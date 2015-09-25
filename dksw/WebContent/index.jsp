@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
+
+<head>
 	<title>단국대학교 소프트웨어학과</title>
 
 	<!-- Meta Tags -->
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Dankook University Department of Software">
-	<meta name="author" content="Seong-Gyun Jeon, Jae-Seock Heo, Ji-Hoon Hwang, Ha-Yarn Kim, Hong-Jun Jang" />
+	<meta name="description" content="Dankook University Department of Software" />
+	<meta name="author" content="Seong-Gyun Jeon, Ji-Hoon Hwang, Jae-Seock Heo, Ha-Yarn Kim, Hong-Jun Jang" />
 
-	<!--  Boostrap Framework  -->
+	<!-- Boostrap Framework  -->
 	<link href="./03_include/css/bootstrap.min.css" rel="stylesheet" />
-
-	<link href="./03_include/css/style.css" rel="stylesheet" id="colors" />
 
 	<!-- Google Fonts - Lato -->
 	<link href="./03_include/css/lato.css" rel="stylesheet" />
@@ -27,22 +27,63 @@
 	<!--  Slippry Slideshow -->
 	<link href="./03_include/css/slippry.min.css" rel="stylesheet" />
 
-	<script async="" src="./03_include/js/analytics.js"></script>
-	<script>
-		(function (i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function () {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o),
-			m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+	<!-- Common Style -->
+	<link href="./03_include/css/style.css" rel="stylesheet" id="colors" />
 
-		ga('create', 'UA-51308611-2', 'auto');
-		ga('send', 'pageview');
+	<!--  Google Analytics -->
+    <!-- Script : Modernizr -->
+    <script src="./03_include/js/modernizr.custom.min.js"></script>
+
+    <!-- Script : jQuery -->
+    <script src="./03_include/js/jquery.min.js"></script>
+    <script src="./03_include/js/jquery-ui.min.js"></script>
+
+    <!-- Script : Bootstrap JS -->
+    <script src="./03_include/js/bootstrap.min.js"></script>
+
+    <!-- Script : Bootstrap Plugin - open dropdown on hover -->
+    <script src="./03_include/js/bootstrap-hover-dropdown.min.js"></script>
+
+    <!-- Script : LESS preprocessor -->
+    <script src="./03_include/js/less.min.js"></script>
+
+    <!-- Script : WOW.js - loading animations -->
+    <script src="./03_include/js/wow.min.js"></script>
+
+    <!-- Script : Knobs - our skills -->
+    <script src="./03_include/js/jquery.knob.min.js"></script>
+
+    <!-- Script : Slippry - Slideshow -->
+    <script src="./03_include/js/slippry.min.js"></script>
+
+    <!-- Script : Mixitup plugin - Portfolio Filter Grid -->
+    <script src="./03_include/js/jquery.mixitup.min.js"></script>
+
+    <!-- Script : Make sticky whatever elements -->
+    <script src="./03_include/js/jquery.sticky.min.js"></script>
+
+    <!-- Script : Smooth sroll -->
+    <script src="./03_include/js/jquery.nicescroll.min.js"></script>
+
+    <!-- Script : Contact Form -->
+    <script src="./03_include/js/contact-form.min.js"></script>
+
+    <!-- Script : Must be last of all scripts -->
+    <script src="./03_include/js/scripts.min.js"></script>
+
+    <!--[if lt IE 9]>
+          <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+          <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->	
+	
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-68083185-1', 'auto');
+	  ga('send', 'pageview');
 	</script>
 </head>
 
@@ -124,106 +165,67 @@
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Database Lab.</a>
 	                            <ul class="dropdown-menu">
-	                                <li>
-	                                    <a href="#">소개 및 연구목표</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">포트폴리오</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">연구원</a>
-	                                </li>
+	                                <li><a href="#">소개 및 연구목표</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">연구원</a></li>
 	                            </ul>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Embedded Lab.</a>
 	                            <ul class="dropdown-menu">
-	                                <li>
-	                                    <a href="#">소개 및 연구목표</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">포트폴리오</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">연구원</a>
-	                                </li>
+	                                <li><a href="#">소개 및 연구목표</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">연구원</a></li>
 	                            </ul>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Mobile Contents Lab.</a>
 	                            <ul class="dropdown-menu">
-	                                <li>
-	                                    <a href="#">소개 및 연구목표</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">포트폴리오</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">연구원</a>
-	                                </li>
+	                                <li><a href="#">소개 및 연구목표</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">연구원</a></li>
 	                            </ul>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Multimedia DSP Lab.</a>
 	                            <ul class="dropdown-menu">
-	                                <li>
-	                                    <a href="#">소개 및 연구목표</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">포트폴리오</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">연구원</a>
-	                                </li>
+	                                <li><a href="#">소개 및 연구목표</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">연구원</a></li>
 	                            </ul>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">OS/Security Lab.</a>
 	                            <ul class="dropdown-menu">
-	                                <li>
-	                                    <a href="#">소개 및 연구목표</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">포트폴리오</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">연구원</a>
-	                                </li>
+	                                <li><a href="#">소개 및 연구목표</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">연구원</a></li>
 	                            </ul>
 	                        </li>
 	                    </ul>
 	                </li>
 	
+					<!-- 교육 -->
 	                <li class="dropdown">
 	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">교육
 	                    </a>
 	                    <ul class="dropdown-menu">
-	                        <li>
-	                            <a href="#">입학안내</a>
-	                        </li>
-	
-	                        <li>
-	                            <a href="#">산학협력</a>
-	                        </li>
+	                        <li><a href="#">입학안내</a></li>
+	                        <li><a href="#">산학협력</a></li>
 	                    </ul>
 	                </li>
 	
-	
+					<!-- 게시판 -->
 	                <li class="dropdown">
 	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">게시판
 	                    </a>
 	                    <ul class="dropdown-menu">
-	                        <li>
-	                            <a href="#">자유게시판</a>
-	                        </li>
-	
-	                        <li>
-	                            <a href="#">질문게시판</a>
-	                        </li>
+	                        <li><a href="#">자유게시판</a></li>
+	                        <li><a href="#">질문게시판</a></li>
 	                    </ul>
 	                </li>
 	
@@ -233,7 +235,6 @@
 	                        <i class="fa fa-bars"></i>
 	                    </a>
 	                </li>
-	
 	            </ul>
 	        </div>
 	    </div>
@@ -254,12 +255,8 @@
                     <div class="space-sm"></div>
                     
                     <ul class="list-inline">
-                        <li>
-                            <a href="#" class="btn btn-default-trn btn-xlg scroll"><i class="fa fa-bolt"></i>애플리케이션 다운로드</a>
-                        </li>
-                        <li>
-                            <a href="" class="btn btn-primary btn-xlg scroll"><i class="fa fa-paper-plane-o"></i>학과생 인증</a>
-                        </li>
+                        <li><a href="#" class="btn btn-default-trn btn-xlg scroll"><i class="fa fa-bolt"></i>애플리케이션 다운로드</a></li>
+                        <li><a href="" class="btn btn-primary btn-xlg scroll"><i class="fa fa-paper-plane-o"></i>학과생 인증</a></li>
                     </ul>
                 </div>
             </div>
@@ -327,7 +324,7 @@
                 </div>
 
                 <div class="col-sm-6 wow fadeInRight" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
-                    <img class="img-mw450" src="./source/Showcase-Template-Flat-Presentation-Vol-3-portfolio.png" alt="Flat showcase presentation">
+                    <img class="img-mw450" src="./01_image/temp/Showcase-Template-Flat-Presentation-Vol-3-portfolio.png" alt="Flat showcase presentation">
                 </div>
             </div>
         </div>
@@ -355,7 +352,7 @@
                 <li class="col-md-4 col-sm-6 mix devices  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="#" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.5s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
-                            <img src="./source/sign-up-sketch.jpg" class="img-responsive" alt="Portfolio - application">
+                            <img src="./01_image/temp/sign-up-sketch.jpg" class="img-responsive" alt="Portfolio - application">
                             <div class="top-part hidden-xs">
                                 <i class="fa fa-eye"></i>
                             </div>
@@ -371,7 +368,7 @@
                 <li class="col-md-4 col-sm-6 mix apps web  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="#" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.25s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.25s; -moz-animation-delay: 0.25s; animation-delay: 0.25s;">
-                            <img src="./source/minimal-wireframe-assets.jpg" class="img-responsive" alt="Websites Layout">
+                            <img src="./01_image/temp/minimal-wireframe-assets.jpg" class="img-responsive" alt="Websites Layout">
                             <div class="top-part hidden-xs">
                                 <i class="fa fa-eye"></i>
                             </div>
@@ -386,7 +383,7 @@
                 <li class="col-md-4 col-sm-6 mix apps  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v2.php" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.75s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
-                            <img src="./source/App-Preview.jpg" class="img-responsive" alt="Portfolio - application">
+                            <img src="./01_image/temp/App-Preview.jpg" class="img-responsive" alt="Portfolio - application">
                             <div class="top-part hidden-xs">
                                 <i class="fa fa-eye"></i>
                             </div>
@@ -401,7 +398,7 @@
                 <li class="col-md-4 col-sm-6 mix devices  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v2.php" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.6s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.6s; -moz-animation-delay: 0.6s; animation-delay: 0.6s;">
-                            <img src="./source/macbook.jpg" class="img-responsive" alt="Apple Macbook Pro">
+                            <img src="./01_image/temp/macbook.jpg" class="img-responsive" alt="Apple Macbook Pro">
                             <div class="top-part hidden-xs">
                                 <i class="fa fa-eye"></i>
                             </div>
@@ -416,7 +413,7 @@
                 <li class="col-md-4 col-sm-6 mix web  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v2.php" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.35s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.35s; -moz-animation-delay: 0.35s; animation-delay: 0.35s;">
-                            <img src="./source/webdesign.jpg" class="img-responsive" alt="Webdesign">
+                            <img src="./01_image/temp/webdesign.jpg" class="img-responsive" alt="Webdesign">
                             <div class="top-part hidden-xs">
                                 <i class="fa fa-eye"></i>
                             </div>
@@ -431,7 +428,7 @@
                 <li class="col-md-4 col-sm-6 mix apps  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v2.php" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.85s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.85s; -moz-animation-delay: 0.85s; animation-delay: 0.85s;">
-                            <img src="./source/app-screen.jpg" class="img-responsive" alt="application">
+                            <img src="./01_image/temp/app-screen.jpg" class="img-responsive" alt="application">
                             <div class="top-part hidden-xs">
                                 <i class="fa fa-eye"></i>
                             </div>
@@ -580,44 +577,44 @@
             <div class="row">
                 <div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.8s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.8s; -moz-animation-delay: 0.8s; animation-delay: 0.8s;">
                     <div class="news">
-                        <img class="img-responsive" src="./source/011.jpg" alt="camera">
+                        <img class="img-responsive" src="./01_image/temp/011.jpg" alt="camera">
                         <h3>Post title</h3>
                         <em>January 26, 2014 by John</em>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis condimentum augue id magna semper rutrum. In enim a arcu imperdiet malesuada.</p>
-                        <a href="http://bootstrapart.net/dragonfly/v1.5/blog-page.php" class="btn btn-default-trn-v2">Read more
+                        <a href="#" class="btn btn-default-trn-v2">Read more
                             <i class="fa fa-angle-double-right"></i>
 						</a>
                     </div>
                 </div>
                 <div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.6s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.6s; -moz-animation-delay: 0.6s; animation-delay: 0.6s;">
                     <div class="news">
-                        <img class="img-responsive" src="./source/31f6.JPG" alt="macbook">
+                        <img class="img-responsive" src="./01_image/temp/31f6.JPG" alt="macbook">
                         <h3>Post title</h3>
                         <em>January 10, 2014 by Ben</em>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis condimentum augue id magna semper rutrum. In enim a arcu imperdiet malesuada.</p>
-                        <a href="http://bootstrapart.net/dragonfly/v1.5/blog-page.php" class="btn btn-default-trn-v2">Read more
+                        <a href="#" class="btn btn-default-trn-v2">Read more
 							<i class="fa fa-angle-double-right"></i>
 						</a>
                     </div>
                 </div>
                 <div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.4s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.4s; -moz-animation-delay: 0.4s; animation-delay: 0.4s;">
                     <div class="news">
-                        <img class="img-responsive" src="./source/picjumbo.com.jpg" alt="devices">
+                        <img class="img-responsive" src="./01_image/temp/picjumbo.com.jpg" alt="devices">
                         <h3>Post title</h3>
                         <em>December 27, 2013 by Nicole</em>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis condimentum augue id magna semper rutrum. In enim a arcu imperdiet malesuada.</p>
-                        <a href="http://bootstrapart.net/dragonfly/v1.5/blog-page.php" class="btn btn-default-trn-v2">Read more
+                        <a href="#" class="btn btn-default-trn-v2">Read more
                             <i class="fa fa-angle-double-right"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.2s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.2s; -moz-animation-delay: 0.2s; animation-delay: 0.2s;">
                     <div class="news">
-                        <img class="img-responsive" src="./source/macbook-air.jpg" alt="macbook">
+                        <img class="img-responsive" src="./01_image/temp/macbook-air.jpg" alt="macbook">
                         <h3>Post title</h3>
                         <em>December 13, 2013 by Adele</em>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis condimentum augue id magna semper rutrum. In enim a arcu imperdiet malesuada.</p>
-                        <a href="http://bootstrapart.net/dragonfly/v1.5/blog-page.php" class="btn btn-default-trn-v2">Read more
+                        <a href="#" class="btn btn-default-trn-v2">Read more
                             <i class="fa fa-angle-double-right"></i>
                         </a>
                     </div>
@@ -627,55 +624,10 @@
         </div>
     </section>
 
-    <!--Back to top-->
+    <!-- Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-    <!-- Scripts-->
 
-    <!-- Modernizr -->
-    <script src="./03_include/js/modernizr.custom.min.js"></script>
-
-    <!-- jQuery -->
-    <script src="./03_include/js/jquery.min.js"></script>
-    <script src="./03_include/js/jquery-ui.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="./03_include/js/bootstrap.min.js"></script>
-
-    <!-- Bootstrap Plugin - open dropdown on hover -->
-    <script src="./03_include/js/bootstrap-hover-dropdown.min.js"></script>
-
-    <!-- LESS preprocessor -->
-    <script src="./03_include/js/less.min.js"></script>
-
-    <!-- WOW.js - loading animations -->
-    <script src="./03_include/js/wow.min.js"></script>
-
-    <!-- Knobs - our skills -->
-    <script src="./03_include/js/jquery.knob.min.js"></script>
-
-    <!-- Slippry - Slideshow -->
-    <script src="./03_include/js/slippry.min.js"></script>
-
-    <!-- Mixitup plugin - Portfolio Filter Grid -->
-    <script src="./03_include/js/jquery.mixitup.min.js"></script>
-
-    <!-- Make sticky whatever elements -->
-    <script src="./03_include/js/jquery.sticky.min.js"></script>
-
-    <!-- Smooth sroll -->
-    <script src="./03_include/js/jquery.nicescroll.min.js"></script>
-
-    <!-- Contact Form -->
-    <script src="./03_include/js/contact-form.min.js"></script>
-
-    <!-- Must be last of all scripts -->
-    <script src="./03_include/js/scripts.min.js"></script>
-
-    <!--[if lt IE 9]>
-          <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
-          <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <!-- Side Menu -->
     <div class="sidebar-off hidden-xs sidebar">

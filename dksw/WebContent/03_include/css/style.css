@@ -1333,102 +1333,102 @@ ul.primary span {
 /* === Background Images === */
 @media (min-width: 1920px) {
   .bg-2 {
-    background-image: url("../../img/576f.jpg");
+    background-image: url("../../01_image/temp/576f.jpg");
   }
   .bg-4 {
-    background-image: url("../../img/b4db71.jpg");
+    background-image: url("../../01_image/temp/b4db71.jpg");
   }
   .bg-6 {
-    background-image: url("../../img/0097.jpg");
+    background-image: url("../../01_image/temp/0097.jpg");
   }
   .bg-7 {
-    background-image: url("../../img/DeathtoStock_Desk1.jpg");
+    background-image: url("../../01_image/temp/DeathtoStock_Desk1.jpg");
   }
   .bg-8 {
-    background-image: url("../../img/7321.jpg");
+    background-image: url("../../01_image/temp/7321.jpg");
   }
   .bg-9 {
-    background-image: url("../../img/macbook-air-all-faded-and-stuff.jpg");
+    background-image: url("../../01_image/temp/macbook-air-all-faded-and-stuff.jpg");
   }
   .bg-11 {
-    background-image: url("../../img/faces.jpg");
+    background-image: url("../../01_image/temp/faces.jpg");
   }
   .bg-12 {
-    background-image: url("../../img/0249.jpg");
+    background-image: url("../../01_image/temp/0249.jpg");
   }
   .bg-13 {
-    background-image: url("../../img/DeathtoStock_NotStock5.jpg");
+    background-image: url("../../01_image/temp/DeathtoStock_NotStock5.jpg");
   }
   .bg-14 {
-    background-image: url("../../img/932.jpg");
+    background-image: url("../../01_image/temp/932.jpg");
   }
   .bg-15 {
-    background-image: url("../../img/7306.jpg");
+    background-image: url("../../01_image/temp/7306.jpg");
   }
   .bg-16 {
-    background-image: url("../../img/9181.jpg");
+    background-image: url("../../01_image/temp/9181.jpg");
   }
   .bg-18 {
-    background-image: url("../../img/IkNYY.jpg");
+    background-image: url("../../01_image/temp/IkNYY.jpg");
   }
   .bg-19 {
-    background-image: url("../../img/U7Fc1e.jpg");
+    background-image: url("../../01_image/temp/U7Fc1e.jpg");
   }
   .bg-20 {
-    background-image: url("../../img/6f11.jpg");
+    background-image: url("../../01_image/temp/6f11.jpg");
   }
   .bg-21 {
-    background-image: url("../../img/9852.jpg");
+    background-image: url("../../01_image/temp/9852.jpg");
   }
 }
 @media (max-width: 1920px) {
   .bg-2 {
-    background-image: url("../../img/1920w/576f.jpg");
+    background-image: url("../../01_image/temp/576f.jpg");
   }
   .bg-4 {
-    background-image: url("../../img/1920w/b4db71.jpg");
+    background-image: url("../../01_image/temp/b4db71.jpg");
   }
   .bg-6 {
-    background-image: url("../../img/1920w/0097.jpg");
+    background-image: url("../../01_image/temp/0097.jpg");
   }
   .bg-7 {
-    background-image: url("../../img/1920w/DeathtoStock_Desk1.jpg");
+    background-image: url("../../01_image/temp/DeathtoStock_Desk1.jpg");
   }
   .bg-8 {
-    background-image: url("../../img/1920w/7321.jpg");
+    background-image: url("../../01_image/temp/7321.jpg");
   }
   .bg-9 {
-    background-image: url("../../img/1920w/macbook-air-all-faded-and-stuff.jpg");
+    background-image: url("../../01_image/temp/macbook-air-all-faded-and-stuff.jpg");
   }
   .bg-11 {
-    background-image: url("../../img/faces.jpg");
+    background-image: url("../../01_image/temp/faces.jpg");
   }
   .bg-12 {
-    background-image: url("../../img/1920w/0249.jpg");
+    background-image: url("../../01_image/temp/0249.jpg");
   }
   .bg-13 {
-    background-image: url("../../img/1920w/DeathtoStock_NotStock5.jpg");
+    background-image: url("../../01_image/temp/DeathtoStock_NotStock5.jpg");
   }
   .bg-14 {
-    background-image: url("../../img/1920w/932.jpg");
+    background-image: url("../../01_image/temp/932.jpg");
   }
   .bg-15 {
-    background-image: url("../../img/1920w/7306.jpg");
+    background-image: url("../../01_image/temp/7306.jpg");
   }
   .bg-16 {
-    background-image: url("../../img/1920w/9181.jpg");
+    background-image: url("../../01_image/temp/9181.jpg");
   }
   .bg-18 {
-    background-image: url("../../img/1920w/IkNYY.jpg");
+    background-image: url("../../01_image/temp/IkNYY.jpg");
   }
   .bg-19 {
-    background-image: url("../../img/1920w/U7Fc1e.jpg");
+    background-image: url("../../01_image/temp/U7Fc1e.jpg");
   }
   .bg-20 {
-    background-image: url("../../img/1920w/6f11.jpg");
+    background-image: url("../../01_image/temp/6f11.jpg");
   }
   .bg-21 {
-    background-image: url("../../img/1920w/9852.jpg");
+    background-image: url("../../01_image/temp/9852.jpg");
   }
 }
 /* Useful Classes for background images */
@@ -3625,7 +3625,7 @@ code {
   .slideshow {
     width: 900px;
     height: 350px;
-    background: url("../../img/macbook-pro-frame.png") 0 0 no-repeat;
+    background: url("../../01_image/temp/macbook-pro-frame.png") 0 0 no-repeat;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
