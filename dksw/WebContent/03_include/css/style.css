@@ -1,10 +1,3 @@
-/*
- * Theme name: Dragonfly
- * Description: Main stylesheet for this template
- * Version: 1.5
- * Last update: September 6 2014
- * Author: Jiri Cermak
- * */
 html {
   -webkit-font-smoothing: antialiased;
 }
@@ -23,11 +16,21 @@ html {
   overflow: hidden;
   position: relative;
 }
-/*
- * ===================================
+
+/* ===================================
+ * External Fonts
+ * =================================== */
+
+@font-face {
+	font-family:NanumGothic;
+	src:url('../font/NanumGothic.ttf') format('truetype');
+}
+
+
+/* ===================================
  * Media Queries
- * ===================================
- * */
+ * =================================== */
+
 @media (max-width: 768px) {
   .list-inline .btn {
     min-width: 100%;
@@ -3881,6 +3884,12 @@ ul.thumbs {
   text-transform: uppercase;
   color: #1eb9c1;
 }
+
+.sidebar .loginForm {
+	font-size:5px;
+	line-height:5px;
+}
+
 .sidebar .circle-icons i {
   color: #777777;
   height: 35px;
