@@ -19,7 +19,7 @@
 	<link href="./03_include/css/lato.css" rel="stylesheet" />
 
 	<!-- Font Awesome Icons -->
-	<link href="./03_include/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="./03_include/css/font-awesome.css" rel="stylesheet" />
 
 	<!-- CSS Animations -->
 	<link href="./03_include/css/animate.min.css" rel="stylesheet" />
@@ -100,13 +100,13 @@
                     
                     <div class="space-sm"></div>
                     
-                    <p>소프트웨어학과 홈페이지에 오신 것을 환영합니다.<br />소프트웨어학과 학생들은 학과 오프라인 게시판 확인 후 필히 가입부탁드립니다.</p>
+                    <p>단국대학교 소프트웨어학과 홈페이지에 오신 것을 환영합니다.<br />본교 학과 학생들은 학과 오프라인 게시판 확인 후 필히 가입부탁드립니다.</p>
                     
                     <div class="space-sm"></div>
                     
                     <ul class="list-inline">
                         <li><a href="#" class="btn btn-default-trn btn-xlg scroll"><i class="fa fa-bolt"></i>애플리케이션 다운로드</a></li>
-                        <li><a href="" class="btn btn-primary btn-xlg scroll"><i class="fa fa-paper-plane-o"></i>학과생 인증</a></li>
+                        <li><a href="<%=request.getContextPath()%>/02_page/join/index.jsp" class="btn btn-primary btn-xlg scroll"><i class="fa fa-paper-plane-o"></i>학과생 인증</a></li>
                     </ul>
                 </div>
             </div>

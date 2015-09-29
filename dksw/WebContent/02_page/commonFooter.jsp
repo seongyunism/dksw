@@ -26,6 +26,10 @@
 	                    <ul class="info-list md-list i-primary">
 	                        <li>
 	                            <i class="fa fa-angle-right fa-fw"></i>
+	                            <a href="#"><span class="link-title" target="_blank">가입 방법 및 절차</span></a>
+	                        </li>      
+	                        <li>
+	                            <i class="fa fa-angle-right fa-fw"></i>
 	                            <a href="#"><span class="link-title">강의실별 시간표</span></a>
 	                        </li>
 	                        <li>
@@ -40,16 +44,12 @@
 	                            <i class="fa fa-angle-right fa-fw"></i>
 	                            <a href="https://webinfo.dankook.ac.kr/main.do" target="_blank"><span class="link-title">단국대학교 웹정보시스템</span></a>
 	                        </li>         
-	                        <li>
-	                            <i class="fa fa-angle-right fa-fw"></i>
-	                            <a href="http://lms.dankook.ac.kr"><span class="link-title" target="_blank">단국대학교 이러닝시스템</span></a>
-	                        </li>
 	                    </ul>
 	                </div>
 	                <div class="space-sm visible-sm visible-xs"></div>
 	                <div class="col-md-4 col-lg-4  col-xs-12">
 	                    <h4>About Us</h4>
-	                    <p>Temporibus autem quibusdam et aut officiis debitis ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+	                    <p>본 홈페이지는 단국대학교 소프트웨어학과 공식<br />홈페이지로 학과 학생들의 편의제공과 커뮤니티<br />활성화를 위해 제작되었습니다.</p>
 	                    <div class="space-sm"></div>
 	                    <h4>Follow Us</h4>
 	                    <ul class="circle-icons icons-list">

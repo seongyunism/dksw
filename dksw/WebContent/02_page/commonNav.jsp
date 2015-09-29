@@ -8,20 +8,17 @@
 	                <span class="icon-bar"></span>
 	                <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="./index.jsp">DKU<span class="text-primary">SOFTWARE</span></a>
+	            <a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp">DKU<span class="text-primary">SOFTWARE</span></a>
 	        </div>
 
 	        <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
 	            <ul class="nav navbar-nav navbar-right ">
-	                <li class="dropdown">
-	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">HOME</a>
-	                </li>
 	
 	                <!-- 공지사항 -->
 	                <li class="dropdown">
 	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">공지사항</a>
 	                    <ul class="dropdown-menu">
-	                        <li><a href="#">학부 공지</a></li>
+	                        <li><a href="<%=request.getContextPath()%>/02_page/sub_01/notice/index.jsp">학부 공지</a></li>
 	                        <li><a href="#">학생회 공지</a></li>
 	                        <li class="divider"></li>
 	                        <li><a href="#">채용 정보</a></li>
@@ -134,7 +131,7 @@
 	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">게시판
 	                    </a>
 	                    <ul class="dropdown-menu">
-	                        <li><a href="#">자유게시판</a></li>
+	                        <li><a href="<%=request.getContextPath()%>/02_page/sub_05/board/index.jsp">자유게시판</a></li>
 	                        <li><a href="#">질문게시판</a></li>
 	                    </ul>
 	                </li>

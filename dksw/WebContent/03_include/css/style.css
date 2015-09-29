@@ -747,6 +747,11 @@ textarea.form-control {
   line-height: 44px;
   padding-left: 10px;
 }
+
+.sign-up-btn .text .company {
+	font-weight:bold;
+}
+
 /*
  * ===================================
  * Helper Classes
@@ -1219,6 +1224,10 @@ ul.primary span {
 .facebook {
   background: #3b5998;
 }
+.kakaotalk {
+	background: #ffeb01;
+}
+
 .text-facebook {
   color: #3b5998;
 }
@@ -4231,3 +4240,20 @@ ul.thumbs {
   margin-left: 2px;
   margin-right: 2px;
 }
+
+/* ===================================
+ * Custom CSS
+ * =================================== */
+
+.offline-auth-code input {
+	height:70px;
+	font-size:1.2em;
+	text-align:center;
+	margin-bottom:5px;
+} 
+
+.btn-offline-auth-code {
+	float:right;
+}
+ 
+ 

@@ -19,7 +19,7 @@
 	<link href="../../../03_include/css/lato.css" rel="stylesheet" />
 
 	<!-- Font Awesome Icons -->
-	<link href="../../../03_include/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="../../../03_include/css/font-awesome.css" rel="stylesheet" />
 
 	<!-- CSS Animations -->
 	<link href="../../../03_include/css/animate.min.css" rel="stylesheet" />
@@ -86,35 +86,35 @@
 	  ga('send', 'pageview');
 	</script>
 </head>
+
 <body>
     <!-- Navigation -->
 	<jsp:include page="../../commonNav.jsp" flush="false"/>
 
-    <!-- Header Box -->
+    <!-- Header Section -->
     <section class="bg-12 bg-center bg-cover">
         <div class="bg-filter">
             <div class="container section-lg">
-                <h1 class="top-title">Services &amp; Features</h1>
+                <h1 class="top-title">공지사항</h1>
             </div>
         </div>
     </section>
 
+	<!-- Content Section -->
     <section class="container section-lg">
         <!-- Nav tabs -->
         <ul class="inline-tabs">
             <li class="active">
-                <a href="http://bootstrapart.net/dragonfly/v1.5/services-v1.php#responsive" data-toggle="tab">Fully responsive</a>
+                <a href="#responsive" data-toggle="tab">학사 공지</a>
             </li>
             <li>
-                <a href="http://bootstrapart.net/dragonfly/v1.5/services-v1.php#ready" data-toggle="tab">Ready for use</a>
+                <a href="#ready" data-toggle="tab">학생회 공지</a>
             </li>
             <li>
-                <a href="http://bootstrapart.net/dragonfly/v1.5/services-v1.php#shortcodes" data-toggle="tab">Shortcodes</a>
-            </li>
-            <li>
-                <a href="http://bootstrapart.net/dragonfly/v1.5/services-v1.php#fontawesome" data-toggle="tab">Font awesome</a>
+                <a href="#shortcodes" data-toggle="tab">채용 정보</a>
             </li>
         </ul>
+        
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active" id="responsive">
@@ -127,17 +127,17 @@
                         <div class="space-sm visible-lg"></div>
                         <ul class="list-inline">
                             <li>
-                                <a href="http://bootstrapart.net/dragonfly/v1.5/services-v1.php#" class="btn btn-primary btn-xlg "><i class="fa fa-bolt"></i>Get started now</a>
+                                <a href="#" class="btn btn-primary btn-xlg "><i class="fa fa-bolt"></i>Get started now</a>
                             </li>
                             <li>
-                                <a href="http://bootstrapart.net/dragonfly/v1.5/services-v1.php#" class="btn btn-primary-trn btn-xlg "><i class="fa fa-paper-plane-o"></i>Learn more</a>
+                                <a href="#" class="btn btn-primary-trn btn-xlg "><i class="fa fa-paper-plane-o"></i>Learn more</a>
                             </li>
 
                         </ul>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 fadeInRight animated">
                         <div class="space-lg visible-xs visible-sm"></div>
-                        <img class="img-responsive  center-block " alt="iMac" src="./Dragonfly - Services _ Version 1_files/mbp_retina2.png">
+                        <img class="img-responsive  center-block " alt="iMac" src="../../../01_image/temp/mbp_retina2.png">
                     </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 fadeInRight animated">
                         <div class="space-lg visible-xs visible-sm"></div>
-                        <img class="img-responsive  center-block w450" alt="iMac" src="./Dragonfly - Services _ Version 1_files/rmbp-sm.png">
+                        <img class="img-responsive  center-block w450" alt="iMac" src="../../../01_image/temp/rmbp-sm.png">
                     </div>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 fadeInRight animated">
                         <div class="space-lg visible-xs visible-sm"></div>
-                        <img class="img-responsive  center-block w450" alt="iMac" src="./Dragonfly - Services _ Version 1_files/rmbp-sm.png">
+                        <img class="img-responsive  center-block w450" alt="iMac" src="../../../01_image/temp/rmbp-sm.png">
                     </div>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 fadeInRight animated">
                         <div class="space-lg visible-xs visible-sm"></div>
-                        <img class="img-responsive  center-block w450" alt="iMac" src="./Dragonfly - Services _ Version 1_files/rmbp-sm.png">
+                        <img class="img-responsive  center-block w450" alt="iMac" src="../../../01_image/temp/rmbp-sm.png">
                     </div>
                 </div>
             </div>
@@ -192,8 +192,8 @@
                 <h2 class="text-center big-title">We offer the best services</h2>
                 <div class="row">
                     <div class="col-md-5 hidden-xs hidden-sm">
-                        <img class="img-responsive iphone-black" alt="iPhone 5S Minimal Mock Up Black" src="./Dragonfly - Services _ Version 1_files/iPhone_5S_Minimal_Mock-up_black.png">
-                        <img class="img-responsive iphone-white " alt="iPhone 5S Minimal Mock Up White" src="./Dragonfly - Services _ Version 1_files/iPhone_5S_Minimal_Mock-up.png">
+                        <img class="img-responsive iphone-black" alt="iPhone 5S Minimal Mock Up Black" src="../../../01_image/temp/iPhone_5S_Minimal_Mock-up_black.png">
+                        <img class="img-responsive iphone-white " alt="iPhone 5S Minimal Mock Up White" src="../../../01_image/temp/iPhone_5S_Minimal_Mock-up.png">
                     </div>
                     <div class="col-md-7 col-sm-12 margin-b15">
                         <div class="space-lg visible-md visible-lg"></div>
@@ -230,13 +230,13 @@
         <h3 class="sr-only">Our Customers</h3>
         <div class="container">
             <div class="row client-logo">
-                <img alt="logo of client - Yahoo" src="./Dragonfly - Services _ Version 1_files/Yahoo.png">
+                <img alt="logo of client - Yahoo" src="../../../01_image/temp/Yahoo.png">
 
-                <img alt="logo of client - Coca-Cola" src="./Dragonfly - Services _ Version 1_files/Coca-Cola.png">
+                <img alt="logo of client - Coca-Cola" src="../../../01_image/temp/Coca-Cola.png">
 
-                <img alt="logo of client - Google" src="./Dragonfly - Services _ Version 1_files/Google.png">
+                <img alt="logo of client - Google" src="../../../01_image/temp/Google.png">
 
-                <img alt="logo of client - Nike" src="./Dragonfly - Services _ Version 1_files/Intel.png">
+                <img alt="logo of client - Nike" src="../../../01_image/temp/Intel.png">
             </div>
         </div>
     </section>
