@@ -4247,6 +4247,10 @@ ul.thumbs {
 
 /* join/index.jsp */
 
+.offline-auth {
+	display:none;
+}
+
 .offline-auth-code input {
 	height:70px;
 	font-size:1.2em;

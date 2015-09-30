@@ -98,7 +98,7 @@
     <section class="bg-16 bg-center bg-cover">
         <div class="bg-filter">
             <div class="container section-lg">
-                <h1 class="top-title">Portfolio item I</h1>
+                <h1 class="top-title">학과장 인사</h1>
             </div>
         </div>
     </section>
