@@ -1,7 +1,7 @@
 package dksw.model.domain;
 
 public class Board {
- 
+
 	private int dkswBoardNo;
 	private int dkswBoardCategory;
 	private String dkswBoardTitle;
