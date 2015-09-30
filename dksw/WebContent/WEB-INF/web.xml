@@ -15,6 +15,16 @@
     <url-pattern>/member</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>LabController</servlet-name>
+    <servlet-class>dksw.controller.LabController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>LabController</servlet-name>
+    <url-pattern>/lab</url-pattern>
+  </servlet-mapping>
+
   <listener>
     <listener-class>dksw.util.UrlPath</listener-class>
   </listener>  
