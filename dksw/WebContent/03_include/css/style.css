@@ -725,7 +725,7 @@ textarea.form-control {
   color: #ffffff;
   border-radius: 2px;
   margin-bottom: 15px;
-  max-width: 260px;
+  max-width: 293px;
   -webkit-transition: all 0.35s ease-out;
   transition: all 0.35s ease-out;
 }
@@ -4245,15 +4245,41 @@ ul.thumbs {
  * Custom CSS
  * =================================== */
 
+/* join/index.jsp */
+
 .offline-auth-code input {
 	height:70px;
 	font-size:1.2em;
 	text-align:center;
-	margin-bottom:5px;
+	margin-bottom:15px;
 } 
 
 .btn-offline-auth-code {
 	float:right;
 }
- 
- 
+
+.btn-sign-up {
+	float:right;	
+}
+
+.join-form {
+	margin:0px;
+	padding:0px;
+}
+
+.input-radio {
+	width:17px;
+	height:35px;
+	float:left;
+}
+
+.label-radio {
+	width:50px;
+	height:35px;
+	float:left;
+	color:#888888;
+}
+
+.btn-radio {
+	height:35px;
+}

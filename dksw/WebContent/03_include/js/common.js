@@ -1,3 +1,4 @@
+// [회원 가입 페이지] 오프라인 인증코드 확인
 function offlineAuthCode() {
 	
 	var action = "/dksw/member?action=checkOfflineAuthCode";
@@ -10,9 +11,10 @@ function offlineAuthCode() {
 		dataType : "text",
 		success: function(response) {
 			if(response == "Checked") {
-				alert("성공");
+				$(".offline-auth").slideUp();
+				$("form.icon").slideDown();
 			} else if(response == "Fail") {
-				alert("실패");
+				alert("잘못된 코드입니다.\n학과 오프라인 게시판을 확인해주시기 바랍니다.");
 			}
 		}, error: function(xhr,status,error) {
 			alert(error);

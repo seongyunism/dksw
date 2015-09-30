@@ -78,15 +78,28 @@
           <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-	<!--  Google Analytics -->
+	<!-- Google Analytics -->
 	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 	
-	  ga('create', 'UA-68083185-1', 'auto');
-	  ga('send', 'pageview');
+	ga('create', 'UA-68083185-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+	<!-- Custom Scripts -->
+	<script>
+	$(function() {
+		$(".input-radio input[name='inputMemberCategory']").click(function() {
+			if($(this).val() == 7) {
+				$(".member-studentNo").slideDown();
+			} else {
+				$(".member-studentNo").slideUp();				
+			}
+		});
+	});
 	</script>
 </head>
 
@@ -103,53 +116,56 @@
                     <!--<div class="sign-up-hr hidden-xs"></div>-->
                     <h1 class="sign-up-title">Create new account</h1>
 					
-					<div class="row">
+					<div class="row offline-auth">
 						<div class="col-md-12 col-sm-6">
 							<div class="offline-auth-code"><input type="text" class="form-control" maxlength="6" placeholder="오프라인 인증코드를 입력해주시기 바랍니다.  (6자리)" /></div>
-                            <button type="submit" class="btn btn-success btn-offline-auth-code" onclick="offlineAuthCode()"><i class="fa fa-check"></i>다음으로</button>
+                            <button type="submit" class="btn btn-success btn-offline-auth-code" onclick="offlineAuthCode()"><i class="fa fa-arrow-circle-right"></i>다음으로</button>
 						</div>
 					</div>
 					
+					<!-- 추후 보안을 위해 세션처리 해줄 것 -->
 					<form role="form" class="icon" style="display:none;">
-	                    <div class="row">
+	                    <div class="row join-form">
+	                    	<!-- Top Side -->
+	                    	<div class="col-md-12 btn-radio">
+								<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-01" value="7" checked /></div>
+								<div class="label-radio"><label for="radio-01">학부생</label></div>
+								<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-02" value="8" /></div>
+	                    		<div class="label-radio"><label for="radio-02">졸업생</label></div>
+	                    		<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-03" value="9" /></div>
+	                    		<div class="label-radio"><label for="radio-03">일반인</label></div>
+	                    		<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-04" value="6" /></div>
+	                    		<div class="label-radio"><label for="radio-04">교수</label></div>
+	                    	</div>
+	                    	
 	                    	<!-- Left Side -->
 	                        <div class="col-md-6 col-sm-6">
                                 <div class="form-group ">
                                     <div class="control">
-                                        <input type="text" class="form-control" placeholder="이름(실명)">
+                                        <input type="text" name="inputMemberName" class="form-control" placeholder="이름(실명)">
                                         <i class="fa fa-user"></i>
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <div class="control">
-                                        <input type="email" class="form-control" placeholder="이메일주소">
+                                        <input type="email" name="inputMemberEmail" class="form-control" placeholder="이메일주소">
                                         <i class="fa fa-envelope"></i>
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <div class="control">
-                                        <input type="password" class="form-control" placeholder="비밀번호">
+                                        <input type="password" name="inputMemberPassword" class="form-control" placeholder="비밀번호">
                                         <i class="fa fa-lock"></i>
                                     </div>
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group member-studentNo">
                                     <div class="control">
-                                        <input type="text" class="form-control" placeholder="학번" maxlength="8" />
-                                        <i class="fa fa-lock"></i>
+                                        <input type="text" name="inputMemberStudentNo" class="form-control" placeholder="학번" maxlength="8" />
+                                        <i class="fa fa-info"></i>
                                     </div>
                                 </div>
-                                <div class="form-group ">
-                                    <div class="control">
-                                        <input type="text" class="form-control" placeholder="오프라인 인증번호">
-                                        <i class="fa fa-lock"></i>
-                                    </div>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fa fa-check"></i>Create New Account</button>
-                                <div class="space visible-sm visible-xs"></div>
-	                        </div>
-	                        
+							</div>
+
 	                        <!-- Right Side -->
 	                        <div class="col-md-6 col-sm-6">
 	                            <a href="#" title=" Sing up with Facebook">
@@ -173,20 +189,26 @@
 	                                </div>
 	                            </a>
 	                        </div>
+	                        
+	                        <!-- Bottom Side -->
+	                        <div class="col-md-12">
+                                <button type="submit" class="btn btn-success btn-sign-up"><i class="fa fa-check"></i>가입 완료</button>
+                                <div class="space visible-sm visible-xs"></div>
+	                        </div>   
 	                    </div>
 					</form>
+					
                 </div>
             </div>
         </div>
     </section>
 
-    <!--Back to top-->
+    <!-- Back to top-->
 	<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 	<!-- Side Menu -->
 	<jsp:include page="../commonSidebar.jsp" flush="false"/>
 	
-
 	<div id="ascrail2000" class="nicescroll-rails" style="width: 8px; z-index: 999999; position: fixed; top: 0px; height: 100%; right: 0px; cursor: default; display: none; background: rgb(221, 221, 221);">
 		<div style="position: relative; top: 0px; float: right; width: 8px; height: 0px; border: none; border-radius: 0px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
 	</div>
