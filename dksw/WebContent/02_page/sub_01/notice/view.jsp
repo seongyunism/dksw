@@ -100,7 +100,7 @@
     <section class="bg-15 bg-center bg-cover">
         <div class="bg-filter">
             <div class="container section-lg">
-                <h1 class="top-title">자유게시판</h1>
+                <h1 class="top-title">공지사항</h1>
             </div>
         </div>
     </section>
