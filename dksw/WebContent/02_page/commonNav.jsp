@@ -70,11 +70,11 @@
 	                    <ul class="dropdown-menu">
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Database Lab.</a>
+	                            <a href="javascript:void(0);" onclick="navLab(1);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Database Lab.</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_03/index.jsp?labCode=1">소개 및 연구목표</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
 	                                <li><a href="#">연구원</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
 	                            </ul>
 	                        </li>
 	
@@ -82,8 +82,8 @@
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Embedded Lab.</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
 	                                <li><a href="#">연구원</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
 	                            </ul>
 	                        </li>
 	
@@ -91,8 +91,8 @@
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Mobile Contents Lab.</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
 	                                <li><a href="#">연구원</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
 	                            </ul>
 	                        </li>
 	
@@ -100,8 +100,8 @@
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Multimedia DSP Lab.</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
 	                                <li><a href="#">연구원</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
 	                            </ul>
 	                        </li>
 	
@@ -109,8 +109,8 @@
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">OS/Security Lab.</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
 	                                <li><a href="#">연구원</a></li>
+	                                <li><a href="#">포트폴리오</a></li>
 	                            </ul>
 	                        </li>
 	                    </ul>

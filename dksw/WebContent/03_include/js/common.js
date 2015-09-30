@@ -24,3 +24,8 @@ function offlineAuthCode() {
 	return false;
 }
 
+function navLab(num) {
+	var src = "/dksw/02_page/sub_03/index.jsp?labCode=" + num;
+	
+	location.href = src;
+}

@@ -70,6 +70,9 @@
     <!-- Script : Must be last of all scripts -->
     <script src="../../../03_include/js/scripts.min.js"></script>
 
+    <!-- Script : Custom scripts -->
+    <script src="../../../03_include/js/common.js"></script>
+
     <!--[if lt IE 9]>
           <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
           <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
