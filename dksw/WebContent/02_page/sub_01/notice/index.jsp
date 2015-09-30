@@ -10,7 +10,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="Dankook University Department of Software" />
-	<meta name="author" content="Seong-Gyun Jeon, Ji-Hoon Hwang, Jae-Seock Heo, Ha-Yarn Kim, Hong-Jun Jang" />
+	<meta name="author" content="Seong-Gyun Jeon, Ji-Hoon Hwang, Jae-Hyeok Heo, Ha-Yarn Kim, Hong-Jun Jang" />
 
 	<!-- Boostrap Framework  -->
 	<link href="../../../03_include/css/bootstrap.min.css" rel="stylesheet" />
@@ -414,7 +414,7 @@
     </section>
  
 
-    <!--Back to top-->
+   <!--Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 	<!-- Side Menu -->
@@ -433,4 +433,3 @@
 	
 </body>
 </html>
-  

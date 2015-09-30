@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <% String labCode = request.getParameter("labCode").toString();%>
-
     <section class="bg-grey section-lg team-grid">
         <div class="container">
             <h2 class="big-title text-center">Members</h2>
@@ -13,7 +12,7 @@
                             <img class="img-responsive" alt="about us" src="./Dragonfly - About Us _ Version 3_files/photodune-4107116-meeting-s.jpg">
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-7 wow fadeInRight animated" style="visibility: visible;">
-                            <h2>5 reasons to choose us</h2>
+                            <h2>Professor</h2>
                             <p>Pellentesque pretium lectus id turpis. Etiam quis quam. Excepteur sint occaecat cupidatat non proident. Vestibulum tortor id mi.</p>
                             <div class="space-sm"></div>
                             <ul class="info-list md-list style i-primary">
