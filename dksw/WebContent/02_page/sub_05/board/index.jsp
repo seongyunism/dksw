@@ -161,7 +161,7 @@
                             <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
                             <a href="#" title="Read all article" class="btn btn-default-trn-v2">
                                 <i class="fa fa-angle-right"></i>Read More
-                            </a>
+                            </a> 
                         </div>
 
                     </div>
