@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-String labCode = request.getAttribute("labCode").toString();
-%>
-
-
+<% String labCode = request.getParameter("labCode").toString(); %>
 
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
@@ -95,7 +91,7 @@ String labCode = request.getAttribute("labCode").toString();
 
 <body>
     <!-- Navigation -->
-	<jsp:include page="../commonNav.jsp&labCode=" flush="false"/>
+	<jsp:include page="../commonNav.jsp" flush="false"/>
     
     <!-- Header Box -->
     <section class="bg-2 bg-center bg-cover">
@@ -110,7 +106,9 @@ String labCode = request.getAttribute("labCode").toString();
 	<jsp:include page="labIntro.jsp" flush="false" />
 	
 	<!-- labMembers.jsp -->
-	<jsp:include page="labMembers.jsp" flush="false" />
+	<jsp:include page="labMembers.jsp" flush="false">
+		<jsp:param name="labCode" value="<%=labCode%>" />	
+	</jsp:include>
 		
     <section class="bg-grey section-lg team-grid">
         <div class="container">
@@ -125,22 +123,22 @@ String labCode = request.getAttribute("labCode").toString();
                             <div class="content-circle content-center">
                                 <ul class="circle-icons icons-list">
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
@@ -160,22 +158,22 @@ String labCode = request.getAttribute("labCode").toString();
                             <div class="content-circle content-center">
                                 <ul class="circle-icons icons-list">
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
@@ -195,22 +193,22 @@ String labCode = request.getAttribute("labCode").toString();
                             <div class="content-circle content-center">
                                 <ul class="circle-icons icons-list">
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
@@ -230,22 +228,22 @@ String labCode = request.getAttribute("labCode").toString();
                             <div class="content-circle content-center">
                                 <ul class="circle-icons icons-list">
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
@@ -269,22 +267,22 @@ String labCode = request.getAttribute("labCode").toString();
                             <div class="content-circle content-center">
                                 <ul class="circle-icons icons-list">
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
@@ -304,22 +302,22 @@ String labCode = request.getAttribute("labCode").toString();
                             <div class="content-circle content-center">
                                 <ul class="circle-icons icons-list">
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
@@ -339,22 +337,22 @@ String labCode = request.getAttribute("labCode").toString();
                             <div class="content-circle content-center">
                                 <ul class="circle-icons icons-list">
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
@@ -374,22 +372,22 @@ String labCode = request.getAttribute("labCode").toString();
                             <div class="content-circle content-center">
                                 <ul class="circle-icons icons-list">
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://bootstrapart.net/dragonfly/v1.5/our-team.php#" title="Follow us">
+                                        <a href="#" title="Follow us">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
