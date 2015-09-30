@@ -93,7 +93,7 @@
 	<script>
 	$(function() {
 		$(".input-radio input[name='inputMemberCategory']").click(function() {
-			if($(this).val() == 7) {
+			if($(this).val() == 7 || $(this).val() == 8) {
 				$(".member-studentNo").slideDown();
 			} else {
 				$(".member-studentNo").slideUp();				
