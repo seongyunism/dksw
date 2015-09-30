@@ -41,12 +41,12 @@
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">학과 소개</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/greeting/index.jsp">학과장 인사</a></li>
-	                                <li><a href="#">학과 연혁</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/history/index.jsp">학과 연혁</a></li>
 	                                <li><a href="#">학과 내규</a></li>
 	                            </ul>
 	                        </li>
 	
-	                        <li><a href="#">교수 소개</a></li>
+	                        <li><a href="<%=request.getContextPath()%>/02_page/sub_02/professor_info/index.jsp">교수 소개</a></li>
 	
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">동아리 소개</a>
