@@ -4,6 +4,35 @@
     <section class="bg-grey section-lg team-grid">
         <div class="container">
             <h2 class="big-title text-center">Members</h2>
+            
+            <div class="tab-content text-left">
+                <div class="tab-pane active" id="believe">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-5 wow fadeInLeft animated" style="visibility: visible;">
+                            <div class="space visible-sm"></div>
+                            <img class="img-responsive" alt="about us" src="./Dragonfly - About Us _ Version 3_files/photodune-4107116-meeting-s.jpg">
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-7 wow fadeInRight animated" style="visibility: visible;">
+                            <h2>5 reasons to choose us</h2>
+                            <p>Pellentesque pretium lectus id turpis. Etiam quis quam. Excepteur sint occaecat cupidatat non proident. Vestibulum tortor id mi.</p>
+                            <div class="space-sm"></div>
+                            <ul class="info-list md-list style i-primary">
+                                <li>
+                                    <i class="fa fa-play"></i>Pellentesque pretium lectus id turpis.</li>
+                                <li>
+                                    <i class="fa fa-play"></i>Excepteur sint occaecat cupidatat non proident.</li>
+                                <li>
+                                    <i class="fa fa-play"></i>Aliquam erat volutpat. Fusce tellus odio.</li>
+                                <li>
+                                    <i class="fa fa-play"></i>Vestibulum fermentum tortor id mi.</li>
+                                <li>
+                                    <i class="fa fa-play"></i>Duis viverra diam non justo.</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
             <div class="space-lg"></div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6">
