@@ -4,7 +4,6 @@
     <section class="bg-grey section-lg team-grid">
         <div class="container">
             <h2 class="big-title text-center">Members</h2>
-            <p class="big-subtitle text-center">Nullam sit amet magna in magna gravida vehicula. Proin pede metus, vulputate nec, fermentum fringilla.</p>
             <div class="space-lg"></div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6">
