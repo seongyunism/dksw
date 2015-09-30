@@ -21,8 +21,6 @@ public class LabController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String action = req.getParameter("action");
 		
-		if(action.equals("")) {
 
-		} 
 	}
 }
