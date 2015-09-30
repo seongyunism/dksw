@@ -118,141 +118,304 @@
             </li>
         </ul>
         
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="responsive">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 animated fadeInLeft">
-                        <h2>We offer the best services</h2>
-                        <div class="space-sm visible-lg"></div>
-                        <p class="text-block">Aliquam eget ante non quam sagittis mollis. In nec varius nisi, nec pharetra nisi. Curabitur ut est velit. Aenean at molestie sem a mattis tellus est sit amet neque.</p>
-                        <p class="text-block">Aenean commodo, ligula ut viverra eleifend, leo urna blandit arcu. Integer placerat tellus eget dolor facilisis, nec malesuada metus tempus.</p>
-                        <div class="space-sm visible-lg"></div>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="btn btn-primary btn-xlg "><i class="fa fa-bolt"></i>Get started now</a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn btn-primary-trn btn-xlg "><i class="fa fa-paper-plane-o"></i>Learn more</a>
-                            </li>
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                
+                <!-- Left Contents -->
+                <div class="col-md-8 col-lg-9">
+ 					<!-- Posts -->
+                    <div class="row blog-post">
 
+                       
+
+                    </div>
+                    <div class="row blog-post">
+                        <div class="col-sm-6">
+                            <div class="hover-content">
+                                <div class="part-a">
+                                    <h3>5</h3>
+                                    <h3>March</h3>
+                                </div>
+                                <div class="part-c">
+                                    <img class="img-responsive" src="./Dragonfly - Blog Page_files/face-1.jpg" alt="Blog Post Author" title="Nicole Perry">
+                                </div>
+                                <div class="part-b">
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-user fa-fw"></i>
+                                            <a href="#" title="View Profile">Nicole Perry</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-clock-o fa-fw"></i>5 March 2014
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-comments fa-fw">
+
+											</i>
+                                            <a href="#" title="Read Comments">7 Comments</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-tags fa-fw"></i>
+                                            <a href="#">Nature,</a>
+                                            <a href="#">Photo,</a>
+                                            <a href="#">Sea</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <img class="img-responsive" alt="Blog Image" src="./Dragonfly - Blog Page_files/011.jpg">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#" title="Read all article">
+                                <h2>Mauris quis nibh ut</h2>
+                            </a>
+                            <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
+                            <a href="#" title="Read all article" class="btn btn-default-trn-v2">
+                                <i class="fa fa-angle-right"></i>Read More
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="row blog-post wow fadeInUp" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
+                        <div class="col-sm-6 ">
+                            <div class="hover-content">
+                                <div class="part-a">
+                                    <h3>2</h3>
+                                    <h3>January</h3>
+                                </div>
+                                <div class="part-c">
+                                    <img class="img-responsive" src="./Dragonfly - Blog Page_files/face-2.jpg" alt="Blog Post Author" title="Nicole Perry">
+                                </div>
+                                <div class="part-b">
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-user fa-fw"></i>
+                                            <a href="#" title="View Profile">James Smith</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-clock-o fa-fw"></i>2 January 2014
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-comments fa-fw">
+
+											</i>
+                                            <a href="#" title="Read Comments">40 Comments</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-tags fa-fw"></i>
+                                            <a href="#">Nature,</a>
+                                            <a href="#">Photo,</a>
+                                            <a href="#">Sea</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <img class="img-responsive" alt="Blog Image" src="./Dragonfly - Blog Page_files/kitsune-3.jpg">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#" title="Read all article">
+                                <h2>Mauris quis nibh ut</h2>
+                            </a>
+                            <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
+                            <a href="#" title="Read all article" class="btn btn-default-trn-v2">
+                                <i class="fa fa-angle-right"></i>Read More
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="row blog-post wow fadeInUp" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
+                        <div class="col-sm-6">
+                            <div class="hover-content">
+                                <div class="part-a">
+                                    <h3>18</h3>
+                                    <h3>April</h3>
+                                </div>
+                                <div class="part-c">
+                                    <img class="img-responsive" src="./Dragonfly - Blog Page_files/face-25.jpg" alt="Blog Post Author" title="Nicole Perry">
+                                </div>
+                                <div class="part-b">
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-user fa-fw"></i>
+                                            <a href="#" title="View Profile">Nicole Perry</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-clock-o fa-fw"></i>18 April 2014
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-comments fa-fw">
+
+											</i>
+                                            <a href="#" title="Read Comments">27 Comments</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-tags fa-fw"></i>
+                                            <a href="#">Nature,</a>
+                                            <a href="#">Photo,</a>
+                                            <a href="#">Sea</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <img class="img-responsive" alt="Blog Image" src="./Dragonfly - Blog Page_files/kitsune-4.jpg">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#" title="Read all article">
+                                <h2>Mauris quis nibh ut</h2>
+                            </a>
+                            <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
+                            <a href="#" class="btn btn-default-trn-v2" title="Read all article">
+                                <i class="fa fa-angle-right"></i>Read More
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="row blog-post wow fadeInUp" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
+                        <div class="col-sm-6">
+                            <div class="hover-content">
+                                <div class="part-a">
+                                    <h3>5</h3>
+                                    <h3>March</h3>
+                                </div>
+                                <div class="part-c">
+                                    <img class="img-responsive" src="./Dragonfly - Blog Page_files/face-1.jpg" alt="Blog Post Author" title="Nicole Perry">
+                                </div>
+                                <div class="part-b">
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-user fa-fw"></i>
+                                            <a href="#" title="View Profile">Nicole Perry</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-clock-o fa-fw"></i>5 March 2014
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-comments fa-fw">
+
+											</i>
+                                            <a href="#" title="Read Comments">7 Comments</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-tags fa-fw"></i>
+                                            <a href="#">Nature,</a>
+                                            <a href="#">Photo,</a>
+                                            <a href="#">Sea</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <img class="img-responsive" alt="Blog Image" src="./Dragonfly - Blog Page_files/picjumbo.com.jpg">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#" title="Read all article">
+                                <h2>Mauris quis nibh ut</h2>
+                            </a>
+                            <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
+                            <a href="#" title="Read all article" class="btn btn-default-trn-v2">
+                                <i class="fa fa-angle-right"></i>Read More
+                            </a>
+                        </div>
+
+                    </div>
+
+					<!-- Number -->
+                    <div class="text-center">
+                        <ul class="pagination ">
+                            <li>
+                                <a href="#">«</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">1</a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                <a href="#">»</a>
+                            </li>
                         </ul>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 fadeInRight animated">
-                        <div class="space-lg visible-xs visible-sm"></div>
-                        <img class="img-responsive  center-block " alt="iMac" src="../../../01_image/temp/mbp_retina2.png">
-                    </div>
                 </div>
-            </div>
-            <div class="tab-pane" id="ready">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 animated fadeInLeft">
-                        <h2>We offer the best services</h2>
+                
+                <!-- Right Contents -->
+                <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
+                	<!-- Search Box -->
+                    <div class="simple-box ">
+					    <div class="input-group form-lg " role="search">
+					        <input type="text" class="form-control" placeholder="Find answer" />
+					        <span class="input-group-btn">
+					            <button class="btn btn-primary" title="Search" type="button">
+					                <i class="fa fa-search"></i>
+					            </button>
+					        </span>
+					    </div>
+					</div>
 
-                        <p class="text-block">Aliquam eget ante non quam sagittis mollis. In nec varius nisi, nec pharetra nisi. Curabitur ut est velit. Aenean at molestie sem a mattis tellus est sit amet neque.</p>
-                        <p class="text-block">Aenean commodo, ligula ut viverra eleifend, leo urna blandit arcu. Integer placerat tellus eget dolor facilisis, nec malesuada metus tempus. Sed ullamcorper tincidunt odio, nec convallis sem iaculis vitae.</p>
-                    </div>
-                    <div class="col-md-6 col-sm-12 fadeInRight animated">
-                        <div class="space-lg visible-xs visible-sm"></div>
-                        <img class="img-responsive  center-block w450" alt="iMac" src="../../../01_image/temp/rmbp-sm.png">
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="shortcodes">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 animated fadeInLeft">
-                        <h2>We offer the best services</h2>
+					<!-- Category Box -->
+					<div class="categories simple-box">
+					    <h3>Categories</h3>
+					    <ul class="list-unstyled">
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="#" title="Category Business">교수님</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="#" title="Category photos">과사무실</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="#" title="Category Education">학부생</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="#" title="Category Music">졸업생</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="#" title="Category Movies">기타</a></li>
+					    </ul>
+					</div>
 
-                        <p class="text-block">Aliquam eget ante non quam sagittis mollis. In nec varius nisi, nec pharetra nisi. Curabitur ut est velit. Aenean at molestie sem a mattis tellus est sit amet neque.</p>
-                        <p class="text-block">Aenean commodo, ligula ut viverra eleifend, leo urna blandit arcu. Integer placerat tellus eget dolor facilisis, nec malesuada metus tempus. Sed ullamcorper tincidunt odio, nec convallis sem iaculis vitae.</p>
-                    </div>
-                    <div class="col-md-6 col-sm-12 fadeInRight animated">
-                        <div class="space-lg visible-xs visible-sm"></div>
-                        <img class="img-responsive  center-block w450" alt="iMac" src="../../../01_image/temp/rmbp-sm.png">
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="fontawesome">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 animated fadeInLeft">
-                        <h2>We offer the best services</h2>
+					<!-- Tag Box -->
+					<!--<div class="tags simple-box">
+					    <h3>Tags</h3>
+					    <ul class="list-unstyled">
+					        <li><i class="fa fa-tags"></i><a href="#">Music</a></li>
+					        <li><i class="fa fa-tags"></i><a href="#">Movies</a> </li>
+					        <li><i class="fa fa-tags"></i><a href="#">Radio</a></li>
+					        <li><i class="fa fa-tags"></i><a href="#">Internet</a></li>
+					    </ul>
+					</div>-->
 
-                        <p class="text-block">Aliquam eget ante non quam sagittis mollis. In nec varius nisi, nec pharetra nisi. Curabitur ut est velit. Aenean at molestie sem a mattis tellus est sit amet neque.</p>
-                        <p class="text-block">Aenean commodo, ligula ut viverra eleifend, leo urna blandit arcu. Integer placerat tellus eget dolor facilisis, nec malesuada metus tempus. Sed ullamcorper tincidunt odio, nec convallis sem iaculis vitae.</p>
-                    </div>
-                    <div class="col-md-6 col-sm-12 fadeInRight animated">
-                        <div class="space-lg visible-xs visible-sm"></div>
-                        <img class="img-responsive  center-block w450" alt="iMac" src="../../../01_image/temp/rmbp-sm.png">
-                    </div>
+					<!-- Subscribe Box -->
+					<!--<div class="simple-box">
+					    <h3>Subscribe Us</h3>
+					    <div class="input-group icon">
+					        <div class="control">
+					            <input type="text" class="form-control" placeholder="Email Address">
+					            <i class="fa fa-bullhorn"></i>
+					        </div>
+					        <span class="input-group-btn">
+					            <button class="btn btn-primary only-icon " type="button">
+					                <i class="fa fa-check"></i>
+					            </button>
+					        </span>
+					    </div>
+					</div>-->
                 </div>
             </div>
+
         </div>
     </section>
 
-    <section class="bg-8 bg-center bg-cover">
-        <div class="bg-filter-v1 section-lg">
-            <div class="container">
-                <h2 class="text-center big-title">We offer the best services</h2>
-                <div class="row">
-                    <div class="col-md-5 hidden-xs hidden-sm">
-                        <img class="img-responsive iphone-black" alt="iPhone 5S Minimal Mock Up Black" src="../../../01_image/temp/iPhone_5S_Minimal_Mock-up_black.png">
-                        <img class="img-responsive iphone-white " alt="iPhone 5S Minimal Mock Up White" src="../../../01_image/temp/iPhone_5S_Minimal_Mock-up.png">
-                    </div>
-                    <div class="col-md-7 col-sm-12 margin-b15">
-                        <div class="space-lg visible-md visible-lg"></div>
-                        <div class="space visible-sm visible-xs"></div>
-                        <div class="float-box wow fadeInRight" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
-                            <i class="fa fa-tint hovicon effect-1 sub-a text-primary"></i>
-                            <div class="float-text-v1">
-                                <h3>Awesome Colors</h3>
-                                <p>Nulle omnis iste natus error sit voluptatem accusantium, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                            </div>
-                        </div>
-                        <div class="float-box wow fadeInRight" data-wow-delay="0.25s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.25s; -moz-animation-delay: 0.25s; animation-delay: 0.25s;">
-                            <i class="fa fa-lightbulb-o hovicon effect-1 sub-a text-primary"></i>
-                            <div class="float-text-v1">
-                                <h3>Clean Design</h3>
-                                <p>Nulle omnis iste natus error sit voluptatem accusantium, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                            </div>
-                        </div>
-                        <div class="float-box wow fadeInRight" data-wow-delay="0.5s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
-                            <i class="fa fa-wrench hovicon effect-1 sub-a text-primary"></i>
-                            <div class="float-text-v1">
-                                <h3>Easy Customization</h3>
-                                <p>Nulle omnis iste natus error sit voluptatem accusantium, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-lg bg-grey">
-        <h3 class="sr-only">Our Customers</h3>
-        <div class="container">
-            <div class="row client-logo">
-                <img alt="logo of client - Yahoo" src="../../../01_image/temp/Yahoo.png">
-
-                <img alt="logo of client - Coca-Cola" src="../../../01_image/temp/Coca-Cola.png">
-
-                <img alt="logo of client - Google" src="../../../01_image/temp/Google.png">
-
-                <img alt="logo of client - Nike" src="../../../01_image/temp/Intel.png">
-            </div>
-        </div>
-    </section>
-
-    <section class="container section text-center">
-        <h2 class="big-title">Join to us today, start a free trial</h2>
-        <p class="big-subtitle">We bring our extensive experiences from others projects into this template for you.</p>
-        <div class="space-md"></div>
-        <a href="http://bootstrapart.net/dragonfly/v1.5/services-v1.php#" class="btn btn-success btn-xlg">Start a free trial</a>
-    </section>
 
     <!--Back to top-->
-	<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 	<!-- Side Menu -->
 	<jsp:include page="../../commonSidebar.jsp" flush="false"/>
@@ -261,12 +424,13 @@
 	<jsp:include page="../../commonFooter.jsp" flush="false"/>
 
 	<div id="ascrail2000" class="nicescroll-rails" style="width: 8px; z-index: 999999; position: fixed; top: 0px; height: 100%; right: 0px; cursor: default; opacity: 0; background: rgb(221, 221, 221);">
-		<div style="position: relative; float: right; width: 8px; border: none; border-radius: 0px; height: 216px; top: 0px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
+		<div style="position: relative; float: right; width: 8px; border: none; border-radius: 0px; height: 218px; top: 0px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
 	</div>
 	
 	<div id="ascrail2000-hr" class="nicescroll-rails" style="height: 8px; z-index: 999999; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; display: none; opacity: 0; background: rgb(221, 221, 221);">
 		<div style="position: relative; top: 0px; height: 8px; border: none; border-radius: 0px; width: 1396px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
 	</div>
-
+	
 </body>
 </html>
+  
