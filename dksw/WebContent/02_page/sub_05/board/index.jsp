@@ -111,11 +111,7 @@
                 <!-- Left Contents -->
                 <div class="col-md-8 col-lg-9">
  					<!-- Posts -->
-                    <div class="row blog-post">
-
-                       
-
-                    </div>
+ 					
                     <div class="row blog-post">
                         <div class="col-sm-6">
                             <div class="hover-content">

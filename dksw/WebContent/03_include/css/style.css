@@ -1344,6 +1344,11 @@ ul.primary span {
 }
 /* === Background Images === */
 @media (min-width: 1920px) {
+	
+	.background-bar-02-01 {
+	    background-image: url("../../01_image/background-bar/02_01.jpg");
+	}
+	
   .bg-2 {
     background-image: url("../../01_image/temp/576f.jpg");
   }
@@ -1394,6 +1399,11 @@ ul.primary span {
   }
 }
 @media (max-width: 1920px) {
+	
+	.background-bar-02-01 {
+	    background-image: url("../../01_image/background-bar/02_01.jpg");
+	}
+	
   .bg-2 {
     background-image: url("../../01_image/temp/576f.jpg");
   }
@@ -4246,6 +4256,15 @@ ul.thumbs {
  * =================================== */
 
 /* join/index.jsp */
+.font-NanumGothic {
+	font-family:NanumGothic;
+}
+
+.edit-date {
+	float:right;
+	font-size:0.8em;
+	text-align:right;
+}
 
 .offline-auth {
 	display:none;

@@ -16,7 +16,7 @@
 	
 	                <!-- 공지사항 -->
 	                <li class="dropdown">
-	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">공지사항</a>
+	                    <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0">공지사항</a>
 	                    <ul class="dropdown-menu">
 	                        <li><a href="<%=request.getContextPath()%>/02_page/sub_01/notice/index.jsp">학부 공지</a></li>
 	                        <li><a href="#">학생회 공지</a></li>

@@ -30,7 +30,7 @@ public class MemberController extends HttpServlet {
 	}
 
 	// 오프라인 가입 인증코드 체크
-	private void checkOfflineAuthCode(HttpServletRequest req, HttpServletResponse res) throws ServletException {
+	private void checkOfflineAuthCode(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 		boolean checkOfflineAuthCode = false;
 
@@ -45,9 +45,9 @@ public class MemberController extends HttpServlet {
 			}
 			
 		} catch (SQLException se) {
-			req.setAttribute("errorMsg", "ERROR : 포스트 가져오기 실패! (SQL에러)");
+			req.setAttribute("errorMsg", "ERROR : 인증 오류! (SQL에러)");
 		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 포스트 가져오기 실패! (IO에러)");
+			req.setAttribute("errorMsg", "ERROR : 인증 오류! (IO에러)");
 		}
 	}
 

@@ -25,6 +25,16 @@
     <url-pattern>/lab</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>DepartmentController</servlet-name>
+    <servlet-class>dksw.controller.DepartmentController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>DepartmentController</servlet-name>
+    <url-pattern>/department</url-pattern>
+  </servlet-mapping>
+
   <listener>
     <listener-class>dksw.util.UrlPath</listener-class>
   </listener>  

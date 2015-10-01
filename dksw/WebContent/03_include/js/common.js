@@ -29,3 +29,25 @@ function navLab(num) {
 	
 	location.href = src;
 }
+
+function initializeDepartmentGreeting() {
+	
+	var action = "/dksw/department?action=getGreetingData";
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		dataType : "json",
+		success: function(response) {
+			$("#dkswDepartmentGreetingTitle").text(response.dkswDepartmentGreetingTitle);
+			$("#dkswDepartmentGreetingPicture").attr("src", "/dksw/04_upload/files/" + response.dkswDepartmentGreetingPicture);	
+			$("#dkswDepartmentGreetingContent").html(response.dkswDepartmentGreetingContent.replace(/\n/g, "<br />"));	
+			$("#dkswDepartmentGreetingEditDate").text(response.dkswDepartmentGreetingEditDate);
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
