@@ -115,10 +115,15 @@
 	</jsp:include>
 
 	<!-- labMembers.jsp -->
-	<jsp:include page="labAcheivement.jsp" flush="false">
+	<jsp:include page="labAchievement.jsp" flush="false">
 		<jsp:param name="labCode" value="<%=labCode%>" />	
 	</jsp:include>
-
+	
+	<!-- labPaperProject.jsp -->
+	<jsp:include page="labPaperProject.jsp" flush="false">
+		<jsp:param name="labCode" value="<%=labCode%>" />	
+	</jsp:include>
+	
     <!--Back to top-->
 	<a href="#" class="back-to-top" style="display: none;">
 	    <i class="fa fa-angle-up"></i>

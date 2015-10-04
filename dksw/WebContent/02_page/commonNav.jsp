@@ -74,7 +74,8 @@
 	                            <ul class="dropdown-menu">
 	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_03/index.jsp?labCode=1">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
+	                                 <li><a href="#">Achievements</a></li>
+	                                 <li><a href="#">Paper & Projects </a></li>
 	                            </ul>
 	                        </li>
 	
@@ -83,16 +84,18 @@
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">Achievements</a></li>
+	                                 <li><a href="#">Paper & Projects </a></li>
 	                            </ul>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Mobile Contents Lab.</a>
 	                            <ul class="dropdown-menu">
-	                                <li><a href="#">소개 및 연구목표</a></li>
+	                               <li><a href="#">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">Achievements</a></li>
+	                                 <li><a href="#">Paper & Projects </a></li>
 	                            </ul>
 	                        </li>
 	
@@ -101,7 +104,8 @@
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">Achievements</a></li>
+	                                 <li><a href="#">Paper & Projects </a></li>
 	                            </ul>
 	                        </li>
 	
@@ -110,7 +114,8 @@
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">포트폴리오</a></li>
+	                                <li><a href="#">Achievements</a></li>
+	                                 <li><a href="#">Paper & Projects </a></li>
 	                            </ul>
 	                        </li>
 	                    </ul>
