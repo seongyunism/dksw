@@ -13,20 +13,17 @@
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-7 wow fadeInRight animated" style="visibility: visible;">
                             <h2>Professor</h2>
-                            <p>Pellentesque pretium lectus id turpis. Etiam quis quam. Excepteur sint occaecat cupidatat non proident. Vestibulum tortor id mi.</p>
+                            <p>Korean Name</p>
+                            <p>English Name</p>
                             <div class="space-sm"></div>
                             <ul class="info-list md-list style i-primary">
                                 <li>
-                                    <i class="fa fa-play"></i>Pellentesque pretium lectus id turpis.</li>
+                                    <i class="fa fa-play"></i>Phone No. :</li>
                                 <li>
-                                    <i class="fa fa-play"></i>Excepteur sint occaecat cupidatat non proident.</li>
+                                    <i class="fa fa-play"></i>E-mail:</li>
                                 <li>
-                                    <i class="fa fa-play"></i>Aliquam erat volutpat. Fusce tellus odio.</li>
-                                <li>
-                                    <i class="fa fa-play"></i>Vestibulum fermentum tortor id mi.</li>
-                                <li>
-                                    <i class="fa fa-play"></i>Duis viverra diam non justo.</li>
-
+                                    <i class="fa fa-play"></i>Research Interest:</li>
+                              
                             </ul>
                         </div>
                     </div>
@@ -63,10 +60,12 @@
                                 </ul>
                             </div>
                         </div>
-                        <h3>Larry Norrington
-						<small>Designer</small>
+                        <h3>Korean Name
+						<small>English Name</small>
 					</h3>
-                        <p>Cras vel urna iaculis orci pulvinar convallis ut eget nunc. Integer a mi ante. Sed ac urna commodo, volutpat justo a, mollis mi.</p>
+                        <p>Admission Year:</p>
+                        <p>E-mail:</p>
+                        <p>Etc:</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6">
