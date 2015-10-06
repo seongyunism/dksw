@@ -91,6 +91,8 @@
 	
 	<!-- Custom Scripts -->
 	<script>
+	var checkOfflineAuthCode = false;
+	
 	$(function() {
 		$(".input-radio input[name='inputMemberCategory']").click(function() {
 			if($(this).val() == 7 || $(this).val() == 8) {
@@ -117,7 +119,7 @@
                     <h1 class="sign-up-title">Create new account</h1>
 					
 					<!-- 추후 보안을 위해 세션처리 해줄 것 -->
-					<form role="form" class="icon">
+					<form role="form" class="icon" method="post">
 	                    <div class="row join-form">
 	                    	<!-- Top Side -->
 	                    	<div class="col-md-12 btn-radio">
@@ -189,16 +191,17 @@
                                 <div class="space visible-sm visible-xs"></div>
 	                        </div>   
 	                    </div>
-					</form>
 					
-					<!-- 인증코드 입력란 -->
-					<div class="row offline-auth">
-						<div class="col-md-12 col-sm-6">
-							<div class="offline-auth-code"><input type="text" class="form-control" maxlength="6" placeholder="오프라인 인증코드를 입력해주시기 바랍니다.  (6자리)" /></div>
-                            <button type="submit" class="btn btn-success btn-offline-auth-code" onclick="offlineAuthCode()"><i class="fa fa-check"></i>가입완료</button>
+						<!-- 인증코드 입력란 -->
+						<div class="row offline-auth">
+							<div class="col-md-12 col-sm-6">
+								<div class="offline-auth-code"><input type="text" class="form-control" maxlength="6" placeholder="오프라인 인증코드를 입력해주시기 바랍니다.  (6자리)" /></div>
+	                            <button type="button" class="btn btn-success btn-offline-auth-code" onclick="offlineAuthCode()"><i class="fa fa-check"></i>가입완료</button>
+							</div>
 						</div>
-					</div>
-					
+						
+					</form>
+	
                 </div>
             </div>
         </div>

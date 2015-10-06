@@ -9,9 +9,11 @@ public class Member {
 	private String dkswMemberStudentNo;
 	private String dkswMemberName;
 	private int dkswMemberSNS;
-	private int dkswMemberJoin;
-	private String dkswMemberJoinCode;
-	private int dkswMemberAuth;
+	private int dkswMemberOnlineAuth;
+	private String dkswMemberOnlineAuthCode;
+	private int dkswMemberOfflineAuthCode;
+	private int dkswMemberJoinDate;
+	private int dkswMemberAdminAuth;
 	
 	public int getDkswMemberNo() {
 		return dkswMemberNo;
@@ -55,30 +57,43 @@ public class Member {
 	public void setDkswMemberSNS(int dkswMemberSNS) {
 		this.dkswMemberSNS = dkswMemberSNS;
 	}
-	public int getDkswMemberJoin() {
-		return dkswMemberJoin;
+	public int getDkswMemberOnlineAuth() {
+		return dkswMemberOnlineAuth;
 	}
-	public void setDkswMemberJoin(int dkswMemberJoin) {
-		this.dkswMemberJoin = dkswMemberJoin;
+	public void setDkswMemberOnlineAuth(int dkswMemberOnlineAuth) {
+		this.dkswMemberOnlineAuth = dkswMemberOnlineAuth;
 	}
-	public String getDkswMemberJoinCode() {
-		return dkswMemberJoinCode;
+	public String getDkswMemberOnlineAuthCode() {
+		return dkswMemberOnlineAuthCode;
 	}
-	public void setDkswMemberJoinCode(String dkswMemberJoinCode) {
-		this.dkswMemberJoinCode = dkswMemberJoinCode;
+	public void setDkswMemberOnlineAuthCode(String dkswMemberOnlineAuthCode) {
+		this.dkswMemberOnlineAuthCode = dkswMemberOnlineAuthCode;
 	}
-	public int getDkswMemberAuth() {
-		return dkswMemberAuth;
+	public int getDkswMemberOfflineAuthCode() {
+		return dkswMemberOfflineAuthCode;
 	}
-	public void setDkswMemberAuth(int dkswMemberAuth) {
-		this.dkswMemberAuth = dkswMemberAuth;
+	public void setDkswMemberOfflineAuthCode(int dkswMemberOfflineAuthCode) {
+		this.dkswMemberOfflineAuthCode = dkswMemberOfflineAuthCode;
+	}
+	public int getDkswMemberJoinDate() {
+		return dkswMemberJoinDate;
+	}
+	public void setDkswMemberJoinDate(int dkswMemberJoinDate) {
+		this.dkswMemberJoinDate = dkswMemberJoinDate;
+	}
+	public int getDkswMemberAdminAuth() {
+		return dkswMemberAdminAuth;
+	}
+	public void setDkswMemberAdminAuth(int dkswMemberAdminAuth) {
+		this.dkswMemberAdminAuth = dkswMemberAdminAuth;
 	}
 	
 	public Member(int dkswMemberNo, int dkswMemberCategory,
 			String dkswMemberEmail, String dkswMemberPassword,
 			String dkswMemberStudentNo, String dkswMemberName,
-			int dkswMemberSNS, int dkswMemberJoin, String dkswMemberJoinCode,
-			int dkswMemberAuth) {
+			int dkswMemberSNS, int dkswMemberOnlineAuth,
+			String dkswMemberOnlineAuthCode, int dkswMemberOfflineAuthCode,
+			int dkswMemberJoinDate, int dkswMemberAdminAuth) {
 		super();
 		this.dkswMemberNo = dkswMemberNo;
 		this.dkswMemberCategory = dkswMemberCategory;
@@ -87,9 +102,10 @@ public class Member {
 		this.dkswMemberStudentNo = dkswMemberStudentNo;
 		this.dkswMemberName = dkswMemberName;
 		this.dkswMemberSNS = dkswMemberSNS;
-		this.dkswMemberJoin = dkswMemberJoin;
-		this.dkswMemberJoinCode = dkswMemberJoinCode;
-		this.dkswMemberAuth = dkswMemberAuth;
+		this.dkswMemberOnlineAuth = dkswMemberOnlineAuth;
+		this.dkswMemberOnlineAuthCode = dkswMemberOnlineAuthCode;
+		this.dkswMemberOfflineAuthCode = dkswMemberOfflineAuthCode;
+		this.dkswMemberJoinDate = dkswMemberJoinDate;
+		this.dkswMemberAdminAuth = dkswMemberAdminAuth;
 	}
-	
 }

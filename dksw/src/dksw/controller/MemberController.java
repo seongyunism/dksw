@@ -26,7 +26,9 @@ public class MemberController extends HttpServlet {
 		
 		if(action.equals("checkOfflineAuthCode")) {
 			checkOfflineAuthCode(req, res);
-		} 
+		} else if(action.equals("joinMember")) {
+			joinMember(req, res);
+		}
 	}
 
 	// 오프라인 가입 인증코드 체크
@@ -51,7 +53,30 @@ public class MemberController extends HttpServlet {
 		}
 	}
 
-	
+	// 회원가입
+	private void joinMember(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		try {
+			int inputMemberCategory = (req.getParameter("inputMemberCategory") != null) ? Integer.parseInt(req.getParameter("inputMemberCategory")) : null; 
+			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
+			String inputMemberPassword = (req.getParameter("inputMemberPassword") != null) ? req.getParameter("inputMemberPassword") : null;
+			String inputMemberStudentNo = (req.getParameter("inputMemberStudentNo") != null) ? req.getParameter("inputMemberStudentNo") : null;
+			String inputMemberName = (req.getParameter("inputMemberName") != null) ? req.getParameter("inputMemberName") : null;
+			
+			int inputMemberSNS = 0;
+			int inputMemberOnlineAuth = 0;
+			
+			
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : 가입 오류! (SQL에러)");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : 가입 오류! (IO에러)");
+		}
+		
+		
+	}
+
 	
 	
 	
