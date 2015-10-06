@@ -4,13 +4,15 @@ public class LabMembers {
 	
 	private int dkswLabCode;
 	private String dkswLabMembersPicture;
-	private String dkswLabMembersName;
-	private String dkswLabMembersStudentNumber;
+	private String dkswLabMembersNameKo;
+	private String dkswLabMembersNameEn;
+	private String dkswLabMembersAdmissionYear;
 	private String dkswLabMembersEmail;
-	private String dkswLabMembersGroup;
+	private int dkswLabMembersGroup;
 	private String dkswLabMembersEtc;
 	private int dkswLabMembersEditDate;
 	private int dkswLabMembersEditRightIndex;
+	private int dkswDepartmentProfessorNo;
 	
 	public int getDkswLabCode() {
 		return dkswLabCode;
@@ -24,17 +26,23 @@ public class LabMembers {
 	public void setDkswLabMembersPicture(String dkswLabMembersPicture) {
 		this.dkswLabMembersPicture = dkswLabMembersPicture;
 	}
-	public String getDkswLabMembersName() {
-		return dkswLabMembersName;
+	public String getDkswLabMembersNameKo() {
+		return dkswLabMembersNameKo;
 	}
-	public void setDkswLabMembersName(String dkswLabMembersName) {
-		this.dkswLabMembersName = dkswLabMembersName;
+	public void setDkswLabMembersNameKo(String dkswLabMembersNameKo) {
+		this.dkswLabMembersNameKo = dkswLabMembersNameKo;
 	}
-	public String getDkswLabMembersStudentNumber() {
-		return dkswLabMembersStudentNumber;
+	public String getDkswLabMembersNameEn() {
+		return dkswLabMembersNameEn;
 	}
-	public void setDkswLabMembersStudentNumber(String dkswLabMembersStudentNumber) {
-		this.dkswLabMembersStudentNumber = dkswLabMembersStudentNumber;
+	public void setDkswLabMembersNameEn(String dkswLabMembersNameEn) {
+		this.dkswLabMembersNameEn = dkswLabMembersNameEn;
+	}
+	public String getDkswLabMembersAdmissionYear() {
+		return dkswLabMembersAdmissionYear;
+	}
+	public void setDkswLabMembersAdmissionYear(String dkswLabMembersAdmissionYear) {
+		this.dkswLabMembersAdmissionYear = dkswLabMembersAdmissionYear;
 	}
 	public String getDkswLabMembersEmail() {
 		return dkswLabMembersEmail;
@@ -42,10 +50,10 @@ public class LabMembers {
 	public void setDkswLabMembersEmail(String dkswLabMembersEmail) {
 		this.dkswLabMembersEmail = dkswLabMembersEmail;
 	}
-	public String getDkswLabMembersGroup() {
+	public int getDkswLabMembersGroup() {
 		return dkswLabMembersGroup;
 	}
-	public void setDkswLabMembersGroup(String dkswLabMembersGroup) {
+	public void setDkswLabMembersGroup(int dkswLabMembersGroup) {
 		this.dkswLabMembersGroup = dkswLabMembersGroup;
 	}
 	public String getDkswLabMembersEtc() {
@@ -66,19 +74,30 @@ public class LabMembers {
 	public void setDkswLabMembersEditRightIndex(int dkswLabMembersEditRightIndex) {
 		this.dkswLabMembersEditRightIndex = dkswLabMembersEditRightIndex;
 	}
+		public int getDkswDepartmentProfessorNo() {
+		return dkswDepartmentProfessorNo;
+	}
+	public void setDkswDepartmentProfessorNo(int dkswDepartmentProfessorNo) {
+		this.dkswDepartmentProfessorNo = dkswDepartmentProfessorNo;
+	}
 	
-	public LabMembers(int dkswLabCode, String dkswLabMembersPicture, String dkswLabMembersName,
-			String dkswLabMembersStudentNumber, String dkswLabMembersEmail, String dkswLabMembersGroup,
-			String dkswLabMembersEtc, int dkswLabMembersEditDate, int dkswLabMembersEditRightIndex) {
+	public LabMembers(int dkswLabCode, String dkswLabMembersPicture, String dkswLabMembersNameKo,
+			String dkswLabMembersNameEn, String dkswLabMembersAdmissionYear, String dkswLabMembersEmail,
+			int dkswLabMembersGroup, String dkswLabMembersEtc, int dkswLabMembersEditDate,
+			int dkswLabMembersEditRightIndex, int dkswDepartmentProfessorNo) {
 		super();
 		this.dkswLabCode = dkswLabCode;
 		this.dkswLabMembersPicture = dkswLabMembersPicture;
-		this.dkswLabMembersName = dkswLabMembersName;
-		this.dkswLabMembersStudentNumber = dkswLabMembersStudentNumber;
+		this.dkswLabMembersNameKo = dkswLabMembersNameKo;
+		this.dkswLabMembersNameEn = dkswLabMembersNameEn;
+		this.dkswLabMembersAdmissionYear = dkswLabMembersAdmissionYear;
 		this.dkswLabMembersEmail = dkswLabMembersEmail;
 		this.dkswLabMembersGroup = dkswLabMembersGroup;
 		this.dkswLabMembersEtc = dkswLabMembersEtc;
 		this.dkswLabMembersEditDate = dkswLabMembersEditDate;
 		this.dkswLabMembersEditRightIndex = dkswLabMembersEditRightIndex;
+		this.dkswDepartmentProfessorNo = dkswDepartmentProfessorNo;
 	}
+	
+	
 }

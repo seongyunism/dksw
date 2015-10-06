@@ -89,6 +89,21 @@
 	  ga('create', 'UA-68083185-1', 'auto');
 	  ga('send', 'pageview');
 	</script>
+	
+	<!-- Custom Scripts -->
+	<script>
+	$(document).ready(function() {
+		initializeLab(<%=labCode%>);
+	});
+
+	$(window).load(function() {
+
+	});
+	
+	$(function() {
+
+	});
+	</script>
 </head>
 
 <body>
@@ -99,7 +114,7 @@
     <section class="bg-2 bg-center bg-cover">
         <div class="bg-filter">
             <div class="container section-lg">
-                <h1 class="top-title">연구실</h1>
+                <h1 class="top-title">연구</h1>
             </div>
         </div>
     </section>
