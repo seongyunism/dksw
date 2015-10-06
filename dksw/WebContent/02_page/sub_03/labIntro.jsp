@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <% String labCode = request.getParameter("labCode").toString();%>
     <section class="section">
-        <div class="container-sm">
+        <div class="container">
             <h2 class="big-title">Introduction</h2> 
             <div class="space-sm"></div>
             <p class="text-block">Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko.</p>
