@@ -165,11 +165,11 @@
 
                         </div>
                         <div class="col-sm-6">
-                            <a href="#" title="Read all article">
+                            <a href="<%=request.getContextPath() %>/02_page/sub_01/notice/view.jsp" title="Read all article">
                                 <h2>Mauris quis nibh ut</h2>
                             </a>
                             <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
-                            <a href="<%=request.getContextPath() %>/02_page/sub_05/board/view.jsp" title="Read all article" class="btn btn-default-trn-v2">
+                            <a href="<%=request.getContextPath() %>/02_page/sub_01/notice/view.jsp" title="Read all article" class="btn btn-default-trn-v2">
                                 <i class="fa fa-angle-right"></i>Read More
                             </a> 
                         </div>
