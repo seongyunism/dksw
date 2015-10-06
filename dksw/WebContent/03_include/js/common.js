@@ -1,7 +1,7 @@
 // [회원 가입 페이지] 
 function joinMember() {
 	var memberCategory = $("input[name='inputMemberCategory']:checked").val();
-	
+	 
 	if(memberCategory == 7 && checkOfflineAuthCode == false) {
 		$(".join-form").slideUp();
 		$(".offline-auth").slideDown();

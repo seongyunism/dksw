@@ -688,7 +688,7 @@ textarea.form-control {
 }
 @media (min-width: 768px) {
   .sign-up {
-    min-width: 600px;
+    width: 600px;
   }
 }
 @media (max-width: 650px) {
