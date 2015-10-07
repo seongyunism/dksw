@@ -65,7 +65,7 @@ public class DepartmentDAO {
 		try {
 			con = DBUtil.getConnection(); 
 			
-			pstmt = con.prepareStatement("SELECT * FROM dksw_department_history");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_department_history WHERE NOT dkswDepartmentHistoryVisible=0 ORDER BY dkswDepartmentHistoryYear ASC, dkswDepartmentHistoryMonth ASC");
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

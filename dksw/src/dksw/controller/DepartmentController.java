@@ -57,7 +57,7 @@ public class DepartmentController extends HttpServlet {
 				JSONObject tempData = new JSONObject();
 				tempData.put("dkswDepartmentHistoryYear", thisData.get(i).getDkswDepartmentHistoryYear());
 				tempData.put("dkswDepartmentHistoryMonth", thisData.get(i).getDkswDepartmentHistoryMonth());
-				tempData.put("dkswDepartmentHistoryContent", thisData.get(i).getDkswDepartmentHistoryContent());
+				tempData.put("dkswDepartmentHistoryContent", thisData.get(i).getDkswDepartmentHistoryContent().replaceAll("\n", "<br />") );
 				tempData.put("dkswDepartmentHistoryVisible", thisData.get(i).getDkswDepartmentHistoryVisible());
 				tempData.put("dkswDepartmentHistoryEditDate", UnixTimeConvertor.toConvertTimeFromUnixTime(thisData.get(i).getDkswDepartmentHistoryEditDate()));
 				tempData.put("dkswDepartmentHistoryEditPermission", thisData.get(i).getDkswDepartmentHistoryPermission());

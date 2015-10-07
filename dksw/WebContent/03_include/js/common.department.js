@@ -34,22 +34,23 @@ function initializeDepartmentHistory() {
 		url : action,
 		dataType : "json",
 		success : function(response) {
+			var head = "<tr><td class='history-head'>년도</td><td class='history-head'>월</td><td class='history-head'>내용</td></tr>"
 			var histories = "";
 			var history = "";
 
 			for (i=0; i<response.dkswDepartmentHistory.length; i++) {
-				var history = "<tr> <td>"
+				var history = "<tr> <td class='history-year' style='line-height:2em;'>"
 					+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryYear
-					+ "</td> <td>"
+					+ "</td> <td class='history-year' style='line-height:2em;'>"
 					+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryMonth
-					+ "</td> <td>"
+					+ "</td> <td style='line-height:2em;'>"
 					+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryContent
 					+ "</td> </tr>";
 				
 				histories += history;
 			}
 
-			$("#dkswDepartmentHistory").html(histories);
+			$("#dkswDepartmentHistory").html(head + histories);
 		},
 		error : function(xhr, status, error) {
 			alert(error);

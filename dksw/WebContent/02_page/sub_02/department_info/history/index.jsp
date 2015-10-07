@@ -39,9 +39,9 @@
 
 	<section class="section">
 		<div class="container-sm">
-			<h2 class="big-title">Project title</h2>
+
 			<div class="space-sm"></div>			
-				<table class="table table-striped"  id="dkswDepartmentHistory"></table>
+				<table class="table table-striped" id="dkswDepartmentHistory"></table>
 
 			<div class="space"></div>
 			<hr class="hr">

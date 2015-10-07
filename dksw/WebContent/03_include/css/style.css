@@ -4322,3 +4322,15 @@ ul.thumbs {
 .btn-radio {
 	height:35px;
 }
+
+.history-head {
+	font-weight:bold;
+	text-align:center;	
+}
+.history-year, .history-month {
+	text-align:center;
+}
+
+.history-year, .history-month, .history-content {
+	line-height:2em;
+}
