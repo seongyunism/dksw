@@ -1,7 +1,8 @@
 // [회원 가입 페이지] 
 function joinMember() {
 	var memberCategory = $("input[name='inputMemberCategory']:checked").val();
-	 
+
+	// 학부생일 경우 오프라인 인증코드 입력
 	if(memberCategory == 7 && checkOfflineAuthCode == false) {
 		$(".join-form").slideUp();
 		$(".offline-auth").slideDown();
@@ -15,7 +16,8 @@ function joinMember() {
 		inputMemberName : $("input[name='inputMemberName']").val(),
 		inputMemberEmail : $("input[name='inputMemberEmail']").val(),
 		inputMemberPassword : $("input[name='inputMemberPassword']").val(),
-		inputMemberStudentNo : $("input[name='inputMemberStudentNo]").val()
+		inputMemberStudentNo : $("input[name='inputMemberStudentNo']").val(), 
+		inputMemberOfflineAuthCode : $("div.offline-auth-code input").val()
 	};
 	
 	$.ajax({

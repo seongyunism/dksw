@@ -48,4 +48,49 @@ public class MemberDAO {
 
 	}
 
+	public static boolean checkJoinMember(int inputMemberCategory, String inputMemberEmail, String inputMemberPassword,
+			String inputMemberStudentNo, String inputMemberName, int inputMemberSNS, int inputMemberOnlineAuth, 
+			String inputMemberOnlineAuthCode, String inputMemberOfflineAuthCode, int inputMemberJoinDate, int inputMemberAdminAuth) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("INSERT INTO dksw_member("
+					+ "dkswMemberCategory, dkswMemberEmail, dkswMemberPassword, dkswMemberStudentNo, dkswMemberName, dkswMemberSNS, "
+					+ "dkswMemberOnlineAuth, dkswMemberOnlineAuthCode, dkswMemberOfflineAuthCode, dkswMemberJoinDate, dkswMemberAdminAuth"
+					+ ") values(?, ?, password(?), ?, ?, ?, ?, ?, ?, ?, ?)");
+		
+			pstmt.setInt(1, inputMemberCategory);
+			pstmt.setString(2, inputMemberEmail);
+			pstmt.setString(3, inputMemberPassword);
+			pstmt.setString(4, inputMemberStudentNo);
+			pstmt.setString(5, inputMemberName);
+			pstmt.setInt(6, inputMemberSNS);
+			pstmt.setInt(7,  inputMemberOnlineAuth);
+			pstmt.setString(8,  inputMemberOnlineAuthCode);
+			pstmt.setString(9,  inputMemberOfflineAuthCode);
+			pstmt.setInt(10, inputMemberJoinDate);
+			pstmt.setInt(11,  inputMemberAdminAuth);
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+
+
 }
