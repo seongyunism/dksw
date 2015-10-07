@@ -13,10 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dksw.model.BoardDAO;
-import dksw.model.DepartmentDAO;
 import dksw.model.domain.Board;
-import dksw.model.domain.DepartmentGreeting;
-import dksw.util.UnixTimeConvertor;
 
 public class BoardController extends HttpServlet {
 
@@ -32,34 +29,44 @@ public class BoardController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String action = req.getParameter("action");
 		
-		if(action.equals("getBoardData")) {
-			getBoardData(req, res);
+		if(action.equals("getBoardListData")) {
+			getBoardListData(req, res);
 		} 
 	}
 
-	public void getBoardData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	// 학과 공지, 학생회 공지, 채용정보, 자유게시판에서 리스트 가져오기
+	public void getBoardListData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		ArrayList<Board> list = null;
+		ArrayList<Board> posts = null;
+		String[] tempContent = null;
 		
 		try {
 			int inputBoardCategory = (req.getParameter("inputBoardCategory") != null) ? Integer.parseInt(req.getParameter("inputBoardCategory")) : null;
 			
-			list = BoardDAO.getBoard(inputBoardCategory);
+			posts = BoardDAO.getBoard(inputBoardCategory);
 		
 			JSONObject jObject = new JSONObject();
 			JSONArray jArray = new JSONArray();
-			
-			
-			for(int i=0; i<list.size(); i++) {
+				
+			for(int i=0; i<posts.size(); i++) {
 				JSONObject temp = new JSONObject();
-				temp.put("dkswBoardNo", list.get(i).getDkswBoardNo());
-				temp.put("dkswBoardCategory", list.get(i).getDkswBoardCategory());
-				temp.put("dkswBoardTitle", list.get(i).getDkswBoardTitle());
-				temp.put("dkswMemberNo", list.get(i).getDkswMemberNo());
-				temp.put("dkswBoardWriteDate", list.get(i).getDkswBoardWriteDate());
-				temp.put("dkswBoardReadnum", list.get(i).getDkswBoardReadnum());
-				temp.put("dkswBoardContent", list.get(i).getDkswBoardContent());
-				temp.put("dkswBoardPicture", list.get(i).getDkswBoardPicture());
+				temp.put("dkswBoardNo", posts.get(i).getDkswBoardNo());
+				temp.put("dkswBoardCategory", posts.get(i).getDkswBoardCategory());
+				temp.put("dkswMemberNo", posts.get(i).getDkswMemberNo());
+				temp.put("dkswBoardWriteDate", posts.get(i).getDkswBoardWriteDate());
+				temp.put("dkswBoardReadnum", posts.get(i).getDkswBoardReadnum());
+				temp.put("dkswBoardTitle", posts.get(i).getDkswBoardTitle());
+				
+				// 본문 앞부분 자르기
+		        tempContent = posts.get(i).getDkswBoardContent().split("\n\n");
+				temp.put("dkswBoardContent", tempContent[0]);
+				
+				// 대체 이미지 삽입
+				if(posts.get(i).getDkswBoardPicture().equals("")) { // 저장된 이미지가 없을 경우
+					temp.put("dkswBoardPicture", req.getContextPath() + "/04_upload/files/sub_01/notice/no-image.jpg");					
+				} else {
+					temp.put("dkswBoardPicture", posts.get(i).getDkswBoardPicture());
+				}
 				
 				jArray.add(temp);
 			}

@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dksw.model.domain.Board;
-import dksw.model.domain.DepartmentGreeting;
-import dksw.model.domain.LabMembers;
 import dksw.util.DBUtil;
 
 public class BoardDAO {
@@ -25,7 +23,7 @@ public class BoardDAO {
 		try {
 			con = DBUtil.getConnection();
 			
-			pstmt = con.prepareStatement("SELECT * FROM dksw_board WHERE dkswBoardCategory=?  ORDER BY dkswBoardNO DESC LIMIT 10");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_board WHERE dkswBoardCategory=? ORDER BY dkswBoardNo DESC LIMIT 10");
 			pstmt.setInt(1,  inputBoardCategory);
 			rset = pstmt.executeQuery();
 			
@@ -33,10 +31,10 @@ public class BoardDAO {
 				data = new Board(
 						rset.getInt(1),
 						rset.getInt(2),
-						rset.getString(3),
+						rset.getInt(3),
 						rset.getInt(4),
 						rset.getInt(5),
-						rset.getInt(6),
+						rset.getString(6),
 						rset.getString(7),
 						rset.getString(8)
 				);
@@ -57,12 +55,8 @@ public class BoardDAO {
 				sqle.printStackTrace();
 			}
 		}
-	
-		
 	}
 
-	
-	
 	public static Board getPost(int inputBoardNo) throws SQLException {
 
 		Connection con = null;
@@ -82,10 +76,10 @@ public class BoardDAO {
 				data = new Board(
 						rset.getInt(1),
 						rset.getInt(2),
-						rset.getString(3),
+						rset.getInt(3),
 						rset.getInt(4),
 						rset.getInt(5),
-						rset.getInt(6),
+						rset.getString(6),
 						rset.getString(7),
 						rset.getString(8)
 				);
@@ -104,10 +98,5 @@ public class BoardDAO {
 				sqle.printStackTrace();
 			}
 		}
-	
-		
 	}
-	
-	
-	
 }

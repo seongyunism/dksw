@@ -6,88 +6,7 @@
 <head>
 	<title>단국대학교 소프트웨어학과</title>
 
-	<!-- Meta Tags -->
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Dankook University Department of Software" />
-	<meta name="author" content="Seong-Gyun Jeon, Ji-Hoon Hwang, Jae-Seock Heo, Ha-Yarn Kim, Hong-Jun Jang" />
-
-	<!-- Boostrap Framework  -->
-	<link href="./03_include/css/bootstrap.min.css" rel="stylesheet" />
-
-	<!-- Google Fonts - Lato -->
-	<link href="./03_include/css/lato.css" rel="stylesheet" />
-
-	<!-- Font Awesome Icons -->
-	<link href="./03_include/css/font-awesome.css" rel="stylesheet" />
-
-	<!-- CSS Animations -->
-	<link href="./03_include/css/animate.min.css" rel="stylesheet" />
-
-	<!-- Slippry Slideshow -->
-	<link href="./03_include/css/slippry.min.css" rel="stylesheet" />
-
-	<!-- Common Style -->
-	<link href="./03_include/css/style.css" rel="stylesheet" id="colors" />
-
-    <!-- Script : Modernizr -->
-    <script src="./03_include/js/modernizr.custom.min.js"></script>
-
-    <!-- Script : jQuery -->
-    <script src="./03_include/js/jquery.min.js"></script>
-    <script src="./03_include/js/jquery-ui.min.js"></script>
-
-    <!-- Script : Bootstrap JS -->
-    <script src="./03_include/js/bootstrap.min.js"></script>
-
-    <!-- Script : Bootstrap Plugin - open dropdown on hover -->
-    <script src="./03_include/js/bootstrap-hover-dropdown.min.js"></script>
-
-    <!-- Script : LESS preprocessor -->
-    <script src="./03_include/js/less.min.js"></script>
-
-    <!-- Script : WOW.js - loading animations -->
-    <script src="./03_include/js/wow.min.js"></script>
-
-    <!-- Script : Knobs - our skills -->
-    <script src="./03_include/js/jquery.knob.min.js"></script>
-
-    <!-- Script : Slippry - Slideshow -->
-    <script src="./03_include/js/slippry.min.js"></script>
-
-    <!-- Script : Mixitup plugin - Portfolio Filter Grid -->
-    <script src="./03_include/js/jquery.mixitup.min.js"></script>
-
-    <!-- Script : Make sticky whatever elements -->
-    <script src="./03_include/js/jquery.sticky.min.js"></script>
-
-    <!-- Script : Smooth sroll -->
-    <script src="./03_include/js/jquery.nicescroll.min.js"></script>
-
-    <!-- Script : Contact Form -->
-    <script src="./03_include/js/contact-form.min.js"></script>
-
-    <!-- Script : Must be last of all scripts -->
-    <script src="./03_include/js/scripts.min.js"></script>
-
-    <!-- Script : Custom scripts -->
-    <script src="./03_include/js/common.js"></script>
-
-    <!--[if lt IE 9]>
-          <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
-          <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->	
-
-	<!--  Google Analytics -->
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	
-	  ga('create', 'UA-68083185-1', 'auto');
-	  ga('send', 'pageview');
-	</script>
+	<jsp:include page="./02_page/commonHeader.jsp" flush="false" />
 </head>
 
 <body>
@@ -117,7 +36,7 @@
     </section>
 
     <!-- Features section -->
-    <div id="learn-more"></div>
+    <!--<div id="learn-more"></div>
     <section class="section">
         <div class="container">
             <div class="row">
@@ -151,14 +70,13 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
     <!-- Services section -->
-    <section class="section-lg bg-grey">
+    <!--<section class="section-lg bg-grey">
         <div class="container">
             <div class="row">
                 <h2 class="lg-title lg-title-border">What we do?</h2>
-                <!--fadeInLeft-->
                 <div class=" col-sm-6 wow fadeInLeft" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam sapien elit, consequat eget, tristique non. Venenatis quis ante. Curabitur ligula sapien.</p>
                     <p>Pulvinar a vestibulum quis, facilisis vel sapien. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
@@ -181,10 +99,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
     <!-- Our works/ projects section -->
-    <section class="section-lg">
+    <!--<section class="section-lg">
         <div class="container">
 
             <h2 class="lg-title lg-title-border">Our work</h2>
@@ -201,7 +119,7 @@
             </ul>
 
             <ul class="row  filter-grid-v2" id="Grid">
-                <!-- Item 1 -->
+            
                 <li class="col-md-4 col-sm-6 mix devices  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="#" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.5s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
@@ -215,9 +133,7 @@
                         </div>
                     </a>
                 </li>
-                <!-- mix - select all, devices - filter only devices -->
 
-                <!-- Item 2 -->
                 <li class="col-md-4 col-sm-6 mix apps web  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="#" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.25s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.25s; -moz-animation-delay: 0.25s; animation-delay: 0.25s;">
@@ -232,7 +148,6 @@
                     </a>
                 </li>
 
-                <!-- Item 3 -->
                 <li class="col-md-4 col-sm-6 mix apps  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v2.php" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.75s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.75s; -moz-animation-delay: 0.75s; animation-delay: 0.75s;">
@@ -247,7 +162,6 @@
                     </a>
                 </li>
 
-                <!-- Item 4 -->
                 <li class="col-md-4 col-sm-6 mix devices  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v2.php" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.6s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.6s; -moz-animation-delay: 0.6s; animation-delay: 0.6s;">
@@ -262,7 +176,6 @@
                     </a>
                 </li>
 
-                <!-- Item 5 -->
                 <li class="col-md-4 col-sm-6 mix web  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v2.php" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.35s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.35s; -moz-animation-delay: 0.35s; animation-delay: 0.35s;">
@@ -277,7 +190,6 @@
                     </a>
                 </li>
 
-                <!-- Item 6 -->
                 <li class="col-md-4 col-sm-6 mix apps  mix_all" style="display: inline-block; opacity: 1;">
                     <a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v2.php" title="View portfolio item">
                         <div class="hover-content wow easeUp" data-wow-delay="0.85s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.85s; -moz-animation-delay: 0.85s; animation-delay: 0.85s;">
@@ -294,13 +206,12 @@
             </ul>
 
         </div>
-    </section>
+    </section>-->
 
-    <div class="bg-11 bg-cover bg-center">
+    <!--<div class="bg-11 bg-cover bg-center">
         <div class="section-lg bg-filter-v2">
             <div class="container">
                 <div id="testimonial" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                         <div class="item active">
                             <div class="testimonial">
@@ -341,10 +252,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <!-- Pricing tables -->
-    <div id="get-started"></div>
+    <!--<div id="get-started"></div>
     <section class="section">
         <div class="container">
             <h2 class="lg-title lg-title-border">Our plans</h2>
@@ -421,10 +332,10 @@
 
             </div>
         </div>
-    </section>
+    </section>-->
 
     <!-- Breaking news -->
-    <section class="section bg-grey">
+	<section class="section bg-grey">
         <div class="container">
             <h2 class="lg-title lg-title-border">Breaking news</h2>
             <div class="row">

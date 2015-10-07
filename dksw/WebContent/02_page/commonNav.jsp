@@ -40,8 +40,8 @@
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">학과 소개</a>
 	                            <ul class="dropdown-menu">
-	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/greeting/index.jsp">학과장 인사</a></li>
-	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/history/index.jsp">학과 연혁</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/greeting/index.jsp">학과장 인사</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/history/index.jsp">학과 연혁</a></li>
 	                                <li><a href="#">학과 내규</a></li>
 	                            </ul>
 	                        </li>
@@ -80,7 +80,7 @@
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Embedded Lab.</a>
+	                            <a href="javascript:void(0);" onclick="navLab(2);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Embedded Lab.</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
@@ -90,7 +90,7 @@
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Mobile Contents Lab.</a>
+	                            <a href="javascript:void(0);" onclick="navLab(3);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Mobile Contents Lab.</a>
 	                            <ul class="dropdown-menu">
 	                               <li><a href="#">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
@@ -100,7 +100,7 @@
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Multimedia DSP Lab.</a>
+	                            <a href="javascript:void(0);" onclick="navLab(4);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Multimedia DSP Lab.</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
@@ -110,7 +110,7 @@
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">OS/Security Lab.</a>
+	                            <a href="javascript:void(0);" onclick="navLab(5);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">OS/Security Lab.</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="#">소개 및 연구목표</a></li>
 	                                <li><a href="#">연구원</a></li>
