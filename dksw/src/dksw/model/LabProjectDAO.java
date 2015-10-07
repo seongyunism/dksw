@@ -4,29 +4,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dksw.model.domain.LabProject;
 import dksw.util.DBUtil;
 
 public class LabProjectDAO {
 
-	public static LabProject getLabProject(int inputLabCode) throws SQLException {
+	public static ArrayList<LabProject> getLabProject(int inputLabCode) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		LabProject data = null;
+		ArrayList<LabProject> projects = new ArrayList<LabProject>();
+		LabProject project = null;
 		
 		try {
 			con = DBUtil.getConnection();
 			
-			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_intro WHERE dkswLabCode=?");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_project WHERE dkswLabCode=?");
 			pstmt.setInt(1, inputLabCode);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				data = new LabProject(
+				project = new LabProject(
 						rset.getInt(1),
 						rset.getString(2),
 						rset.getString(3),
@@ -37,9 +39,10 @@ public class LabProjectDAO {
 						rset.getInt(8),
 						rset.getInt(9)
 				);
+				projects.add(project);
 			}
 
-			return data;
+			return projects;
 			
 		} catch (SQLException se) {
 			se.printStackTrace();

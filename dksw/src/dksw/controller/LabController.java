@@ -51,22 +51,27 @@ public class LabController extends HttpServlet {
 
 		LabIntro introData = null;
 		ArrayList<LabMembers> membersData = null;
-		LabAchievements achievementsData = null;
-		LabPaper paperData = null;
-		LabProject projectData = null;		
+		ArrayList<LabAchievements> achievementsData = null;
+		ArrayList<LabPaper> paperData = null;
+		ArrayList<LabProject> projectData = null;
+		
+			
 		
 		try {
 
 			int inputLabCode = (req.getParameter("inputLabCode") != null) ? Integer.parseInt(req.getParameter("inputLabCode")) : null;
 			
 			JSONObject jObject = new JSONObject();
-			JSONArray jArray = new JSONArray();
+			JSONArray jArrayMembers = new JSONArray();
+			JSONArray jArrayAchievements = new JSONArray();
+			JSONArray jArrayPaper = new JSONArray();
+			JSONArray jArrayProject = new JSONArray();
 			
 			introData = LabIntroDAO.getLabIntro(inputLabCode);
 			membersData = LabMembersDAO.getLabMembers(inputLabCode);
-//			achievementsData = LabAchievementsDAO.getLabAchievements(inputLabCode);
-//			paperData = LabPaperDAO.getLabPaper(inputLabCode);
-//			projectData = LabProjectDAO.getLabProject(inputLabCode);
+			achievementsData = LabAchievementsDAO.getLabAchievements(inputLabCode);
+			paperData = LabPaperDAO.getLabPaper(inputLabCode);
+			projectData = LabProjectDAO.getLabProject(inputLabCode);
 
 			
 			// 데이터를 삽입
@@ -90,18 +95,58 @@ public class LabController extends HttpServlet {
 				tempMember.put("dkswLabMembersEditDate", membersData.get(i).getDkswLabMembersEditDate());
 				tempMember.put("dkswLabMembersEditRightIndex", membersData.get(i).getDkswLabMembersEditRightIndex());
 				tempMember.put("dkswDepartmentProfessorNo", membersData.get(i).getDkswDepartmentProfessorNo());
-				jArray.add(tempMember);
+				jArrayMembers.add(tempMember);
 			}
 			
-			jObject.put("dkswLabMembers", jArray);
+			jObject.put("dkswLabMembers", jArrayMembers);
 			
 			// Achievements
+			for(int i=0; i<achievementsData.size(); i++) {
+				JSONObject tempAchievement = new JSONObject();
+				tempAchievement.put("dkswLabAchievementsYear", achievementsData.get(i).getDkswLabAchievementsYear());
+				tempAchievement.put("dkswLabAchievementsMonth", achievementsData.get(i).getDkswLabAchievementsMonth());
+				tempAchievement.put("dkswLabAchievementsContent", achievementsData.get(i).getDkswLabAchievementsContent());
+				tempAchievement.put("dkswLabAchievementsEditDate", achievementsData.get(i).getDkswLabAchievementsEditDate());
+				tempAchievement.put("dkswLabAchievementsEditRightIndex", achievementsData.get(i).getDkswLabAchievementsEditRightIndex());
+				jArrayAchievements.add(tempAchievement);
+			}
 		
+			jObject.put("dkswLabAchievements", jArrayAchievements);
 			
+			// Paper
+			for(int i=0; i<paperData.size(); i++) {
+				JSONObject tempPaper = new JSONObject();
+				tempPaper.put("dkswLabPaperTitle", paperData.get(i).getDkswLabPaperTitle());
+				tempPaper.put("dkswLabPaperContent", paperData.get(i).getDkswLabPaperContent());
+				tempPaper.put("dkswLabPaperParticipants", paperData.get(i).getDkswLabPaperParticipants());
+				tempPaper.put("dkswLabPaperEditDate", paperData.get(i).getDkswLabPaperEditDate());
+				tempPaper.put("dkswLabPaperEditRightIndex", paperData.get(i).getDkswLabPaperEditRightIndex());
+				jArrayPaper.add(tempPaper);
+			}
+			
+			jObject.put("dkswLabPaper", jArrayPaper);
+			
+			// Project
+			
+			for(int i=0; i<projectData.size(); i++) {
+				JSONObject tempProject = new JSONObject();
+				tempProject.put("dkswLabProjectName", projectData.get(i).getDkswLabProjectName());
+				tempProject.put("dkswLabProjectStartYear", projectData.get(i).getDkswLabProjectStartYear());
+				tempProject.put("dkswLabProjectStartMonth", projectData.get(i).getDkswLabProjectStartMonth());
+				tempProject.put("dkswLabProjectEndYear", projectData.get(i).getDkswLabProjectEndYear());
+				tempProject.put("dkswLabProjectEndMonth", projectData.get(i).getDkswLabProjectEndMonth());
+				tempProject.put("dkswLabProjectContent", projectData.get(i).getDkswLabProjectContent());
+				tempProject.put("dkswLabProjectEditDate", projectData.get(i).getDkswLabProjectEditDate());
+				tempProject.put("dkswLabProjectEditRightIndex", projectData.get(i).getDkswLabProjectEditRightIndex());
+				
+				jArrayProject.add(tempProject);
+			}
+					
+			jObject.put("dkswLabProject", jArrayProject);
 			
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
-			
+
 			res.getWriter().write(jObject.toString());
 
 			

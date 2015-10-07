@@ -4,29 +4,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dksw.model.domain.LabAchievements;
 import dksw.util.DBUtil;
 
 public class LabAchievementsDAO {
 
-	public static LabAchievements getLabAchievements(int inputLabCode) throws SQLException {
+	public static ArrayList<LabAchievements> getLabAchievements(int inputLabCode) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		LabAchievements data = null;
+		ArrayList<LabAchievements> achievements = new ArrayList<LabAchievements>();
+		LabAchievements achievement = null;
 		
 		try {
 			con = DBUtil.getConnection();
 			
-			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_intro WHERE dkswLabCode=?");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_achievements WHERE dkswLabCode=?");
 			pstmt.setInt(1, inputLabCode);
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				data = new LabAchievements(
+			while(rset.next()) {
+				achievement = new LabAchievements(
 						rset.getInt(1),
 						rset.getString(2),
 						rset.getString(3),
@@ -34,9 +36,11 @@ public class LabAchievementsDAO {
 						rset.getInt(5),
 						rset.getInt(6)
 				);
+				
+				achievements.add(achievement);
 			}
-
-			return data;
+			
+			return achievements;
 			
 		} catch (SQLException se) {
 			se.printStackTrace();

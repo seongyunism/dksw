@@ -3,11 +3,11 @@ package dksw.model.domain;
 public class LabAchievements {
 	
 	private int dkswLabCode;
-	private String dkswLabachievementsYear;
-	private String dkswLabachievementsMonth;
-	private String dkswLabachievementsContent;
-	private int dkswLabachievementsEditDate;
-	private int dkswLabachievementsEditRightIndex;
+	private String dkswLabAchievementsYear;
+	private String dkswLabAchievementsMonth;
+	private String dkswLabAchievementsContent;
+	private int dkswLabAchievementsEditDate;
+	private int dkswLabAchievementsEditRightIndex;
 	
 	public int getDkswLabCode() {
 		return dkswLabCode;
@@ -15,45 +15,45 @@ public class LabAchievements {
 	public void setDkswLabCode(int dkswLabCode) {
 		this.dkswLabCode = dkswLabCode;
 	}
-	public String getDkswLabachievementsYear() {
-		return dkswLabachievementsYear;
+	public String getDkswLabAchievementsYear() {
+		return dkswLabAchievementsYear;
 	}
-	public void setDkswLabachievementsYear(String dkswLabachievementsYear) {
-		this.dkswLabachievementsYear = dkswLabachievementsYear;
+	public void setDkswLabAchievementsYear(String dkswLabAchievementsYear) {
+		this.dkswLabAchievementsYear = dkswLabAchievementsYear;
 	}
-	public String getDkswLabachievementsMonth() {
-		return dkswLabachievementsMonth;
+	public String getDkswLabAchievementsMonth() {
+		return dkswLabAchievementsMonth;
 	}
-	public void setDkswLabachievementsMonth(String dkswLabachievementsMonth) {
-		this.dkswLabachievementsMonth = dkswLabachievementsMonth;
+	public void setDkswLabAchievementsMonth(String dkswLabAchievementsMonth) {
+		this.dkswLabAchievementsMonth = dkswLabAchievementsMonth;
 	}
-	public String getDkswLabachievementsContent() {
-		return dkswLabachievementsContent;
+	public String getDkswLabAchievementsContent() {
+		return dkswLabAchievementsContent;
 	}
-	public void setDkswLabachievementsContent(String dkswLabachievementsContent) {
-		this.dkswLabachievementsContent = dkswLabachievementsContent;
+	public void setDkswLabAchievementsContent(String dkswLabAchievementsContent) {
+		this.dkswLabAchievementsContent = dkswLabAchievementsContent;
 	}
-	public int getDkswLabachievementsEditDate() {
-		return dkswLabachievementsEditDate;
+	public int getDkswLabAchievementsEditDate() {
+		return dkswLabAchievementsEditDate;
 	}
-	public void setDkswLabachievementsEditDate(int dkswLabachievementsEditDate) {
-		this.dkswLabachievementsEditDate = dkswLabachievementsEditDate;
+	public void setDkswLabAchievementsEditDate(int dkswLabAchievementsEditDate) {
+		this.dkswLabAchievementsEditDate = dkswLabAchievementsEditDate;
 	}
-	public int getDkswLabachievementsEditRightIndex() {
-		return dkswLabachievementsEditRightIndex;
+	public int getDkswLabAchievementsEditRightIndex() {
+		return dkswLabAchievementsEditRightIndex;
 	}
-	public void setDkswLabachievementsEditRightIndex(int dkswLabachievementsEditRightIndex) {
-		this.dkswLabachievementsEditRightIndex = dkswLabachievementsEditRightIndex;
+	public void setDkswLabAchievementsEditRightIndex(int dkswLabAchievementsEditRightIndex) {
+		this.dkswLabAchievementsEditRightIndex = dkswLabAchievementsEditRightIndex;
 	}
 	
-	public LabAchievements(int dkswLabCode, String dkswLabachievementsYear, String dkswLabachievementsMonth,
-			String dkswLabachievementsContent, int dkswLabachievementsEditDate, int dkswLabachievementsEditRightIndex) {
+	public LabAchievements(int dkswLabCode, String dkswLabAchievementsYear, String dkswLabAchievementsMonth,
+			String dkswLabAchievementsContent, int dkswLabAchievementsEditDate, int dkswLabAchievementsEditRightIndex) {
 		super();
 		this.dkswLabCode = dkswLabCode;
-		this.dkswLabachievementsYear = dkswLabachievementsYear;
-		this.dkswLabachievementsMonth = dkswLabachievementsMonth;
-		this.dkswLabachievementsContent = dkswLabachievementsContent;
-		this.dkswLabachievementsEditDate = dkswLabachievementsEditDate;
-		this.dkswLabachievementsEditRightIndex = dkswLabachievementsEditRightIndex;
+		this.dkswLabAchievementsYear = dkswLabAchievementsYear;
+		this.dkswLabAchievementsMonth = dkswLabAchievementsMonth;
+		this.dkswLabAchievementsContent = dkswLabAchievementsContent;
+		this.dkswLabAchievementsEditDate = dkswLabAchievementsEditDate;
+		this.dkswLabAchievementsEditRightIndex = dkswLabAchievementsEditRightIndex;
 	}
 }

@@ -4,29 +4,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dksw.model.domain.LabPaper;
 import dksw.util.DBUtil;
 
 public class LabPaperDAO {
 
-	public static LabPaper getLabPaper(int inputLabCode) throws SQLException {
+	public static ArrayList<LabPaper> getLabPaper(int inputLabCode) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		LabPaper data = null;
+		ArrayList<LabPaper> papers = new ArrayList<LabPaper>();
+		LabPaper paper = null;
 		
 		try {
 			con = DBUtil.getConnection();
 			
-			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_intro WHERE dkswLabCode=?");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_paper WHERE dkswLabCode=?");
 			pstmt.setInt(1, inputLabCode);
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				data = new LabPaper(
+			while (rset.next()) {
+				paper = new LabPaper(
 						rset.getInt(1),
 						rset.getString(2),
 						rset.getString(3),
@@ -34,9 +36,10 @@ public class LabPaperDAO {
 						rset.getInt(5),
 						rset.getInt(6)
 				);
+				papers.add(paper);
 			}
 
-			return data;
+			return papers;
 			
 		} catch (SQLException se) {
 			se.printStackTrace();
