@@ -14,6 +14,16 @@
     <servlet-name>MemberController</servlet-name>
     <url-pattern>/member</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>BoardController</servlet-name>
+    <servlet-class>dksw.controller.BoardController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>BoardController</servlet-name>
+    <url-pattern>/board</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>LabController</servlet-name>

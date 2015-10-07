@@ -88,6 +88,21 @@
 	  ga('create', 'UA-68083185-1', 'auto');
 	  ga('send', 'pageview');
 	</script>
+	
+	<!-- Custom Scripts -->
+	<script>
+	$(document).ready(function() {
+		initializeBoard(1);
+	});
+
+	$(window).load(function() {
+
+	});
+	
+	$(function() {
+
+	});
+	</script>
 </head>
 
 <body>
@@ -125,204 +140,18 @@
                 <!-- Left Contents -->
                 <div class="col-md-8 col-lg-9">
  					<!-- Posts -->
+ 					<div class="posts" id="dkswBoard">
  					
-                    <div class="row blog-post">
-                        <div class="col-sm-6">
-                            <div class="hover-content">
-                                <div class="part-a">
-                                    <h3>5</h3>
-                                    <h3>March</h3>
-                                </div>
-                                <div class="part-c">
-                                    <img class="img-responsive" src="./Dragonfly - Blog Page_files/face-1.jpg" alt="Blog Post Author" title="Nicole Perry">
-                                </div>
-                                <div class="part-b">
-                                    <ul>
-                                        <li>
-                                            <i class="fa fa-user fa-fw"></i>
-                                            <a href="#" title="View Profile">Nicole Perry</a>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-clock-o fa-fw"></i>5 March 2014
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-comments fa-fw">
+ 					
+ 					
 
-											</i>
-                                            <a href="#" title="Read Comments">7 Comments</a>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-tags fa-fw"></i>
-                                            <a href="#">Nature,</a>
-                                            <a href="#">Photo,</a>
-                                            <a href="#">Sea</a>
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" alt="Blog Image" src="./Dragonfly - Blog Page_files/011.jpg">
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="<%=request.getContextPath() %>/02_page/sub_01/notice/view.jsp" title="Read all article">
-                                <h2>Mauris quis nibh ut</h2>
-                            </a>
-                            <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
-                            <a href="<%=request.getContextPath() %>/02_page/sub_01/notice/view.jsp" title="Read all article" class="btn btn-default-trn-v2">
-                                <i class="fa fa-angle-right"></i>Read More
-                            </a> 
-                        </div>
-
-                    </div>
-                    <div class="row blog-post wow fadeInUp" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
-                        <div class="col-sm-6 ">
-                            <div class="hover-content">
-                                <div class="part-a">
-                                    <h3>2</h3>
-                                    <h3>January</h3>
-                                </div>
-                                <div class="part-c">
-                                    <img class="img-responsive" src="./Dragonfly - Blog Page_files/face-2.jpg" alt="Blog Post Author" title="Nicole Perry">
-                                </div>
-                                <div class="part-b">
-                                    <ul>
-                                        <li>
-                                            <i class="fa fa-user fa-fw"></i>
-                                            <a href="#" title="View Profile">James Smith</a>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-clock-o fa-fw"></i>2 January 2014
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-comments fa-fw">
-
-											</i>
-                                            <a href="#" title="Read Comments">40 Comments</a>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-tags fa-fw"></i>
-                                            <a href="#">Nature,</a>
-                                            <a href="#">Photo,</a>
-                                            <a href="#">Sea</a>
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" alt="Blog Image" src="./Dragonfly - Blog Page_files/kitsune-3.jpg">
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="#" title="Read all article">
-                                <h2>Mauris quis nibh ut</h2>
-                            </a>
-                            <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
-                            <a href="#" title="Read all article" class="btn btn-default-trn-v2">
-                                <i class="fa fa-angle-right"></i>Read More
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="row blog-post wow fadeInUp" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
-                        <div class="col-sm-6">
-                            <div class="hover-content">
-                                <div class="part-a">
-                                    <h3>18</h3>
-                                    <h3>April</h3>
-                                </div>
-                                <div class="part-c">
-                                    <img class="img-responsive" src="./Dragonfly - Blog Page_files/face-25.jpg" alt="Blog Post Author" title="Nicole Perry">
-                                </div>
-                                <div class="part-b">
-                                    <ul>
-                                        <li>
-                                            <i class="fa fa-user fa-fw"></i>
-                                            <a href="#" title="View Profile">Nicole Perry</a>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-clock-o fa-fw"></i>18 April 2014
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-comments fa-fw">
-
-											</i>
-                                            <a href="#" title="Read Comments">27 Comments</a>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-tags fa-fw"></i>
-                                            <a href="#">Nature,</a>
-                                            <a href="#">Photo,</a>
-                                            <a href="#">Sea</a>
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" alt="Blog Image" src="./Dragonfly - Blog Page_files/kitsune-4.jpg">
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="#" title="Read all article">
-                                <h2>Mauris quis nibh ut</h2>
-                            </a>
-                            <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
-                            <a href="#" class="btn btn-default-trn-v2" title="Read all article">
-                                <i class="fa fa-angle-right"></i>Read More
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="row blog-post wow fadeInUp" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;">
-                        <div class="col-sm-6">
-                            <div class="hover-content">
-                                <div class="part-a">
-                                    <h3>5</h3>
-                                    <h3>March</h3>
-                                </div>
-                                <div class="part-c">
-                                    <img class="img-responsive" src="./Dragonfly - Blog Page_files/face-1.jpg" alt="Blog Post Author" title="Nicole Perry">
-                                </div>
-                                <div class="part-b">
-                                    <ul>
-                                        <li>
-                                            <i class="fa fa-user fa-fw"></i>
-                                            <a href="#" title="View Profile">Nicole Perry</a>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-clock-o fa-fw"></i>5 March 2014
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-comments fa-fw">
-
-											</i>
-                                            <a href="#" title="Read Comments">7 Comments</a>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-tags fa-fw"></i>
-                                            <a href="#">Nature,</a>
-                                            <a href="#">Photo,</a>
-                                            <a href="#">Sea</a>
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" alt="Blog Image" src="./Dragonfly - Blog Page_files/picjumbo.com.jpg">
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="#" title="Read all article">
-                                <h2>Mauris quis nibh ut</h2>
-                            </a>
-                            <p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam ante, tristique et euismod faucibus, mollis in elit. Nulla sollicitudin hendrerit sapien vel accumsan.</p>
-                            <a href="#" title="Read all article" class="btn btn-default-trn-v2">
-                                <i class="fa fa-angle-right"></i>Read More
-                            </a>
-                        </div>
-
-                    </div>
-
+ 					
+ 					
+ 					
+ 					
+ 					
+ 					</div>
+ 
 					<!-- Number -->
                     <div class="text-center">
                         <ul class="pagination ">

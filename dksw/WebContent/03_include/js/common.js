@@ -69,6 +69,53 @@ function navLab(num) {
 	location.href = src;
 }
 
+function initializeBoard(board) {
+	
+	var action = "/dksw/board?action=getBoardData";
+	var inputBoardCategory = "inputBoardCategory=" + board;
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : inputBoardCategory,
+		dataType : "json",
+		success: function(response) {
+
+//			response.dkswBoard[i].dkswBoardNo
+//			response.dkswBoard[i].dkswBoardCategory
+//			response.dkswBoard[i].dkswBoardTitle
+//			response.dkswBoard[i].dkswMemberNo
+//			response.dkswBoard[i].dkswBoardWriteDate
+//			response.dkswBoard[i].dkswBoardReadnum
+//			response.dkswBoard[i].dkswBoardContent
+//			response.dkswBoard[i].dkswBoardPicture
+			
+			var posts = null;
+			var post = null;
+			
+			for(i=0; i<response.dkswBoard.length; i++) {
+				post = "<div class=\"row blog-post wow fadeInUp\"><div class=\"col-sm-6\"><img class=\"img-responsive\" src=\"그림주소\">" +
+						"</div><div class=\"col-sm-6\"><a href=\"<%=request.getContextPath() %>/02_page/sub_01/notice/view.jsp\">" +
+						"<h2>" + response.dkswBoard[i].dkswBoardTitle + "</h2></a><p>" + response.dkswBoard[i].dkswBoardContent + "</p>" +
+						"<a href=\"<%=request.getContextPath() %>/02_page/sub_01/notice/view.jsp\" class=\"btn btn-default-trn-v2\">" +
+						"<i class=\"fa fa-angle-right\"></i>Read More</a></div></div>";
+				posts += post;
+			}
+			
+			$("#dkswBoard").html(posts);
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
+
+
+
+
+
 function initializeDepartmentGreeting() {
 	
 	var action = "/dksw/department?action=getGreetingData";
