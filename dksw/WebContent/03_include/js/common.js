@@ -112,10 +112,6 @@ function initializeBoard(board) {
 	return false;
 }
 
-
-
-
-
 function initializeDepartmentGreeting() {
 	
 	var action = "/dksw/department?action=getGreetingData";
@@ -137,6 +133,44 @@ function initializeDepartmentGreeting() {
 		
 	return false;
 }
+
+//학과 연혁
+function initializeDepartmentHistory() {
+
+	var action = "/dksw/department?action=getHistoryData";
+
+	$.ajax({
+				type : "POST",
+				url : action,
+				dataType : "json",
+				success : function(response) {
+
+					var histories = "";
+					var history = "";
+
+					for (i = 0; i <response.dkswDepartmentHistory.length; i++) {
+						var history = "<tr> <td>"
+								+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryYear
+								+ "</td> <td>"
+								+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryMonth
+								+ "</td> <td>"
+								+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryContent
+								+ "</td> </tr>";
+
+						histories += history;
+					}
+
+					$("#dkswDepartmentHistory").html(histories);
+
+				},
+				error : function(xhr, status, error) {
+					alert(error);
+				}
+			});
+
+	return false;
+}
+
 
 function initializeLab(labCode) {
 	

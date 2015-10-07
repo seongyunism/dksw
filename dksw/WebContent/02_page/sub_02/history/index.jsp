@@ -101,6 +101,22 @@
 	ga('create', 'UA-68083185-1', 'auto');
 	ga('send', 'pageview');
 </script>
+
+<!-- Custom Scripts -->
+<script>
+	$(document).ready(function() {
+		initializeDepartmentHistory();
+	});
+
+	$(window).load(function() {
+
+	});
+
+	$(function() {
+
+	});
+</script>
+
 </head>
 
 <body>
@@ -119,23 +135,10 @@
 	<section class="section">
 		<div class="container-sm">
 			<h2 class="big-title">Project title</h2>
-			<div class="space-sm"></div>
-			<table class="table table-striped">
-				<tr>
-					<td>2014</td>
-					<td>09</td>
-					<td>내용</td>
-				</tr>
+			<div class="space-sm"></div>			
+				<table class="table table-striped"  id="dkswDepartmentHistory"></table>
 
-				<tr>
-					<td>2015</td>
-					<td>09</td>
-					<td>내용</td>
-				</tr>
-			</table>
-			
 			<div class="space"></div>
-
 			<hr class="hr">
 
 			<ul class="list-unstyled info-list">
@@ -159,74 +162,8 @@
 		</div>
 	</section>
 
-	<section class="bg-grey section">
-		<div class="container">
-			<div class="clearfix ">
-				<h3 class="pull-left">More Projects</h3>
-				<a
-					href="http://bootstrapart.net/dragonfly/v1.5/portfolio/portfolio-v1.php">
-					<h3 class="pull-right">View all projects</h3>
-				</a>
-			</div>
-			<div class="space-sm"></div>
-			<div class="row portfolio-grid">
-
-				<div class="col-md-4 col-sm-6">
-					<a
-						href="http://bootstrapart.net/dragonfly/v1.5/portfolio/portfolio-item-v1.php"
-						title="View portfolio item">
-						<div class="hover-content">
-							<img
-								src="./Dragonfly - Portfolio Item I_files/sign-up-sketch.jpg"
-								class="img-responsive" alt="Portfolio - application">
-							<div class="top-part hidden-xs">
-								<i class="fa fa-eye"></i>
-							</div>
-							<div class="bottom-part hidden-xs">
-								<h3>Title</h3>
-							</div>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-md-4 col-sm-6 ">
-					<a
-						href="http://bootstrapart.net/dragonfly/v1.5/portfolio/portfolio-item-v1.php"
-						title="View portfolio item">
-						<div class="hover-content">
-							<img
-								src="./Dragonfly - Portfolio Item I_files/minimal-wireframe-assets.jpg"
-								class="img-responsive" alt="Websites Layout">
-							<div class="top-part hidden-xs">
-								<i class="fa fa-eye"></i>
-							</div>
-							<div class="bottom-part hidden-xs">
-								<h3>Title</h3>
-							</div>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-md-4 col-sm-6 ">
-					<a
-						href="http://bootstrapart.net/dragonfly/v1.5/portfolio/portfolio-item-v1.php"
-						title="View portfolio item">
-						<div class="hover-content">
-							<img src="./Dragonfly - Portfolio Item I_files/App-Preview.jpg"
-								class="img-responsive" alt="Portfolio - application">
-							<div class="top-part hidden-xs">
-								<i class="fa fa-eye"></i>
-							</div>
-							<div class="bottom-part hidden-xs">
-								<h3>Title</h3>
-							</div>
-						</div>
-					</a>
-				</div>
-
-			</div>
-		</div>
-	</section>
+	<!-- 수정일 -->
+	<p class=" font-NanumGothic edit-date col-md-4" id="dkswDepartmentHistoryEditDate"></p>
 
 	<!--Back to top-->
 	<a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v1.php#"
