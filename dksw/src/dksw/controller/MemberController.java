@@ -7,8 +7,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 import dksw.model.MemberDAO;
+import dksw.model.domain.Member;
+import dksw.util.SendEmail;
 
 public class MemberController extends HttpServlet {
 
@@ -26,12 +31,18 @@ public class MemberController extends HttpServlet {
 		
 		if(action.equals("checkOfflineAuthCode")) {
 			checkOfflineAuthCode(req, res);
-		} else if(action.equals("joinMember")) {
-			joinMember(req, res);
+		} else if(action.equals("checkOnlineAuth")) {
+			checkOnlineAuth(req, res);
+		} else if(action.equals("checkOnlineAuthCode")) {
+			checkOnlineAuthCode(req, res);
+		} else if(action.equals("loginMember")) {
+			loginMember(req, res);
+		} else if(action.equals("logoutMember")) {
+			logoutMember(req, res);
 		}
 	}
 
-	// 오프라인 가입 인증코드 체크
+	// 오프라인 인증 코드 체크 (오프라인 학과 게시물)
 	private void checkOfflineAuthCode(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 		boolean checkOfflineAuthCode = false;
@@ -41,7 +52,7 @@ public class MemberController extends HttpServlet {
 			checkOfflineAuthCode = MemberDAO.checkOfflineAuthCode(inputOfflineAuthCode);
 			
 			if(checkOfflineAuthCode) {
-				res.getWriter().write("Checked");
+				res.getWriter().write("offlineAuthChecked");
 			} else {
 				res.getWriter().write("Fail");				
 			}
@@ -53,11 +64,12 @@ public class MemberController extends HttpServlet {
 		}
 	}
 
-	// 회원가입
-	private void joinMember(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	// 온라인 인증 처리 (이메일 확인)	
+	private void checkOnlineAuth(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
-		boolean checkJoinMember = false;
-		
+		boolean checkInsertMemberRecord = false;
+		boolean checkSendOnlineAuthCode = false;
+	
 		try {
 			int inputMemberCategory = (req.getParameter("inputMemberCategory") != null) ? Integer.parseInt(req.getParameter("inputMemberCategory")) : null; 
 			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
@@ -66,33 +78,151 @@ public class MemberController extends HttpServlet {
 			String inputMemberName = (req.getParameter("inputMemberName") != null) ? req.getParameter("inputMemberName") : null;
 			int inputMemberSNS = 0;
 			int inputMemberOnlineAuth = 0;
-			String inputMemberOnlineAuthCode = "";
+			String inputMemberOnlineAuthCode = RandomStringUtils.randomAlphabetic(16);
 			String inputMemberOfflineAuthCode = (req.getParameter("inputMemberOfflineAuthCode") != null) ? req.getParameter("inputMemberOfflineAuthCode") : null;
-			int inputMemberJoinDate = 0;
+			long inputMemberJoinDate = (System.currentTimeMillis())/1000;
 			int inputMemberAdminAuth = 0;		
 			
-			checkJoinMember = MemberDAO.checkJoinMember(inputMemberCategory, inputMemberEmail, inputMemberPassword, inputMemberStudentNo, inputMemberName,
+			// 온라인 인증코드를 입력받은 이메일로 발송 
+			checkSendOnlineAuthCode = SendEmail.SendEmail(inputMemberEmail, "단국대학교 소프트웨어학과 홈페이지 인증메일입니다.", "<a href='http://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/02_page/join/auth.jsp?authCode="+ inputMemberCategory + inputMemberOnlineAuthCode + "' target='_blank'>인증완료</a>");		
+
+			// 사용자 정보를 DB에 삽입
+			checkInsertMemberRecord = MemberDAO.checkJoinMember(inputMemberCategory, inputMemberEmail, inputMemberPassword, inputMemberStudentNo, inputMemberName,
 					inputMemberSNS, inputMemberOnlineAuth, inputMemberOnlineAuthCode, inputMemberOfflineAuthCode, inputMemberJoinDate, inputMemberAdminAuth);
 			
-			if(checkJoinMember) {
-				res.getWriter().write("JoinOK");
+			if(checkInsertMemberRecord == true && checkSendOnlineAuthCode == true) {
+				res.getWriter().write("onlineAuthChecked");
 			} else {
-				res.getWriter().write("Fail");		
+				res.getWriter().write("Fail");
 			}
 			
 		} catch (SQLException se) {
-			req.setAttribute("errorMsg", "ERROR : 가입 오류! (SQL에러)");
+			req.setAttribute("errorMsg", "ERROR : 인증 오류! (SQL에러)");
 		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 가입 오류! (IO에러)");
+			req.setAttribute("errorMsg", "ERROR : 인증 오류! (IO에러)");
 		}
-		
-		
 	}
 
-	
-	
-	
-	
-	
-	
+	// 온라인 인증 코드 체크
+	private void checkOnlineAuthCode(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		int searchOnlineAuthCode = 0;
+		boolean checkOnlineAuthCode = false; // 0 : 기본, 1 : 코드존재, 2: 코드없음, 3 : 인증완료=
+		String retMsg = "Fail";
+		
+		try {
+			String inputOnlineAuthCode = (req.getParameter("inputOnlineAuthCode") != null) ? req.getParameter("inputOnlineAuthCode") : null;
+			int inputMemberCategory = Integer.parseInt(inputOnlineAuthCode.substring(0, 1));
+			int inputMemberAdminAuth = 0;
+			
+			searchOnlineAuthCode = MemberDAO.searchOnlineAuthCode(inputOnlineAuthCode.substring(1)); // 회원 번호
+			
+			if(searchOnlineAuthCode == -1) { // 이미 온라인 인증한 회원
+				retMsg = "Fail_Already";
+			} else if(searchOnlineAuthCode > 0) { // 회원인 경우
+				switch(inputMemberCategory) {
+					case 6: // 교수
+						inputMemberAdminAuth = 1;
+						retMsg = "onlineAuthCodeChecked_6";
+						break;
+					case 7: // 학부생
+						inputMemberAdminAuth = 1;
+						retMsg = "onlineAuthCodeChecked_7";
+						break;
+					case 8: // 졸업생
+						retMsg = "onlineAuthCodeChecked_8";
+						break;
+					case 9: // 일반인
+						retMsg = "onlineAuthCodeChecked_9";
+						break;
+					default:
+						retMsg = "Fail_Category";
+						break;			
+				}
+				
+				checkOnlineAuthCode = MemberDAO.checkOnlineAuthCode(inputOnlineAuthCode.substring(1), inputMemberAdminAuth);
+
+				if(!checkOnlineAuthCode) { // DB 처리 확인
+					retMsg = "Fail_DB";
+				}
+				
+				// 로그인 처리
+				Member thisMember = MemberDAO.getMember(searchOnlineAuthCode);
+				
+				HttpSession sessionMember = req.getSession();
+
+				sessionMember.setAttribute("dkswMemberNo", thisMember.getDkswMemberNo());
+				sessionMember.setAttribute("dkswMemberCategory", thisMember.getDkswMemberCategory());
+				sessionMember.setAttribute("dkswMemberEmail", thisMember.getDkswMemberEmail());
+				sessionMember.setAttribute("dkswMemberName", thisMember.getDkswMemberName());
+				
+				if(thisMember.getDkswMemberNo() == 1) { // 관리자일 경우
+					sessionMember.setAttribute("dkswMemberIsAdmin", true);
+				}
+				
+			} else { // 가입하지 않은 회원 (DB에 인증코드 없음)
+				retMsg = "Fail_Null";
+			}
+			
+			res.getWriter().write(retMsg);				
+
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : 인증 오류! (SQL에러)");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : 인증 오류! (IO에러)");
+		}	
+	}
+
+	// 회원 로그인 처리
+	private void loginMember(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		Member checkMember = null;
+
+		try {
+			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
+			String inputMemberPassword = (req.getParameter("inputMemberPassword") != null) ? req.getParameter("inputMemberPassword") : null;
+
+			checkMember = MemberDAO.checkLoginMember(inputMemberEmail, inputMemberPassword);
+			
+			if(checkMember != null) {
+
+				HttpSession sessionMember = req.getSession();
+								
+				sessionMember.setAttribute("dkswMemberNo", checkMember.getDkswMemberNo());
+				sessionMember.setAttribute("dkswMemberCategory", checkMember.getDkswMemberCategory());
+				sessionMember.setAttribute("dkswMemberEmail", checkMember.getDkswMemberEmail());
+				sessionMember.setAttribute("dkswMemberName", checkMember.getDkswMemberName());
+
+				if(checkMember.getDkswMemberNo() == 1) {
+					sessionMember.setAttribute("dkswMemberAdmin", "true");
+				}
+				
+				res.getWriter().write("LoginOK");	
+				
+			} else {
+				res.getWriter().write("Fail");	
+			}
+
+		} catch (SQLException e) {
+			req.setAttribute("errorMsg", "ERROR : 포스트 가져오기 실패! (SQL에러)");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : 인증 오류! (IO에러)");
+		}
+	}
+
+	// 회원 로그아웃 처리
+	private void logoutMember(HttpServletRequest req, HttpServletResponse res) {
+		
+		HttpSession sessionMember = req.getSession(false);
+		
+		try {
+			if (sessionMember != null) {
+				sessionMember.invalidate();
+				res.getWriter().write("LogoutOK");
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

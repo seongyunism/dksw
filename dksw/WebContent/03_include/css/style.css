@@ -4293,6 +4293,16 @@ ul.thumbs {
 	margin-bottom:15px;
 } 
 
+.online-auth {
+	display:none;
+}
+
+.online-auth-text {
+	color: #555555;
+	text-align:center;
+	line-height:1.5em;
+}
+
 .btn-offline-auth-code {
 	float:right;
 }
@@ -4333,4 +4343,10 @@ ul.thumbs {
 
 .history-year, .history-month, .history-content {
 	line-height:2em;
+}
+
+
+
+.margin_left_10 {
+	margin-left:10px;
 }

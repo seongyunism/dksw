@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -28,7 +29,7 @@
                     
                     <ul class="list-inline">
                         <li><a href="#" class="btn btn-default-trn btn-xlg scroll font-NanumGothic"><i class="fa fa-bolt"></i>애플리케이션 다운로드</a></li>
-                        <li><a href="<%=request.getContextPath()%>/02_page/join/index.jsp" class="btn btn-primary btn-xlg scroll font-NanumGothic"><i class="fa fa-paper-plane-o"></i>학과생 인증 및 회원 가입</a></li>
+                        <c:if test="${empty sessionScope.dkswMemberNo}"><li><a href="<%=request.getContextPath()%>/02_page/join/index.jsp" class="btn btn-primary btn-xlg scroll font-NanumGothic"><i class="fa fa-paper-plane-o"></i>학과생 인증 및 회원 가입</a></li></c:if>
                     </ul>
                 </div>
             </div>

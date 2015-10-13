@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -17,7 +18,7 @@
 			if($(this).val() == 7 || $(this).val() == 8) {
 				$(".member-studentNo").slideDown();
 			} else {
-				$(".member-studentNo").slideUp();				
+				$(".member-studentNo").slideUp();		
 			}
 		});
 	});
@@ -33,95 +34,121 @@
         <div class="bg-filter">
             <div class="hv-center">
                 
-                <div class="sign-up">
-                    <!--<div class="sign-up-hr hidden-xs"></div>-->
-                    <h1 class="sign-up-title">Create new account</h1>
-					
-					<!-- 추후 보안을 위해 세션처리 해줄 것 -->
-					<form role="form" class="icon" method="post">
-	                    <div class="row join-form">
-	                    	<!-- Top Side -->
-	                    	<div class="col-md-12 btn-radio">
-								<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-01" value="7" checked /></div>
-								<div class="label-radio"><label for="radio-01">학부생</label></div>
-								<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-02" value="8" /></div>
-	                    		<div class="label-radio"><label for="radio-02">졸업생</label></div>
-	                    		<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-03" value="9" /></div>
-	                    		<div class="label-radio"><label for="radio-03">일반인</label></div>
-	                    		<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-04" value="6" /></div>
-	                    		<div class="label-radio"><label for="radio-04">교수</label></div>
-	                    	</div>
-	                    	
-	                    	<!-- Left Side -->
-	                        <div class="col-md-6 col-sm-6">
-                                <div class="form-group ">
-                                    <div class="control">
-                                        <input type="text" name="inputMemberName" class="form-control" placeholder="이름(실명)">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="control">
-                                        <input type="email" name="inputMemberEmail" class="form-control" placeholder="이메일주소">
-                                        <i class="fa fa-envelope"></i>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="control">
-                                        <input type="password" name="inputMemberPassword" class="form-control" placeholder="비밀번호">
-                                        <i class="fa fa-lock"></i>
-                                    </div>
-                                </div>
-                                <div class="form-group member-studentNo">
-                                    <div class="control">
-                                        <input type="text" name="inputMemberStudentNo" class="form-control" placeholder="학번" maxlength="8" />
-                                        <i class="fa fa-info"></i>
-                                    </div>
-                                </div>
+                <c:if test="${empty sessionScope.dkswMemberNo}">
+	                <div class="sign-up">
+		                
+		                <h1 class="sign-up-title">Create new account</h1>
+							
+						<form role="form" class="icon" method="post">
+							<div class="row join-form">
+			                    <!-- Top Side -->
+			                    <div class="col-md-12 btn-radio">
+									<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-01" value="7" checked /></div>
+									<div class="label-radio"><label for="radio-01">학부생</label></div>
+									<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-02" value="8" /></div>
+			                    	<div class="label-radio"><label for="radio-02">졸업생</label></div>
+			                    	<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-03" value="9" /></div>
+			                    	<div class="label-radio"><label for="radio-03">일반인</label></div>
+			                    	<div class="input-radio"><input type="radio" name="inputMemberCategory" id="radio-04" value="6" /></div>
+			                    	<div class="label-radio"><label for="radio-04">교수</label></div>
+			                    </div>
+			                    	
+			                    <!-- Left Side -->
+			                    <div class="col-md-6 col-sm-6">
+		                        	<div class="form-group ">
+		                            	<div class="control">
+		                                	<input type="text" name="inputMemberName" class="form-control" placeholder="이름(실명)" />
+		                                    <i class="fa fa-user"></i>
+		                                </div>
+									</div>
+									
+		                            <div class="form-group ">
+		                            	<div class="control">
+		                               		<input type="email" name="inputMemberEmail" class="form-control" placeholder="이메일주소" />
+		                                	<i class="fa fa-envelope"></i>
+		                            	</div>
+		                            </div>
+		                            
+		                            <div class="form-group ">
+		                            	<div class="control">
+		                                	<input type="password" name="inputMemberPassword" class="form-control" placeholder="비밀번호" />
+		                                    <i class="fa fa-lock"></i>
+		                                </div>
+		                            </div>
+		                            
+		                            <div class="form-group member-studentNo">
+		                            	<div class="control">
+		                                	<input type="text" name="inputMemberStudentNo" class="form-control" placeholder="학번" maxlength="8" />
+		                                    <i class="fa fa-info"></i>
+		                                </div>
+		                            </div>
+								</div>
+		
+			                    <!-- Right Side -->
+			                    <div class="col-md-6 col-sm-6">
+			                    	<a href="#" title=" Sing up with Facebook">
+										<div class="sign-up-btn facebook">
+			                            	<div class="icon"><i class="fa fa-facebook"></i></div>
+			                            	<div class="text">Sign up with <span class="company">Facebook</span></div>
+			                        	</div>
+			                        </a>
+			                            
+			                        <a href="#" title=" Sing up with Twitter">
+			                        	<div class="sign-up-btn twitter">
+			                            	<div class="icon"><i class="fa fa-twitter"></i></div>
+			                                <div class="text">Sign up with <span class="company">Twitter</span></div>
+			                            </div>
+			                        </a>
+			                            
+			                        <a href="#" title=" Sing up with KakaoTalk">
+			                        	<div class="sign-up-btn kakaotalk">
+			                            	<div class="icon" style="line-height:40px;"><i class="fa fa-commenting"></i></div>
+			                                	<div class="text">Sign up with <span class="company">KakaoTalk</span></div>
+			                            </div>
+			                        </a>
+								</div>
+			                        
+								<!-- Bottom Side -->
+								<div class="col-md-12">
+									<button type="button" class="btn btn-success btn-sign-up" onclick="joinMember()"><i class="fa fa-arrow-circle-right"></i><span class="txtNext">서버로 전송</span></button>
+									<div class="space visible-sm visible-xs"></div>
+			                    </div>   
 							</div>
-
-	                        <!-- Right Side -->
-	                        <div class="col-md-6 col-sm-6">
-	                            <a href="#" title=" Sing up with Facebook">
-	                                <div class="sign-up-btn facebook">
-	                                    <div class="icon"><i class="fa fa-facebook"></i></div>
-	                                    <div class="text">Sign up with <span class="company">Facebook</span></div>
-	                                </div>
-	                            </a>
-	                            
-	                            <a href="#" title=" Sing up with Twitter">
-	                                <div class="sign-up-btn twitter">
-	                                    <div class="icon"><i class="fa fa-twitter"></i></div>
-	                                    <div class="text">Sign up with <span class="company">Twitter</span></div>
-	                                </div>
-	                            </a>
-	                            
-	                            <a href="#" title=" Sing up with KakaoTalk">
-	                                <div class="sign-up-btn kakaotalk">
-	                                    <div class="icon" style="line-height:40px;"><i class="fa fa-commenting"></i></div>
-	                                    <div class="text">Sign up with <span class="company">KakaoTalk</span></div>
-	                                </div>
-	                            </a>
-	                        </div>
-	                        
-	                        <!-- Bottom Side -->
-	                        <div class="col-md-12">
-                                <button type="button" class="btn btn-success btn-sign-up" onclick="joinMember()"><i class="fa fa-arrow-circle-right"></i>서버로 전송</button>
-                                <div class="space visible-sm visible-xs"></div>
-	                        </div>   
-	                    </div>
-					
-						<!-- 인증코드 입력란 -->
-						<div class="row offline-auth">
+							
+							<!-- 인증코드 입력란 -->
+							<div class="row offline-auth">
+								<div class="col-md-12 col-sm-6">
+									<div class="offline-auth-code"><input type="text" class="form-control" maxlength="6" placeholder="오프라인 인증코드를 입력해주시기 바랍니다.  (6자리)" /></div>
+			                        <button type="button" class="btn btn-success btn-offline-auth-code" onclick="offlineAuthCode()"><i class="fa fa-check"></i>서버로 전송</button>
+								</div>
+							</div>
+								
+						</form>
+				
+						<!-- 온라인 인증코드 관련 메시지 -->
+						<div class="row online-auth">
 							<div class="col-md-12 col-sm-6">
-								<div class="offline-auth-code"><input type="text" class="form-control" maxlength="6" placeholder="오프라인 인증코드를 입력해주시기 바랍니다.  (6자리)" /></div>
-	                            <button type="button" class="btn btn-success btn-offline-auth-code" onclick="offlineAuthCode()"><i class="fa fa-check"></i>가입완료</button>
+								<h4 class="online-auth-text"><span style="font-weight:bold;">입력하신 이메일로 인증코드가 발송되었습니다.</span><br />
+								이메일을 확인하시면 가입이 완료됩니다.</h4><br />
 							</div>
 						</div>
-						
-					</form>
-	
-                </div>
+		
+	                </div>
+                
+	                <!-- 온라인 인증코드 관련 메시지 -->
+					<div class="row online-auth">
+							<div class="col-md-12 col-sm-6">
+								<h4 class="online-auth-text"><span style="font-weight:bold;">입력하신 이메일로 인증코드가 발송되었습니다.</span><br />
+								이메일을 확인하시면 가입이 완료됩니다.</h4><br />
+							</div>
+					</div>
+				</c:if>
+                
+                <c:if test="${not empty sessionScope.dkswMemberNo}">
+	                <div class="sign-up" style="text-align:center; color:#555555;">
+		                <h4>잘못된 접근입니다. (이미 가입한 회원)</h4>
+					</div>
+                </c:if>
             </div>
         </div>
     </section>

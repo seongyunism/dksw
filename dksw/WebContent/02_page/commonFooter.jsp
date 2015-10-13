@@ -8,7 +8,7 @@
 	                    <ul class="info-list md-list i-primary">
 	                        <li>
 	                            <i class="fa fa-envelope fa-fw"></i>
-	                            <a href="mailto:kspark@dankook.ac.kr">kspark@dankook.ac.kr</a>
+	                            <a href="mailto:dankook.sw@gmail.com">dankook.sw@gmail.com</a>
 	                        </li>
 	                        <li>
 	                            <i class="fa fa-phone fa-fw"></i>
