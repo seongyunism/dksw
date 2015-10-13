@@ -10,6 +10,39 @@ import dksw.util.DBUtil;
 
 public class MemberDAO {
 
+	public static boolean checkRedundancyEmail(String inputMemberEmail) throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			
+			pstmt = con.prepareStatement("SELECT count(*) FROM dksw_member WHERE dkswMemberEmail=?");
+			pstmt.setString(1, inputMemberEmail);
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			if(rset.getInt(1) == 0) {
+				return true;
+			} else {
+				return false;
+			}
+				
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+
 	public static boolean checkOfflineAuthCode(String inputOfflineAuthCode) throws SQLException {
 
 		Connection con = null;

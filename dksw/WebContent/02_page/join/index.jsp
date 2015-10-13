@@ -11,6 +11,7 @@
 	
 	<!-- Custom Scripts -->
 	<script>
+	var checkEmailAddr = 0;
 	var checkOfflineAuthCode = false;
 	
 	$(function() {
@@ -64,7 +65,7 @@
 									
 		                            <div class="form-group ">
 		                            	<div class="control">
-		                               		<input type="email" name="inputMemberEmail" class="form-control" placeholder="이메일주소" />
+		                               		<input type="email" name="inputMemberEmail" class="form-control" placeholder="이메일주소" onkeyup="checkEmail()" />
 		                                	<i class="fa fa-envelope"></i>
 		                            	</div>
 		                            </div>
@@ -109,7 +110,11 @@
 								</div>
 			                        
 								<!-- Bottom Side -->
-								<div class="col-md-12">
+								<div class="col-md-8">
+									<div class="txtStatus"></div>
+								</div>
+								
+								<div class="col-md-4">
 									<button type="button" class="btn btn-success btn-sign-up" onclick="joinMember()"><i class="fa fa-arrow-circle-right"></i><span class="txtNext">서버로 전송</span></button>
 									<div class="space visible-sm visible-xs"></div>
 			                    </div>   
@@ -134,14 +139,6 @@
 						</div>
 		
 	                </div>
-                
-	                <!-- 온라인 인증코드 관련 메시지 -->
-					<div class="row online-auth">
-							<div class="col-md-12 col-sm-6">
-								<h4 class="online-auth-text"><span style="font-weight:bold;">입력하신 이메일로 인증코드가 발송되었습니다.</span><br />
-								이메일을 확인하시면 가입이 완료됩니다.</h4><br />
-							</div>
-					</div>
 				</c:if>
                 
                 <c:if test="${not empty sessionScope.dkswMemberNo}">

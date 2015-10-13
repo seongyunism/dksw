@@ -4337,6 +4337,7 @@ ul.thumbs {
 	font-weight:bold;
 	text-align:center;	
 }
+
 .history-year, .history-month {
 	text-align:center;
 }
@@ -4345,7 +4346,20 @@ ul.thumbs {
 	line-height:2em;
 }
 
+.txtStatus {
+	height:44px;
+	text-align:center;
+	line-height:44px;
+	color:#666666;
+}
 
+.txtStatus-red {
+	color:#ff0000;
+}
+
+.txtStatus-yellow {
+	color:#ffff00;
+}
 
 .margin_left_10 {
 	margin-left:10px;

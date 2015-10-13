@@ -33,16 +33,11 @@
         <div class="bg-filter">
             <div class="hv-center">
                 
-                <div class="sign-up">
-                    <!--<div class="sign-up-hr hidden-xs"></div>-->
-                    <h1 class="sign-up-title">Create new account</h1>
-					
-					<!-- 온라인 인증코드 관련 메시지 -->
-					<div class="row">
-						<div class="col-md-12 col-sm-6"></div>
-					</div>
+				<!-- 온라인 인증코드 관련 메시지 -->
+	            <div class="sign-up" style="text-align:center; color:#555555;">
+					<h4 class="txtStatus-onlineAuthCode"></h4>
+				</div>
 	
-                </div>
             </div>
         </div>
     </section>

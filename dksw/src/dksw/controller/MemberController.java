@@ -13,6 +13,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import dksw.model.MemberDAO;
 import dksw.model.domain.Member;
+import dksw.util.EmailAddrCheck;
 import dksw.util.SendEmail;
 
 public class MemberController extends HttpServlet {
@@ -29,7 +30,9 @@ public class MemberController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String action = req.getParameter("action");
 		
-		if(action.equals("checkOfflineAuthCode")) {
+		if(action.equals("checkEmail")) {
+			checkEmail(req, res);
+		} else if(action.equals("checkOfflineAuthCode")) {
 			checkOfflineAuthCode(req, res);
 		} else if(action.equals("checkOnlineAuth")) {
 			checkOnlineAuth(req, res);
@@ -42,6 +45,33 @@ public class MemberController extends HttpServlet {
 		}
 	}
 
+	private void checkEmail(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		boolean checkRedundancyEmail = false;
+		
+		try {
+			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
+
+			if(EmailAddrCheck.isEmail(inputMemberEmail)) {
+				checkRedundancyEmail = MemberDAO.checkRedundancyEmail(inputMemberEmail);
+				
+				if(checkRedundancyEmail) {
+					res.getWriter().write("EmailOK");
+				} else {
+					res.getWriter().write("Redundancy");
+				}
+			} else {
+				res.getWriter().write("NotEmail");
+			}
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+		
+	}
+
 	// 오프라인 인증 코드 체크 (오프라인 학과 게시물)
 	private void checkOfflineAuthCode(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
@@ -49,6 +79,7 @@ public class MemberController extends HttpServlet {
 
 		try {
 			String inputOfflineAuthCode = (req.getParameter("inputOfflineAuthCode") != null) ? req.getParameter("inputOfflineAuthCode") : null;
+			
 			checkOfflineAuthCode = MemberDAO.checkOfflineAuthCode(inputOfflineAuthCode);
 			
 			if(checkOfflineAuthCode) {
@@ -58,9 +89,9 @@ public class MemberController extends HttpServlet {
 			}
 			
 		} catch (SQLException se) {
-			req.setAttribute("errorMsg", "ERROR : 인증 오류! (SQL에러)");
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 인증 오류! (IO에러)");
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
 
@@ -97,9 +128,9 @@ public class MemberController extends HttpServlet {
 			}
 			
 		} catch (SQLException se) {
-			req.setAttribute("errorMsg", "ERROR : 인증 오류! (SQL에러)");
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 인증 오류! (IO에러)");
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
 
@@ -167,10 +198,10 @@ public class MemberController extends HttpServlet {
 			res.getWriter().write(retMsg);				
 
 		} catch (SQLException se) {
-			req.setAttribute("errorMsg", "ERROR : 인증 오류! (SQL에러)");
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 인증 오류! (IO에러)");
-		}	
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
 	}
 
 	// 회원 로그인 처리
@@ -203,10 +234,10 @@ public class MemberController extends HttpServlet {
 				res.getWriter().write("Fail");	
 			}
 
-		} catch (SQLException e) {
-			req.setAttribute("errorMsg", "ERROR : 포스트 가져오기 실패! (SQL에러)");
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 인증 오류! (IO에러)");
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
 
