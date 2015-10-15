@@ -38,7 +38,7 @@
 	            <ul class="info-list sm-list">
 	                <li>
 	                    <i class="fa fa-envelope fa-fw margin_left_10"></i>
-	                    <a class="text-muted" href="mailto:kspark@dankook.ac.kr"><%=session.getAttribute("dkswMemberEmail").toString()%></a>
+	                    <a class="text-muted"><%=session.getAttribute("dkswMemberEmail").toString()%></a>
 	                </li>
 	                <li>
 	                    <i class="fa fa-user fa-fw margin_left_10"></i>
