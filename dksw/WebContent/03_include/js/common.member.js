@@ -47,7 +47,7 @@ function checkInputForm() {
 			alert("이미 등록된 이메일 주소입니다.");
 			return false;
 		case 3:
-			alert("사용이 불가능한 이메일 주소입니다.");
+			alert("올바른 형식의 이메일 주소가 아닙니다.");
 			return false;
 		case 4:
 			alert("잘못 입력하셨습니다.");
@@ -95,7 +95,7 @@ function checkEmail() {
 				$(".txtStatus").html("<span class='txtStatus-red'>이미 등록된 이메일 주소입니다.</span>");
 			} else if(response == "NotEmail") { // 잘못된 이메일 주소
 				checkEmailAddr = 3;
-				$(".txtStatus").html("<span class='txtStatus-red'>사용이 불가능한 이메일 주소입니다.</span>");
+				$(".txtStatus").html("<span class='txtStatus-red'>올바른 형식의 이메일 주소가 아닙니다.</span>");
 			} else {
 				checkEmailAddr = 4;
 				$(".txtStatus").html("<span class='txtStatus-red'>잘못 입력하셨습니다.</span>");

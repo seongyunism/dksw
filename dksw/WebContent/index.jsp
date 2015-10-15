@@ -23,7 +23,7 @@
                     
                     <div class="space-sm"></div>
                     
-                    <p class="font-NanumGothic">단국대학교 소프트웨어학과 홈페이지에 오신 것을 환영합니다.<br />본교 학과 학생들은 학과 오프라인 게시판 확인 후 필히 가입부탁드립니다.</p>
+                    <p class="font-NanumGothic">단국대학교 소프트웨어학과 홈페이지에 오신 것을 환영합니다.<br />본교 학과 학생들은 학과 오프라인 게시판 확인 후 필히 가입바랍니다.</p>
                     
                     <div class="space-sm"></div>
                     
