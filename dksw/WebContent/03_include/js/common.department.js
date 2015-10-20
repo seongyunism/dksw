@@ -34,7 +34,7 @@ function initializeDepartmentHistory() {
 		url : action,
 		dataType : "json",
 		success : function(response) {
-			var head = "<tr><td class='history-head'>년도</td><td class='history-head'>월</td><td class='history-head'>내용</td></tr>"
+			var head = "<tr><td class='history-head'>년도</td><td class='history-head'>월</td><td class='history-head'>내용</td></tr>";
 			var histories = "";
 			var history = "";
 

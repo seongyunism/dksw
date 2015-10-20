@@ -41,7 +41,7 @@
 		<div class="container-sm">
 
 			<div class="space-sm"></div>			
-				<table class="table table-striped" id="dkswDepartmentHistory"></table>
+			<table class="table table-striped" id="dkswDepartmentHistory"></table>
 
 			<div class="space"></div>
 			<hr class="hr">

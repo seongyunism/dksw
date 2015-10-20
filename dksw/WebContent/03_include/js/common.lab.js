@@ -36,22 +36,22 @@ function initializeLab(labCode) {
 			}
 			$("#dkswLabMembers").html(members);
 			
-			var head = "<tr><td class='history-head'>년도</td><td class='history-head'>월</td><td class='history-head'>내용</td></tr>";
-			var achievement= "";
-			
 			// Achievements
-			for(i=0; i<response.dkswLabAchievements.length; i++){
-				
+			var head = "<tr><td class='history-head'>년도</td><td class='history-head'>월</td><td class='history-head'>내용</td></tr>";
+			var achievement = "";
+			
+			for (i=0; i<response.dkswLabAchievements.length; i++) {
 				achievement = "<tr> <td class='history-year' style='line-height:2em;'>"
-				+response.dkswLabAchievements[i].dkswLabAchievementsYear +
-				+ "</td> <td class='history-year' style='line-height:2em;'>"
-				+ response.dkswLabAchievements[i].dkswLabAchievementsMonth +
-				+ "</td> <td style='line-height:2em;'>"
-				+response.dkswLabAchievements[i].dkswLabAchievementsContent+
-				+ "</td> </tr>";
+					+ response.dkswLabAchievements[i].dkswLabAchievementsYear
+					+ "</td> <td class='history-year' style='line-height:2em;'>"
+					+ response.dkswLabAchievements[i].dkswLabAchievementsMonth
+					+ "</td> <td style='line-height:2em;'>"
+					+ response.dkswLabAchievements[i].dkswLabAchievementsContent
+					+ "</td> </tr>";
 				
 				achievements += achievement;
 			}
+			
 			$("#dkswLabAchievements").html(head + achievements);
 			
 			// Paper
