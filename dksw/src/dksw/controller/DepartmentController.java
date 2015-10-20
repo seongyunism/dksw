@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 import dksw.model.DepartmentDAO;
 import dksw.model.domain.DepartmentGreeting;
 import dksw.model.domain.DepartmentHistory;
+import dksw.model.domain.DepartmentProfessor;
 import dksw.util.UnixTimeConvertor;
 
 public class DepartmentController extends HttpServlet {
@@ -35,6 +36,8 @@ public class DepartmentController extends HttpServlet {
 			getGreetingData(req, res);
 		} else if (action.equals("getHistoryData")) {
 			getHistoryData(req, res);
+		} else if (action.equals("getProfessorData")) {
+			getProfessorData(req, res);
 		}
 
 	}
@@ -106,6 +109,51 @@ public class DepartmentController extends HttpServlet {
 		} catch (IOException ie) {
 			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
 		}
+	}
+	//학과 교수
+	private void getProfessorData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		ArrayList<DepartmentProfessor> thisData = null;
+
+		try {
+			
+			thisData = DepartmentDAO.getProfessor();
+
+			JSONObject jObject = new JSONObject();
+			JSONArray jArray = new JSONArray();
+			
+			// 데이터를 삽입		
+			for(int i=0; i<thisData.size(); i++)
+			{
+				JSONObject tempData = new JSONObject();
+				tempData.put("dkswDepartmentProfessorNo", thisData.get(i).getDkswDepartmentProfessorNo());
+				tempData.put("dkswDepartmentProfessorNameKo", thisData.get(i).getDkswDepartmentProfessorNameKo());
+				tempData.put("dkswDepartmentProfessorNameEn", thisData.get(i).getDkswDepartmentProfessorNameEn());
+				tempData.put("dkswDepartmentProfessorLabName", thisData.get(i).getDkswDepartmentProfessorLabName());
+				tempData.put("dkswDepartmentProfessorField", thisData.get(i).getDkswDepartmentProfessorField());
+				tempData.put("dkswDepartmentProfessorLabLocation", thisData.get(i).getDkswDepartmentProfessorLabLocation());
+				tempData.put("dkswDepartmentProfessorEmail", thisData.get(i).getDkswDepartmentProfessorEmail());
+				tempData.put("dkswDepartmentProfessorContact", thisData.get(i).getDkswDepartmentProfessorContact());
+				tempData.put("dkswDepartmentProfessorPicture", thisData.get(i).getDkswDepartmentProfessorPicture());
+				tempData.put("dkswDepartmentProfessorHomepage", thisData.get(i).getDkswDepartmentProfessorHomepage());
+				tempData.put("dkswDepartmentProfessorEditDate", UnixTimeConvertor.toConvertTimeFromUnixTime(thisData.get(i).getDkswDepartmentProfessorEditDate()));
+				tempData.put("dkswDepartmentProfessorEditPermission", thisData.get(i).getDkswDepartmentProfessorEditPermission());
+				jArray.add(tempData);
+			}
+						
+			jObject.put("dkswDepartmentProfessor", jArray);
+			
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+			
+			res.getWriter().write(jObject.toString());
+
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (SQL에러)");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
+		}
+
 	}
 
 }

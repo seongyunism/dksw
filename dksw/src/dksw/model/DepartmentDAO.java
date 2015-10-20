@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dksw.model.domain.DepartmentGreeting;
 import dksw.model.domain.DepartmentHistory;
+import dksw.model.domain.DepartmentProfessor;
 import dksw.util.DBUtil;
 
 public class DepartmentDAO {
@@ -81,6 +82,56 @@ public class DepartmentDAO {
 				datas.add(data);
 			}
 
+			return datas;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+
+	}
+	//학과 교수 
+	public static ArrayList<DepartmentProfessor> getProfessor() throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<DepartmentProfessor> datas = new ArrayList<>();
+		DepartmentProfessor data = null;
+		
+		try {
+			con = DBUtil.getConnection(); 
+			
+			pstmt = con.prepareStatement("SELECT * FROM dksw_department_professor ");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				data = new DepartmentProfessor(
+						rset.getInt(1),
+						rset.getString(2),
+						rset.getString(3),
+						rset.getString(4),
+						rset.getString(5),
+						rset.getString(6),
+						rset.getString(7),
+						rset.getString(8),
+						rset.getString(9),
+						rset.getString(10),
+						rset.getInt(11),
+						rset.getInt(12)
+				);
+				
+				datas.add(data);
+			}
+			
 			return datas;
 			
 		} catch (SQLException se) {

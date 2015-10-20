@@ -77,7 +77,7 @@ public class LabController extends HttpServlet {
 			// 데이터를 삽입
 
 			// Intro
-			jObject.put("dkswLabIntroIntroduction", introData.getDkswLabIntroIntroduction());
+			jObject.put("dkswLabIntroIntroduction", introData.getDkswLabIntroIntroduction().replaceAll("\n", "<br />"));
 			jObject.put("dkswLabIntroPicture", introData.getDkswLabIntroPicture());
 			jObject.put("dkswLabIntroEditDate", introData.getDkswLabIntroEditDate());
 			jObject.put("dkswLabIntroEditRightIndex", introData.getDkswLabIntroEditRightIndex());

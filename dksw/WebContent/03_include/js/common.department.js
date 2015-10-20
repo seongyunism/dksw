@@ -59,3 +59,42 @@ function initializeDepartmentHistory() {
 
 	return false;
 }
+// 학과 교수
+function initializeDepartmentProfessor() {
+	
+	var action = "/dksw/department?action=getProfessorData";
+
+	$.ajax({
+		type : "POST",
+		url : action,
+		dataType : "json",
+		success : function(response) {
+			
+			var professors = "";
+			var professor = "";
+
+			for (i=0; i<response.dkswDepartmentProfessor.length; i++) {
+				var professor =  "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle'>" +
+				"<div class='hover-content'><img src='" +response.dkswDepartmentProfessor[i].dkswDepartmentProfessorPicture+
+				"' /><div ></div>" +
+				"</div><h3>" + response.dkswDepartmentProfessor[i].dkswDepartmentProfessorNameKo +"</span><small>" + response.dkswDepartmentProfessor[i].dkswDepartmentProfessorNameEn + "</small>" +
+						"</h3><p>Lab: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorLabName +
+						"</h3><p>Lab Location: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorLabLocation +
+						"</p><p>E-mail: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorEmail +
+						"</p><p>Research Interests: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorField +
+						"</p><p>Contact: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorContact +
+						"</p><p>Hompage: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorHomepage +
+						"</p></div></div>";
+				
+				professors += professor;
+			}
+
+			$("#dkswDepartmentProfessor").html(professors);
+		},
+		error : function(xhr, status, error) {
+			alert(error);
+		}
+	});
+
+	return false;
+}

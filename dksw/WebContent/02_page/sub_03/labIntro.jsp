@@ -4,7 +4,7 @@
         <div class="container">
             <h2 class="big-title">Introduction</h2> 
  
-            <div class="space-sm"></div>
+            <div class="space-sm" ></div>
  
             <p class="text-block" id="dkswLabIntroIntroduction"></p>
             
@@ -22,9 +22,8 @@
             			<ul id="slider-aboutUs" class="sy-list">
             			
             			
-			                <li class="sy-slide fade useCSS transition sy-active" style="transition-duration: 800ms; opacity: 1;">
-			                    <a href="#slide1">
-			                        <img src="../../01_image/temp/DeathtoStock_Wired3a.jpg" alt="">
+			                <li class="sy-slide fade useCSS transition" style="transition-duration: 800ms; opacity: 1;">
+			                    <a href="#slide1" id = "dkswLabIntroPicture" >
 			                    </a>
 			                </li>
 			                

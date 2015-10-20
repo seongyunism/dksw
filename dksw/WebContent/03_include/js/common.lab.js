@@ -21,13 +21,15 @@ function initializeLab(labCode) {
 			var projects = "";
 			
 			// Introduction
+			var  intropicture = " <img src='"+response.dkswLabIntroPicture+ "' alt=>";
 			$("#dkswLabIntroIntroduction").html(response.dkswLabIntroIntroduction);
+			$("#dkswLabIntroPicture").html(intropicture);
 			
 			// Members
 			for(i=0; i<response.dkswLabMembers.length; i++) {
 				var member = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle'>" +
-						"<div class='hover-content'><img class='img-responsive' src='' />" +
-						"<div class='content-circle content-center'></div>" +
+						"<div class='hover-content'><img class='img-responsive' src='" +response.dkswLabMembers[i].dkswLabMembersPicture+
+						"' /><div class='content-circle content-center'></div>" +
 						"</div><h3>" + response.dkswLabMembers[i].dkswLabMembersNameKo +"</span><small>" + response.dkswLabMembers[i].dkswLabMembersNameEn + "</small>" +
 								"</h3><p>Admission Year: "+response.dkswLabMembers[i].dkswLabMembersAdmissionYear +
 								"</p><p>E-mail: "+response.dkswLabMembers[i].dkswLabMembersEmail +
