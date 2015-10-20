@@ -2230,7 +2230,7 @@ div:hover > .icon-o {
   transform: scale(0.2);
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
-  max-width: 450px;
+  max-width: 200px;
   border-radius: 50%;
 }
 .hover-content:hover .content-circle {
