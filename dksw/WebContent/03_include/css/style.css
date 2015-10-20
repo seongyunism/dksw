@@ -563,8 +563,7 @@ h1 > .label {
   display: block;
   width: 100%;
   padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
+  line-height: 2em;
   color: #777777;
   background-color: #ffffff;
   background-image: none;
@@ -579,7 +578,6 @@ h1 > .label {
   border-color: #ccc;
 }
 textarea.form-control {
-  line-height: normal !important;
   padding-top: 13px !important;
 }
 /* Icon in form field */
@@ -4323,10 +4321,10 @@ ul.thumbs {
 }
 
 .label-radio {
-	width:50px;
 	height:35px;
 	float:left;
 	color:#888888;
+	margin-right:10px;
 }
 
 .btn-radio {
@@ -4361,6 +4359,26 @@ ul.thumbs {
 	color:#ffff00;
 }
 
+.margin_bottom_5 {
+	margin-bottom:5px;
+}
+
+.margin_bottom_10 {
+	margin-bottom:10px;
+}
+
+.margin_left_5 {
+	margin-left:5px;
+}
+
 .margin_left_10 {
 	margin-left:10px;
+}
+
+.write-form {
+	display:none;
+}
+
+.writePost {
+	float:right;
 }
