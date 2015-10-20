@@ -31,7 +31,19 @@ public class BoardController extends HttpServlet {
 		
 		if(action.equals("getBoardListData")) {
 			getBoardListData(req, res);
-		} 
+		} else if(action.equals("getBoardPermission")) {
+			getBoardPermissionData(req, res);
+		}
+	}
+	
+	private void getBoardPermissionData(HttpServletRequest req, HttpServletResponse res) {
+		
+//		try {
+//			int 
+			
+			
+//		}
+		
 	}
 
 	// 학과 공지, 학생회 공지, 채용정보, 자유게시판에서 리스트 가져오기

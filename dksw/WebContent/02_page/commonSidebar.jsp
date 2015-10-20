@@ -17,7 +17,7 @@
             <div class="space-sm"></div>
 
 			<!-- Login Form & Member Information Section -->
-			<c:if test="${sessionScope.dkswMemberCategory == true}">
+			<c:if test="${empty sessionScope.dkswMemberNo}">
 	            <h4>Login</h4>
 	            <div class="space-sm"></div>
 	            

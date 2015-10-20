@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
@@ -38,16 +38,14 @@
         </div>
     </section>
 
-	<!-- Button Section -->
-	<c:if test="${empty sessionScope.dkswMemberNo}">
-	<section class="container section-lg">
-		새글작성
-	
-	</section>
-	</c:if>
 
     <!-- Content Section  -->       
     <section class="container section-lg">
+		<!-- Button -->
+		<c:if test="${sessionScope.dkswMemberCategory == '1'}">
+			<div class="writePost">새글작성</div>
+		</c:if>
+
         <!-- Nav tabs -->
         <ul class="inline-tabs"> 
             <li class="active"> 
