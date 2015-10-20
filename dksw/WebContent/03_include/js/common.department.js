@@ -59,7 +59,8 @@ function initializeDepartmentHistory() {
 
 	return false;
 }
-// 학과 교수
+
+// 학과 교수 페이지 로딩
 function initializeDepartmentProfessor() {
 	
 	var action = "/dksw/department?action=getProfessorData";
@@ -71,20 +72,32 @@ function initializeDepartmentProfessor() {
 		success : function(response) {
 			
 			var professors = "";
-			var professor = "";
 
 			for (i=0; i<response.dkswDepartmentProfessor.length; i++) {
-				var professor =  "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle'>" +
-				"<div class='hover-content'><img src='" +response.dkswDepartmentProfessor[i].dkswDepartmentProfessorPicture+
-				"' /><div ></div>" +
-				"</div><h3>" + response.dkswDepartmentProfessor[i].dkswDepartmentProfessorNameKo +"</span><small>" + response.dkswDepartmentProfessor[i].dkswDepartmentProfessorNameEn + "</small>" +
-						"</h3><p>Lab: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorLabName +
-						"</h3><p>Lab Location: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorLabLocation +
-						"</p><p>E-mail: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorEmail +
-						"</p><p>Research Interests: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorField +
-						"</p><p>Contact: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorContact +
-						"</p><p>Hompage: "+response.dkswDepartmentProfessor[i].dkswDepartmentProfessorHomepage +
-						"</p></div></div>";
+				
+				var professor = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile'><div class='hover-content'><img class='img-responsive' src='"
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorPicture
+					+ "' style='width:100%' /><div class='content-open content-center'><ul class='circle-icons text-center icons-list'><li><a href='mailto:"
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorEmail
+					+ "' title='Follow us'><i class='fa fa-envelope'></i></a></li><li><a href='"
+//					+ facebook
+					+ "' title='Follow us'><i class='fa fa-twitter'></i></a></li><li><a href='"
+//					+ twitter
+					+ "' title='Follow us'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='font-NanumGothic'>"
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorNameKo
+					+ "&nbsp;&nbsp;<small>"
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorNameEn
+					+ "</small></h3><ul class='info-list-pro i-primary font-NanumGothic'><li><i class='fa fa-caret-right'></i>연구실 : "
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorLabName
+					+ "</li><li><i class='fa fa-caret-right'></i>사무실 : "
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorLabLocation
+					+ "</li><li><i class='fa fa-caret-right'></i>이메일 : "
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorEmail
+					+ "</li><li><i class='fa fa-caret-right'></i>연락처 : "
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorContact
+					+ "</li><li><i class='fa fa-caret-right'></i>홈페이지 : <a href='"
+					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorHomepage
+					+ "' target='_blank'>바로가기</a></li></ul></div></div>"
 				
 				professors += professor;
 			}

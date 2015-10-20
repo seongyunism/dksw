@@ -42,7 +42,7 @@
 	                            <ul class="dropdown-menu">
 	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/greeting/index.jsp">학과장 인사</a></li>
 	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/history/index.jsp">학과 연혁</a></li>
-	                                <li><a href="#">학과 내규</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/law/index.jsp">학과 내규</a></li>
 	                            </ul>
 	                        </li>
 	

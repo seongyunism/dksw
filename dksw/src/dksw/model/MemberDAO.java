@@ -57,8 +57,9 @@ public class MemberDAO {
 			pstmt = con.prepareStatement("SELECT dkswMemberOfflineAuthCode FROM dksw_member_code ORDER BY dkswMemberOfflineAuthYear DESC, dkswMemberOfflineAuthMonth DESC LIMIT 1");
 			rset = pstmt.executeQuery();
 			
-			rset.next();
-			nowOfflineAuthCode = rset.getString(1);
+			if(rset.next()) {
+				nowOfflineAuthCode = rset.getString(1);
+			}
 
 			if(inputOfflineAuthCode.equals(nowOfflineAuthCode)) {
 				return true;
@@ -139,9 +140,10 @@ public class MemberDAO {
 			pstmt.setString(1, inputMemberOnlineAuthCode); 
 			rset = pstmt.executeQuery();
 			
-			rset.next();
-			memberNo = rset.getInt(1);
-			memberOnlineAuth = rset.getInt(2);
+			if(rset.next()) {
+				memberNo = rset.getInt(1);
+				memberOnlineAuth = rset.getInt(2);
+			}
 			
 			if(memberOnlineAuth == 1) {
 				return -1;
@@ -249,13 +251,14 @@ public class MemberDAO {
 		try {
 			con = DBUtil.getConnection(); 
 			
-			pstmt = con.prepareStatement("SELECT dkswMemberNo FROM dksw_member WHERE dkswMemberEmail=? AND dkswMemberPassword=password(?)");
+			pstmt = con.prepareStatement("SELECT dkswMemberNo FROM dksw_member WHERE dkswMemberEmail=? AND dkswMemberPassword=password(?) AND dkswMemberOnlineAuth=1 AND dkswMemberAdminAuth=1");
 			pstmt.setString(1, inputMemberEmail);
 			pstmt.setString(2, inputMemberPassword);
 			rset = pstmt.executeQuery();
 			
-			rset.next();
-			memberNo = rset.getInt(1);
+			if(rset.next()) {
+				memberNo = rset.getInt(1);
+			}
 			
 			if(memberNo > 0) {
 				return getMember(memberNo);

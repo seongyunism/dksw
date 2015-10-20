@@ -66,25 +66,27 @@
 	            
 	            <div class="text-block font-NanumGothic" id="dkswBoardContent" style="line-height:2em;"></div>
 	            <div class="space"></div>
-	                        
-	            <div class="btn btn-primary pull-right margin_left_5">
-	            	<i class="fa fa-trash-o"></i>삭제
-	            </div>
 	            
-	            <div class="btn btn-primary-trn pull-right" onclick="modifyMode()">
-	                <i class="fa fa-wrench"></i>수정
-	            </div>
+	            <c:if test="${sessionScope.dkswMemberCategory == '1'}">         
+		            <div class="btn btn-primary pull-right margin_left_5">
+		            	<i class="fa fa-trash-o"></i>삭제
+		            </div>
+		            
+		            <div class="btn btn-primary-trn pull-right" onclick="modifyMode()">
+		                <i class="fa fa-wrench"></i>수정
+		            </div>
+				</c:if>
 	
 	            <div class="space"></div>
 	
 				<c:if test="${not empty sessionScope.dkswMemberNo}">
 		            <div class="comment-box-1 icon">
-		                <h3>덧글 작성</h3>
+		                <h4>덧글 남기기</h4>
 		                <div class="row">
 							<div class="col-md-12">
 								<form>
 		                            <div class="control">
-		                                <textarea class="form-control" rows="8"></textarea>
+		                                <textarea class="form-control" style="line-height:1.5em;" rows="5"></textarea>
 		                                <i class="fa fa-comment"></i>
 		                            </div>
 								
@@ -218,33 +220,35 @@
 	            
 			</div>
 			
-			<div class="write-form">
-				<form method="post">
-					<input type="hidden" name="inputMode" value="1" />
-					<input type="hidden" name="inputMemberNo" value="" />
-				
-					<div class="col-md-12 btn-radio">
-						<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-01" value="1" checked /></div>
-						<div class="label-radio"><label for="radio-01">학과 공지</label></div>
-						<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-02" value="2" /></div>
-				        <div class="label-radio"><label for="radio-02">학생회 공지</label></div>
-				        <div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-03" value="3" /></div>
-				        <div class="label-radio"><label for="radio-03">채용 정보</label></div>
-					</div>
-				
-					<input type="text" name="inputBoardTitle" class="form-control font-NanumGothic margin_bottom_5" placeholder="제목" style="font-weight:bold;" />
-					<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
-		            <div class="space"></div>
-		                        
-		            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost()">
-		            	<i class="fa fa-trash-o"></i>완료
-		            </div>
-		            
-		            <div class="btn btn-primary-trn pull-right" onclick="modifyModeCancel()">
-		                <i class="fa fa-wrench"></i>취소
-		            </div>
-				</form>
-			</div>
+			<c:if test="${sessionScope.dkswMemberCategory == '1'}">  
+				<div class="write-form">
+					<form method="post">
+						<input type="hidden" name="inputMode" value="1" />
+						<input type="hidden" name="inputMemberNo" value="" />
+					
+						<div class="col-md-12 btn-radio">
+							<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-01" value="1" checked /></div>
+							<div class="label-radio"><label for="radio-01">학과 공지</label></div>
+							<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-02" value="2" /></div>
+					        <div class="label-radio"><label for="radio-02">학생회 공지</label></div>
+					        <div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-03" value="3" /></div>
+					        <div class="label-radio"><label for="radio-03">채용 정보</label></div>
+						</div>
+					
+						<input type="text" name="inputBoardTitle" class="form-control font-NanumGothic margin_bottom_5" placeholder="제목" style="font-weight:bold;" />
+						<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
+			            <div class="space"></div>
+			                        
+			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost()">
+			            	<i class="fa fa-trash-o"></i>완료
+			            </div>
+			            
+			            <div class="btn btn-primary-trn pull-right" onclick="modifyModeCancel()">
+			                <i class="fa fa-wrench"></i>취소
+			            </div>
+					</form>
+				</div>
+			</c:if>
  
         </div>
 
