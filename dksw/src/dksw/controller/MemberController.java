@@ -97,10 +97,11 @@ public class MemberController extends HttpServlet {
 
 	// 온라인 인증 처리 (이메일 확인)	
 	private void checkOnlineAuth(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		
+				
 		boolean checkInsertMemberRecord = false;
 		boolean checkSendOnlineAuthCode = false;
-	
+		boolean checkRedundancyEmail = false;
+
 		try {
 			int inputMemberCategory = (req.getParameter("inputMemberCategory") != null) ? Integer.parseInt(req.getParameter("inputMemberCategory")) : null; 
 			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
@@ -113,6 +114,17 @@ public class MemberController extends HttpServlet {
 			String inputMemberOfflineAuthCode = (req.getParameter("inputMemberOfflineAuthCode") != null) ? req.getParameter("inputMemberOfflineAuthCode") : null;
 			long inputMemberJoinDate = (System.currentTimeMillis())/1000;
 			int inputMemberAdminAuth = 0;		
+			
+			// 이메일 체크
+			if(EmailAddrCheck.isEmail(inputMemberEmail)) {
+				checkRedundancyEmail = MemberDAO.checkRedundancyEmail(inputMemberEmail);
+				
+				if(!checkRedundancyEmail) { // 이미 등록된 이메일인 경우
+					res.getWriter().write("Fail");
+				}
+			} else { // 이메일 형식이 아닌 경우
+				res.getWriter().write("Fail");
+			}
 			
 			// 온라인 인증코드를 입력받은 이메일로 발송 
 			checkSendOnlineAuthCode = SendEmail.SendEmail(inputMemberEmail, "단국대학교 소프트웨어학과 홈페이지 인증메일입니다.", "<a href='http://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/02_page/join/auth.jsp?authCode="+ inputMemberCategory + inputMemberOnlineAuthCode + "' target='_blank'>인증완료</a>");		

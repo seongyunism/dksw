@@ -13,6 +13,7 @@
 	<script>
 	var checkEmailAddr = 0;
 	var checkOfflineAuthCode = false;
+	var formClickCount = 0;
 	
 	$(function() {
 		$(".input-radio input[name='inputMemberCategory']").click(function() {

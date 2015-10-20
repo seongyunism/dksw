@@ -138,6 +138,12 @@ function offlineAuthCode() {
 // 온라인 인증
 function onlineAuth() {
 	
+	formClickCount++;
+	
+	if(formClickCount != 1) {
+		return false;
+	}
+	
 	var action = "/dksw/member?action=checkOnlineAuth";	
 	var form_data = {
 		inputMemberCategory : $("input[name='inputMemberCategory']:checked").val(),
