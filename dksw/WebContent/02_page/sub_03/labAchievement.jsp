@@ -9,10 +9,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="timeline" id="dkswLabAchievements">
+                    
+                     <table class="table table-striped" id="dkswLabAchievements"></table>
                                
                     </div>
                 </div>
             </div>
-        </div>
     </section>
