@@ -99,4 +99,35 @@ public class BoardDAO {
 			}
 		}
 	}
+
+	public static boolean modifyPost(int inputBoardNo, int inputBoardCategory, String inputBoardTitle, String inputBoardContent) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;	
+		
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("UPDATE dksw_board SET dkswBoardCategory=?, dkswBoardTitle=?, dkswBoardContent=? WHERE dkswBoardNo=?");
+			pstmt.setInt(1, inputBoardCategory);
+			pstmt.setString(2, inputBoardTitle);
+			pstmt.setString(3, inputBoardContent);
+			pstmt.setInt(4, inputBoardNo);
+			pstmt.executeUpdate();	
+			
+			return true;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
 }

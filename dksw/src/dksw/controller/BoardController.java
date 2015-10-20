@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dksw.model.BoardDAO;
+import dksw.model.MemberDAO;
 import dksw.model.domain.Board;
 
 public class BoardController extends HttpServlet {
@@ -33,16 +34,120 @@ public class BoardController extends HttpServlet {
 			getBoardListData(req, res);
 		} else if(action.equals("getBoardPermission")) {
 			getBoardPermissionData(req, res);
+		} else if(action.equals("getBoardPostData")) {
+			getBoardPostData(req, res);
+		} else if(action.equals("modifyPost")) {
+			writePost(req, res);
 		}
 	}
 	
-	private void getBoardPermissionData(HttpServletRequest req, HttpServletResponse res) {
+	private void writePost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
-//		try {
-//			int 
+		boolean checkModifyPost = false;
+		Board modifiedPost = null;
+		String[] tempContent = null;
+		String content = "";
+		
+		try {
+			int inputMode = (req.getParameter("inputMode") != null) ? Integer.parseInt(req.getParameter("inputMode")) : null;	
+			int inputBoardNo = (req.getParameter("inputBoardNo") != null) ? Integer.parseInt(req.getParameter("inputBoardNo")) : null;
+			int inputBoardCategory = (req.getParameter("inputBoardCategory") != null) ? Integer.parseInt(req.getParameter("inputBoardCategory")) : null;
+			int inputMemberNo = (req.getParameter("inputMemberNo") != null) ? Integer.parseInt(req.getParameter("inputMemberNo")) : null;
+			String inputBoardTitle = (req.getParameter("inputBoardTitle") != null) ? (req.getParameter("inputBoardTitle")) : null;
+			String inputBoardContent = (req.getParameter("inputBoardContent") != null) ? (req.getParameter("inputBoardContent")) : null;
 			
+			if(inputMode == 1) { // 새글 작성 모드
+				return;
+			} else { // 수정 모드
+				checkModifyPost = BoardDAO.modifyPost(inputBoardNo, inputBoardCategory, inputBoardTitle, inputBoardContent);
+				modifiedPost = BoardDAO.getPost(inputBoardNo);
+				
+				JSONObject jObject = new JSONObject();
+				JSONArray jArray = new JSONArray();
+				
+				jObject.put("dkswBoardNo", modifiedPost.getDkswBoardNo());
+				jObject.put("dkswBoardCategory", modifiedPost.getDkswBoardCategory());
+				jObject.put("dkswMemberName", MemberDAO.getMember(modifiedPost.getDkswMemberNo()).getDkswMemberName());
+				jObject.put("dkswBoardWriteDate", modifiedPost.getDkswBoardWriteDate());
+				jObject.put("dkswBoardReadnum", modifiedPost.getDkswBoardReadnum());
+				jObject.put("dkswBoardTitle", modifiedPost.getDkswBoardTitle());
+						
+				// 본문 자르기
+				tempContent = modifiedPost.getDkswBoardContent().split("\n\n");
+					
+				for(int i=1; i<tempContent.length; i++) {
+					content += (tempContent[i] + "\n\n");
+				}
+					
+				jObject.put("dkswBoardSubTitle", tempContent[0]);
+				jObject.put("dkswBoardContent", content.trim().replaceAll("\n", "<br />"));
+				jObject.put("dkswBoardPicture", modifiedPost.getDkswBoardPicture());
+						
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+
+				res.getWriter().write(jObject.toString());	
+			}
+
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+
+	private void getBoardPostData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		
+		Board post = null;
+		String[] tempContent = null;
+		String content = "";
+		
+		try {
+			int inputMode = (req.getParameter("inputMode") != null) ? Integer.parseInt(req.getParameter("inputMode")) : null;
+			int inputBoardNo = (req.getParameter("inputBoardNo") != null) ? Integer.parseInt(req.getParameter("inputBoardNo")) : null;
 			
-//		}
+			post = BoardDAO.getPost(inputBoardNo);
+
+			JSONObject jObject = new JSONObject();
+			JSONArray jArray = new JSONArray();
+			
+			jObject.put("dkswBoardNo", post.getDkswBoardNo());
+			jObject.put("dkswBoardCategory", post.getDkswBoardCategory());
+			jObject.put("dkswMemberName", MemberDAO.getMember(post.getDkswMemberNo()).getDkswMemberName());
+			jObject.put("dkswBoardWriteDate", post.getDkswBoardWriteDate());
+			jObject.put("dkswBoardReadnum", post.getDkswBoardReadnum());
+			jObject.put("dkswBoardTitle", post.getDkswBoardTitle());
+					
+			if(inputMode == 1) { // 일반 모드
+				// 본문 자르기
+				tempContent = post.getDkswBoardContent().split("\n\n");
+				
+				for(int i=1; i<tempContent.length; i++) {
+					content += (tempContent[i] + "\n\n");
+				}
+				
+				jObject.put("dkswBoardSubTitle", tempContent[0]);
+				jObject.put("dkswBoardContent", content.trim().replaceAll("\n", "<br />"));
+
+			} else { // 수정 모드
+				jObject.put("dkswBoardContent", post.getDkswBoardContent().trim());
+			}
+
+			jObject.put("dkswBoardPicture", post.getDkswBoardPicture());
+					
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+
+			res.getWriter().write(jObject.toString());			
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+
+	private void getBoardPermissionData(HttpServletRequest req, HttpServletResponse res) {
 		
 	}
 
@@ -91,17 +196,9 @@ public class BoardController extends HttpServlet {
 			res.getWriter().write(jObject.toString());
 			
 		} catch (SQLException se) {
-			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (SQL에러)");
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
-		}	
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
 	}	
-		
-		
-		
-		
-		
-		
-		
-		
-	}
+}

@@ -44,6 +44,7 @@
 		<!-- Button -->
 		<c:if test="${sessionScope.dkswMemberCategory == '1'}">
 			<div class="writePost">새글작성</div>
+			<div class="space-sm"></div>
 		</c:if>
 
         <!-- Nav tabs -->

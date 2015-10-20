@@ -258,7 +258,7 @@ function loginMember() {
 function logoutMember() {
 	$.ajax({
 		type : "POST",
-		url : "member?action=logoutMember",
+		url : "/dksw/member?action=logoutMember",
 		dataType : "text",
 		success: function(response) {
 			if(response == "LogoutOK") {
