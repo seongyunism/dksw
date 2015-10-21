@@ -122,19 +122,34 @@ function initializeDepartmentContact() {
 		dataType : "json",
 		success: function(response) {
 			var number = "";
+			var location = "";
+			var email = "";
+			var fax = "";
+			var office = "";
+			var room = "";
 			//contact number
-			number = "<i class='fa fa-angle-right fa-fw'></i> 과사무실:" +response.dkswDepartmentContactNumber ;
-			
-			alert(number);
-			
-			
+			number = "<i class='fa fa-angle-right fa-fw'></i> 과사무실: " +response.dkswDepartmentContactNumber ;
 			$("#dkswContactNumber").html(number);
+			
 			//contact location
-			$("#dkswContactLocation").text(response.dkswContactLocation);
-			$("#dkswContactEmail").text(response.dkswContactEmail);
-			$("#dkswContactFax").text(response.dkswContactFax);
-			$("#dkswContactOffice").text(response.dkswContactOffice);
-			$("#dkswContactRoom").text(response.dkswContactRoom);
+			location = "<i class='fa fa-angle-right fa-fw'></i> 주소 : " +response.dkswDepartmentContactLocation;
+			$("#dkswContactLocation").html(location);
+			
+			//contact email
+			email = "<i class='fa fa-angle-right fa-fw'></i> " +response.dkswDepartmentContactEmail;
+			$("#dkswContactEmail").html(email);
+			
+			//contact fax
+			fax = "<i class='fa fa-angle-right fa-fw'></i> Fax: " +response.dkswDepartmentContactFax;
+			$("#dkswContactFax").html(fax);
+			
+			//contact office
+			office = "<i class='fa fa-angle-right fa-fw'></i> 과사무실: " +response.dkswDepartmentContactOffice;
+			$("#dkswContactOffice").html(office);
+			
+			//contact room
+			room = "<i class='fa fa-angle-right fa-fw'></i> 과  방: " +response.dkswDepartmentContactRoom;
+			$("#dkswContactRoom").html(room);
 			
 		}, error: function(xhr,status,error) {
 			alert(error);

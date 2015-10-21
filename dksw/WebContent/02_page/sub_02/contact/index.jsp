@@ -44,20 +44,26 @@
 	                    <ul class="info-list md-list i-primary">
 	                   	   
 	                            <h2><i class="fa fa-map-marker fa-fw"></i> Location</h2>
-	                           	
-	                           	<li><h4> <i class="fa fa-angle-right fa-fw"></i> 주소 :</h4></li>
-	                           	<li><h4> <i class="fa fa-angle-right fa-fw"></i> 과사무실:</h4> </li>
-	                           	<li><h4> <i class="fa fa-angle-right fa-fw"></i> 과방: </h4></li>
-	                          
+	                           	<h2></h2>
+	                           	<li><h4 id = "dkswContactLocation"> </h4></li>
+	                           	<h3></h3>
+	                           	<li><h4 id = "dkswContactOffice"> </h4> </li>
+	                           	<h3></h3>
+	                           	<li><h4 id = "dkswContactRoom" > </h4></li>
+	                         	 <h3></h3>
 	                          
 	                           	<h2><i class="fa fa-phone fa-fw"> </i> Number</h2>
-	                           	           
+	                            <h2></h2>     
 	                           	<li><h4 id = "dkswContactNumber"> </h4> </li>
-	                           	<li><h4> <i class="fa fa-angle-right fa-fw"></i> Fax: </h4></li>
+	                           	<h3></h3>
+	                           	<li><h4 id = "dkswContactFax"> </h4></li>
+	                           	<h3></h3>
 	                           	
 	                           	
 	                           	<h2><i class="fa fa-envelope fa-fw"></i> E-mail</h2>
-	                           	<li><h4> <i class="fa fa-angle-right fa-fw"></i> </h4></li>
+	                           	<h2></h2>
+	                           	<li><h4 id = "dkswContactEmail"></h4></li>
+	                           	<h3></h3>
 	                              	                        
 	                        
 	                    </ul>

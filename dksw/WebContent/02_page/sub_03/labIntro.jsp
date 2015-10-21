@@ -7,9 +7,9 @@
             <div class="space-sm" ></div>
  
             <p class="text-block" id="dkswLabIntroIntroduction"></p>
-            
-            
+                       
             <hr class="hr">
+           
         </div>
     </section>
     
@@ -22,7 +22,7 @@
             			<ul id="slider-aboutUs" class="sy-list">
             			
             			
-			                <li class="sy-slide fade useCSS transition" style="transition-duration: 800ms; opacity: 1;">
+			                <li class="sy-slide fade useCSS " style="transition-duration: 800ms; opacity:0;">
 			                    <a href="#slide1" id = "dkswLabIntroPicture" >
 			                    </a>
 			                </li>

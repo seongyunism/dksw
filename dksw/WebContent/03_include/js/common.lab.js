@@ -57,33 +57,40 @@ function initializeLab(labCode) {
 			$("#dkswLabAchievements").html(head + achievements);
 			
 			// Paper
+			var paperhead = "<tr><td class='history-head'>TITLE</td><td class='history-head'>PARTICIPANTS</td><td class='history-head'>ETC</td></tr>";
+			
 			for(i=0; i<response.dkswLabPaper.length; i++){
-				
-				var paper = "<li><div class='timeline-panel'><div class='timeline-heading'>" +
-								"<h4>"+response.dkswLabPaper[i].dkswLabPaperTitle +
-								"</h4><h4 class='subheading'>"+ response.dkswLabPaper[i].dkswLabPaperParticipants+
-								"</h4><h4 class='text-muted'>"+ response.dkswLabPaper[i].dkswLabPaperContent+
-								"</h4></div></div></li>";
+					var paper ="<tr> <td class='history-year' style='line-height:2em;'>"
+					+ response.dkswLabPaper[i].dkswLabPaperTitle
+					+ "</td> <td class='history-year' style='line-height:2em;'>"
+					+ response.dkswLabPaper[i].dkswLabPaperParticipants
+					+ "</td> <td style='line-height:2em;'>"
+					+ response.dkswLabPaper[i].dkswLabPaperContent
+					+ "</td> </tr>";
 				
 				papers += paper;
 			}
-			$("#dkswLabPaper").html(papers);
+			$("#dkswLabPaper").html(paperhead + papers);
 			
 			// Project
+			
+			var projecthead = "<tr><td class='history-head'>TITLE</td><td class='history-head'>PROJECT TERM</td><td class='history-head'>SPONSER</td></tr>";
+			
 			for(i=0; i<response.dkswLabProject.length; i++){
 				
-				var project = "<li><div class='timeline-panel'><div class='timeline-heading'>" +
-								"<h4>"+response.dkswLabProject[i].dkswLabProjectName +
-								"</h4><h4 class='subheading'>"+ response.dkswLabProject[i].dkswLabProjectStartYear+
-								"." + response.dkswLabProject[i].dkswLabProjectStartMonth+
-								"~" + response.dkswLabProject[i].dkswLabProjectEndYear+
-								"." + response.dkswLabProject[i].dkswLabProjectEndMonth+
-								"</h4><h4 class='text-muted'>"+ response.dkswLabPaper[i].dkswLabPaperContent+
-								"</h4></div></div></li>";
+				var project = "<tr> <td class='history-year' style='line-height:2em;'>"
+					+ response.dkswLabProject[i].dkswLabProjectContent
+					+ "</td> <td class='history-year' style='line-height:2em;'>"
+					+ response.dkswLabProject[i].dkswLabProjectStartYear+"."+response.dkswLabProject[i].dkswLabProjectStartMonth+" ~ "
+					+ response.dkswLabProject[i].dkswLabProjectEndYear+"."+response.dkswLabProject[i].dkswLabProjectEndMonth
+					+ "</td> <td style='line-height:2em;'>"
+					+ response.dkswLabProject[i].dkswLabProjectName
+					+ "</td> </tr>";
 				
 				projects += project;
 			}
-			$("#dkswLabProject").html(projects);
+			
+			$("#dkswLabProject").html(projecthead + projects);
 			
 		},error: function(xhr,status,error) {
 			alert(error);

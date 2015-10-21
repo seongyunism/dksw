@@ -6,7 +6,7 @@
 					          <div class="row">
 			            <div class="col-lg-12">
 			                <div class="well text-center">
-			                    Paper
+			                    PAPER
 			                </div>
 			            </div>
 			            <!-- /.col-lg-12 -->
@@ -16,9 +16,7 @@
 			        <!-- Content Row -->
 			     <div class="row">
                 <div class="col-lg-12" >
-                    <ul class="timeline" id ="dkswLabPaper" >
-                                                          
-                    </ul>
+                    <table class="table table-striped" id="dkswLabPaper"></table>
                 </div>
             </div>
 			        </div>
@@ -27,7 +25,7 @@
 		          <div class="row">
             <div class="col-lg-12">
                 <div class="well text-center">
-                   On-Going Projects
+                   ON-GOING PROJECTS
                 </div>
             </div>
             <!-- /.col-lg-12 -->
@@ -37,9 +35,7 @@
         <!-- Content Row -->
         <div class="row">
                 <div class="col-lg-12">
-                    <ul class="timeline" id="dkswLabProject">
-                                                          
-                    </ul>
+                    <table class="table table-striped" id="dkswLabProject"></table>
                 </div>
             </div>
       </div>

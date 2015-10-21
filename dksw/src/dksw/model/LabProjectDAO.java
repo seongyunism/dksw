@@ -27,7 +27,7 @@ public class LabProjectDAO {
 			pstmt.setInt(1, inputLabCode);
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				project = new LabProject(
 						rset.getInt(1),
 						rset.getString(2),

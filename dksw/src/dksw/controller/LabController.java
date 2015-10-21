@@ -8,17 +8,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dksw.model.BoardDAO;
 import dksw.model.DepartmentDAO;
 import dksw.model.LabAchievementsDAO;
 import dksw.model.LabIntroDAO;
 import dksw.model.LabMembersDAO;
 import dksw.model.LabPaperDAO;
 import dksw.model.LabProjectDAO;
-
+import dksw.model.MemberDAO;
 import dksw.model.domain.LabAchievements;
 import dksw.model.domain.LabIntro;
 import dksw.model.domain.LabMembers;
@@ -156,4 +159,110 @@ public class LabController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
 		}				
 	}
+	
+	//연구실 member 추가
+	private void addLabMembers(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		
+		boolean checkInsertLabMembersRecord = false;
+		
+		try {
+				int inputLabMembersCode = (req.getParameter("inputLabMembersCode") != null) ? Integer.parseInt(req.getParameter("inputLabMembersCode")) : null; 
+				String inputLabMembersPicture = (req.getParameter("inputLabMembersPicture") != null) ? req.getParameter("inputLabMembersPicture") : null;
+				String inputLabMembersNameKo = (req.getParameter("inputLabMembersNameKo") != null) ? req.getParameter("inputLabMembersNameKo") : null;
+				String inputLabMembersNameEn = (req.getParameter("inputLabMembersNameEn") != null) ? req.getParameter("inputLabMembersNameEn") : null;
+				String inputLabMembersAdmissionYear = (req.getParameter("inputLabMembersAdmissionYear") != null) ? req.getParameter("inputLabMembersAdmissionYear") : null;
+				String inputLabMembersEmail = (req.getParameter("inputLabMembersEmail") != null) ? req.getParameter("inputLabMembersEmail") : null;
+				int inputLabMembersGroup = (req.getParameter("inputLabMembersGroup") != null) ? Integer.parseInt(req.getParameter("inputLabMembersGroup")) : null;
+				String inputLabMembersEtc = (req.getParameter("inputLabMembersEtc") != null) ? req.getParameter("inputLabMembersEtc") : null;
+				long inputLabMembersEditdate = (System.currentTimeMillis())/1000;
+				int inputLabMembersEditRightIndex = 0;
+				int inputDepartmentProfessorNo = (req.getParameter("inputDepartmentProfessorNo") != null) ? Integer.parseInt(req.getParameter("inputDepartmentProfessorNo")) : null; 
+	
+				
+				checkInsertLabMembersRecord = LabMembersDAO.addLabMembers(inputLabMembersCode, inputLabMembersPicture, inputLabMembersNameKo,inputLabMembersNameEn, inputLabMembersAdmissionYear, inputLabMembersEmail,
+						inputLabMembersGroup, inputLabMembersEtc, inputLabMembersEditdate, inputLabMembersEditRightIndex, inputDepartmentProfessorNo);
+			
+				if(checkInsertLabMembersRecord == true ) {
+					res.getWriter().write("onlineAuthChecked");
+				} else {
+					res.getWriter().write("Fail");
+				}
+			
+			} 
+		catch (SQLException se) {
+		req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+		req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	// 연구실 멤버 수정 
+	private void modifyLabMembers(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		
+		boolean checkModifyLabMembersRecord = false;
+		
+		try {
+				int inputLabMembersCode = (req.getParameter("inputLabMembersCode") != null) ? Integer.parseInt(req.getParameter("inputLabMembersCode")) : null; 
+				String inputLabMembersPicture = (req.getParameter("inputLabMembersPicture") != null) ? req.getParameter("inputLabMembersPicture") : null;
+				String inputLabMembersNameKo = (req.getParameter("inputLabMembersNameKo") != null) ? req.getParameter("inputLabMembersNameKo") : null;
+				String inputLabMembersNameEn = (req.getParameter("inputLabMembersNameEn") != null) ? req.getParameter("inputLabMembersNameEn") : null;
+				String inputLabMembersAdmissionYear = (req.getParameter("inputLabMembersAdmissionYear") != null) ? req.getParameter("inputLabMembersAdmissionYear") : null;
+				String inputLabMembersEmail = (req.getParameter("inputLabMembersEmail") != null) ? req.getParameter("inputLabMembersEmail") : null;
+				int inputLabMembersGroup = (req.getParameter("inputLabMembersGroup") != null) ? Integer.parseInt(req.getParameter("inputLabMembersGroup")) : null;
+				String inputLabMembersEtc = (req.getParameter("inputLabMembersEtc") != null) ? req.getParameter("inputLabMembersEtc") : null;
+				long inputLabMembersEditdate = (System.currentTimeMillis())/1000;
+				int inputLabMembersEditRightIndex = 0;
+				int inputDepartmentProfessorNo = (req.getParameter("inputDepartmentProfessorNo") != null) ? Integer.parseInt(req.getParameter("inputDepartmentProfessorNo")) : null; 
+	
+				
+				checkModifyLabMembersRecord = LabMembersDAO.modifyLabMembers(inputLabMembersCode, inputLabMembersPicture, inputLabMembersNameKo,inputLabMembersNameEn, inputLabMembersAdmissionYear,
+						inputLabMembersGroup, inputLabMembersEtc, inputLabMembersEditdate, inputLabMembersEditRightIndex, inputDepartmentProfessorNo,inputLabMembersEmail);
+			
+				if(checkModifyLabMembersRecord == true ) {
+					res.getWriter().write("onlineAuthChecked");
+				} else {
+					res.getWriter().write("Fail");
+				}
+			
+			} 
+		catch (SQLException se) {
+		req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+		req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	//연구실 멤버 삭제 
+	private void deleteLabMembers(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		
+		boolean checkDeletLabMembers = false;
+		
+		try {
+			int inputLabMembersEmail = (req.getParameter("inputLabMembersEmail") != null) ? Integer.parseInt(req.getParameter("inputLabMembersEmail")) : null;
+
+			HttpSession sessionMember = req.getSession();
+			
+			if(sessionMember.getAttribute("getDkswLabMembersEmail").toString().equals("3")) {
+				
+					
+				
+				checkDeletLabMembers = BoardDAO.deletePost(inputLabMembersEmail);
+				
+				if(checkDeletLabMembers) {
+					res.getWriter().write("DeleteOK");
+				} else {
+					res.getWriter().write("Fail");
+				}
+				
+			} else { 
+				return;
+			}
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
 }
