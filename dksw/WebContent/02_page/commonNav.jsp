@@ -58,7 +58,7 @@
 	
 	                        <li class="divider"></li>
 	
-	                        <li><a href="#">위치 및 연락처</a></li>
+	                        <li><a href="<%= request.getContextPath()%>/02_page/sub_02/contact/index.jsp">위치 및 연락처</a></li>
 
 	                    </ul>
 	                </li>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dksw.model.domain.DepartmentContact;
 import dksw.model.domain.DepartmentGreeting;
 import dksw.model.domain.DepartmentHistory;
 import dksw.model.domain.DepartmentProfessor;
@@ -131,6 +132,46 @@ public class DepartmentDAO {
 			}
 			
 			return datas;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+
+	}
+	
+	//학과 위치 및 연락처  
+	public static DepartmentContact getContact() throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		DepartmentContact data = null;
+		
+		try {
+			con = DBUtil.getConnection(); 
+			
+			pstmt = con.prepareStatement("SELECT * FROM dksw_department_contact");
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				data = new DepartmentContact(
+						rset.getString(1),
+						rset.getString(2),
+						rset.getString(3),
+						rset.getString(4),
+						rset.getString(5),
+						rset.getString(6)
+				);
+			}
+			return data;
 			
 		} catch (SQLException se) {
 			se.printStackTrace();

@@ -97,7 +97,7 @@ function initializeDepartmentProfessor() {
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorContact
 					+ "</li><li><i class='fa fa-caret-right'></i>홈페이지 : <a href='"
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorHomepage
-					+ "' target='_blank'>바로가기</a></li></ul></div></div>"
+					+ "' target='_blank'>바로가기</a></li></ul></div></div>";
 				
 				professors += professor;
 			}
@@ -109,5 +109,34 @@ function initializeDepartmentProfessor() {
 		}
 	});
 
+	return false;
+}
+
+//연락처 페이지 로딩
+function initializeDepartmentContact() {
+	var action = "/dksw/department?action=getContactData";
+	
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		dataType : "json",
+		success: function(response) {
+			var number = "";
+			//contact number
+			var number = "<i class='fa fa-angle-right fa-fw'></i> 과사무실:" +response.dkswDepartmentContactNumber ;
+			$("#dkswContactNumber").html(number);
+			//contact location
+			$("#dkswContactLocation").text(response.dkswContactLocation);
+			$("#dkswContactEmail").text(response.dkswContactEmail);
+			$("#dkswContactFax").text(response.dkswContactFax);
+			$("#dkswContactOffice").text(response.dkswContactOffice);
+			$("#dkswContactRoom").text(response.dkswContactRoom);
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
 	return false;
 }

@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dksw.model.DepartmentDAO;
+import dksw.model.domain.DepartmentContact;
 import dksw.model.domain.DepartmentGreeting;
 import dksw.model.domain.DepartmentHistory;
 import dksw.model.domain.DepartmentProfessor;
@@ -38,8 +39,9 @@ public class DepartmentController extends HttpServlet {
 			getHistoryData(req, res);
 		} else if (action.equals("getProfessorData")) {
 			getProfessorData(req, res);
+		}else if (action.equals("getContactData")) {
+			getContactData(req, res);
 		}
-
 	}
 
 	// 학과 연혁
@@ -152,5 +154,43 @@ public class DepartmentController extends HttpServlet {
 		}
 
 	}
+	//학과 위치 및 연락처
+	private void getContactData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		DepartmentContact thisData = null;
+
+		try {
+			
+			thisData = DepartmentDAO.getContact();
+
+			JSONObject jObject = new JSONObject();
+			JSONArray jArray = new JSONArray();
+			
+			// 데이터를 삽입		
+				JSONObject tempData = new JSONObject();
+				tempData.put("dkswDepartmentContactNumber", thisData.getDkswDepartmentContactNumber());
+				tempData.put("dkswDepartmentContactLocation", thisData.getDkswDepartmentContactLocation());
+				tempData.put("dkswDepartmentContactEmail", thisData.getDkswDepartmentContactEmail());
+				tempData.put("dkswDepartmentContactFax", thisData.getDkswDepartmentContactFax());
+				tempData.put("dkswDepartmentContactOffice", thisData.getDkswDepartmentContactOffice());
+				tempData.put("dkswDepartmentContactRoom", thisData.getDkswDepartmentContactRoom());
+				jArray.add(tempData);				
+		
+			
+			jObject.put("dkswDepartmentContact", jArray);
+			
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+			
+			res.getWriter().write(jObject.toString());
+
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (SQL에러)");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
+		}
+
+	}
+
 
 }
