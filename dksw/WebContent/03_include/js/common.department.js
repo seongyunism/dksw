@@ -116,7 +116,6 @@ function initializeDepartmentProfessor() {
 function initializeDepartmentContact() {
 	var action = "/dksw/department?action=getContactData";
 	
-	
 	$.ajax({
 		type : "POST",
 		url : action,
@@ -124,7 +123,11 @@ function initializeDepartmentContact() {
 		success: function(response) {
 			var number = "";
 			//contact number
-			var number = "<i class='fa fa-angle-right fa-fw'></i> 과사무실:" +response.dkswDepartmentContactNumber ;
+			number = "<i class='fa fa-angle-right fa-fw'></i> 과사무실:" +response.dkswDepartmentContactNumber ;
+			
+			alert(number);
+			
+			
 			$("#dkswContactNumber").html(number);
 			//contact location
 			$("#dkswContactLocation").text(response.dkswContactLocation);

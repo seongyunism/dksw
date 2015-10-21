@@ -154,6 +154,7 @@ public class DepartmentController extends HttpServlet {
 		}
 
 	}
+	
 	//학과 위치 및 연락처
 	private void getContactData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
@@ -167,21 +168,16 @@ public class DepartmentController extends HttpServlet {
 			JSONArray jArray = new JSONArray();
 			
 			// 데이터를 삽입		
-				JSONObject tempData = new JSONObject();
-				tempData.put("dkswDepartmentContactNumber", thisData.getDkswDepartmentContactNumber());
-				tempData.put("dkswDepartmentContactLocation", thisData.getDkswDepartmentContactLocation());
-				tempData.put("dkswDepartmentContactEmail", thisData.getDkswDepartmentContactEmail());
-				tempData.put("dkswDepartmentContactFax", thisData.getDkswDepartmentContactFax());
-				tempData.put("dkswDepartmentContactOffice", thisData.getDkswDepartmentContactOffice());
-				tempData.put("dkswDepartmentContactRoom", thisData.getDkswDepartmentContactRoom());
-				jArray.add(tempData);				
-		
-			
-			jObject.put("dkswDepartmentContact", jArray);
-			
+			jObject.put("dkswDepartmentContactNumber", thisData.getDkswDepartmentContactNumber());
+			jObject.put("dkswDepartmentContactLocation", thisData.getDkswDepartmentContactLocation());
+			jObject.put("dkswDepartmentContactEmail", thisData.getDkswDepartmentContactEmail());
+			jObject.put("dkswDepartmentContactFax", thisData.getDkswDepartmentContactFax());
+			jObject.put("dkswDepartmentContactOffice", thisData.getDkswDepartmentContactOffice());
+			jObject.put("dkswDepartmentContactRoom", thisData.getDkswDepartmentContactRoom());
+
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
-			
+
 			res.getWriter().write(jObject.toString());
 
 		} catch (SQLException se) {
