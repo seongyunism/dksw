@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String category = request.getParameter("category").toString();%>
 
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
@@ -11,8 +12,15 @@
 	
 	<!-- Custom Scripts -->
 	<script>
+	var category = "<%=category%>";
+	
 	$(document).ready(function() {
 		initializeBoard(1);
+		initializeBoard(2);
+		initializeBoard(3);		
+		
+		$("ul.inline-tabs a[href='#" + category + "']").parent("li").attr("class", "active");
+		$("#" + category).attr("class", "tab-pane active");
 	});
 
 	$(window).load(function() {
@@ -20,7 +28,7 @@
 	});
 	
 	$(function() {
-
+		
 	});
 	</script>
 </head>
@@ -40,47 +48,79 @@
 
     <!-- Content Section  -->       
     <section class="container section-lg">
-		<!-- Button -->
-		<c:if test="${sessionScope.dkswMemberCategory == '1'}">
-			<div class="writePost">새글작성</div>
-			<div class="space-sm"></div>
+
+		<div class="list">
+			<!-- Button -->
+			<c:if test="${sessionScope.dkswMemberCategory == '1'}">
+				<div class="btn btn-primary-trn pull-right" onclick="writeMode()">
+			    	<i class="fa fa-pencil"></i>새글작성
+			    </div>
+				<div class="space-sm"></div>
+			</c:if>
+	
+	        <!-- Nav tabs -->
+	        <ul class="inline-tabs"> 
+	            <li> 
+	             	<a href="#department" data-toggle="tab">학과 공지</a> 
+	           	</li> 
+	          	<li class=""> 
+	               	<a href="#student" data-toggle="tab">학생회 공지</a> 
+	           	</li> 
+	           	<li class=""> 
+	               	<a href="#job" data-toggle="tab">채용 정보</a> 
+	           	</li> 
+	       	</ul> 
+	       			
+	        <!-- Tab panes -->
+			<div class="tab-content">
+			
+				<!-- 학과 공지 -->
+	            <div class="tab-pane" id="department">
+	            	<div id="dkswBoard_1"></div>
+	            </div>
+	            
+				<!-- 학생회 공지 -->            
+	            <div class="tab-pane" id="student">
+	            	<div id="dkswBoard_2"></div>
+	            </div>
+	            
+	            <!-- 채용 정보 -->
+	            <div class="tab-pane" id="job">
+	            	<div id="dkswBoard_3"></div>
+				</div>
+	        </div>
+		</div>
+		
+		<c:if test="${sessionScope.dkswMemberCategory == '1'}">  
+			<div class="write-form">
+				<form method="post">
+					<input type="hidden" name="inputMode" value="1" />
+					<input type="hidden" name="inputMemberNo" value="" />
+					
+					<div class="col-md-12 btn-radio">
+						<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-01" value="1" checked /></div>
+						<div class="label-radio"><label for="radio-01">학과 공지</label></div>
+						<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-02" value="2" /></div>
+					    <div class="label-radio"><label for="radio-02">학생회 공지</label></div>
+					    <div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-03" value="3" /></div>
+					    <div class="label-radio"><label for="radio-03">채용 정보</label></div>
+					</div>
+					
+					<input type="text" name="inputBoardTitle" class="form-control font-NanumGothic margin_bottom_5" placeholder="제목" style="font-weight:bold;" />
+					<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
+					<div class="space"></div>
+			                        
+					<div class="btn btn-primary pull-right margin_left_5" onclick="writePost()">
+						<i class="fa fa-trash-o"></i>완료
+					</div>
+			            
+					<div class="btn btn-primary-trn pull-right" onclick="writeModeCancel()">
+						<i class="fa fa-wrench"></i>취소
+					</div>
+				</form>
+			</div>
 		</c:if>
 
-        <!-- Nav tabs -->
-        <ul class="inline-tabs"> 
-            <li class="active"> 
-             	<a href="#responsive" data-toggle="tab">학과 공지</a> 
-           	</li> 
-          	<li class=""> 
-               	<a href="#ready" data-toggle="tab">학생회 공지</a> 
-           	</li> 
-           	<li class=""> 
-               	<a href="#shortcodes" data-toggle="tab">채용 정보</a> 
-           	</li> 
-       	</ul> 
-       			
-        <!-- Tab panes -->
-		<div class="tab-content">
-		
-			<!-- 학과 공지 -->
-            <div class="tab-pane active" id="responsive">
-            	<div id="dkswBoard"></div>
-            </div>
-            
-			<!-- 학생회 공지 -->            
-            <div class="tab-pane" id="ready">
-                <div class="row">
-				학생회 공지
-                </div>
-            </div>
-            
-            <!-- 채용 정보 -->
-            <div class="tab-pane" id="shortcodes">
-                <div class="row">
-				채용정보
-				</div>
-			</div>
-        </div>
 
     </section>
 

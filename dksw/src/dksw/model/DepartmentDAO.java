@@ -74,9 +74,7 @@ public class DepartmentDAO {
 						rset.getInt(1),
 						rset.getInt(2),
 						rset.getString(3),
-						rset.getInt(4),
-						rset.getInt(5),
-						rset.getInt(6)
+						rset.getInt(4)
 				);
 				
 				datas.add(data);

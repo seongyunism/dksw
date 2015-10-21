@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String category = request.getParameter("category").toString();%>
 <% String postNo = request.getParameter("postNo").toString(); %>
 
 <!DOCTYPE html>
@@ -12,6 +13,8 @@
 		
 	<!-- Custom Scripts -->
 	<script>
+	var category = "<%=category%>";
+	
 	$(document).ready(function() {
 		initializeBoardView(<%=postNo%>);
 	});
@@ -68,7 +71,7 @@
 	            <div class="space"></div>
 	            
 	            <c:if test="${sessionScope.dkswMemberCategory == '1'}">         
-		            <div class="btn btn-primary pull-right margin_left_5">
+		            <div class="btn btn-primary pull-right margin_left_5" onclick="deletePost()">
 		            	<i class="fa fa-trash-o"></i>삭제
 		            </div>
 		            

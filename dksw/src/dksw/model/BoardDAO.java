@@ -23,7 +23,7 @@ public class BoardDAO {
 		try {
 			con = DBUtil.getConnection();
 			
-			pstmt = con.prepareStatement("SELECT * FROM dksw_board WHERE dkswBoardCategory=? ORDER BY dkswBoardNo DESC LIMIT 10");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_board WHERE dkswBoardCategory=? ORDER BY dkswBoardNo DESC LIMIT 20");
 			pstmt.setInt(1,  inputBoardCategory);
 			rset = pstmt.executeQuery();
 			
@@ -100,6 +100,45 @@ public class BoardDAO {
 		}
 	}
 
+	public static boolean writePost(int inputBoardCategory, int inputMemberNo, long inputBoardWriteDate,
+			int inputBoardReadnum, String inputBoardTitle, String inputBoardContent, String inputBoardPicture) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("INSERT INTO dksw_board("
+					+ "dkswBoardCategory, dkswMemberNo, dkswBoardWriteDate, dkswBoardReadnum, dkswBoardTitle, dkswBoardContent, "
+					+ "dkswBoardPicture"
+					+ ") values(?, ?, ?, ?, ?, ?, ?)");
+		
+			pstmt.setInt(1, inputBoardCategory);
+			pstmt.setInt(2, inputMemberNo);
+			pstmt.setLong(3, inputBoardWriteDate);
+			pstmt.setInt(4, inputBoardReadnum);
+			pstmt.setString(5, inputBoardTitle);
+			pstmt.setString(6, inputBoardContent);
+			pstmt.setString(7, inputBoardPicture);
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+	
 	public static boolean modifyPost(int inputBoardNo, int inputBoardCategory, String inputBoardTitle, String inputBoardContent) throws SQLException {
 
 		Connection con = null;
@@ -129,5 +168,38 @@ public class BoardDAO {
 				sqle.printStackTrace();
 			}
 		}
+	}
+
+	public static boolean deletePost(int inputBoardNo) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int deleteQueryCount = 0;
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("DELETE FROM dksw_board WHERE dkswBoardNo=?");
+			pstmt.setInt(1, inputBoardNo);
+			deleteQueryCount = pstmt.executeUpdate();
+
+			if(deleteQueryCount == 1) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+			
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}	
 	}
 }

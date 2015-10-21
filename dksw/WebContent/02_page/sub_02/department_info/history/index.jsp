@@ -37,38 +37,17 @@
 		</div>
 	</section>
 
+	<!-- Content Section -->
 	<section class="section">
 		<div class="container-sm">
-
-			<div class="space-sm"></div>			
 			<table class="table table-striped" id="dkswDepartmentHistory"></table>
 
-			<div class="space"></div>
-			<hr class="hr">
+			<!-- 수정일 -->
+			<p class="font-NanumGothic edit-date col-md-4" id="dkswDepartmentHistoryEditDate"></p>
 
-			<ul class="list-unstyled info-list">
-				<li><strong>Category: </strong>Websites</li>
-				<li><strong>Services in project: </strong>Webdesing, UX, SEO</li>
-				<li><strong>Client: </strong>Google Inc.</li>
-				<li><strong>Date released: </strong>February 2014</li>
-			</ul>
-
-			<hr class="hr">
-
-			<div class="inline-btn">
-				<a class="btn btn-primary btn-xlg"
-					href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v1.php#"><i
-					class="fa fa-paper-plane-o"></i>Live Preview</a>
-				<div class="space-sm visible-xs"></div>
-				<a class="btn btn-primary-trn btn-xlg"
-					href="http://bootstrapart.net/dragonfly/v1.5/portfolio-v1.php"><i
-					class="fa fa-arrow-left"></i>Back To Portfolio</a>
-			</div>
 		</div>
 	</section>
 
-	<!-- 수정일 -->
-	<p class=" font-NanumGothic edit-date col-md-4" id="dkswDepartmentHistoryEditDate"></p>
 
 	<!--Back to top-->
 	<a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v1.php#"

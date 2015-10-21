@@ -1,11 +1,11 @@
 package dksw.model.domain;
 
 public class Board {
-
+	
 	private int dkswBoardNo;
 	private int dkswBoardCategory;
 	private int dkswMemberNo;
-	private int dkswBoardWriteDate;
+	private long dkswBoardWriteDate;
 	private int dkswBoardReadnum;
 	private String dkswBoardTitle;
 	private String dkswBoardContent;
@@ -29,10 +29,10 @@ public class Board {
 	public void setDkswMemberNo(int dkswMemberNo) {
 		this.dkswMemberNo = dkswMemberNo;
 	}
-	public int getDkswBoardWriteDate() {
+	public long getDkswBoardWriteDate() {
 		return dkswBoardWriteDate;
 	}
-	public void setDkswBoardWriteDate(int dkswBoardWriteDate) {
+	public void setDkswBoardWriteDate(long dkswBoardWriteDate) {
 		this.dkswBoardWriteDate = dkswBoardWriteDate;
 	}
 	public int getDkswBoardReadnum() {
@@ -60,8 +60,8 @@ public class Board {
 		this.dkswBoardPicture = dkswBoardPicture;
 	}
 	
-	public Board(int dkswBoardNo, int dkswBoardCategory, int dkswMemberNo, int dkswBoardWriteDate, int dkswBoardReadnum,
-			String dkswBoardTitle, String dkswBoardContent, String dkswBoardPicture) {
+	public Board(int dkswBoardNo, int dkswBoardCategory, int dkswMemberNo, long dkswBoardWriteDate,
+			int dkswBoardReadnum, String dkswBoardTitle, String dkswBoardContent, String dkswBoardPicture) {
 		super();
 		this.dkswBoardNo = dkswBoardNo;
 		this.dkswBoardCategory = dkswBoardCategory;

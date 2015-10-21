@@ -55,15 +55,12 @@ public class DepartmentController extends HttpServlet {
 			JSONArray jArray = new JSONArray();
 			
 			// 데이터를 삽입		
-			for(int i=0; i<thisData.size(); i++)
-			{
+			for(int i=0; i<thisData.size(); i++) {
 				JSONObject tempData = new JSONObject();
 				tempData.put("dkswDepartmentHistoryYear", thisData.get(i).getDkswDepartmentHistoryYear());
 				tempData.put("dkswDepartmentHistoryMonth", thisData.get(i).getDkswDepartmentHistoryMonth());
 				tempData.put("dkswDepartmentHistoryContent", thisData.get(i).getDkswDepartmentHistoryContent().replaceAll("\n", "<br />") );
 				tempData.put("dkswDepartmentHistoryVisible", thisData.get(i).getDkswDepartmentHistoryVisible());
-				tempData.put("dkswDepartmentHistoryEditDate", UnixTimeConvertor.toConvertTimeFromUnixTime(thisData.get(i).getDkswDepartmentHistoryEditDate()));
-				tempData.put("dkswDepartmentHistoryEditPermission", thisData.get(i).getDkswDepartmentHistoryPermission());
 				jArray.add(tempData);
 			}
 			

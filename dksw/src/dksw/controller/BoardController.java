@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,6 +16,7 @@ import org.json.simple.JSONObject;
 import dksw.model.BoardDAO;
 import dksw.model.MemberDAO;
 import dksw.model.domain.Board;
+import dksw.util.EmailAddrCheck;
 
 public class BoardController extends HttpServlet {
 
@@ -38,27 +40,49 @@ public class BoardController extends HttpServlet {
 			getBoardPostData(req, res);
 		} else if(action.equals("modifyPost")) {
 			writePost(req, res);
+		} else if(action.equals("deletePost")) {
+			deletePost(req, res);
 		}
 	}
 	
 	private void writePost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 		boolean checkModifyPost = false;
+		boolean checkWritePost = false;
 		Board modifiedPost = null;
 		String[] tempContent = null;
 		String content = "";
 		
 		try {
 			int inputMode = (req.getParameter("inputMode") != null) ? Integer.parseInt(req.getParameter("inputMode")) : null;	
-			int inputBoardNo = (req.getParameter("inputBoardNo") != null) ? Integer.parseInt(req.getParameter("inputBoardNo")) : null;
 			int inputBoardCategory = (req.getParameter("inputBoardCategory") != null) ? Integer.parseInt(req.getParameter("inputBoardCategory")) : null;
-			int inputMemberNo = (req.getParameter("inputMemberNo") != null) ? Integer.parseInt(req.getParameter("inputMemberNo")) : null;
 			String inputBoardTitle = (req.getParameter("inputBoardTitle") != null) ? (req.getParameter("inputBoardTitle")) : null;
 			String inputBoardContent = (req.getParameter("inputBoardContent") != null) ? (req.getParameter("inputBoardContent")) : null;
 			
 			if(inputMode == 1) { // 새글 작성 모드
-				return;
+				HttpSession sessionMember = req.getSession();
+				
+				if(sessionMember.getAttribute("dkswMemberNo").toString().equals("")) {
+					return;
+				}
+				
+				int inputMemberNo = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+				long inputBoardWriteDate = (System.currentTimeMillis())/1000;
+				int inputBoardReadnum = 0;
+				String inputBoardPicture = "";
+				
+				checkWritePost = BoardDAO.writePost(inputBoardCategory, inputMemberNo, inputBoardWriteDate, inputBoardReadnum, inputBoardTitle, inputBoardContent, inputBoardPicture);
+
+				if(checkWritePost) {
+					res.getWriter().write("WriteOK");
+				} else {
+					res.getWriter().write("Fail");
+				}
+				
 			} else { // 수정 모드
+				int inputMemberNo = (req.getParameter("inputMemberNo") != null) ? Integer.parseInt(req.getParameter("inputMemberNo")) : null;
+				int inputBoardNo = (req.getParameter("inputBoardNo") != null) ? Integer.parseInt(req.getParameter("inputBoardNo")) : null;
+
 				checkModifyPost = BoardDAO.modifyPost(inputBoardNo, inputBoardCategory, inputBoardTitle, inputBoardContent);
 				modifiedPost = BoardDAO.getPost(inputBoardNo);
 				
@@ -147,7 +171,7 @@ public class BoardController extends HttpServlet {
 		}
 	}
 
-	private void getBoardPermissionData(HttpServletRequest req, HttpServletResponse res) {
+	private void getBoardPermissionData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 	}
 
@@ -201,4 +225,34 @@ public class BoardController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}	
+	
+	private void deletePost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		
+		boolean checkDeletePost = false;
+		
+		try {
+			int inputBoardNo = (req.getParameter("inputBoardNo") != null) ? Integer.parseInt(req.getParameter("inputBoardNo")) : null;
+
+			HttpSession sessionMember = req.getSession();
+			
+			if(sessionMember.getAttribute("dkswMemberNo").toString().equals("1") || sessionMember.getAttribute("dkswMemberNo").toString().equals(BoardDAO.getPost(inputBoardNo).getDkswMemberNo())) {
+				
+				checkDeletePost = BoardDAO.deletePost(inputBoardNo);
+				
+				if(checkDeletePost) {
+					res.getWriter().write("DeleteOK");
+				} else {
+					res.getWriter().write("Fail");
+				}
+				
+			} else { // 작성자와 일치하지 않는 시도
+				return;
+			}
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
 }
