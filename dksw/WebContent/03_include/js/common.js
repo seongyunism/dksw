@@ -16,3 +16,28 @@ function navLab(num) {
 	
 	location.href = src;
 }
+
+//페이지 권한 정보 가져오기
+function initializePermission(id) {
+
+	var action = "/dksw/admin?action=getPermission";
+	var inputAdminPermissionId = "inputAdminPermissionId=" + id;
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : inputAdminPermissionId,
+		dataType : "text",
+		success: function(response) {
+			if(response == "ApproveOK") {
+				$("#writeBtn, #writeForm").show();				
+			} else {
+				$("#writeBtn, #writeForm").hide();								
+			}
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}

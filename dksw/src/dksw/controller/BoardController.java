@@ -13,10 +13,14 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dksw.model.AdminDAO;
 import dksw.model.BoardDAO;
 import dksw.model.MemberDAO;
+import dksw.model.domain.AdminPermission;
 import dksw.model.domain.Board;
 import dksw.util.EmailAddrCheck;
+import dksw.util.PermissionCheck;
+import dksw.util.UnixTimeConvertor;
 
 public class BoardController extends HttpServlet {
 
@@ -34,8 +38,6 @@ public class BoardController extends HttpServlet {
 		
 		if(action.equals("getBoardListData")) {
 			getBoardListData(req, res);
-		} else if(action.equals("getBoardPermission")) {
-			getBoardPermissionData(req, res);
 		} else if(action.equals("getBoardPostData")) {
 			getBoardPostData(req, res);
 		} else if(action.equals("modifyPost")) {
@@ -64,20 +66,41 @@ public class BoardController extends HttpServlet {
 				
 				if(sessionMember.getAttribute("dkswMemberNo").toString().equals("")) {
 					return;
+				} else { // 회원인 경우 글쓰기 권한 체크
+					AdminPermission permission = null;
+					boolean checkPermission = false;
+					
+					try {
+						String inputAdminPermissionId = (req.getParameter("inputAdminPermissionId") != null) ? (req.getParameter("inputAdminPermissionId")) : null;
+						String memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? (sessionMember.getAttribute("dkswMemberCategory").toString()) : null;
+						
+						permission = AdminDAO.getPermission(inputAdminPermissionId);
+						
+						checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
+						
+						if(checkPermission) {
+							int inputMemberNo = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+							long inputBoardWriteDate = (System.currentTimeMillis())/1000;
+							int inputBoardReadnum = 0;
+							String inputBoardPicture = "";
+							
+							checkWritePost = BoardDAO.writePost(inputBoardCategory, inputMemberNo, inputBoardWriteDate, inputBoardReadnum, inputBoardTitle, inputBoardContent, inputBoardPicture);
+							
+							if(checkWritePost) {
+								res.getWriter().write("WriteOK");
+							} else {
+								res.getWriter().write("Fail");
+							}
+							
+						} else {
+							res.getWriter().write("Fail");
+							return;
+						}
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
 				}
 				
-				int inputMemberNo = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
-				long inputBoardWriteDate = (System.currentTimeMillis())/1000;
-				int inputBoardReadnum = 0;
-				String inputBoardPicture = "";
-				
-				checkWritePost = BoardDAO.writePost(inputBoardCategory, inputMemberNo, inputBoardWriteDate, inputBoardReadnum, inputBoardTitle, inputBoardContent, inputBoardPicture);
-
-				if(checkWritePost) {
-					res.getWriter().write("WriteOK");
-				} else {
-					res.getWriter().write("Fail");
-				}
 				
 			} else { // 수정 모드
 				int inputMemberNo = (req.getParameter("inputMemberNo") != null) ? Integer.parseInt(req.getParameter("inputMemberNo")) : null;
@@ -120,6 +143,7 @@ public class BoardController extends HttpServlet {
 		}
 	}
 
+	// 포스트 가져오기
 	private void getBoardPostData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 		Board post = null;
@@ -138,7 +162,7 @@ public class BoardController extends HttpServlet {
 			jObject.put("dkswBoardNo", post.getDkswBoardNo());
 			jObject.put("dkswBoardCategory", post.getDkswBoardCategory());
 			jObject.put("dkswMemberName", MemberDAO.getMember(post.getDkswMemberNo()).getDkswMemberName());
-			jObject.put("dkswBoardWriteDate", post.getDkswBoardWriteDate());
+			jObject.put("dkswBoardWriteDate", UnixTimeConvertor.toConvertTimeFromUnixTime(post.getDkswBoardWriteDate()));
 			jObject.put("dkswBoardReadnum", post.getDkswBoardReadnum());
 			jObject.put("dkswBoardTitle", post.getDkswBoardTitle());
 					
@@ -169,10 +193,6 @@ public class BoardController extends HttpServlet {
 		} catch (IOException ie) {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
-	}
-
-	private void getBoardPermissionData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		
 	}
 
 	// 학과 공지, 학생회 공지, 채용정보, 자유게시판에서 리스트 가져오기
@@ -226,6 +246,7 @@ public class BoardController extends HttpServlet {
 		}
 	}	
 	
+	// 포스트 삭제하기
 	private void deletePost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 		boolean checkDeletePost = false;

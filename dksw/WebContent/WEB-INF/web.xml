@@ -45,6 +45,18 @@
     <url-pattern>/department</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>AdminController</servlet-name>
+    <servlet-class>dksw.controller.AdminController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>AdminController</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+
+  
+  
   <listener>
     <listener-class>dksw.util.UrlPath</listener-class>
   </listener>  

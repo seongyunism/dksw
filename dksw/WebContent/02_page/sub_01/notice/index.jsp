@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String category = request.getParameter("category").toString();%>
+<%@ page import = "javax.servlet.http.HttpSession" %>
+<% String category = request.getParameter("category").toString(); %>
 
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
@@ -15,6 +16,8 @@
 	var category = "<%=category%>";
 	
 	$(document).ready(function() {
+		initializePermission("board_" + category);
+		
 		initializeBoard(1);
 		initializeBoard(2);
 		initializeBoard(3);		
@@ -51,10 +54,10 @@
 
 		<div class="list">
 			<!-- Button -->
-			<c:if test="${sessionScope.dkswMemberCategory == '1'}">
-				<div class="btn btn-primary-trn pull-right" onclick="writeMode()">
-			    	<i class="fa fa-pencil"></i>새글작성
-			    </div>
+			<c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '2' || sessionScope.dkswMemberCategory == '5'}">  
+				<div id="writeBtn" class="btn btn-primary-trn pull-right" onclick="writeMode()">
+					<i class="fa fa-pencil"></i>새글작성
+				    </div>
 				<div class="space-sm"></div>
 			</c:if>
 	
@@ -91,7 +94,7 @@
 	        </div>
 		</div>
 		
-		<c:if test="${sessionScope.dkswMemberCategory == '1'}">  
+		<c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '2' || sessionScope.dkswMemberCategory == '5'}">
 			<div class="write-form">
 				<form method="post">
 					<input type="hidden" name="inputMode" value="1" />
@@ -110,7 +113,7 @@
 					<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
 					<div class="space"></div>
 			                        
-					<div class="btn btn-primary pull-right margin_left_5" onclick="writePost()">
+					<div class="btn btn-primary pull-right margin_left_5" onclick="writePost('<%=category%>')">
 						<i class="fa fa-trash-o"></i>완료
 					</div>
 			            
@@ -121,9 +124,7 @@
 			</div>
 		</c:if>
 
-
     </section>
-
 
     <!--Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>

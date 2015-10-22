@@ -14,28 +14,54 @@ function initializeBoard(board) {
 		data : inputBoardCategory,
 		dataType : "json",
 		success: function(response) {
-			var posts = "";
-			var post = "";
-			
-			for(i=0; i<response.dkswBoard.length; i++) {
-				post = "<div class='row blog-post wow fadeInUp' name='"
-					+ response.dkswBoard[i].dkswBoardNo
-					+ "'><div class='col-sm-3'><img class='img-responsive' src='"
-					+ response.dkswBoard[i].dkswBoardPicture
-					+ "'></div><div class='col-sm-9'><a href='./view.jsp?category=" + category + "&postNo="
-					+ response.dkswBoard[i].dkswBoardNo
-					+ "'><h3>"
-					+ response.dkswBoard[i].dkswBoardTitle
-					+ "</h3></a><p>"
-					+ response.dkswBoard[i].dkswBoardContent
-					+ "</p><a href='./view.jsp?category=" + category + "&postNo="
-					+ response.dkswBoard[i].dkswBoardNo
-					+"' class='btn btn-default-trn-v2'><i class='fa fa-angle-right'></i>더 보기</a></div></div>";
-
-				posts += post;
+			if(board == '4') {
+				var posts = "";
+				var post = "";
+				
+				for(i=0; i<response.dkswBoard.length; i++) {
+					post = "<div class='row blog-post' name='"
+						+ response.dkswBoard[i].dkswBoardNo
+						+ "'><div class='col-sm-4'><div class='hover-content'><img class='img-responsive' alt='Blog Image' src='"
+						+ response.dkswBoard[i].dkswBoardPicture
+						+ "'></div></div><div class='col-sm-8'><a href='./view.jsp?category=" + category + "&postNo="
+						+ response.dkswBoard[i].dkswBoardNo
+						+ "'><h2>"
+						+ response.dkswBoard[i].dkswBoardTitle
+						+ "</h2></a><p>"
+						+ response.dkswBoard[i].dkswBoardContent
+						+ "</p> <a href='./view.jsp?category=" + category + "&postNo="
+						+ response.dkswBoard[i].dkswBoardNo
+						+ "' class='btn btn-default-trn-v2'><i class='fa fa-angle-right'></i>더 보기</a></div></div>";
+					
+					posts += post;
+				}
+				
+				$("#dkswBoard_" + board).html(posts);
+  
+			} else {
+				var posts = "";
+				var post = "";
+				
+				for(i=0; i<response.dkswBoard.length; i++) {
+					post = "<div class='row blog-post wow fadeInUp' name='"
+						+ response.dkswBoard[i].dkswBoardNo
+						+ "'><div class='col-sm-3'><img class='img-responsive' src='"
+						+ response.dkswBoard[i].dkswBoardPicture
+						+ "'></div><div class='col-sm-9'><a href='./view.jsp?category=" + category + "&postNo="
+						+ response.dkswBoard[i].dkswBoardNo
+						+ "'><h3>"
+						+ response.dkswBoard[i].dkswBoardTitle
+						+ "</h3></a><p>"
+						+ response.dkswBoard[i].dkswBoardContent
+						+ "</p><a href='./view.jsp?category=" + category + "&postNo="
+						+ response.dkswBoard[i].dkswBoardNo
+						+"' class='btn btn-default-trn-v2'><i class='fa fa-angle-right'></i>더 보기</a></div></div>";
+					
+					posts += post;
+				}
+				
+				$("#dkswBoard_" + board).html(posts);
 			}
-			
-			$("#dkswBoard_" + board).html(posts);
 			
 		}, error: function(xhr,status,error) {
 			alert(error);
@@ -75,10 +101,11 @@ function initializeBoardView(no) {
 }
 
 // 포스트 작성 및 수정하기
-function writePost() {
+function writePost(category) {
 
 	var action = "/dksw/board?action=modifyPost";
 	var form_data = {
+		inputAdminPermissionId : "board_" + category,
 		inputMode : $("input[name='inputMode']").val(),
 		inputBoardNo : $(".view").attr("name"),
 		inputBoardCategory : $("input[name='inputBoardCategory']:checked").val(),
@@ -213,7 +240,7 @@ function deletePost() {
 				if(response == "DeleteOK") {
 					location.href = "/dksw/02_page/sub_01/notice/index.jsp?category=" + category;	
 				} else {
-					alert("잘못된 접근입니다.");
+					alert("본인이 작성한 글이 아니거나 잘못된 접근입니다.");
 				}
 			}, error: function(xhr,status,error) {
 				alert(error);

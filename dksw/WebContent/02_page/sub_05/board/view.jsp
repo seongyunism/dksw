@@ -1,4 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String category = request.getParameter("category").toString();%>
+<% String postNo = request.getParameter("postNo").toString(); %>
 
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
@@ -7,148 +10,254 @@
 	<title>단국대학교 소프트웨어학과 | 자유게시판</title>
 
 	<jsp:include page="../../commonHeader.jsp" flush="false" />
+		
+	<!-- Custom Scripts -->
+	<script>
+	var category = "<%=category%>";
+	
+	$(document).ready(function() {
+		initializeBoardView(<%=postNo%>);
+	});
+
+	$(window).load(function() {
+
+	});
+	
+	$(function() {
+
+	});
+	</script>
 </head>
 
 <body>
-    <!-- Navigation -->
+	<!-- Navigation -->
 	<jsp:include page="../../commonNav.jsp" flush="false"/>
 
 	<!-- Header Section  -->
-    <section class="background-bar-05-01 bg-center bg-cover">
-        <div class="bg-filter">
+    <section class="background-bar-01-01 bg-center bg-cover">
+		<div class="bg-filter">
             <div class="container section-lg">
                 <h1 class="top-title">자유게시판</h1>
             </div>
         </div>
-    </section>
+	</section>
 
+	<!-- Content Section -->
+    <section class="section">
+        <div class="container">
 
+			<div class="article-info">
+				<ul class="tags list-unstyled pull-left">
+					<li><i class="fa fa-user fa-fw"></i><a href="#" title="View Profile" id="dkswMemberName"></a></li>
+					<li><i class="fa fa-user fa-fw"></i><a href="#" title="View Profile" id="dkswBoardWriteDate"></a></li>
 
-   <DIV class="container">
-<DIV class="post-header">
-<H2 class="visible-xs">Title of article</H2>
-<P class="text-block visible-xs">Lorem ipsum dolor sit amet, consectetuer 
-adipiscing elit. Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. 
-Mauris metus. Maecenas aliquet accumsan leo. Fusce tellus. Duis pulvinar. Ut 
-enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit 
-laboriosam, nisi ut aliquid ex ea commodi consequatur? Duis pulvinar.</P>
-<DIV class="space-sm visible-xs"></DIV><IMG class="img-responsive" alt="Photo of post" 
-src="Dragonfly%20-%20Blog%20Item_files/932.jpg">
-<DIV class="post-heading hidden-xs">
-<H2>Title of article</H2>
-<P class="lead">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce 
-tellus odio, dapibus id fermentum quis, suscipit id erat. Mauris metus. Maecenas 
-aliquet accumsan leo. Fusce tellus. Duis pulvinar. Ut enim ad minima veniam, 
-quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid 
-ex ea commodi consequatur? Duis pulvinar.</P></DIV></DIV>
-<DIV class="article-info">
-<UL class="tags list-unstyled pull-left">
-  <LI><I class="fa fa-user fa-fw"></I>                         <A title="View Profile" 
-  href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#">Nicole Perry</A>  
-                     </LI>
-  <LI><I class="fa fa-clock-o fa-fw"></I>18 April 2014                     </LI>
-  <LI><I class="fa fa-comments fa-fw"></I>                         <A title="Read Comments" 
-  href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#">27 Comments</A>   
-                    </LI>
-  <LI><I class="fa fa-tags fa-fw"></I>                         <A href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#">Nature,</A> 
-                          <A href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#">Photo,</A> 
-                          <A href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#">Sea</A> 
-                      </LI></UL>
-<UL class="square-icons share-icons-list pull-right">
-  <LI><A title="Share" href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#"><I 
-  class="fa fa-google-plus"></I>                         </A>                    
-   </LI>
-  <LI><A title="Share" href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#"><I 
-  class="fa fa-twitter"></I>                         </A>                     
-  </LI>
-  <LI><A title="Share" href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#"><I 
-  class="fa fa-tumblr"></I>                         </A>                     
-  </LI>
-  <LI><A title="Share" href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#"><I 
-  class="fa fa-facebook"></I>                         </A>                     
-  </LI>
-  <LI><A title="Share" href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#"><I 
-  class="fa fa-pinterest"></I>                         </A>                     
-  </LI>
-  <LI><A title="Share" href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#"><I 
-  class="fa fa-youtube-play"></I>                         </A>                   
-    </LI>
-  <LI><A title="Share" href="http://bootstrapart.net/dragonfly/v1.5/blog-item.php#"><I 
-  class="fa fa-dribbble"></I>                         </A>                     
-  </LI></UL></DIV>
-<DIV>
-<H3 class="md-title">Subtitle</H3>
-<P class="text-block-v1">Lorem ipsum dolor sit amet, consectetuer adipiscing 
-elit. Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. Mauris 
-metus. Maecenas aliquet accumsan leo. Fusce tellus. Duis pulvinar. Ut enim ad 
-minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, 
-nisi ut aliquid ex ea commodi consequatur? Duis pulvinar. Nunc dapibus tortor 
-vel mi dapibus sollicitudin. Duis aute irure dolor in reprehenderit in voluptate 
-velit esse cillum dolore eu fugiat nulla pariatur. Nunc dapibus tortor vel mi 
-dapibus sollicitudin. Nullam lectus justo, vulputate eget mollis sed, tempor sed 
-magna.</P>
-<P class="text-block-v1">Fusce suscipit libero eget elit. Ut tempus purus at 
-lorem. Aenean id metus id velit ullamcorper pulvinar. Donec ipsum massa, 
-ullamcorper in, auctor et, scelerisque sed, est. Fusce dui leo, imperdiet in, 
-aliquam sit amet, feugiat eu, orci. In convallis. Nulla accumsan, elit sit amet 
-varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. 
-Phasellus faucibus molestie nisl. Etiam posuere lacus quis dolor. Duis bibendum, 
-lectus ut viverra rhoncus, dolor nunc faucibus libero, eget facilisis enim ipsum 
-id lacus. Maecenas sollicitudin. Etiam dui sem, fermentum vitae, sagittis id, 
-malesuada in, quam. Nullam sit amet magna in magna gravida vehicula. Lorem ipsum 
-dolor sit amet, consectetuer adipiscing elit. Maecenas fermentum, sem in 
-pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a 
-lectus. Pellentesque sapien. Maecenas ipsum velit, consectetuer eu lobortis ut, 
-dictum at dui.</P>
-<P class="text-block-v1">Aenean fermentum risus id tortor. Etiam sapien elit, 
-consequat eget, tristique non, venenatis quis, ante. Integer pellentesque quam 
-vel velit. Fusce consectetuer risus a nunc. Integer vulputate sem a nibh rutrum 
-consequat. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis 
-quam, tempor suscipit diam nulla vel leo. Mauris dolor felis, sagittis at, 
-luctus sed, aliquam non, tellus. Cum sociis natoque penatibus et magnis dis 
-parturient montes, nascetur ridiculus mus. Mauris tincidunt sem sed arcu. 
-Suspendisse nisl. Nunc tincidunt ante vitae massa. Vestibulum erat nulla, 
-ullamcorper nec, rutrum non, nonummy ac, erat. Maecenas aliquet accumsan leo. 
-Duis pulvinar. Etiam neque. Vivamus luctus egestas leo. Integer rutrum, orci 
-vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede 
-sem sit amet enim. Praesent dapibus.</P>
-<DIV class="space"></DIV>
+                    <!--<li><i class="fa fa-comments fa-fw"></i><a href="#" title="Read Comments">27 Comments</a></li> -->
+                </ul>
                 
-              
-				
-
-					<!-- Tag Box -->
-					<!--<div class="tags simple-box">
-					    <h3>Tags</h3>
-					    <ul class="list-unstyled">
-					        <li><i class="fa fa-tags"></i><a href="#">Music</a></li>
-					        <li><i class="fa fa-tags"></i><a href="#">Movies</a> </li>
-					        <li><i class="fa fa-tags"></i><a href="#">Radio</a></li>
-					        <li><i class="fa fa-tags"></i><a href="#">Internet</a></li>
-					    </ul>
-					</div>-->
-
-					<!-- Subscribe Box -->
-					<!--<div class="simple-box">
-					    <h3>Subscribe Us</h3>
-					    <div class="input-group icon">
-					        <div class="control">
-					            <input type="text" class="form-control" placeholder="Email Address">
-					            <i class="fa fa-bullhorn"></i>
-					        </div>
-					        <span class="input-group-btn">
-					            <button class="btn btn-primary only-icon " type="button">
-					                <i class="fa fa-check"></i>
-					            </button>
-					        </span>
-					    </div>
-					</div>-->
-                </div>
+                <ul class="square-icons share-icons-list pull-right">
+                    <li><a href="#" title="Share"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#" title="Share"><i class="fa fa-facebook"></i></a></li>
+                </ul>
             </div>
-
+            
+			<div class="view">
+	
+	            <div class="post-header">
+	                <h2 class="font-NanumGothic" id="dkswBoardTitle"></h2>
+	            </div>
+	
+	            <div class="text-block font-NanumGothic" id="dkswBoardSubTitle"></div>
+	            <div class="space"></div>
+	            
+	            <div class="text-block font-NanumGothic" id="dkswBoardContent" style="line-height:2em;"></div>
+	            <div class="space"></div>
+	            
+	            <c:if test="${sessionScope.dkswMemberCategory == '1'}">         
+		            <div class="btn btn-primary pull-right margin_left_5" onclick="deletePost()">
+		            	<i class="fa fa-trash-o"></i>삭제
+		            </div>
+		            
+		            <div class="btn btn-primary-trn pull-right" onclick="modifyMode()">
+		                <i class="fa fa-wrench"></i>수정
+		            </div>
+				</c:if>
+	
+	            <div class="space"></div>
+	
+				<c:if test="${not empty sessionScope.dkswMemberNo}">
+		            <div class="comment-box-1 icon">
+		                <h4>덧글 남기기</h4>
+		                <div class="row">
+							<div class="col-md-12">
+								<form>
+		                            <div class="control">
+		                                <textarea class="form-control" style="line-height:1.5em;" rows="5"></textarea>
+		                                <i class="fa fa-comment"></i>
+		                            </div>
+								
+									<button type="submit" class="hidden-xs hidden-sm btn btn-primary btn-block">
+										<i class="fa fa-pencil"></i>서버로 전송
+									</button>
+		
+		                        </form>
+		                    </div>
+		                    
+		                </div>
+		            </div>
+	            </c:if>
+	            
+		       	<!--<div class="comment-box-3">
+	                <div class="media">
+	                    <a class="pull-left" href="#">
+	                        <img class="media-object" alt="64x64" src="./Dragonfly - Blog Item_files/face-23.jpg">
+	                    </a>
+	                    <div class="media-body">
+	                        <div class="media-header">
+	                            <h4 class="media-heading">
+									<a href="#">Caroline Harrison</a>
+								</h4>
+	                            <small>
+									<em class="media-body-time six" title="6:46 p.m.">5 minutes</em>
+								</small>
+	
+	                        </div>
+	                        <div class="media-body-text">
+	                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+	                        </div>
+	                        <div class="media-footer">
+	                            <em>12</em>
+	                            <a href="#">
+	                                <i title="Like" class="fa  fa-thumbs-o-up"></i>
+	                            </a>
+	                            <a href="#" class="pull-right comment-box-3-reply" title="Reply">
+	                                <i class="fa fa-reply"></i>Reply</a>
+	                        </div>
+	                    </div>
+	
+	                </div>
+	                <hr>
+	                <div class="media">
+	                    <a class="pull-left" href="#">
+	                        <img class="media-object" alt="64x64" src="./Dragonfly - Blog Item_files/face-17.jpg">
+	                    </a>
+	                    <div class="media-body">
+	                        <div class="media-header">
+	                            <h4 class="media-heading">
+									<a href="#">Adele Taylor</a>
+								</h4>
+	                            <small>
+									<em class="media-body-time six" title="May 2, 2013">May 2, 2013</em>
+								</small>
+	
+	                        </div>
+	                        <div class="media-body-text">
+	                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+	                        </div>
+	                        <div class="media-footer">
+	                            <em>3</em>
+	                            <a href="#">
+	                                <i title="Like" class="fa  fa-thumbs-o-up"></i>
+	                            </a>
+	                            <a href="#" class="pull-right comment-box-3-reply" title="Reply">
+	                                <i class="fa fa-reply"></i>Reply</a>
+	                        </div>
+	                    </div>
+	
+	                </div>
+	                <hr>
+	                <div class="media">
+	                    <a class="pull-left" href="#">
+	                        <img class="media-object" alt="64x64" src="./Dragonfly - Blog Item_files/face-12.jpg">
+	                    </a>
+	                    <div class="media-body">
+	                        <div class="media-header">
+	                            <h4 class="media-heading ">
+									<a href="#">Ben Berry</a>
+								</h4>
+	                            <small>
+									<em class="media-body-time six" title="May 2, 2013">May 2, 2013</em>
+								</small>
+	
+	                        </div>
+	                        <div class="media-body-text">
+	                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+	                        </div>
+	                        <div class="media-footer">
+	                            <em>9</em>
+	                            <a href="#">
+	                                <i title="Like" class="fa  fa-thumbs-o-up"></i>
+	                            </a>
+	                            <a href="#" class="pull-right comment-box-3-reply" title="Reply">
+	                                <i class="fa fa-reply"></i>Reply</a>
+	                        </div>
+	
+	                        <div class="media">
+	                            <a class="pull-left" href="#">
+	                                <img class="media-object" alt="64x64" src="./Dragonfly - Blog Item_files/face-24.jpg">
+	                            </a>
+	                            <div class="media-body">
+	                                <div class="media-header">
+	                                    <h4 class="media-heading ">
+											<a href="#">Jack Brown</a>
+										</h4>
+	                                    <small>
+											<em class="media-body-time six" title="May 2, 2013">May 2, 2013</em>
+										</small>
+	
+	                                </div>
+	                                <div class="media-body-text">
+	                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+	                                </div>
+	                                <div class="media-footer">
+	                                    <em>2</em>
+	                                    <a href="#">
+	                                        <i title="Like" class="fa  fa-thumbs-o-up"></i>
+	                                    </a>
+	                                    <a href="#" class="pull-right comment-box-3-reply" title="Reply">
+	                                        <i class="fa fa-reply"></i>Reply</a>
+	                                </div>
+	                                
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>-->
+	            
+			</div>
+			
+			<c:if test="${not empty sessionScope.dkswMemberNo}"> 
+				<div class="write-form">
+					<form method="post">
+						<input type="hidden" name="inputMode" value="1" />
+						<input type="hidden" name="inputMemberNo" value="" />
+					
+						<div class="col-md-12 btn-radio">
+							<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-01" value="1" checked /></div>
+							<div class="label-radio"><label for="radio-01">학과 공지</label></div>
+							<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-02" value="2" /></div>
+					        <div class="label-radio"><label for="radio-02">학생회 공지</label></div>
+					        <div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-03" value="3" /></div>
+					        <div class="label-radio"><label for="radio-03">채용 정보</label></div>
+						</div>
+					
+						<input type="text" name="inputBoardTitle" class="form-control font-NanumGothic margin_bottom_5" placeholder="제목" style="font-weight:bold;" />
+						<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
+			            <div class="space"></div>
+			                        
+			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost()">
+			            	<i class="fa fa-trash-o"></i>완료
+			            </div>
+			            
+			            <div class="btn btn-primary-trn pull-right" onclick="modifyModeCancel()">
+			                <i class="fa fa-wrench"></i>취소
+			            </div>
+					</form>
+				</div>
+			</c:if>
+ 
         </div>
-    </section>
 
+    </section>
 
     <!--Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>

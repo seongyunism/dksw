@@ -70,7 +70,7 @@
 	            <div class="text-block font-NanumGothic" id="dkswBoardContent" style="line-height:2em;"></div>
 	            <div class="space"></div>
 	            
-	            <c:if test="${sessionScope.dkswMemberCategory == '1'}">         
+	            <c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '2' || sessionScope.dkswMemberCategory == '5'}">        
 		            <div class="btn btn-primary pull-right margin_left_5" onclick="deletePost()">
 		            	<i class="fa fa-trash-o"></i>삭제
 		            </div>
@@ -223,8 +223,8 @@
 	            
 			</div>
 			
-			<c:if test="${sessionScope.dkswMemberCategory == '1'}">  
-				<div class="write-form">
+			<c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '2' || sessionScope.dkswMemberCategory == '5'}"> 
+				<div id="#writeForm" class="write-form">
 					<form method="post">
 						<input type="hidden" name="inputMode" value="1" />
 						<input type="hidden" name="inputMemberNo" value="" />
@@ -242,7 +242,7 @@
 						<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
 			            <div class="space"></div>
 			                        
-			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost()">
+			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost('<%=category%>'">
 			            	<i class="fa fa-trash-o"></i>완료
 			            </div>
 			            
