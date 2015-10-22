@@ -50,16 +50,44 @@
     <section class="section">
         <div class="container">
             <div class="row">
-                <!-- Button -->
-				<c:if test="${not empty sessionScope.dkswMemberNo}">
-					<div id="writeBtn" class="btn btn-primary-trn pull-right" onclick="writeMode()">
-						<i class="fa fa-pencil"></i>새글작성
-					    </div>
-					<div class="space-sm"></div>
-				</c:if>
-			
+            			
                 <!-- Left Contents -->
-                <div class="col-md-8 col-lg-9" id="dkswBoard_4"></div>
+                <div class="col-md-8 col-lg-9">
+					<div class="list">
+		                <!-- Button -->
+						<c:if test="${not empty sessionScope.dkswMemberNo}">
+							<div id="writeBtn" class="btn btn-primary-trn pull-right" onclick="writeMode()">
+								<i class="fa fa-pencil"></i>새글작성
+							    </div>
+							<div class="space-sm"></div>
+						</c:if>
+					
+						<div id="dkswBoard_4"></div>
+					</div>
+                
+					<c:if test="${not empty sessionScope.dkswMemberNo}">
+						<div class="write-form">
+							<form method="post">
+								<input type="hidden" name="inputMode" value="1" />
+								<input type="hidden" name="inputMemberNo" value="" />
+								<input type="hidden" name="inputBoardCategory" value="4" />
+								
+								<input type="text" name="inputBoardTitle" class="form-control font-NanumGothic margin_bottom_5" placeholder="제목" style="font-weight:bold;" />
+								<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
+								<div class="space"></div>
+						                        
+								<div class="btn btn-primary pull-right margin_left_5" onclick="writePost('board_free')">
+									<i class="fa fa-trash-o"></i>완료
+								</div>
+						            
+								<div class="btn btn-primary-trn pull-right" onclick="writeModeCancel()">
+									<i class="fa fa-wrench"></i>취소
+								</div>
+							</form>
+						</div>
+					</c:if>
+                </div>
+                
                 
                 <!-- Right Contents -->
                 <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
@@ -117,8 +145,8 @@
             </div>
 
         </div>
+     
     </section>
-
 
     <!--Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
