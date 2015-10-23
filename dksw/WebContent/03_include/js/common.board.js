@@ -87,10 +87,10 @@ function initializeBoardView(no) {
 		dataType : "json",
 		success: function(response) {
 			$(".view").attr("name", response.dkswBoardNo);
-			$("input[name='inputMemberNo']").val(response.dkswBoardNo);			
 			$("#dkswBoardTitle").text(response.dkswBoardTitle);
 			$("#dkswBoardSubTitle").text(response.dkswBoardSubTitle);			
 			$("#dkswBoardContent").html(response.dkswBoardContent);
+			$("#dkswBoardWriteDate").html(response.dkswBoardWriteDate);
 			$("#dkswMemberName").text(response.dkswMemberName);		
 		}, error: function(xhr,status,error) {
 			alert(error);
@@ -102,13 +102,20 @@ function initializeBoardView(no) {
 
 // 포스트 작성 및 수정하기
 function writePost(category) {
-
+	var boardCategory;
+	
+	if(category == "free") {
+		boardCategory = 4;
+	} else {
+		boardCategory = $("input[name='inputBoardCategory']:checked").val();
+	}
+	
 	var action = "/dksw/board?action=modifyPost";
 	var form_data = {
 		inputAdminPermissionId : "board_" + category,
 		inputMode : $("input[name='inputMode']").val(),
 		inputBoardNo : $(".view").attr("name"),
-		inputBoardCategory : $("input[name='inputBoardCategory']:checked").val(),
+		inputBoardCategory : boardCategory,
 		inputMemberNo : $("input[name='inputMemberNo']").val(),
 		inputBoardTitle :  $("input[name='inputBoardTitle']").val(),
 		inputBoardContent :  $("textarea[name='inputBoardContent']").val()
@@ -123,7 +130,7 @@ function writePost(category) {
 			dataType : "text",
 			success: function(response) {
 				if(response == "WriteOK") {
-					location.href = "/dksw/02_page/sub_01/notice/index.jsp?category=" + category;	
+					location.reload(true);
 				} else {
 					alert("잘못된 접근입니다.")
 				}
@@ -141,15 +148,17 @@ function writePost(category) {
 			data : form_data,
 			dataType : "json",
 			success: function(response) {
-			
-				$(".view").attr("name", response.dkswBoardNo);
-				$("input[name='inputMemberNo']").val(response.dkswBoardNo);			
-				$("#dkswBoardTitle").text(response.dkswBoardTitle);
-				$("#dkswBoardSubTitle").text(response.dkswBoardSubTitle);			
-				$("#dkswBoardContent").html(response.dkswBoardContent);
-				$("#dkswMemberName").text(response.dkswMemberName);		
+				if(response.check =="ModifyOK") {
+					$(".view").attr("name", response.dkswBoardNo);
+					$("#dkswBoardTitle").text(response.dkswBoardTitle);
+					$("#dkswBoardSubTitle").text(response.dkswBoardSubTitle);			
+					$("#dkswBoardContent").html(response.dkswBoardContent);
+					$("#dkswMemberName").text(response.dkswMemberName);		
+					modifyModeCancel();
+				} else {
+					alert("본인이 작성한 글이 아니거나 잘못된 접근입니다.");
+				}
 				
-				modifyModeCancel();
 		
 			}, error: function(xhr,status,error) {
 				alert(error);
@@ -238,7 +247,7 @@ function deletePost() {
 			dataType : "text",
 			success: function(response) {
 				if(response == "DeleteOK") {
-					location.href = "/dksw/02_page/sub_01/notice/index.jsp?category=" + category;	
+					location.href = "index.jsp?category=" + category;	
 				} else {
 					alert("본인이 작성한 글이 아니거나 잘못된 접근입니다.");
 				}

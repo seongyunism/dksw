@@ -34,7 +34,7 @@
 	<jsp:include page="../../commonNav.jsp" flush="false"/>
 
 	<!-- Header Section  -->
-    <section class="background-bar-01-01 bg-center bg-cover">
+    <section class="background-bar-05-01 bg-center bg-cover">
 		<div class="bg-filter">
             <div class="container section-lg">
                 <h1 class="top-title">자유게시판</h1>
@@ -49,7 +49,7 @@
 			<div class="article-info">
 				<ul class="tags list-unstyled pull-left">
 					<li><i class="fa fa-user fa-fw"></i><a href="#" title="View Profile" id="dkswMemberName"></a></li>
-					<li><i class="fa fa-user fa-fw"></i><a href="#" title="View Profile" id="dkswBoardWriteDate"></a></li>
+					<li><i class="fa fa-user fa-clock-o"></i><a href="#" title="View Profile" id="dkswBoardWriteDate"></a></li>
 
                     <!--<li><i class="fa fa-comments fa-fw"></i><a href="#" title="Read Comments">27 Comments</a></li> -->
                 </ul>
@@ -72,7 +72,7 @@
 	            <div class="text-block font-NanumGothic" id="dkswBoardContent" style="line-height:2em;"></div>
 	            <div class="space"></div>
 	            
-	            <c:if test="${sessionScope.dkswMemberCategory == '1'}">         
+	            <c:if test="${not empty sessionScope.dkswMemberNo}">         
 		            <div class="btn btn-primary pull-right margin_left_5" onclick="deletePost()">
 		            	<i class="fa fa-trash-o"></i>삭제
 		            </div>
@@ -229,22 +229,14 @@
 				<div class="write-form">
 					<form method="post">
 						<input type="hidden" name="inputMode" value="1" />
-						<input type="hidden" name="inputMemberNo" value="" />
-					
-						<div class="col-md-12 btn-radio">
-							<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-01" value="1" checked /></div>
-							<div class="label-radio"><label for="radio-01">학과 공지</label></div>
-							<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-02" value="2" /></div>
-					        <div class="label-radio"><label for="radio-02">학생회 공지</label></div>
-					        <div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-03" value="3" /></div>
-					        <div class="label-radio"><label for="radio-03">채용 정보</label></div>
-						</div>
+						<input type="hidden" name="inputMemberNo" value="${sessionScope.dkswMemberNo}" />
+						<input type="hidden" name="inputBoardCategory" value="4" />
 					
 						<input type="text" name="inputBoardTitle" class="form-control font-NanumGothic margin_bottom_5" placeholder="제목" style="font-weight:bold;" />
 						<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
 			            <div class="space"></div>
 			                        
-			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost()">
+			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost('free')">
 			            	<i class="fa fa-trash-o"></i>완료
 			            </div>
 			            

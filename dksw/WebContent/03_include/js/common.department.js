@@ -91,9 +91,9 @@ function initializeDepartmentProfessor() {
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorLabName
 					+ "</li><li><i class='fa fa-caret-right'></i>사무실 : "
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorLabLocation
-					+ "</li><li><i class='fa fa-caret-right'></i>이메일 : "
+					+ "</li><li><i class='fa fa-caret-right'></i>이메일 : <a href='mailto://"
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorEmail
-					+ "</li><li><i class='fa fa-caret-right'></i>연락처 : "
+					+ "'>이메일 보내기</a></li><li><i class='fa fa-caret-right'></i>연락처 : "
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorContact
 					+ "</li><li><i class='fa fa-caret-right'></i>홈페이지 : <a href='"
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorHomepage

@@ -21,19 +21,49 @@ function initializeLab(labCode) {
 			var projects = "";
 			
 			// Introduction
-			var  intropicture = " <img src='"+response.dkswLabIntroPicture+ "' alt=>";
+			var  introPicture = "";
+			
+			if(response.dkswLabIntroPicture_0 != "") {
+				introPicture = "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide1'><div class=' image-slide'><img class='image-slide-crop' src='" + response.dkswLabIntroPicture_0 + "' /></div></a></li>";				
+			}
+			
+			if(response.dkswLabIntroPicture_1 != null) {
+				introPicture += "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide2'><img src='" + response.dkswLabIntroPicture_1 + "' /></a></li>";				
+			}
+			
+			if(response.dkswLabIntroPicture_2 != null) {
+				introPicture += "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide3'><img src='" + response.dkswLabIntroPicture_2 + "' /></a></li>";				
+			}
+
 			$("#dkswLabIntroIntroduction").html(response.dkswLabIntroIntroduction);
-			$("#dkswLabIntroPicture").html(intropicture);
+			$("#dkswLabIntroPicture").html(introPicture);
+			jQuery("#dkswLabIntroPicture").slippry();
 			
 			// Members
 			for(i=0; i<response.dkswLabMembers.length; i++) {
-				var member = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle'>" +
-						"<div class='hover-content'><img class='img-responsive' src='" +response.dkswLabMembers[i].dkswLabMembersPicture+
-						"' /><div class='content-circle content-center'></div>" +
-						"</div><h3>" + response.dkswLabMembers[i].dkswLabMembersNameKo +"</span><small>" + response.dkswLabMembers[i].dkswLabMembersNameEn + "</small>" +
-								"</h3><p>Admission Year: "+response.dkswLabMembers[i].dkswLabMembersAdmissionYear +
-								"</p><p>E-mail: "+response.dkswLabMembers[i].dkswLabMembersEmail +
-								"</p><p>Etc: "+ response.dkswLabMembers[i].dkswLabMembersEtc+"</p></div></div>";
+				var memberPicture = "";
+				var admisisonYear = "";
+				var workPlace = "";
+				
+				if(response.dkswLabMembers[i].dkswLabMembersPicture == "") {
+					memberPicture = "/dksw/04_upload/files/sub_03/members/no-image.jpg";
+				} else {
+					memberPicture = "/dksw/04_upload/files/sub_03/members/" + labCode + "/" + response.dkswLabMembers[i].dkswLabMembersPicture;
+				}
+				
+				var member = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='" + memberPicture
+					+ "' style='width:100%' /><div class='content-circle content-center text-center'><ul class='circle-icons icons-list'><li><a href='mailto://"
+					+ response.dkswLabMembers[i].dkswLabMembersEmail
+					+ "' title='Follow us'><i class='fa fa-envelope'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-twitter'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='text-center'>" 
+					+ response.dkswLabMembers[i].dkswLabMembersNameKo
+					+ "</span><small>"
+					+ response.dkswLabMembers[i].dkswLabMembersNameEn 
+					+ "</small></h3><ul class='info-list-pro i-primary font-NanumGothic'>"
+					+ "<li><i class='fa fa-caret-right'></i>입학년도 : " + response.dkswLabMembers[i].dkswLabMembersAdmissionYear + "</li>"
+					+ "<li><i class='fa fa-caret-right'></i>이메일 : <a href='mailto://" + response.dkswLabMembers[i].dkswLabMembersEmail + "'>이메일 보내기</a></li>"
+					+ "<li><i class='fa fa-caret-right'></i>근무지 : " + response.dkswLabMembers[i].dkswLabMembersWorkPlace + "</li>"
+					+ "</ul></div></div>";
+				
 				members += member;
 			}
 			$("#dkswLabMembers").html(members);

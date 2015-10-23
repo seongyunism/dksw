@@ -22,23 +22,21 @@ public class LabMembersDAO {
 		
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_members WHERE dkswLabCode=? AND NOT dkswLabMembersGroup=1");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_members WHERE dkswLabCode=? AND NOT dkswLabMembersGroup=1 ORDER BY dkswLabMembersGroup ASC, dkswLabMembersNameKo ASC");
 			pstmt.setInt(1, inputLabCode);
 			rset = pstmt.executeQuery();
 				
 			while (rset.next()) {
 				member = new LabMembers(
 						rset.getInt(1),
-						rset.getString(2),
+						rset.getInt(2),
 						rset.getString(3),
 						rset.getString(4),
 						rset.getString(5),
 						rset.getString(6),
-						rset.getInt(7),
+						rset.getString(7),
 						rset.getString(8),
-						rset.getInt(9),
-						rset.getInt(10),
-						rset.getInt(11)
+						rset.getInt(9)
 					);
 				
 				members.add(member);
@@ -60,6 +58,7 @@ public class LabMembersDAO {
 
 	}
 	
+	// 수정요망
 	public static boolean addLabMembers(int inputLabMembersCode, String inputLabMembersPicture, String inputLabMembersNameKo,
 			String inputLabMembersNameEn, String inputLabMembersAdmissionYear, String inputLabMembersEmail, int inputLabMembersGroup, 
 			String inputLabMembersEtc, long inputLabMembersEditdate ,int inputLabMembersEditRightIndex, int inputDepartmentProfessorNo) throws SQLException {
@@ -104,6 +103,7 @@ public class LabMembersDAO {
 		}
 	}
 	
+	// 수정요망
 	public static boolean modifyLabMembers(int inputLabMembersCode, String inputLabMembersPicture, String inputLabMembersNameKo,
 			String inputLabMembersNameEn, String inputLabMembersAdmissionYear, int inputLabMembersGroup, 
 			String inputLabMembersEtc, long inputLabMembersEditdate ,int inputLabMembersEditRightIndex, int inputDepartmentProfessorNo,String inputLabMembersEmail) throws SQLException {
@@ -146,12 +146,16 @@ public class LabMembersDAO {
 			}
 		}
 	}
-	public static boolean deleteLabMembers(String inputLabMembersEmail) throws SQLException
-	{
+	
+	// 수정요망
+	public static boolean deleteLabMembers(String inputLabMembersEmail) throws SQLException {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		int deleteQueryCount = 0;
+		
 		try {
 			con = DBUtil.getConnection();
 
@@ -164,7 +168,6 @@ public class LabMembersDAO {
 			} else {
 				return false;
 			}
-
 				
 		} catch (SQLException se) {
 			se.printStackTrace();

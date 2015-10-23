@@ -27,6 +27,7 @@ import dksw.model.domain.LabIntro;
 import dksw.model.domain.LabMembers;
 import dksw.model.domain.LabPaper;
 import dksw.model.domain.LabProject;
+import dksw.util.CommonUtil;
 import dksw.util.UnixTimeConvertor;
 
 public class LabController extends HttpServlet {
@@ -58,8 +59,6 @@ public class LabController extends HttpServlet {
 		ArrayList<LabPaper> paperData = null;
 		ArrayList<LabProject> projectData = null;
 		
-			
-		
 		try {
 
 			int inputLabCode = (req.getParameter("inputLabCode") != null) ? Integer.parseInt(req.getParameter("inputLabCode")) : null;
@@ -81,28 +80,28 @@ public class LabController extends HttpServlet {
 
 			// Intro
 			jObject.put("dkswLabIntroIntroduction", introData.getDkswLabIntroIntroduction().replaceAll("\n", "<br />"));
-			jObject.put("dkswLabIntroPicture", introData.getDkswLabIntroPicture());
+
+			for(int i=0; i<CommonUtil.userSpilt(introData.getDkswLabIntroPicture()).size(); i++) {
+				jObject.put("dkswLabIntroPicture_" + i, CommonUtil.userSpilt(introData.getDkswLabIntroPicture()).get(i));
+			}
+			
 			jObject.put("dkswLabIntroEditDate", introData.getDkswLabIntroEditDate());
 			jObject.put("dkswLabIntroEditRightIndex", introData.getDkswLabIntroEditRightIndex());
 
 			// Members
 			for(int i=0; i<membersData.size(); i++) {
 				JSONObject tempMember = new JSONObject();
-				tempMember.put("dkswLabMembersPicture", membersData.get(i).getDkswLabMembersPicture());
+				tempMember.put("dkswLabMembersGroup", membersData.get(i).getDkswLabMembersGroup());
+				tempMember.put("dkswLabMembersAdmissionYear", membersData.get(i).getDkswLabMembersAdmissionYear());
 				tempMember.put("dkswLabMembersNameKo", membersData.get(i).getDkswLabMembersNameKo());
 				tempMember.put("dkswLabMembersNameEn", membersData.get(i).getDkswLabMembersNameEn());
-				tempMember.put("dkswLabMembersAdmissionYear", membersData.get(i).getDkswLabMembersAdmissionYear());
 				tempMember.put("dkswLabMembersEmail", membersData.get(i).getDkswLabMembersEmail());
-				tempMember.put("dkswLabMembersGroup", membersData.get(i).getDkswLabMembersGroup());
-				tempMember.put("dkswLabMembersEtc", membersData.get(i).getDkswLabMembersEtc());
-				tempMember.put("dkswLabMembersEditDate", membersData.get(i).getDkswLabMembersEditDate());
-				tempMember.put("dkswLabMembersEditRightIndex", membersData.get(i).getDkswLabMembersEditRightIndex());
-				tempMember.put("dkswDepartmentProfessorNo", membersData.get(i).getDkswDepartmentProfessorNo());
+				tempMember.put("dkswLabMembersWorkPlace", membersData.get(i).getDkswLabMembersWorkPlace());
+				tempMember.put("dkswLabMembersPicture", membersData.get(i).getDkswLabMembersPicture());
+				tempMember.put("dkswMemberNo", membersData.get(i).getDkswMemberNo());
 				jArrayMembers.add(tempMember);
 			}
-			
-			jObject.put("dkswLabMembers", jArrayMembers);
-			
+				
 			// Achievements
 			for(int i=0; i<achievementsData.size(); i++) {
 				JSONObject tempAchievement = new JSONObject();
@@ -113,8 +112,6 @@ public class LabController extends HttpServlet {
 				tempAchievement.put("dkswLabAchievementsEditRightIndex", achievementsData.get(i).getDkswLabAchievementsEditRightIndex());
 				jArrayAchievements.add(tempAchievement);
 			}
-		
-			jObject.put("dkswLabAchievements", jArrayAchievements);
 			
 			// Paper
 			for(int i=0; i<paperData.size(); i++) {
@@ -127,10 +124,7 @@ public class LabController extends HttpServlet {
 				jArrayPaper.add(tempPaper);
 			}
 			
-			jObject.put("dkswLabPaper", jArrayPaper);
-			
 			// Project
-			
 			for(int i=0; i<projectData.size(); i++) {
 				JSONObject tempProject = new JSONObject();
 				tempProject.put("dkswLabProjectName", projectData.get(i).getDkswLabProjectName());
@@ -144,7 +138,10 @@ public class LabController extends HttpServlet {
 				
 				jArrayProject.add(tempProject);
 			}
-					
+
+			jObject.put("dkswLabMembers", jArrayMembers);
+			jObject.put("dkswLabAchievements", jArrayAchievements);
+			jObject.put("dkswLabPaper", jArrayPaper);
 			jObject.put("dkswLabProject", jArrayProject);
 			
 			res.setContentType("application/json");

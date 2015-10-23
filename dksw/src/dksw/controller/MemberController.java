@@ -13,8 +13,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import dksw.model.MemberDAO;
 import dksw.model.domain.Member;
-import dksw.util.EmailAddrCheck;
-import dksw.util.SendEmail;
+import dksw.util.EmailUtil;
 
 public class MemberController extends HttpServlet {
 
@@ -52,7 +51,7 @@ public class MemberController extends HttpServlet {
 		try {
 			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
 
-			if(EmailAddrCheck.isEmail(inputMemberEmail)) {
+			if(EmailUtil.isEmail(inputMemberEmail)) {
 				checkRedundancyEmail = MemberDAO.checkRedundancyEmail(inputMemberEmail);
 				
 				if(checkRedundancyEmail) {
@@ -116,7 +115,7 @@ public class MemberController extends HttpServlet {
 			int inputMemberAdminAuth = 0;		
 			
 			// 이메일 체크
-			if(EmailAddrCheck.isEmail(inputMemberEmail)) {
+			if(EmailUtil.isEmail(inputMemberEmail)) {
 				checkRedundancyEmail = MemberDAO.checkRedundancyEmail(inputMemberEmail);
 				
 				if(!checkRedundancyEmail) { // 이미 등록된 이메일인 경우
@@ -127,7 +126,7 @@ public class MemberController extends HttpServlet {
 			}
 			
 			// 온라인 인증코드를 입력받은 이메일로 발송 
-			checkSendOnlineAuthCode = SendEmail.SendEmail(inputMemberEmail, "단국대학교 소프트웨어학과 홈페이지 인증메일입니다.", "<a href='http://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/02_page/join/auth.jsp?authCode="+ inputMemberCategory + inputMemberOnlineAuthCode + "' target='_blank'>인증완료</a>");		
+			checkSendOnlineAuthCode = EmailUtil.SendEmail(inputMemberEmail, "단국대학교 소프트웨어학과 홈페이지 인증메일입니다.", "<a href='http://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/02_page/join/auth.jsp?authCode="+ inputMemberCategory + inputMemberOnlineAuthCode + "' target='_blank'>인증완료</a>");		
 
 			// 사용자 정보를 DB에 삽입
 			checkInsertMemberRecord = MemberDAO.checkJoinMember(inputMemberCategory, inputMemberEmail, inputMemberPassword, inputMemberStudentNo, inputMemberName,

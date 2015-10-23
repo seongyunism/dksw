@@ -18,7 +18,6 @@ import dksw.model.BoardDAO;
 import dksw.model.MemberDAO;
 import dksw.model.domain.AdminPermission;
 import dksw.model.domain.Board;
-import dksw.util.EmailAddrCheck;
 import dksw.util.PermissionCheck;
 import dksw.util.UnixTimeConvertor;
 
@@ -49,7 +48,7 @@ public class BoardController extends HttpServlet {
 	
 	private void writePost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
-		boolean checkModifyPost = false;
+		int checkModifyPost = 0;
 		boolean checkWritePost = false;
 		Board modifiedPost = null;
 		String[] tempContent = null;
@@ -101,39 +100,46 @@ public class BoardController extends HttpServlet {
 					}
 				}
 				
-				
 			} else { // 수정 모드
 				int inputMemberNo = (req.getParameter("inputMemberNo") != null) ? Integer.parseInt(req.getParameter("inputMemberNo")) : null;
 				int inputBoardNo = (req.getParameter("inputBoardNo") != null) ? Integer.parseInt(req.getParameter("inputBoardNo")) : null;
-
-				checkModifyPost = BoardDAO.modifyPost(inputBoardNo, inputBoardCategory, inputBoardTitle, inputBoardContent);
-				modifiedPost = BoardDAO.getPost(inputBoardNo);
+				
+				checkModifyPost = BoardDAO.modifyPost(inputBoardNo, inputBoardCategory, inputBoardTitle, inputBoardContent, inputMemberNo);
 				
 				JSONObject jObject = new JSONObject();
 				JSONArray jArray = new JSONArray();
-				
-				jObject.put("dkswBoardNo", modifiedPost.getDkswBoardNo());
-				jObject.put("dkswBoardCategory", modifiedPost.getDkswBoardCategory());
-				jObject.put("dkswMemberName", MemberDAO.getMember(modifiedPost.getDkswMemberNo()).getDkswMemberName());
-				jObject.put("dkswBoardWriteDate", modifiedPost.getDkswBoardWriteDate());
-				jObject.put("dkswBoardReadnum", modifiedPost.getDkswBoardReadnum());
-				jObject.put("dkswBoardTitle", modifiedPost.getDkswBoardTitle());
-						
-				// 본문 자르기
-				tempContent = modifiedPost.getDkswBoardContent().split("\n\n");
+
+				if(checkModifyPost == 0) {
+					jObject.put("check", "Fail");
 					
-				for(int i=1; i<tempContent.length; i++) {
-					content += (tempContent[i] + "\n\n");
+				} else if(checkModifyPost == 1) {
+					modifiedPost = BoardDAO.getPost(inputBoardNo);
+					
+					jObject.put("check", "ModifyOK");
+					jObject.put("dkswBoardNo", modifiedPost.getDkswBoardNo());
+					jObject.put("dkswBoardCategory", modifiedPost.getDkswBoardCategory());
+					jObject.put("dkswMemberNo", modifiedPost.getDkswMemberNo());
+					jObject.put("dkswMemberName", MemberDAO.getMember(modifiedPost.getDkswMemberNo()).getDkswMemberName());
+					jObject.put("dkswBoardWriteDate", modifiedPost.getDkswBoardWriteDate());
+					jObject.put("dkswBoardReadnum", modifiedPost.getDkswBoardReadnum());
+					jObject.put("dkswBoardTitle", modifiedPost.getDkswBoardTitle());
+					
+					// 본문 자르기
+					tempContent = modifiedPost.getDkswBoardContent().split("\n\n");
+					
+					for(int i=1; i<tempContent.length; i++) {
+						content += (tempContent[i] + "\n\n");
+					}
+					
+					jObject.put("dkswBoardSubTitle", tempContent[0]);
+					jObject.put("dkswBoardContent", content.trim().replaceAll("\n", "<br />"));
+					jObject.put("dkswBoardPicture", modifiedPost.getDkswBoardPicture());
 				}
-					
-				jObject.put("dkswBoardSubTitle", tempContent[0]);
-				jObject.put("dkswBoardContent", content.trim().replaceAll("\n", "<br />"));
-				jObject.put("dkswBoardPicture", modifiedPost.getDkswBoardPicture());
-						
+				
 				res.setContentType("application/json");
 				res.setCharacterEncoding("UTF-8");
-
-				res.getWriter().write(jObject.toString());	
+					
+				res.getWriter().write(jObject.toString());
 			}
 
 		} catch (SQLException se) {
@@ -161,6 +167,7 @@ public class BoardController extends HttpServlet {
 			
 			jObject.put("dkswBoardNo", post.getDkswBoardNo());
 			jObject.put("dkswBoardCategory", post.getDkswBoardCategory());
+			jObject.put("dkswMemberNo", post.getDkswMemberNo());	
 			jObject.put("dkswMemberName", MemberDAO.getMember(post.getDkswMemberNo()).getDkswMemberName());
 			jObject.put("dkswBoardWriteDate", UnixTimeConvertor.toConvertTimeFromUnixTime(post.getDkswBoardWriteDate()));
 			jObject.put("dkswBoardReadnum", post.getDkswBoardReadnum());

@@ -139,23 +139,30 @@ public class BoardDAO {
 		}
 	}
 	
-	public static boolean modifyPost(int inputBoardNo, int inputBoardCategory, String inputBoardTitle, String inputBoardContent) throws SQLException {
+	public static int modifyPost(int inputBoardNo, int inputBoardCategory, String inputBoardTitle, String inputBoardContent, int inputMemberNo) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;	
+		int check = 0;
+		
 		
 		try {
 			con = DBUtil.getConnection();
 
-			pstmt = con.prepareStatement("UPDATE dksw_board SET dkswBoardCategory=?, dkswBoardTitle=?, dkswBoardContent=? WHERE dkswBoardNo=?");
+			if(inputMemberNo == 1) { // 관리자 특권 부여
+				pstmt = con.prepareStatement("UPDATE dksw_board SET dkswBoardCategory=?, dkswBoardTitle=?, dkswBoardContent=? WHERE dkswBoardNo=?");
+			} else {
+				pstmt = con.prepareStatement("UPDATE dksw_board SET dkswBoardCategory=?, dkswBoardTitle=?, dkswBoardContent=? WHERE dkswBoardNo=? AND dkswMemberNo=?");				
+				pstmt.setInt(5, inputMemberNo);
+			}
 			pstmt.setInt(1, inputBoardCategory);
 			pstmt.setString(2, inputBoardTitle);
 			pstmt.setString(3, inputBoardContent);
 			pstmt.setInt(4, inputBoardNo);
-			pstmt.executeUpdate();	
+			check = pstmt.executeUpdate();	
 			
-			return true;
+			return check;
 			
 		} catch (SQLException se) {
 			se.printStackTrace();

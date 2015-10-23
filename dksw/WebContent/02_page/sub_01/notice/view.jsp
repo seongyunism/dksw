@@ -227,7 +227,7 @@
 				<div id="#writeForm" class="write-form">
 					<form method="post">
 						<input type="hidden" name="inputMode" value="1" />
-						<input type="hidden" name="inputMemberNo" value="" />
+						<input type="hidden" name="inputMemberNo" value="${sessionScope.dkswMemberNo}" />
 					
 						<div class="col-md-12 btn-radio">
 							<div class="input-radio"><input type="radio" name="inputBoardCategory" id="radio-01" value="1" checked /></div>

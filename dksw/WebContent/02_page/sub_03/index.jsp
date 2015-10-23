@@ -1,5 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String labCode = request.getParameter("labCode").toString(); %>
+<%
+String labCode = request.getParameter("labCode").toString();
+String labName = "";
+
+switch(labCode) {
+	case "1":
+		labName = "데이터베이스 연구실";
+		break;
+	case "2":
+		labName = "임베디드 연구실";
+		break;
+	case "3":
+		labName = "임베디드 연구실";
+		break;
+	case "4":
+		labName = "멀티미디어 연구실";
+		break;
+	case "5":
+		labName = "운영체제/보안 연구실";
+		break;
+}
+%>
 
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
@@ -33,7 +54,7 @@
     <section class="bg-2 bg-center bg-cover">
         <div class="bg-filter">
             <div class="container section-lg">
-                <h1 class="top-title">연구</h1>
+                <h1 class="top-title"><%=labName %></h1>
             </div>
         </div>
     </section>
@@ -53,8 +74,13 @@
 		<jsp:param name="labCode" value="<%=labCode%>" />	
 	</jsp:include>
 	
-	<!-- labPaperProject.jsp -->
-	<jsp:include page="labPaperProject.jsp" flush="false">
+	<!-- labPaper.jsp -->
+	<jsp:include page="labPaper.jsp" flush="false">
+		<jsp:param name="labCode" value="<%=labCode%>" />	
+	</jsp:include>
+	
+	<!-- labProject.jsp -->
+	<jsp:include page="labProject.jsp" flush="false">
 		<jsp:param name="labCode" value="<%=labCode%>" />	
 	</jsp:include>
 	

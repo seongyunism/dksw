@@ -69,14 +69,14 @@
 						<div class="write-form">
 							<form method="post">
 								<input type="hidden" name="inputMode" value="1" />
-								<input type="hidden" name="inputMemberNo" value="" />
+								<input type="hidden" name="inputMemberNo" value="${sessionScope.dkswMemberNo}" />
 								<input type="hidden" name="inputBoardCategory" value="4" />
 								
 								<input type="text" name="inputBoardTitle" class="form-control font-NanumGothic margin_bottom_5" placeholder="제목" style="font-weight:bold;" />
 								<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
 								<div class="space"></div>
 						                        
-								<div class="btn btn-primary pull-right margin_left_5" onclick="writePost('board_free')">
+								<div class="btn btn-primary pull-right margin_left_5" onclick="writePost('free')">
 									<i class="fa fa-trash-o"></i>완료
 								</div>
 						            
