@@ -1355,8 +1355,9 @@ ul.primary span {
 	    background-image: url("../../01_image/background-bar/02_04.jpg");
 	}
 
-
-
+	.background-bar-03-01 {
+	    background-image: url("../../01_image/background-bar/03_01.jpg");
+	}
 
 	.background-bar-05-01 {
 	    background-image: url("../../01_image/background-bar/05_01.jpg");
@@ -1425,6 +1426,9 @@ ul.primary span {
 	    background-image: url("../../01_image/background-bar/02_04.jpg");
 	}
 	
+	.background-bar-03-01 {
+	    background-image: url("../../01_image/background-bar/03_01.jpg");
+	}
 	
 	.background-bar-05-01 {
 	    background-image: url("../../01_image/background-bar/05_01.jpg");
@@ -4276,13 +4280,45 @@ ul.thumbs {
 }
 
 /* ===================================
- * Custom CSS
+ *                           Custom CSS
  * =================================== */
 
-/* join/index.jsp */
+/********* 공통 *********/
+
 .font-NanumGothic {
 	font-family:NanumGothic;
 }
+
+.text-bold {
+	font-weight:bold;
+}
+
+.text-size-08 {
+	font-size:0.8em;
+}
+
+.text-size-09 {
+	font-size:0.9em;
+}
+
+.margin_bottom_5 {
+	margin-bottom:5px;
+}
+
+.margin_bottom_10 {
+	margin-bottom:10px;
+}
+
+.margin_left_5 {
+	margin-left:5px;
+}
+
+.margin_left_10 {
+	margin-left:10px;
+}
+
+
+/********* 회원가입 페이지 *********/
 
 .edit-date {
 	float:right;
@@ -4341,9 +4377,11 @@ ul.thumbs {
 	height:35px;
 }
 
+
+/********* 학과 소개 *********/
+
 .history-head {
 	font-weight:bold;
-	text-align:center;	
 }
 
 .history-year, .history-month {
@@ -4383,22 +4421,6 @@ ul.thumbs {
 .info-list-pro > li > i:before {
 	margin-left:10px;
 	margin-right: 8px;
-}
-
-.margin_bottom_5 {
-	margin-bottom:5px;
-}
-
-.margin_bottom_10 {
-	margin-bottom:10px;
-}
-
-.margin_left_5 {
-	margin-left:5px;
-}
-
-.margin_left_10 {
-	margin-left:10px;
 }
 
 .write-form {

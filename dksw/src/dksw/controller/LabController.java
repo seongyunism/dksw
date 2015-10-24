@@ -10,25 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dksw.model.AdminDAO;
 import dksw.model.BoardDAO;
-import dksw.model.DepartmentDAO;
 import dksw.model.LabAchievementsDAO;
 import dksw.model.LabIntroDAO;
 import dksw.model.LabMembersDAO;
 import dksw.model.LabPaperDAO;
 import dksw.model.LabProjectDAO;
-import dksw.model.MemberDAO;
+import dksw.model.domain.AdminPermission;
 import dksw.model.domain.LabAchievements;
 import dksw.model.domain.LabIntro;
 import dksw.model.domain.LabMembers;
 import dksw.model.domain.LabPaper;
 import dksw.model.domain.LabProject;
 import dksw.util.CommonUtil;
-import dksw.util.UnixTimeConvertor;
+import dksw.util.PermissionCheck;
 
 public class LabController extends HttpServlet {
 
@@ -47,7 +46,11 @@ public class LabController extends HttpServlet {
 		
 		if(action.equals("getLabData")) {
 			getLabData(req, res);
-		} 
+		} else if(action.equals("writeLabTableData")) {
+			writeLabTableData(req, res);
+		} else if(action.equals("deleteLabTableData")) {
+			deleteLabTableData(req, res);
+		}
 		
 	}
 
@@ -60,7 +63,6 @@ public class LabController extends HttpServlet {
 		ArrayList<LabProject> projectData = null;
 		
 		try {
-
 			int inputLabCode = (req.getParameter("inputLabCode") != null) ? Integer.parseInt(req.getParameter("inputLabCode")) : null;
 			
 			JSONObject jObject = new JSONObject();
@@ -74,9 +76,6 @@ public class LabController extends HttpServlet {
 			achievementsData = LabAchievementsDAO.getLabAchievements(inputLabCode);
 			paperData = LabPaperDAO.getLabPaper(inputLabCode);
 			projectData = LabProjectDAO.getLabProject(inputLabCode);
-
-			
-			// 데이터를 삽입
 
 			// Intro
 			jObject.put("dkswLabIntroIntroduction", introData.getDkswLabIntroIntroduction().replaceAll("\n", "<br />"));
@@ -105,6 +104,7 @@ public class LabController extends HttpServlet {
 			// Achievements
 			for(int i=0; i<achievementsData.size(); i++) {
 				JSONObject tempAchievement = new JSONObject();
+				tempAchievement.put("dkswLabAchievementsNo", achievementsData.get(i).getDkswLabAchievementsNo());		
 				tempAchievement.put("dkswLabAchievementsYear", achievementsData.get(i).getDkswLabAchievementsYear());
 				tempAchievement.put("dkswLabAchievementsMonth", achievementsData.get(i).getDkswLabAchievementsMonth());
 				tempAchievement.put("dkswLabAchievementsContent", achievementsData.get(i).getDkswLabAchievementsContent());
@@ -144,6 +144,32 @@ public class LabController extends HttpServlet {
 			jObject.put("dkswLabPaper", jArrayPaper);
 			jObject.put("dkswLabProject", jArrayProject);
 			
+			// 수정 권한 체크
+			HttpSession sessionMember = req.getSession(false);
+			
+			if(sessionMember != null) { // 세션이 존재하는 경우
+				String memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? (sessionMember.getAttribute("dkswMemberCategory").toString()) : null;
+				int memberNo = (sessionMember.getAttribute("dkswMemberNo") != null) ? Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString()) : 0;
+				
+				if(memberNo > 0) { // 로그인 되어있는 경우
+					AdminPermission permission = null;
+					boolean checkPermission = false;
+					
+					try {
+						String inputAdminPermissionId = "page_lab";					
+						permission = AdminDAO.getPermission(inputAdminPermissionId);
+						
+						checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
+						
+						if(checkPermission) {
+							jObject.put("dkswLabModifyPermission", "OK");
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
 
@@ -157,17 +183,95 @@ public class LabController extends HttpServlet {
 		}				
 	}
 	
+	private void writeLabTableData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		boolean checkWriteLabRecord = false;
+		
+		try {
+			int inputLabCode = (req.getParameter("inputLabCode") != null) ? Integer.parseInt(req.getParameter("inputLabCode")) : null;
+			int inputLabItem = (req.getParameter("inputLabItem") != null) ? Integer.parseInt(req.getParameter("inputLabItem")) : null;
+			String inputLabData1 = (req.getParameter("inputLabData1") != null) ? (req.getParameter("inputLabData1")) : null;
+			String inputLabData2 = (req.getParameter("inputLabData2") != null) ? (req.getParameter("inputLabData2")) : null;
+			String inputLabData3 = (req.getParameter("inputLabData3") != null) ? (req.getParameter("inputLabData3")) : null;	
+			
+			switch(inputLabItem) {
+				case 0: // Achievements
+					checkWriteLabRecord = LabAchievementsDAO.writeRecord(inputLabCode, inputLabData1, inputLabData2, inputLabData3);
+					break;
+				case 1: // Paper
+					break;
+				case 2: // Project
+					break;
+			}
+		
+			if(checkWriteLabRecord) {
+				res.getWriter().write("WriteOK");
+			} else {
+				res.getWriter().write("Fail");				
+			}
+	
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	private void deleteLabTableData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		boolean checkDeleteLabRecord = false;
+		
+		try {
+			int inputLabItem = (req.getParameter("inputLabItem") != null) ? Integer.parseInt(req.getParameter("inputLabItem")) : null; 
+			int inputLabRecordNo = (req.getParameter("inputLabRecordNo") != null) ? Integer.parseInt(req.getParameter("inputLabRecordNo")) : null; 
+			
+			switch(inputLabItem) {
+				case 0: // Achievements
+					checkDeleteLabRecord = LabAchievementsDAO.deleteRecord(inputLabRecordNo);
+					break;
+				case 1: // Paper
+					break;
+				case 2: // Project
+					break;
+			}
+			
+			if(checkDeleteLabRecord) {
+				res.getWriter().write("deleteOK");
+			} else {
+				res.getWriter().write("Fail");				
+			}
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//연구실 member 추가
 	private void addLabMembers(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 		boolean checkInsertLabMembersRecord = false;
 		
 		try {
-				int inputLabMembersCode = (req.getParameter("inputLabMembersCode") != null) ? Integer.parseInt(req.getParameter("inputLabMembersCode")) : null; 
-				String inputLabMembersPicture = (req.getParameter("inputLabMembersPicture") != null) ? req.getParameter("inputLabMembersPicture") : null;
-				String inputLabMembersNameKo = (req.getParameter("inputLabMembersNameKo") != null) ? req.getParameter("inputLabMembersNameKo") : null;
-				String inputLabMembersNameEn = (req.getParameter("inputLabMembersNameEn") != null) ? req.getParameter("inputLabMembersNameEn") : null;
-				String inputLabMembersAdmissionYear = (req.getParameter("inputLabMembersAdmissionYear") != null) ? req.getParameter("inputLabMembersAdmissionYear") : null;
+			int inputLabMembersCode = (req.getParameter("inputLabMembersCode") != null) ? Integer.parseInt(req.getParameter("inputLabMembersCode")) : null; 
+			String inputLabMembersPicture = (req.getParameter("inputLabMembersPicture") != null) ? req.getParameter("inputLabMembersPicture") : null;
+			String inputLabMembersNameKo = (req.getParameter("inputLabMembersNameKo") != null) ? req.getParameter("inputLabMembersNameKo") : null;
+			String inputLabMembersNameEn = (req.getParameter("inputLabMembersNameEn") != null) ? req.getParameter("inputLabMembersNameEn") : null;
+			String inputLabMembersAdmissionYear = (req.getParameter("inputLabMembersAdmissionYear") != null) ? req.getParameter("inputLabMembersAdmissionYear") : null;
 				String inputLabMembersEmail = (req.getParameter("inputLabMembersEmail") != null) ? req.getParameter("inputLabMembersEmail") : null;
 				int inputLabMembersGroup = (req.getParameter("inputLabMembersGroup") != null) ? Integer.parseInt(req.getParameter("inputLabMembersGroup")) : null;
 				String inputLabMembersEtc = (req.getParameter("inputLabMembersEtc") != null) ? req.getParameter("inputLabMembersEtc") : null;
@@ -185,11 +289,10 @@ public class LabController extends HttpServlet {
 					res.getWriter().write("Fail");
 				}
 			
-			} 
-		catch (SQLException se) {
-		req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
-		req.setAttribute("errorMsg", "ERROR : IO ERROR");
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
 	

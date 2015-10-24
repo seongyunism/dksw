@@ -14,7 +14,7 @@ function initializeLab(labCode) {
 		data : inputLabCode,
 		dataType : "json",
 		success: function(response) {
-	
+
 			var members = "";
 			var achievements = "";
 			var papers = "";
@@ -69,53 +69,67 @@ function initializeLab(labCode) {
 			$("#dkswLabMembers").html(members);
 			
 			// Achievements
-			var head = "<tr><td class='history-head'>년도</td><td class='history-head'>월</td><td class='history-head'>내용</td></tr>";
+			var head = "<tr><td class='text-center text-bold' style='width:70px;'>년도</td><td class='text-center text-bold' style='width:50px;' >월</td><td class='text-center text-bold'>내용</td>";
+
+			if(response.dkswLabModifyPermission == "OK") {
+				head += "<td class='text-center text-bold' style='width:50px;'>관리</td></tr>";
+			} else {
+				head += "</tr>";
+			}
+			
 			var achievement = "";
 			
 			for (i=0; i<response.dkswLabAchievements.length; i++) {
-				achievement = "<tr> <td class='history-year' style='line-height:2em;'>"
+				achievement = "<tr name='" + response.dkswLabAchievements[i].dkswLabAchievementsNo + "'> <td class='text-center' style='line-height:2em;'>"
 					+ response.dkswLabAchievements[i].dkswLabAchievementsYear
-					+ "</td> <td class='history-year' style='line-height:2em;'>"
+					+ "</td> <td class='text-center' style='line-height:2em;'>"
 					+ response.dkswLabAchievements[i].dkswLabAchievementsMonth
 					+ "</td> <td style='line-height:2em;'>"
 					+ response.dkswLabAchievements[i].dkswLabAchievementsContent
-					+ "</td> </tr>";
-				
+					+ "</td>";
+
+					if(response.dkswLabModifyPermission == "OK") {
+						achievement += "<td class='text-center' style='width:50px;'><input type='button' value='삭제' onclick='deleteLabTable(0, " + response.dkswLabAchievements[i].dkswLabAchievementsNo + ")' /></td></tr>";
+					} else {
+						achievement += "</tr>";
+					}
+					
 				achievements += achievement;
 			}
 			
-			$("#dkswLabAchievements").html(head + achievements);
+			var achievementForm = "";
+			
+			if(response.dkswLabModifyPermission == "OK") {
+				achievementForm += "<tr><td><input type='text' name='data1' maxlength='4' class='text-center' style='width:66px;' /></td><td><input type='text' name='data2' maxlength='2' class='text-center' style='width:46px;' /></td><td><input type='text' name='data3' style='width:100%;' /></td><td><input type='button' value='추가' onclick='writeLabTable(" + labCode + ", 0)' /></td></tr>";
+			}
+			
+			$("#dkswLabAchievements").html(head + achievements + achievementForm);
 			
 			// Paper
-			var paperhead = "<tr><td class='history-head'>TITLE</td><td class='history-head'>PARTICIPANTS</td><td class='history-head'>ETC</td></tr>";
+			var paperHead = "<tr><td class='text-center text-bold'>논문명 및 저자</td></tr>";
 			
 			for(i=0; i<response.dkswLabPaper.length; i++){
-					var paper ="<tr> <td class='history-year' style='line-height:2em;'>"
-					+ response.dkswLabPaper[i].dkswLabPaperTitle
-					+ "</td> <td class='history-year' style='line-height:2em;'>"
-					+ response.dkswLabPaper[i].dkswLabPaperParticipants
-					+ "</td> <td style='line-height:2em;'>"
-					+ response.dkswLabPaper[i].dkswLabPaperContent
-					+ "</td> </tr>";
+					var paper ="<tr> <td style='line-height:2em;'><span class='text-bold'>"
+					+ response.dkswLabPaper[i].dkswLabPaperTitle + "</span>&nbsp;(" + response.dkswLabPaper[i].dkswLabPaperContent
+					+ ")<br /><span class='text-size-08'>" + response.dkswLabPaper[i].dkswLabPaperParticipants
+					+ "</span></td></tr>";
 				
 				papers += paper;
 			}
-			$("#dkswLabPaper").html(paperhead + papers);
+			$("#dkswLabPaper").html(paperHead + papers);
 			
 			// Project
-			
-			var projecthead = "<tr><td class='history-head'>TITLE</td><td class='history-head'>PROJECT TERM</td><td class='history-head'>SPONSER</td></tr>";
+			var projecthead = "<tr><td class='text-center text-bold' style='width:150px;'>진행기간</td><td class='text-center text-bold'>프로젝트명</td></tr>";
 			
 			for(i=0; i<response.dkswLabProject.length; i++){
 				
-				var project = "<tr> <td class='history-year' style='line-height:2em;'>"
-					+ response.dkswLabProject[i].dkswLabProjectContent
-					+ "</td> <td class='history-year' style='line-height:2em;'>"
-					+ response.dkswLabProject[i].dkswLabProjectStartYear+"."+response.dkswLabProject[i].dkswLabProjectStartMonth+" ~ "
-					+ response.dkswLabProject[i].dkswLabProjectEndYear+"."+response.dkswLabProject[i].dkswLabProjectEndMonth
-					+ "</td> <td style='line-height:2em;'>"
-					+ response.dkswLabProject[i].dkswLabProjectName
-					+ "</td> </tr>";
+				var project = "<tr> <td class='text-center' style='line-height:2em;'>"
+					+ response.dkswLabProject[i].dkswLabProjectStartYear + "." + response.dkswLabProject[i].dkswLabProjectStartMonth
+					+ " ~ "
+					+ response.dkswLabProject[i].dkswLabProjectEndYear + "." + response.dkswLabProject[i].dkswLabProjectEndMonth
+					+ "</td><td style='line-height:2em;'><span class='text-bold'>"
+					+ response.dkswLabProject[i].dkswLabProjectContent + "</span>, " + response.dkswLabProject[i].dkswLabProjectName
+					+ "</td></tr>";
 				
 				projects += project;
 			}
@@ -128,4 +142,71 @@ function initializeLab(labCode) {
 	});
 		
 	return false;	
+}
+
+function writeLabTable(labCode, item) {
+
+	var action = "/dksw/lab?action=writeLabTableData";
+	var itemStr = new Array('Achievements', 'Paper', 'Project');
+	var form_data = {
+			inputLabCode : labCode,
+			inputLabItem : item,
+			inputLabData1 : $("div[name='lab" + itemStr[item] + "'] input[name='data1']").val(),
+			inputLabData2 : $("div[name='lab" + itemStr[item] + "'] input[name='data2']").val(),
+			inputLabData3 : $("div[name='lab" + itemStr[item] + "'] input[name='data3']").val(),
+	};
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : form_data,
+		dataType : "text",
+		success: function(response) {
+			if(response == "WriteOK") {
+				location.reload(true);
+			} else {
+				alert("오류가 발생하였습니다.");
+			}
+		},error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
+
+function deleteLabTable(item, record) {
+
+	check = confirm("정말로 삭제하시겠습니까?");
+
+	if(!check) {
+		return false;
+		
+	} else {
+	
+		var action = "/dksw/lab?action=deleteLabTableData";
+		var itemStr = new Array('Achievements', 'Paper', 'Project');
+		var form_data = {
+				inputLabItem : item,
+				inputLabRecordNo : record
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : action,
+			data : form_data,
+			dataType : "text",
+			success: function(response) {
+				if(response == "deleteOK") {
+					$("div[name='lab" + itemStr[item] + "'] tr[name='" + record + "']").remove();
+				} else {
+					alert("오류가 발생하였습니다.");
+				}
+			},error: function(xhr,status,error) {
+				alert(error);
+			}
+		});
+			
+		return false;
+	}
 }

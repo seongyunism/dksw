@@ -11,7 +11,7 @@ switch(labCode) {
 		labName = "임베디드 연구실";
 		break;
 	case "3":
-		labName = "임베디드 연구실";
+		labName = "모바일콘텐츠 연구실";
 		break;
 	case "4":
 		labName = "멀티미디어 연구실";
@@ -51,7 +51,7 @@ switch(labCode) {
 	<jsp:include page="../commonNav.jsp" flush="false"/>
     
     <!-- Header Box -->
-    <section class="bg-2 bg-center bg-cover">
+    <section class="background-bar-03-01 bg-center bg-cover">
         <div class="bg-filter">
             <div class="container section-lg">
                 <h1 class="top-title"><%=labName %></h1>

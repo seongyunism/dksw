@@ -146,7 +146,6 @@ public class BoardDAO {
 		ResultSet rset = null;	
 		int check = 0;
 		
-		
 		try {
 			con = DBUtil.getConnection();
 

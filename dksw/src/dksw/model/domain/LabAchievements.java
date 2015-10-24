@@ -2,6 +2,7 @@ package dksw.model.domain;
 
 public class LabAchievements {
 	
+	private int dkswLabAchievementsNo;
 	private int dkswLabCode;
 	private String dkswLabAchievementsYear;
 	private String dkswLabAchievementsMonth;
@@ -9,6 +10,12 @@ public class LabAchievements {
 	private int dkswLabAchievementsEditDate;
 	private int dkswLabAchievementsEditRightIndex;
 	
+	public int getDkswLabAchievementsNo() {
+		return dkswLabAchievementsNo;
+	}
+	public void setDkswLabAchievementsNo(int dkswLabAchievementsNo) {
+		this.dkswLabAchievementsNo = dkswLabAchievementsNo;
+	}
 	public int getDkswLabCode() {
 		return dkswLabCode;
 	}
@@ -46,9 +53,11 @@ public class LabAchievements {
 		this.dkswLabAchievementsEditRightIndex = dkswLabAchievementsEditRightIndex;
 	}
 	
-	public LabAchievements(int dkswLabCode, String dkswLabAchievementsYear, String dkswLabAchievementsMonth,
-			String dkswLabAchievementsContent, int dkswLabAchievementsEditDate, int dkswLabAchievementsEditRightIndex) {
+	public LabAchievements(int dkswLabAchievementsNo, int dkswLabCode, String dkswLabAchievementsYear,
+			String dkswLabAchievementsMonth, String dkswLabAchievementsContent, int dkswLabAchievementsEditDate,
+			int dkswLabAchievementsEditRightIndex) {
 		super();
+		this.dkswLabAchievementsNo = dkswLabAchievementsNo;
 		this.dkswLabCode = dkswLabCode;
 		this.dkswLabAchievementsYear = dkswLabAchievementsYear;
 		this.dkswLabAchievementsMonth = dkswLabAchievementsMonth;

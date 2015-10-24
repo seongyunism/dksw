@@ -8,7 +8,7 @@
 	</section>
 
     <section class="section-lg team-grid">
-        <div class="container">
+        <div class="container" name="labMembers">
             
             <!-- ±³¼ö´Ô -->
             <div class="tab-content text-left">

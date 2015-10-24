@@ -52,7 +52,6 @@ public class LabPaperDAO {
 				sqle.printStackTrace();
 			}
 		}
-
 	}	
 
 }

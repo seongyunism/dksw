@@ -8,12 +8,13 @@
 	</section>
 	
     <section class="section-lg">
-        <div class="container">
-            <p class="text-block" id="dkswLabIntroIntroduction"></p>
+        <div class="container" name="labIntro">
+            <p class="text-block font-NanumGothic" style="line-height:2em;" id="dkswLabIntroIntroduction"></p>
         </div>
         
 		<div class="space"></div>
-                    
+		<div class="space"></div>
+		
         <div class="container">
 			<div class="normal sy-slides-wrap">
 				<ul id="dkswLabIntroPicture"></ul>

@@ -8,7 +8,7 @@
 	</section>
 
 	<section class="section">
-		<div class="container-sm">
+		<div class="container" name="labAchievements">
             <div class="row">
                 <div class="col-lg-12">
                 	<table class="table table-striped" id="dkswLabAchievements"></table>      

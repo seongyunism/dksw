@@ -8,7 +8,7 @@
 	</section>
 
 	<section class="section-lg">  
-		<div class="container">
+		<div class="container" name="labPaper">
 			<div class="row">
 				<div class="col-lg-12">
 					<table class="table table-striped" id="dkswLabPaper"></table>
