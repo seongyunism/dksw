@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dksw.model.domain.Member;
 import dksw.util.DBUtil;
@@ -270,6 +271,40 @@ public class MemberDAO {
 			se.printStackTrace();
 			throw se;
 	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}	
+	}
+
+	public static ArrayList<Integer> getSameCategoryMembers(int inputMemberCategory) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<Integer> members = new ArrayList<Integer>();
+		
+		try {
+			con = DBUtil.getConnection(); 
+			
+			pstmt = con.prepareStatement("SELECT dkswMemberNo FROM dksw_member WHERE dkswMemberCategory=?");
+			pstmt.setInt(1, inputMemberCategory);
+			rset = pstmt.executeQuery();
+		
+			while(rset.next()) {
+				members.add(rset.getInt(1));
+			}
+			
+			return members;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+
 		} finally {
 			try {
 				DBUtil.close(con, pstmt, rset);

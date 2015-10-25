@@ -35,7 +35,7 @@
                 
 				<!-- 온라인 인증코드 관련 메시지 -->
 	            <div class="sign-up" style="text-align:center; color:#555555;">
-					<h4 class="txtStatus-onlineAuthCode"></h4>
+					<h4 class="txtStatus-onlineAuthCode">처리중입니다.</h4>
 				</div>
 	
             </div>
