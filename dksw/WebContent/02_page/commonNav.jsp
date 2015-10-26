@@ -51,8 +51,8 @@
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">동아리 소개</a>
 	                            <ul class="dropdown-menu">
-	                                <li><a href="#">AEGIS</a></li>
-	                                <li><a href="#">DMAP'S</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/club_info/index.jsp">AEGIS</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/club_info/index.jsp">DMAP'S</a></li>
 	                            </ul>
 	                        </li>
 	
@@ -62,69 +62,36 @@
 
 	                    </ul>
 	                </li>
-	
+
 	                <!-- 연구 -->
 	                <li class="dropdown">
-	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">연구
-	                    </a>
+	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">연구</a>
 	                    <ul class="dropdown-menu">
-	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" onclick="navLab(1);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Database Lab.</a>
-	                            <ul class="dropdown-menu">
-	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_03/index.jsp?labCode=1">소개 및 연구목표</a></li>
-	                                <li><a href="#">연구원</a></li>
-	                                 <li><a href="#">Achievements</a></li>
-	                                 <li><a href="#">Paper & Projects </a></li>
-	                            </ul>
+	                            <a href="<%= request.getContextPath()%>/02_page/sub_03/index.jsp?labCode=1">Database Lab.</a>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" onclick="navLab(2);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Embedded Lab.</a>
-	                            <ul class="dropdown-menu">
-	                                <li><a href="#">소개 및 연구목표</a></li>
-	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">Achievements</a></li>
-	                                 <li><a href="#">Paper & Projects </a></li>
-	                            </ul>
+	                            <a href="<%= request.getContextPath()%>/02_page/sub_03/index.jsp?labCode=2">Embedded Lab.</a>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" onclick="navLab(3);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Mobile Contents Lab.</a>
-	                            <ul class="dropdown-menu">
-	                               <li><a href="#">소개 및 연구목표</a></li>
-	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">Achievements</a></li>
-	                                 <li><a href="#">Paper & Projects </a></li>
-	                            </ul>
+	                            <a href="<%= request.getContextPath()%>/02_page/sub_03/index.jsp?labCode=3">Mobile Contents Lab.</a>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" onclick="navLab(4);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Multimedia DSP Lab.</a>
-	                            <ul class="dropdown-menu">
-	                                <li><a href="#">소개 및 연구목표</a></li>
-	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">Achievements</a></li>
-	                                 <li><a href="#">Paper & Projects </a></li>
-	                            </ul>
+	                            <a href="<%= request.getContextPath()%>/02_page/sub_03/index.jsp?labCode=4">Multimedia DSP Lab.</a>
 	                        </li>
 	
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" onclick="navLab(5);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">OS/Security Lab.</a>
-	                            <ul class="dropdown-menu">
-	                                <li><a href="#">소개 및 연구목표</a></li>
-	                                <li><a href="#">연구원</a></li>
-	                                <li><a href="#">Achievements</a></li>
-	                                 <li><a href="#">Paper & Projects </a></li>
-	                            </ul>
+	                            <a href="<%= request.getContextPath()%>/02_page/sub_03/index.jsp?labCode=5">OS/Security Lab.</a>
 	                        </li>
 	                    </ul>
 	                </li>
 	
 					<!-- 교육 -->
 	                <li class="dropdown">
-	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">교육
-	                    </a>
+	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">교육</a>
 	                    <ul class="dropdown-menu">
 	                        <li><a href="#">입학안내</a></li>
 	                        <li><a href="#">산학협력</a></li>
@@ -133,8 +100,7 @@
 	
 					<!-- 게시판 -->
 	                <li class="dropdown">
-	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">게시판
-	                    </a>
+	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">게시판</a>
 	                    <ul class="dropdown-menu">
 	                        <li><a href="<%=request.getContextPath()%>/02_page/sub_05/board/index.jsp">자유게시판</a></li>
 	                        <li><a href="#">질문게시판</a></li>

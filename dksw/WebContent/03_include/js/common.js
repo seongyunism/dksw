@@ -10,13 +10,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-68083185-1', 'auto');
 ga('send', 'pageview');
 
-// 서브 메뉴 이동
-function navLab(num) {
-	var src = "/dksw/02_page/sub_03/index.jsp?labCode=" + num;
-	
-	location.href = src;
-}
-
 //페이지 권한 정보 가져오기
 function initializePermission(id) {
 
