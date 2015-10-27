@@ -57,7 +57,7 @@
 			<c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '2' || sessionScope.dkswMemberCategory == '5'}">  
 				<div id="writeBtn" class="btn btn-primary-trn pull-right" onclick="writeMode()">
 					<i class="fa fa-pencil"></i>새글작성
-				    </div>
+				</div>
 				<div class="space-sm"></div>
 			</c:if>
 	

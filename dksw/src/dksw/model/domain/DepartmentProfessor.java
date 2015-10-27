@@ -12,8 +12,7 @@ public class DepartmentProfessor {
 	private String dkswDepartmentProfessorContact;
 	private String dkswDepartmentProfessorPicture;
 	private String dkswDepartmentProfessorHomepage;
-	private int dkswDepartmentProfessorEditDate;
-	private int dkswDepartmentProfessorEditPermission;
+	private int dkswMemberNo;
 	
 	public int getDkswDepartmentProfessorNo() {
 		return dkswDepartmentProfessorNo;
@@ -75,25 +74,18 @@ public class DepartmentProfessor {
 	public void setDkswDepartmentProfessorHomepage(String dkswDepartmentProfessorHomepage) {
 		this.dkswDepartmentProfessorHomepage = dkswDepartmentProfessorHomepage;
 	}
-	public int getDkswDepartmentProfessorEditDate() {
-		return dkswDepartmentProfessorEditDate;
+	public int getDkswMemberNo() {
+		return dkswMemberNo;
 	}
-	public void setDkswDepartmentProfessorEditDate(int dkswDepartmentProfessorEditDate) {
-		this.dkswDepartmentProfessorEditDate = dkswDepartmentProfessorEditDate;
-	}
-	public int getDkswDepartmentProfessorEditPermission() {
-		return dkswDepartmentProfessorEditPermission;
-	}
-	public void setDkswDepartmentProfessorEditPermission(int dkswDepartmentProfessorEditPermission) {
-		this.dkswDepartmentProfessorEditPermission = dkswDepartmentProfessorEditPermission;
+	public void setDkswMemberNo(int dkswMemberNo) {
+		this.dkswMemberNo = dkswMemberNo;
 	}
 	
 	public DepartmentProfessor(int dkswDepartmentProfessorNo, String dkswDepartmentProfessorNameKo,
 			String dkswDepartmentProfessorNameEn, String dkswDepartmentProfessorLabName,
 			String dkswDepartmentProfessorField, String dkswDepartmentProfessorLabLocation,
 			String dkswDepartmentProfessorEmail, String dkswDepartmentProfessorContact,
-			String dkswDepartmentProfessorPicture, String dkswDepartmentProfessorHomepage,
-			int dkswDepartmentProfessorEditDate, int dkswDepartmentProfessorEditPermission) {
+			String dkswDepartmentProfessorPicture, String dkswDepartmentProfessorHomepage, int dkswMemberNo) {
 		super();
 		this.dkswDepartmentProfessorNo = dkswDepartmentProfessorNo;
 		this.dkswDepartmentProfessorNameKo = dkswDepartmentProfessorNameKo;
@@ -105,8 +97,6 @@ public class DepartmentProfessor {
 		this.dkswDepartmentProfessorContact = dkswDepartmentProfessorContact;
 		this.dkswDepartmentProfessorPicture = dkswDepartmentProfessorPicture;
 		this.dkswDepartmentProfessorHomepage = dkswDepartmentProfessorHomepage;
-		this.dkswDepartmentProfessorEditDate = dkswDepartmentProfessorEditDate;
-		this.dkswDepartmentProfessorEditPermission = dkswDepartmentProfessorEditPermission;
+		this.dkswMemberNo = dkswMemberNo;
 	}
-		
 }

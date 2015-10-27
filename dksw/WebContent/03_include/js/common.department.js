@@ -16,6 +16,10 @@ function initializeDepartmentGreeting() {
 			$("#dkswDepartmentGreetingPicture").attr("src", "/dksw/04_upload/files/" + response.dkswDepartmentGreetingPicture);	
 			$("#dkswDepartmentGreetingContent").html(response.dkswDepartmentGreetingContent.replace(/\n/g, "<br />"));	
 			$("#dkswDepartmentGreetingEditDate").text(response.dkswDepartmentGreetingEditDate);
+			$("#dkswDepartmentProfessorNameKo").text(response.dkswDepartmentProfessorNameKo);
+			$("#dkswDepartmentProfessorContact").text(response.dkswDepartmentProfessorContact);
+			$("#dkswDepartmentProfessorLabLocation").text(response.dkswDepartmentProfessorLabLocation);
+			$("#dkswDepartmentProfessorEmail").text(response.dkswDepartmentProfessorEmail);
 		}, error: function(xhr,status,error) {
 			alert(error);
 		}

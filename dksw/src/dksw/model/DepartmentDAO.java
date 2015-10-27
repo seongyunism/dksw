@@ -14,6 +14,7 @@ import dksw.util.DBUtil;
 
 public class DepartmentDAO {
 
+	// 학과장 인사
 	public static DepartmentGreeting getGreeting() throws SQLException {
 
 		Connection con = null;
@@ -96,8 +97,56 @@ public class DepartmentDAO {
 		}
 
 	}
-	//학과 교수 
-	public static ArrayList<DepartmentProfessor> getProfessor() throws SQLException {
+
+	// 학과 교수
+	public static DepartmentProfessor getProfessor(int inputMemberNo) throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		DepartmentProfessor data = null;	
+		
+		try {
+			con = DBUtil.getConnection(); 
+			
+			pstmt = con.prepareStatement("SELECT * FROM dksw_department_professor WHERE dkswMemberNo=?");
+			pstmt.setInt(1, inputMemberNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				data = new DepartmentProfessor(
+						rset.getInt(1),
+						rset.getString(2),
+						rset.getString(3),
+						rset.getString(4),
+						rset.getString(5),
+						rset.getString(6),
+						rset.getString(7),
+						rset.getString(8),
+						rset.getString(9),
+						rset.getString(10),
+						rset.getInt(11)
+				);
+			}
+			
+			return data;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+	
+	// 학과 교수 
+	public static ArrayList<DepartmentProfessor> getProfessorList() throws SQLException {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -124,8 +173,7 @@ public class DepartmentDAO {
 						rset.getString(8),
 						rset.getString(9),
 						rset.getString(10),
-						rset.getInt(11),
-						rset.getInt(12)
+						rset.getInt(11)
 				);
 				
 				datas.add(data);
@@ -144,7 +192,6 @@ public class DepartmentDAO {
 				sqle.printStackTrace();
 			}
 		}
-
 	}
 	
 	//학과 위치 및 연락처  

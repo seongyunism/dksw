@@ -6,7 +6,7 @@ public class DepartmentGreeting {
 	private String dkswDepartmentGreetingPicture;
 	private String dkswDepartmentGreetingContent;
 	private int dkswDepartmentGreetingEditDate;
-	private int dkswDepartmentGreetingEditPermission;
+	private int dkswMemberNo;
 	
 	public String getDkswDepartmentGreetingTitle() {
 		return dkswDepartmentGreetingTitle;
@@ -32,21 +32,20 @@ public class DepartmentGreeting {
 	public void setDkswDepartmentGreetingEditDate(int dkswDepartmentGreetingEditDate) {
 		this.dkswDepartmentGreetingEditDate = dkswDepartmentGreetingEditDate;
 	}
-	public int getDkswDepartmentGreetingEditPermission() {
-		return dkswDepartmentGreetingEditPermission;
+	public int getDkswMemberNo() {
+		return dkswMemberNo;
 	}
-	public void setDkswDepartmentGreetingEditPermission(int dkswDepartmentGreetingEditPermission) {
-		this.dkswDepartmentGreetingEditPermission = dkswDepartmentGreetingEditPermission;
+	public void setDkswMemberNo(int dkswMemberNo) {
+		this.dkswMemberNo = dkswMemberNo;
 	}
 	
 	public DepartmentGreeting(String dkswDepartmentGreetingTitle, String dkswDepartmentGreetingPicture,
-			String dkswDepartmentGreetingContent, int dkswDepartmentGreetingEditDate,
-			int dkswDepartmentGreetingEditPermission) {
+			String dkswDepartmentGreetingContent, int dkswDepartmentGreetingEditDate, int dkswMemberNo) {
 		super();
 		this.dkswDepartmentGreetingTitle = dkswDepartmentGreetingTitle;
 		this.dkswDepartmentGreetingPicture = dkswDepartmentGreetingPicture;
 		this.dkswDepartmentGreetingContent = dkswDepartmentGreetingContent;
 		this.dkswDepartmentGreetingEditDate = dkswDepartmentGreetingEditDate;
-		this.dkswDepartmentGreetingEditPermission = dkswDepartmentGreetingEditPermission;
+		this.dkswMemberNo = dkswMemberNo;
 	}
 }

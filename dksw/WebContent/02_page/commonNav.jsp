@@ -25,9 +25,9 @@
 	                        <li class="dropdown-submenu">
 	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">자료실</a>
 	                            <ul class="dropdown-menu">
-	                                <li><a href="#">일반 자료실</a></li>
-	                                <li><a href="#">강의자료</a></li>
-	                                <li><a href="#">과제물 공지</a></li>              
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_01/file/normal/index.jsp">일반 자료실</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_01/file/lecture/index.jsp">강의자료</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_01/file/homework/index.jsp">과제물 공지</a></li>              
 	                            </ul>
 	                        </li>
 	                    </ul>

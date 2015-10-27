@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dksw.model.DepartmentDAO;
+import dksw.model.MemberDAO;
 import dksw.model.domain.DepartmentContact;
 import dksw.model.domain.DepartmentGreeting;
 import dksw.model.domain.DepartmentHistory;
@@ -43,14 +44,46 @@ public class DepartmentController extends HttpServlet {
 			getContactData(req, res);
 		}
 	}
+	
+	// 학과장 인사
+	public void getGreetingData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
+		DepartmentGreeting thisData = null;
+
+		try {
+			thisData = DepartmentDAO.getGreeting();
+
+			JSONObject jObject = new JSONObject();
+			JSONArray jArray = new JSONArray();
+
+			// 데이터를 삽입
+			jObject.put("dkswDepartmentGreetingTitle", thisData.getDkswDepartmentGreetingTitle());
+			jObject.put("dkswDepartmentGreetingPicture", thisData.getDkswDepartmentGreetingPicture());
+			jObject.put("dkswDepartmentGreetingContent", thisData.getDkswDepartmentGreetingContent());
+			jObject.put("dkswDepartmentGreetingEditDate", UnixTimeConvertor.toConvertTimeFromUnixTime(thisData.getDkswDepartmentGreetingEditDate()));
+			jObject.put("dkswDepartmentProfessorNameKo", DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorNameKo());
+			jObject.put("dkswDepartmentProfessorContact", DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorContact());
+			jObject.put("dkswDepartmentProfessorLabLocation", DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorLabLocation());
+			jObject.put("dkswDepartmentProfessorEmail", DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorEmail());
+			 
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+
+			res.getWriter().write(jObject.toString());
+
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (SQL에러)");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
+		}
+	}
+	
 	// 학과 연혁
 	private void getHistoryData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
 		ArrayList<DepartmentHistory> thisData = null;
 
 		try {
-			
 			thisData = DepartmentDAO.getHistory();
 
 			JSONObject jObject = new JSONObject();
@@ -78,52 +111,21 @@ public class DepartmentController extends HttpServlet {
 		} catch (IOException ie) {
 			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
 		}
-
 	}
 
-	public void getGreetingData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-
-		DepartmentGreeting thisData = null;
-
-		try {
-			thisData = DepartmentDAO.getGreeting();
-
-			JSONObject jObject = new JSONObject();
-			JSONArray jArray = new JSONArray();
-
-			// 데이터를 삽입
-			jObject.put("dkswDepartmentGreetingTitle", thisData.getDkswDepartmentGreetingTitle());
-			jObject.put("dkswDepartmentGreetingPicture", thisData.getDkswDepartmentGreetingPicture());
-			jObject.put("dkswDepartmentGreetingContent", thisData.getDkswDepartmentGreetingContent());
-			jObject.put("dkswDepartmentGreetingEditDate", UnixTimeConvertor.toConvertTimeFromUnixTime(thisData.getDkswDepartmentGreetingEditDate()));
-			jObject.put("dkswDepartmentGreetingEditPermission", thisData.getDkswDepartmentGreetingEditPermission());
-
-			res.setContentType("application/json");
-			res.setCharacterEncoding("UTF-8");
-
-			res.getWriter().write(jObject.toString());
-
-		} catch (SQLException se) {
-			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (SQL에러)");
-		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
-		}
-	}
 	//학과 교수
 	private void getProfessorData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
 		ArrayList<DepartmentProfessor> thisData = null;
 
 		try {
-			
-			thisData = DepartmentDAO.getProfessor();
+			thisData = DepartmentDAO.getProfessorList();
 
 			JSONObject jObject = new JSONObject();
 			JSONArray jArray = new JSONArray();
 			
 			// 데이터를 삽입		
-			for(int i=0; i<thisData.size(); i++)
-			{
+			for(int i=0; i<thisData.size(); i++) {
 				JSONObject tempData = new JSONObject();
 				tempData.put("dkswDepartmentProfessorNo", thisData.get(i).getDkswDepartmentProfessorNo());
 				tempData.put("dkswDepartmentProfessorNameKo", thisData.get(i).getDkswDepartmentProfessorNameKo());
@@ -135,8 +137,7 @@ public class DepartmentController extends HttpServlet {
 				tempData.put("dkswDepartmentProfessorContact", thisData.get(i).getDkswDepartmentProfessorContact());
 				tempData.put("dkswDepartmentProfessorPicture", thisData.get(i).getDkswDepartmentProfessorPicture());
 				tempData.put("dkswDepartmentProfessorHomepage", thisData.get(i).getDkswDepartmentProfessorHomepage());
-				tempData.put("dkswDepartmentProfessorEditDate", UnixTimeConvertor.toConvertTimeFromUnixTime(thisData.get(i).getDkswDepartmentProfessorEditDate()));
-				tempData.put("dkswDepartmentProfessorEditPermission", thisData.get(i).getDkswDepartmentProfessorEditPermission());
+				tempData.put("dkswMemberNo", thisData.get(i).getDkswMemberNo());
 				jArray.add(tempData);
 			}
 						
@@ -152,7 +153,6 @@ public class DepartmentController extends HttpServlet {
 		} catch (IOException ie) {
 			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
 		}
-
 	}
 	
 	//학과 위치 및 연락처
@@ -161,7 +161,6 @@ public class DepartmentController extends HttpServlet {
 		DepartmentContact thisData = null;
 
 		try {
-			
 			thisData = DepartmentDAO.getContact();
 
 			JSONObject jObject = new JSONObject();
@@ -185,8 +184,5 @@ public class DepartmentController extends HttpServlet {
 		} catch (IOException ie) {
 			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
 		}
-
 	}
-
-
 }

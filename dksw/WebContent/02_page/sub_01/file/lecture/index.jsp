@@ -1,12 +1,113 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!DOCTYPE html>
+<html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
+
+<head>
+	<title>단국대학교 소프트웨어학과 | 학과장 인사</title>
+
+	<jsp:include page="../../../commonHeader.jsp" flush="false" />
+	
+	<!-- Custom Scripts -->
+	<script>
+	$(document).ready(function() {
+		$(".lecture-year, .lecture-semester").selectpicker();
+	});
+
+	$(window).load(function() {
+
+	});
+	
+	$(function() {
+
+	});
+	</script>
+</head>
+
+<body>
+    <!-- Navigation -->
+	<jsp:include page="../../../commonNav.jsp" flush="false"/>
+
+    <!-- Header Box -->
+    <section class="bg-center bg-cover">
+        <div class="bg-filter">
+            <div class="container section-lg">
+                <h1 class="top-title font-NanumGothic">강의자료</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+        	<div class="button text-center">
+	 			<div class="btn btn-primary-trn">
+					<i class="fa fa-pencil"></i>강의 개설
+				</div>
+				
+	 			<div class="btn btn-primary-trn">
+					<i class="fa fa-pencil"></i>강의 리스트
+				</div>
+				
+				<div class="btn btn-primary-trn">
+					<i class="fa fa-times"></i>강의 닫기
+				</div>
+			</div>
+			<div class="space"></div>
+			
+			<div class="lecture-open text-center" style="width:800px; min-height:45px;">
+				<div style="width:225px; float:left;">
+					<select class="lecture-year" style="text-align:center;">				
+						<option>년도</option>
+						<option value="2015">2015년</option>
+						<option value="2016">2016년</option>
+						<option value="2017">2017년</option>
+						<option value="2018">2018년</option>
+						<option value="2019">2019년</option>
+						<option value="2020">2020년</option>
+					</select>
+				</div>
+				
+				<div style="width:225px; float:left; margin-right:2px;">
+					<select class="lecture-semester">
+						<option>학기</option>
+						<option value="1">1학기</option>
+						<option value="2">2학기</option>
+					</select>
+				</div>				
+				<div style="width:200px; float:left; margin-right:5px;"><input type="text" class="form-control" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="강의명" /></div>
+				<div style="width:100px; float:left;"><input type="text" class="form-control" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="분반수" maxlength="2" /></div>
+				<div style="width:30px; float:left; padding-top:11px;"><i class="fa fa-question-circle" title="본인이 강의하는 같은 강좌의 분반 개수"></i></div>
+
+				
+			</div>
+			
+			
+			
+			
+			<div class="lecture-list"></div>
+			<div class="lecture-close"></div>
+
+        </div>
+    </section>
+
+    <!--Back to top-->
+	<a href="#" class="back-to-top" style="display: none;">
+	    <i class="fa fa-angle-up"></i>
+	</a>
+
+	<!-- Side Menu -->
+	<jsp:include page="../../../commonSidebar.jsp" flush="false"/>
+	
+    <!-- Footer-->
+	<jsp:include page="../../../commonFooter.jsp" flush="false"/>
+
+	<div id="ascrail2000" class="nicescroll-rails" style="width: 8px; z-index: 999999; position: fixed; top: 0px; height: 100%; right: 0px; cursor: default; opacity: 0; background: rgb(221, 221, 221);">
+		<div style="position: relative; float: right; width: 8px; border: none; border-radius: 0px; height: 269px; top: 0px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
+	</div>
+	
+	<div id="ascrail2000-hr" class="nicescroll-rails" style="height: 8px; z-index: 999999; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; opacity: 0; display: none; background: rgb(221, 221, 221);">
+		<div style="position: relative; top: 0px; height: 8px; border: none; border-radius: 0px; width: 1391px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
+	</div>
+	
 </body>
 </html>

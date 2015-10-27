@@ -70,10 +70,10 @@
             <hr class="hr">
             
             <ul class="list-unstyled info-list">
-                <li><strong>학과장 : </strong></li>
-                <li><strong>사무실 위치 : </strong></li>
-                <li><strong>전화번호 : </strong></li>
-                <li><strong>이메일 : </strong></li>
+                <li><strong>학과장&nbsp;&nbsp;:&nbsp;&nbsp;</strong>교수 <span id="dkswDepartmentProfessorNameKo"></span></li>
+                <li><strong>사무실 위치&nbsp;&nbsp;:&nbsp;&nbsp;</strong><span id="dkswDepartmentProfessorLabLocation"></span></li>
+                <li><strong>전화번호&nbsp;&nbsp;:&nbsp;&nbsp;</strong><span id="dkswDepartmentProfessorContact"></span></li>
+                <li><strong>이메일&nbsp;&nbsp;:&nbsp;&nbsp;</strong><span id="dkswDepartmentProfessorEmail"></span></li>
             </ul>
 
             <hr class="hr">

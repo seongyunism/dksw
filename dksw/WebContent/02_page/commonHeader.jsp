@@ -5,8 +5,11 @@
 	<meta name="description" content="Dankook University Department of Software" />
 	<meta name="author" content="Seong-Gyun Jeon, Ji-Hoon Hwang, Jae-Seock Heo, Ha-Yarn Kim, Hong-Jun Jang" />
 
-	<!-- CSS : Boostrap Framework  -->
+	<!-- CSS : Boostrap Framework -->
 	<link href="<%=request.getContextPath()%>/03_include/css/bootstrap.min.css" rel="stylesheet" />
+
+	<!-- CSS : Boostrap Plugin - select box -->
+	<link href="<%=request.getContextPath()%>/03_include/css/bootstrap-select.min.css" rel="stylesheet" />
 
 	<!-- CSS : Google Fonts - Lato -->
 	<link href="<%=request.getContextPath()%>/03_include/css/lato.css" rel="stylesheet" />
@@ -35,6 +38,9 @@
 
     <!-- Script : Bootstrap Plugin - open dropdown on hover -->
     <script src="<%=request.getContextPath()%>/03_include/js/bootstrap-hover-dropdown.min.js"></script>
+
+    <!-- Script : Bootstrap Plugin - select box -->
+    <script src="<%=request.getContextPath()%>/03_include/js/bootstrap-select.min.js"></script>
 
     <!-- Script : LESS preprocessor -->
     <script src="<%=request.getContextPath()%>/03_include/js/less.min.js"></script>
