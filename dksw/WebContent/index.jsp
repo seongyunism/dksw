@@ -15,15 +15,15 @@
 	<jsp:include page="./02_page/commonNav.jsp" flush="false"/>
 
     <!-- Header Section  -->
-    <section class="bg-7 bg-centerTop70 bg-cover">
+    <section class="background-bar-main bg-centerTop70 bg-cover">
         <div class="bg-filter sTop">
             <div class="container">
                 <div class="jumbotron trn v-center">
-                    <h1>DKU Department of Software</h1>
+                    <h1 class="page-main-title">DKU Department of Software</h1>
                     
-                    <div class="space-sm"></div>
+                    <div class="space"></div>
                     
-                    <p class="font-NanumGothic">단국대학교 소프트웨어학과 홈페이지에 오신 것을 환영합니다.<br />본교 학과 학생들은 학과 오프라인 게시판 확인 후 필히 가입바랍니다.</p>
+                    <p class="font-NanumGothic" style="line-height:1.7em;"><span class="page-main-subtitle">단국대학교 소프트웨어학과 홈페이지에 오신 것을 환영합니다.</span><br /><span class="page-main-subtitle">본교 학과 학생들은 <span class="page-main-subtitle-offline text-bold" title="자연과학관 5층 학과 사무실 앞 게시판">학과 오프라인 게시판 확인</span> 후 필히 가입바랍니다.</span></p>
                     
                     <div class="space-sm"></div>
                     

@@ -48,7 +48,7 @@
                         <i class="fa fa-map-marker icon-c"></i>
                         <div class="float-text">
                             <h4>Our Location</h4>
-                            <p style="line-height:1.75em; margin-top:10px;"><span style='letter-spacing:-0.5px;'>경기도 용인시 수지구 죽전로 152 단국대학교</span><br />자연과학관 501호(과사무실), 502호(과방)</p>
+                            <p style="line-height:1.75em; margin-top:10px;"><span style="font-size:0.85em; letter-spacing:-0.5px;">경기도 용인시 수지구 죽전로 152 단국대학교</span><br /><span style="font-size:0.9em;">자연과학관 501호(과사무실), 502호(과방)</span></p>
                         </div>
                     </div>
                 </div>

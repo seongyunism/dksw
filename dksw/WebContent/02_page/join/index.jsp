@@ -32,7 +32,7 @@
 	<jsp:include page="../commonNav.jsp" flush="false"/>
 
 	<!-- Sign Up Section -->
-    <section class="bg-8 bg-center bg-cover section-fxd">
+    <section class="background-bar-join bg-center bg-cover section-fxd">
         <div class="bg-filter">
             <div class="hv-center">
                 

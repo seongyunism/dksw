@@ -94,6 +94,7 @@
 	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">교육</a>
 	                    <ul class="dropdown-menu">
 	                        <li><a href="#">입학안내</a></li>
+	                        <li><a href="#">공학인증</a></li>
 	                        <li><a href="#">산학협력</a></li>
 	                    </ul>
 	                </li>

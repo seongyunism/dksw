@@ -83,11 +83,11 @@ function initializeDepartmentProfessor() {
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorPicture
 					+ "' style='width:100%' /><div class='content-open content-center'><ul class='circle-icons text-center icons-list'><li><a href='mailto:"
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorEmail
-					+ "' title='Follow us'><i class='fa fa-envelope'></i></a></li><li><a href='"
+					+ "' title='이메일 보내기'><i class='fa fa-envelope'></i></a></li><li><a href='"
 //					+ facebook
-					+ "' title='Follow us'><i class='fa fa-twitter'></i></a></li><li><a href='"
+					+ "' title='페이스북 방문하기'><i class='fa fa-twitter'></i></a></li><li><a href='"
 //					+ twitter
-					+ "' title='Follow us'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='font-NanumGothic'>"
+					+ "' title='트위터 방문하기'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='font-NanumGothic'>"
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorNameKo
 					+ "&nbsp;&nbsp;<small>"
 					+ response.dkswDepartmentProfessor[i].dkswDepartmentProfessorNameEn
