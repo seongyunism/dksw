@@ -15,12 +15,14 @@ import org.json.simple.JSONObject;
 
 import dksw.model.AdminDAO;
 import dksw.model.BoardDAO;
+import dksw.model.DepartmentDAO;
 import dksw.model.LabAchievementsDAO;
 import dksw.model.LabIntroDAO;
 import dksw.model.LabMembersDAO;
 import dksw.model.LabPaperDAO;
 import dksw.model.LabProjectDAO;
 import dksw.model.domain.AdminPermission;
+import dksw.model.domain.DepartmentProfessor;
 import dksw.model.domain.LabAchievements;
 import dksw.model.domain.LabIntro;
 import dksw.model.domain.LabMembers;
@@ -88,17 +90,36 @@ public class LabController extends HttpServlet {
 			jObject.put("dkswLabIntroEditRightIndex", introData.getDkswLabIntroEditRightIndex());
 
 			// Members
+			DepartmentProfessor professor = null;
+			
 			for(int i=0; i<membersData.size(); i++) {
 				JSONObject tempMember = new JSONObject();
-				tempMember.put("dkswLabMembersGroup", membersData.get(i).getDkswLabMembersGroup());
-				tempMember.put("dkswLabMembersAdmissionYear", membersData.get(i).getDkswLabMembersAdmissionYear());
-				tempMember.put("dkswLabMembersNameKo", membersData.get(i).getDkswLabMembersNameKo());
-				tempMember.put("dkswLabMembersNameEn", membersData.get(i).getDkswLabMembersNameEn());
-				tempMember.put("dkswLabMembersEmail", membersData.get(i).getDkswLabMembersEmail());
-				tempMember.put("dkswLabMembersWorkPlace", membersData.get(i).getDkswLabMembersWorkPlace());
-				tempMember.put("dkswLabMembersPicture", membersData.get(i).getDkswLabMembersPicture());
-				tempMember.put("dkswMemberNo", membersData.get(i).getDkswMemberNo());
-				jArrayMembers.add(tempMember);
+				
+				System.out.println(membersData.get(i).getDkswLabMembersGroup());
+				
+				if(membersData.get(i).getDkswLabMembersGroup() == 1) { // 교수
+					professor = DepartmentDAO.getProfessor(membersData.get(i).getDkswMemberNo());
+					
+					jObject.put("dkswLabMembersProfessorNameKo", professor.getDkswDepartmentProfessorNameKo());
+					jObject.put("dkswLabMembersProfessorNameEn",professor.getDkswDepartmentProfessorNameEn());
+					jObject.put("dkswLabMembersProfessorField",professor.getDkswDepartmentProfessorField());
+					jObject.put("dkswLabMembersProfessorPicture", professor.getDkswDepartmentProfessorPicture());
+					jObject.put("dkswLabMembersProfessorContact", professor.getDkswDepartmentProfessorContact());
+					jObject.put("dkswLabMembersProfessorEmail", professor.getDkswDepartmentProfessorEmail());
+					
+					System.out.println(professor.getDkswDepartmentProfessorNameKo());
+					
+				} else { // 나머지
+					tempMember.put("dkswLabMembersGroup", membersData.get(i).getDkswLabMembersGroup());
+					tempMember.put("dkswLabMembersAdmissionYear", membersData.get(i).getDkswLabMembersAdmissionYear());
+					tempMember.put("dkswLabMembersNameKo", membersData.get(i).getDkswLabMembersNameKo());
+					tempMember.put("dkswLabMembersNameEn", membersData.get(i).getDkswLabMembersNameEn());
+					tempMember.put("dkswLabMembersEmail", membersData.get(i).getDkswLabMembersEmail());
+					tempMember.put("dkswLabMembersWorkPlace", membersData.get(i).getDkswLabMembersWorkPlace());
+					tempMember.put("dkswLabMembersPicture", membersData.get(i).getDkswLabMembersPicture());
+					tempMember.put("dkswMemberNo", membersData.get(i).getDkswMemberNo());
+					jArrayMembers.add(tempMember);					
+				}
 			}
 				
 			// Achievements

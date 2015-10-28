@@ -50,8 +50,8 @@ function initializeLab(labCode) {
 				} else {
 					memberPicture = "/dksw/04_upload/files/sub_03/members/" + labCode + "/" + response.dkswLabMembers[i].dkswLabMembersPicture;
 				}
-				
-				var member = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='" + memberPicture
+										
+					var member = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='" + memberPicture
 					+ "' style='width:100%' /><div class='content-circle content-center text-center'><ul class='circle-icons icons-list'><li><a href='mailto://"
 					+ response.dkswLabMembers[i].dkswLabMembersEmail
 					+ "' title='Follow us'><i class='fa fa-envelope'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-twitter'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='text-center'>" 
@@ -67,6 +67,19 @@ function initializeLab(labCode) {
 				members += member;
 			}
 			$("#dkswLabMembers").html(members);
+			
+			var professor = "<div class='tab-pane active' id='believe'><div class='row'> "+
+							"<div class='col-sm-6 col-md-6 col-lg-5 wow fadeInLeft animated' style='visibility: visible;'>"+
+							"<div class='space visible-sm'></div><img class='img-responsive' src='" +response.dkswLabMembersProfessorPicture+ "'>" +
+							"</div><div class='col-sm-6 col-md-6 col-lg-7 wow fadeInRight animated' style='visibility: visible;'>"+
+							"<h2>Professor</h2><h1>"+response.dkswLabMembersProfessorNameKo+"</h1>" +
+							"<h4>"+response.dkswLabMembersProfessorNameEn+"</h4><div class='space-sm'>" +
+							"</div><ul class='info-list md-list style i-primary'><li><i class='fa fa-play'>" +
+							"</i>Phone No. : " +response.dkswLabMembersProfessorContact+"</li><li><i class='fa fa-play'>" +
+							"</i>E-mail: " +response.dkswLabMembersProfessorEmail+"</li><li><i class='fa fa-play'>" +
+							"</i>Research Interest:" +response.dkswLabMembersProfessorField+"</li></ul></div></div></div>"
+			
+			$("#dkswLabMembersProfessor").html(professor);
 			
 			// Achievements
 			var head = "<tr><td class='text-center text-bold' style='width:70px;'>년도</td><td class='text-center text-bold' style='width:50px;' >월</td><td class='text-center text-bold'>내용</td>";
@@ -89,7 +102,7 @@ function initializeLab(labCode) {
 					+ "</td>";
 
 					if(response.dkswLabModifyPermission == "OK") {
-						achievement += "<td class='text-center' style='width:50px;'><input type='button' value='삭제' onclick='deleteLabTable(0, " + response.dkswLabAchievements[i].dkswLabAchievementsNo + ")' /></td></tr>";
+						achievement += "<td class='text-center' style='width:50px;'><input type='button' class ='btn btn-danger btn-sm' value='삭제' onclick='deleteLabTable(0, " + response.dkswLabAchievements[i].dkswLabAchievementsNo + ")' /></td></tr>";
 					} else {
 						achievement += "</tr>";
 					}
@@ -100,7 +113,9 @@ function initializeLab(labCode) {
 			var achievementForm = "";
 			
 			if(response.dkswLabModifyPermission == "OK") {
-				achievementForm += "<tr><td><input type='text' name='data1' maxlength='4' class='text-center' style='width:66px;' /></td><td><input type='text' name='data2' maxlength='2' class='text-center' style='width:46px;' /></td><td><input type='text' name='data3' style='width:100%;' /></td><td><input type='button' value='추가' onclick='writeLabTable(" + labCode + ", 0)' /></td></tr>";
+				achievementForm += "<tr><td><input type='text' name='data1' maxlength='4' class='form-control text-center' style='width:66px;padding:0px 3px; display:inline;'placeholder = '연도' /></td>" +
+						"<td><input type='text' name='data2' maxlength='2' class='form-control text-center' style='width:46px;padding:0px 3px; display:inline;' placeholder = '월' /></td>" +
+						"<td><input type='text' name='data3' class='form-control text-center' style='width:100%; padding:0px 3px; display:inline;' placeholder = '내용' /></td><td><input type='button' class ='btn btn-primary-trn btn-sm' value='추가' onclick='writeLabTable(" + labCode + ", 0)' /></td></tr>";
 			}
 			
 			$("#dkswLabAchievements").html(head + achievements + achievementForm);
@@ -120,7 +135,7 @@ function initializeLab(labCode) {
 					+ ")<br /><span class='text-size-08'>" + response.dkswLabPaper[i].dkswLabPaperParticipants
 					+ "</span></td>";
 					if(response.dkswLabModifyPermission == "OK") {
-						paper += "<td class='text-center' style='width:50px;'><input type='button' value='삭제' onclick='deleteLabTable(1, " + response.dkswLabPaper[i].dkswLabPaperNo + ")' /></td>";
+						paper += "<td class='text-center' style='width:50px;'><input type='button' class ='btn btn-danger btn-sm' value='삭제' onclick='deleteLabTable(1, " + response.dkswLabPaper[i].dkswLabPaperNo + ")' /></td>";
 					} else {
 						paper += "</tr>";
 					}
@@ -130,13 +145,16 @@ function initializeLab(labCode) {
 			var paperForm = "";
 			
 			if(response.dkswLabModifyPermission == "OK") {
-				paperForm += "<tr><td><input type='text' name='data1' maxlength='50' class='text-center' style='width:400px;' /> <input type='text' name='data2' maxlength='20' class='text-center' style='width:200px;' /><input type='text' name='data3' style='width:500px;' /></td><td><input type='button' value='추가' onclick='writeLabTable(" + labCode + ", 1)' /></td></tr>";
+				paperForm += "<tr><td><input type='text' name='data1' maxlength='50' class='form-control text-center' style='width:400px;padding:0px 3px; display:inline' placeholder = '논문명'/> " +
+						"<input type='text' name='data2' maxlength='20' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline'  placeholder = '게재지'/> " +
+						"<input type='text' name='data3' class='form-control text-center' style='width: 200px;padding:0px 3px; display:inline'  placeholder = '논문 저자'/></td>" +
+						"<td><input type='button' class ='btn btn-primary-trn btn-sm' value='추가' onclick='writeLabTable(" + labCode + ", 1)' /></td></tr>";
 			}
 			
 			$("#dkswLabPaper").html(paperHead + papers+ paperForm);
 			
 			// Project
-			var projecthead = "<tr><td class='text-center text-bold' style='width:150px;'>진행기간</td><td class='text-center text-bold'>프로젝트명</td>";
+			var projecthead = "<tr><td class='text-center text-bold' style='width:200px;'>진행기간</td><td class='text-center text-bold'>프로젝트명</td>";
 
 			if(response.dkswLabModifyPermission == "OK") {
 				projecthead += "<td class='text-center text-bold' style='width:50px;'>관리</td></tr>";
@@ -155,7 +173,7 @@ function initializeLab(labCode) {
 					+ "</td>";
 				
 				if(response.dkswLabModifyPermission == "OK") {
-					project += "<td class='text-center' style='width:50px;'><input type='button' value='삭제' onclick='deleteLabTable(2, " + response.dkswLabProject[i].dkswLabProjectNo + ")' /></td>";
+					project += "<td class='text-center' style='width:50px;'><input type='button' class ='btn btn-danger btn-sm' value='삭제' onclick='deleteLabTable(2, " + response.dkswLabProject[i].dkswLabProjectNo + ")' /></td>";
 				} else {
 					project += "</tr>";
 				}
@@ -165,7 +183,13 @@ function initializeLab(labCode) {
 			var projectForm = "";
 			
 			if(response.dkswLabModifyPermission == "OK") {
-				projectForm += "<tr><td><input type='text' name='data1' maxlength='10' class='text-center' style='width:50px;' /> . <input type='text' name='data2' maxlength='10' class='text-center' style='width:25px;' /> ~ <input type='text' name='data3' class='text-center' style='width:50px;' /> . <input type = 'text' name = 'data4' class='text-center' style = 'width:25px;' /></td><td><input type='text' name='data5' maxlength='50' class='text-center' style='width:500px;' /> <input type='text' name='data6' maxlength='50' class='text-center' style='width:500px;' /> </td><td><input type='button' value='추가' onclick='writeLabTable(" + labCode + ", 2)' /></td></tr>";
+				projectForm += "<tr><td><input type='text' name='data1' maxlength='4' class='form-control text-center' style='width:50px; padding:0px 3px; display:inline;' placeholder ='연도' />." +
+						"<input type='text' name='data2' maxlength='2' class='form-control text-center' style='width:25px; padding:0px 3px; display:inline;' placeholder ='월' />" +
+						" ~ <input type='text' name='data3' maxlength = '4' class='form-control text-center' style='width:50px;padding:0px 3px; display:inline;' placeholder ='연도'/> . " +
+						"<input type = 'text' name = 'data4' maxlength='2' class='form-control text-center' style = 'width:25px;padding:0px 3px; display:inline;' placeholder ='월' /></td>" +
+						"<td><input type='text' name='data5' maxlength='50' class='form-control text-center' style='width:500px;padding:0px 3px; display:inline;' placeholder ='프로젝트명' /> " +
+						"<input type='text' name='data6' maxlength='50' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline;' placeholder ='프로젝트 기관명'/> " +
+						"</td><td><input type='button' class ='btn btn-primary-trn btn-sm' value='추가' onclick='writeLabTable(" + labCode + ", 2)' /></td></tr>";
 			}
 			
 			$("#dkswLabProject").html(projecthead + projects + projectForm);

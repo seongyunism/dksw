@@ -22,7 +22,7 @@ public class LabMembersDAO {
 		
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_members WHERE dkswLabCode=? AND NOT dkswLabMembersGroup=1 ORDER BY dkswLabMembersGroup ASC, dkswLabMembersNameKo ASC");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lab_members WHERE dkswLabCode=? ORDER BY dkswLabMembersGroup ASC, dkswLabMembersNameKo ASC");
 			pstmt.setInt(1, inputLabCode);
 			rset = pstmt.executeQuery();
 				
