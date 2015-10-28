@@ -35,12 +35,12 @@
 	
 	                <!-- 학과소개 -->
 	                <li class="dropdown">
-	                    <a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/index.jsp;" onclick="nav()" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">학과소개</a>
+	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">학과소개</a>
 	                    <ul class="dropdown-menu">
 	                        <li class="dropdown-submenu">
-	                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">학과 소개</a>
+	                            <a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/index.jsp" onclick="nav()" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">학과 소개</a>
 	                            <ul class="dropdown-menu">
-	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/index.jsp">학과장 인사</a></li>
+	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/greeting/index.jsp">학과장 인사</a></li>
 	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/history/index.jsp">학과 연혁</a></li>
 	                                <li><a href="<%=request.getContextPath()%>/02_page/sub_02/department_info/law/index.jsp">학과 내규</a></li>
 	                            </ul>
@@ -93,9 +93,9 @@
 	                <li class="dropdown">
 	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">교육</a>
 	                    <ul class="dropdown-menu">
-	                        <li><a href="#">입학안내</a></li>
-	                        <li><a href="#">공학인증</a></li>
-	                        <li><a href="#">산학협력</a></li>
+	                        <li><a href="<%= request.getContextPath()%>/02_page/sub_04/entrance/index.jsp">입학안내</a></li>
+	                        <li><a href="<%= request.getContextPath()%>/02_page/sub_04/gonghak/index.jsp">공학인증</a></li>
+	                        <li><a href="<%= request.getContextPath()%>/02_page/sub_04/sanhak/index.jsp">산학협력</a></li>
 	                    </ul>
 	                </li>
 	

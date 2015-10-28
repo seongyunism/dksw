@@ -72,6 +72,7 @@
     <!-- Script : Custom scripts -->
     <script src="<%=request.getContextPath()%>/03_include/js/common.js"></script>
     <script src="<%=request.getContextPath()%>/03_include/js/common.member.js"></script>
+    <script src="<%=request.getContextPath()%>/03_include/js/common.lecture.js"></script>
     <script src="<%=request.getContextPath()%>/03_include/js/common.board.js"></script>
     <script src="<%=request.getContextPath()%>/03_include/js/common.department.js"></script>
     <script src="<%=request.getContextPath()%>/03_include/js/common.lab.js"></script>

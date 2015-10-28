@@ -36,8 +36,8 @@ function initializePermission(id) {
 }
 
 function nav() {
-	
-	location.href ="/dksw/02_page/sub_01/department_info/index.jsp"
-	
-	
+
+	var src = "/dksw/02_page/sub_02/department_info/index.jsp";
+
+	location.href = src;
 }
