@@ -116,6 +116,7 @@ public class LabController extends HttpServlet {
 			// Paper
 			for(int i=0; i<paperData.size(); i++) {
 				JSONObject tempPaper = new JSONObject();
+				tempPaper.put("dkswLabPaperNo", paperData.get(i).getDkswLabPaperNo());
 				tempPaper.put("dkswLabPaperTitle", paperData.get(i).getDkswLabPaperTitle());
 				tempPaper.put("dkswLabPaperContent", paperData.get(i).getDkswLabPaperContent());
 				tempPaper.put("dkswLabPaperParticipants", paperData.get(i).getDkswLabPaperParticipants());
@@ -127,6 +128,7 @@ public class LabController extends HttpServlet {
 			// Project
 			for(int i=0; i<projectData.size(); i++) {
 				JSONObject tempProject = new JSONObject();
+				tempProject.put("dkswLabProjectNo", projectData.get(i).getDkswLabProjectNo());
 				tempProject.put("dkswLabProjectName", projectData.get(i).getDkswLabProjectName());
 				tempProject.put("dkswLabProjectStartYear", projectData.get(i).getDkswLabProjectStartYear());
 				tempProject.put("dkswLabProjectStartMonth", projectData.get(i).getDkswLabProjectStartMonth());
@@ -193,14 +195,19 @@ public class LabController extends HttpServlet {
 			String inputLabData1 = (req.getParameter("inputLabData1") != null) ? (req.getParameter("inputLabData1")) : null;
 			String inputLabData2 = (req.getParameter("inputLabData2") != null) ? (req.getParameter("inputLabData2")) : null;
 			String inputLabData3 = (req.getParameter("inputLabData3") != null) ? (req.getParameter("inputLabData3")) : null;	
+			String inputLabData4 = (req.getParameter("inputLabData4") != null) ? (req.getParameter("inputLabData4")) : null;
+			String inputLabData5 = (req.getParameter("inputLabData5") != null) ? (req.getParameter("inputLabData5")) : null;
+			String inputLabData6 = (req.getParameter("inputLabData6") != null) ? (req.getParameter("inputLabData6")) : null;
 			
 			switch(inputLabItem) {
 				case 0: // Achievements
 					checkWriteLabRecord = LabAchievementsDAO.writeRecord(inputLabCode, inputLabData1, inputLabData2, inputLabData3);
 					break;
 				case 1: // Paper
+					checkWriteLabRecord = LabPaperDAO.writeRecord(inputLabCode, inputLabData1, inputLabData2, inputLabData3);
 					break;
 				case 2: // Project
+					checkWriteLabRecord = LabProjectDAO.writeRecord(inputLabCode, inputLabData1, inputLabData2, inputLabData3, inputLabData4,inputLabData5,inputLabData6);
 					break;
 			}
 		
@@ -230,8 +237,10 @@ public class LabController extends HttpServlet {
 					checkDeleteLabRecord = LabAchievementsDAO.deleteRecord(inputLabRecordNo);
 					break;
 				case 1: // Paper
+					checkDeleteLabRecord = LabPaperDAO.deleteRecord(inputLabRecordNo);
 					break;
 				case 2: // Project
+					checkDeleteLabRecord = LabProjectDAO.deleteRecord(inputLabRecordNo);
 					break;
 			}
 			

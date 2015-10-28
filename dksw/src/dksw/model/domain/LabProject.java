@@ -1,7 +1,7 @@
 package dksw.model.domain;
 
 public class LabProject {
-	
+	private int dkswLabProjectNo;
 	private int dkswLabCode;
 	private String dkswLabProjectName;
 	private String dkswLabProjectStartYear;
@@ -12,6 +12,12 @@ public class LabProject {
 	private int dkswLabProjectEditDate; 
 	private int dkswLabProjectEditRightIndex;
 	
+	public int getDkswLabProjectNo() {
+		return dkswLabProjectNo;
+	}
+	public void setDkswLabProjectNo(int dkswLabProjectNo) {
+		this.dkswLabProjectNo = dkswLabProjectNo;
+	}
 	public int getDkswLabCode() {
 		return dkswLabCode;
 	}
@@ -67,10 +73,11 @@ public class LabProject {
 		this.dkswLabProjectEditRightIndex = dkswLabProjectEditRightIndex;
 	}
 	
-	public LabProject(int dkswLabCode, String dkswLabProjectName, String dkswLabProjectStartYear,
+	public LabProject(int dkswLabProjectNo, int dkswLabCode, String dkswLabProjectName, String dkswLabProjectStartYear,
 			String dkswLabProjectStartMonth, String dkswLabProjectEndYear, String dkswLabProjectEndMonth,
 			String dkswLabProjectContent, int dkswLabProjectEditDate, int dkswLabProjectEditRightIndex) {
 		super();
+		this.dkswLabProjectNo = dkswLabProjectNo;
 		this.dkswLabCode = dkswLabCode;
 		this.dkswLabProjectName = dkswLabProjectName;
 		this.dkswLabProjectStartYear = dkswLabProjectStartYear;
@@ -80,5 +87,5 @@ public class LabProject {
 		this.dkswLabProjectContent = dkswLabProjectContent;
 		this.dkswLabProjectEditDate = dkswLabProjectEditDate;
 		this.dkswLabProjectEditRightIndex = dkswLabProjectEditRightIndex;
-	}
+	}	
 }

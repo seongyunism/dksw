@@ -1,6 +1,8 @@
 package dksw.model.domain;
 
 public class LabPaper {
+	
+	private int dkswLabPaperNo;
 	private int dkswLabCode;
 	private String dkswLabPaperTitle;
 	private String dkswLabPaperContent;
@@ -8,6 +10,12 @@ public class LabPaper {
 	private int dkswLabPaperEditDate;
 	private int dkswLabPaperEditRightIndex;
 	
+	public int getDkswLabPaperNo() {
+		return dkswLabPaperNo;
+	}
+	public void setDkswLabPaperNo(int dkswLabPaperNo) {
+		this.dkswLabPaperNo = dkswLabPaperNo;
+	}
 	public int getDkswLabCode() {
 		return dkswLabCode;
 	}
@@ -45,9 +53,10 @@ public class LabPaper {
 		this.dkswLabPaperEditRightIndex = dkswLabPaperEditRightIndex;
 	}
 	
-	public LabPaper(int dkswLabCode, String dkswLabPaperTitle, String dkswLabPaperContent,
+	public LabPaper(int dkswLabPaperNo, int dkswLabCode, String dkswLabPaperTitle, String dkswLabPaperContent,
 			String dkswLabPaperParticipants, int dkswLabPaperEditDate, int dkswLabPaperEditRightIndex) {
 		super();
+		this.dkswLabPaperNo = dkswLabPaperNo;
 		this.dkswLabCode = dkswLabCode;
 		this.dkswLabPaperTitle = dkswLabPaperTitle;
 		this.dkswLabPaperContent = dkswLabPaperContent;
@@ -55,4 +64,5 @@ public class LabPaper {
 		this.dkswLabPaperEditDate = dkswLabPaperEditDate;
 		this.dkswLabPaperEditRightIndex = dkswLabPaperEditRightIndex;
 	}
+	
 }

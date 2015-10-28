@@ -106,35 +106,69 @@ function initializeLab(labCode) {
 			$("#dkswLabAchievements").html(head + achievements + achievementForm);
 			
 			// Paper
-			var paperHead = "<tr><td class='text-center text-bold'>논문명 및 저자</td></tr>";
+			var paperHead = "<tr><td class='text-center text-bold'>논문명 및 저자</td>";
+			
+			if(response.dkswLabModifyPermission == "OK") {
+				paperHead += "<td class='text-center text-bold' style='width:50px;'>관리</td></tr>";
+			} else {
+				paperHead += "</tr>";
+			}
 			
 			for(i=0; i<response.dkswLabPaper.length; i++){
-					var paper ="<tr> <td style='line-height:2em;'><span class='text-bold'>"
+					var paper ="<tr name='" + response.dkswLabPaper[i].dkswLabPaperNo + "'> <td style='line-height:2em;'><span class='text-bold'>"
 					+ response.dkswLabPaper[i].dkswLabPaperTitle + "</span>&nbsp;(" + response.dkswLabPaper[i].dkswLabPaperContent
 					+ ")<br /><span class='text-size-08'>" + response.dkswLabPaper[i].dkswLabPaperParticipants
-					+ "</span></td></tr>";
+					+ "</span></td>";
+					if(response.dkswLabModifyPermission == "OK") {
+						paper += "<td class='text-center' style='width:50px;'><input type='button' value='삭제' onclick='deleteLabTable(1, " + response.dkswLabPaper[i].dkswLabPaperNo + ")' /></td>";
+					} else {
+						paper += "</tr>";
+					}
 				
 				papers += paper;
 			}
-			$("#dkswLabPaper").html(paperHead + papers);
+			var paperForm = "";
+			
+			if(response.dkswLabModifyPermission == "OK") {
+				paperForm += "<tr><td><input type='text' name='data1' maxlength='50' class='text-center' style='width:400px;' /> <input type='text' name='data2' maxlength='20' class='text-center' style='width:200px;' /><input type='text' name='data3' style='width:500px;' /></td><td><input type='button' value='추가' onclick='writeLabTable(" + labCode + ", 1)' /></td></tr>";
+			}
+			
+			$("#dkswLabPaper").html(paperHead + papers+ paperForm);
 			
 			// Project
-			var projecthead = "<tr><td class='text-center text-bold' style='width:150px;'>진행기간</td><td class='text-center text-bold'>프로젝트명</td></tr>";
+			var projecthead = "<tr><td class='text-center text-bold' style='width:150px;'>진행기간</td><td class='text-center text-bold'>프로젝트명</td>";
+
+			if(response.dkswLabModifyPermission == "OK") {
+				projecthead += "<td class='text-center text-bold' style='width:50px;'>관리</td></tr>";
+			} else {
+				projecthead += "</tr>";
+			}
 			
 			for(i=0; i<response.dkswLabProject.length; i++){
 				
-				var project = "<tr> <td class='text-center' style='line-height:2em;'>"
+				var project = "<tr name = '"+response.dkswLabProject[i].dkswLabProjectNo+"'> <td class='text-center' style='line-height:2em;'>"
 					+ response.dkswLabProject[i].dkswLabProjectStartYear + "." + response.dkswLabProject[i].dkswLabProjectStartMonth
 					+ " ~ "
 					+ response.dkswLabProject[i].dkswLabProjectEndYear + "." + response.dkswLabProject[i].dkswLabProjectEndMonth
 					+ "</td><td style='line-height:2em;'><span class='text-bold'>"
 					+ response.dkswLabProject[i].dkswLabProjectContent + "</span>, " + response.dkswLabProject[i].dkswLabProjectName
-					+ "</td></tr>";
+					+ "</td>";
 				
+				if(response.dkswLabModifyPermission == "OK") {
+					project += "<td class='text-center' style='width:50px;'><input type='button' value='삭제' onclick='deleteLabTable(2, " + response.dkswLabProject[i].dkswLabProjectNo + ")' /></td>";
+				} else {
+					project += "</tr>";
+				}
+								
 				projects += project;
 			}
+			var projectForm = "";
 			
-			$("#dkswLabProject").html(projecthead + projects);
+			if(response.dkswLabModifyPermission == "OK") {
+				projectForm += "<tr><td><input type='text' name='data1' maxlength='10' class='text-center' style='width:50px;' /> . <input type='text' name='data2' maxlength='10' class='text-center' style='width:25px;' /> ~ <input type='text' name='data3' class='text-center' style='width:50px;' /> . <input type = 'text' name = 'data4' class='text-center' style = 'width:25px;' /></td><td><input type='text' name='data5' maxlength='50' class='text-center' style='width:500px;' /> <input type='text' name='data6' maxlength='50' class='text-center' style='width:500px;' /> </td><td><input type='button' value='추가' onclick='writeLabTable(" + labCode + ", 2)' /></td></tr>";
+			}
+			
+			$("#dkswLabProject").html(projecthead + projects + projectForm);
 			
 		},error: function(xhr,status,error) {
 			alert(error);
@@ -154,6 +188,10 @@ function writeLabTable(labCode, item) {
 			inputLabData1 : $("div[name='lab" + itemStr[item] + "'] input[name='data1']").val(),
 			inputLabData2 : $("div[name='lab" + itemStr[item] + "'] input[name='data2']").val(),
 			inputLabData3 : $("div[name='lab" + itemStr[item] + "'] input[name='data3']").val(),
+			inputLabData4 : $("div[name='lab" + itemStr[item] + "'] input[name='data4']").val(),
+			inputLabData5 : $("div[name='lab" + itemStr[item] + "'] input[name='data5']").val(),
+			inputLabData6 : $("div[name='lab" + itemStr[item] + "'] input[name='data6']").val(),
+			
 	};
 	
 	$.ajax({
