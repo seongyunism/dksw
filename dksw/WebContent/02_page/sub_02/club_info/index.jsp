@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<% String clubCode = request.getParameter("clubCode").toString(); %>
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
 
@@ -7,6 +7,22 @@
 	<title>단국대학교 소프트웨어학과 | 동아리 소개</title>
 	
 	<jsp:include page="../../commonHeader.jsp" flush="false" />
+	
+	<!-- Custom Scripts -->
+<script>
+	$(document).ready(function() {
+		initializeDepartmentClub('<%=clubCode%>');
+	});
+
+	$(window).load(function() {
+
+	});
+
+	$(function() {
+
+	});
+</script>
+
 </head>
 
 <body>
@@ -22,17 +38,37 @@
 		</div>
 	</section>
 
-	<section>
-		<div class="col-sm-6">
-			<a href="#" title="Read all article">
-				<h2>Mauris quis nibh ut</h2>
-			</a>
-			<p>Mauris quis nibh ut odio ullamcorper volutpat. Aenean quam
-				ante, tristique et euismod faucibus, mollis in elit. Nulla
-				sollicitudin hendrerit sapien vel accumsan.</p>
-			<a href="#" title="Read all article" class="btn btn-default-trn-v2">
-				<i class="fa fa-angle-right"></i>Read More
-			</a>
+	<section class="section">
+		<div class="container-sm">
+
+			<!--동아리 사진 -->
+			<section class="section">
+				<div>
+					<center><img id="dkswDepartmentClubPicture" width="600" height="400"/></center>
+					<div class="top-part hidden-xs">
+						<i class="fa fa-eye"></i>
+					</div>
+				</div>
+			</section>
+
+			<!-- 내용 -->
+			<p class="font-NanumGothic"	id="dkswDepartmentClubNameEn"	style="line-height: 1.8em;"></p>
+			<div class="space-sm"></div>
+
+			<h4>소개</h4>
+			<p class="font-NanumGothic"	id="dkswDepartmentClubContent" style="line-height: 1.8em;"></p>
+			<div class="space-sm"></div>
+
+			<div class="space-sm"></div>
+			<div class="space-sm"></div>
+
+			<!-- 수정일 -->
+			<p class=" font-NanumGothic edit-date col-md-4"	id="getDkswDepartmentIntroductionEditDate"></p>
+			
+			<div class="space-sm"></div>
+
+			<hr class="hr">
+
 		</div>
 	</section>
 
