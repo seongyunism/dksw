@@ -95,8 +95,6 @@ public class LabController extends HttpServlet {
 			for(int i=0; i<membersData.size(); i++) {
 				JSONObject tempMember = new JSONObject();
 				
-				System.out.println(membersData.get(i).getDkswLabMembersGroup());
-				
 				if(membersData.get(i).getDkswLabMembersGroup() == 1) { // 교수
 					professor = DepartmentDAO.getProfessor(membersData.get(i).getDkswMemberNo());
 					
@@ -106,8 +104,6 @@ public class LabController extends HttpServlet {
 					jObject.put("dkswLabMembersProfessorPicture", professor.getDkswDepartmentProfessorPicture());
 					jObject.put("dkswLabMembersProfessorContact", professor.getDkswDepartmentProfessorContact());
 					jObject.put("dkswLabMembersProfessorEmail", professor.getDkswDepartmentProfessorEmail());
-					
-					System.out.println(professor.getDkswDepartmentProfessorNameKo());
 					
 				} else { // 나머지
 					tempMember.put("dkswLabMembersGroup", membersData.get(i).getDkswLabMembersGroup());

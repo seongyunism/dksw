@@ -18,7 +18,7 @@
 	});
 
 	$(window).load(function() {
-
+		jQuery("#dkswDepartmentIntroPicture").slippry();
 	});
 
 	$(function() {
@@ -32,7 +32,7 @@
 	<jsp:include page="../../commonNav.jsp" flush="false" />
 
 	<!-- Header Box -->
-	<section class="bg-16 bg-center bg-cover">
+	<section class="background-bar-02-01 bg-center bg-cover">
 		<div class="bg-filter">
 			<div class="container section-lg">
 				<h1 class="top-title">학과 소개</h1>
@@ -43,19 +43,12 @@
 	<section class="section">
 		<div class="container-sm">
 
-			<!--건물 사진 -->
-			<section class="section">
-				<div>
-					<center><img src="../../../04_upload/files/sub_02/department_info/자연과학관.jpg" width="600" height="400"/></center>
-					<div class="top-part hidden-xs">
-						<i class="fa fa-eye"></i>
-					</div>
-					<div class="bottom-part hidden-xs">
-						<h4>자연과학관</h4>
-					</div>
-				</div>
-			</section>
-
+			<img src="../../../04_upload/files/sub_02/department_info/20151029_001.jpg" class="container-sm-img" />
+		
+			
+			<div class="space-sm"></div>
+			<div class="space-sm"></div>
+						
 			<!-- 내용 -->
 			<h4>소개</h4>
 			<p class="font-NanumGothic"	id="dkswDepartmentIntroductionContentIntro"	style="line-height: 1.8em;"></p>
@@ -75,13 +68,10 @@
 			<p class=" font-NanumGothic edit-date col-md-4"	id="dkswDepartmentIntroductionEditDate"></p>
 			
 			<div class="space-sm"></div>
-
-			<hr class="hr">
-
 		</div>
 	</section>
 
-	<section class="bg-grey section">
+	<!--<section class="bg-grey section">
 		<div class="container">
 			<div class="clearfix ">
 				<h3 class="pull-left">More Projects</h3>
@@ -148,7 +138,7 @@
 
 			</div>
 		</div>
-	</section>
+	</section>-->
 
 	<!--Back to top-->
 	<a href="http://bootstrapart.net/dragonfly/v1.5/portfolio-item-v1.php#"

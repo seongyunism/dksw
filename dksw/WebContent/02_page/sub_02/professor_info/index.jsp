@@ -30,7 +30,7 @@
 	<jsp:include page="../../commonNav.jsp" flush="false" />
 	
     <!-- Header Section  -->
-	<section class="background-bar-02-04 bg-center bg-cover">
+	<section class="background-bar-02-05 bg-center bg-cover">
 		<div class="bg-filter">
 			<div class="container section-lg">
 				<h1 class="top-title">교수 소개</h1>
