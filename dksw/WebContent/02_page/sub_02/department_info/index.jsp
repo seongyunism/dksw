@@ -18,7 +18,7 @@
 	});
 
 	$(window).load(function() {
-		jQuery("#dkswDepartmentIntroPicture").slippry();
+
 	});
 
 	$(function() {
