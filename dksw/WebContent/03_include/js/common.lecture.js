@@ -2,10 +2,10 @@ function addLecture() {
 		
 	var action = "/dksw/lecture?action=addLecture";
 	var form_data = {
-			inputLectureYear : $("select[name='inputLectureYear']").val(),
-			inputLectureSemester : $("select[name='inputLectureSemester']").val(),
-			inputLectureName : $("input[name='inputLectureName']").val(),
-			inputLectureCount : $("input[name='inputLectureCount']").val()
+		inputLectureYear : $("select[name='inputLectureYear']").val(),
+		inputLectureSemester : $("select[name='inputLectureSemester']").val(),
+		inputLectureName : $("input[name='inputLectureName']").val(),
+		inputLectureCount : $("input[name='inputLectureCount']").val()
 	};
 
 	$.ajax({

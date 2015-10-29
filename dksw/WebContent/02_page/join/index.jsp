@@ -116,7 +116,7 @@
 								</div>
 								
 								<div class="col-md-4">
-									<button type="button" class="btn btn-success btn-sign-up" onclick="joinMember()"><i class="fa fa-arrow-circle-right"></i><span class="txtNext">서버로 전송</span></button>
+									<button type="button" class="btn btn-success btn-sign-up" onclick="joinMember()"><i class="fa fa-arrow-circle-right"></i><span class="txtNext">회원가입</span></button>
 									<div class="space visible-sm visible-xs"></div>
 			                    </div>   
 							</div>

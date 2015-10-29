@@ -52,6 +52,51 @@ public class LectureDAO {
 		}
 	}
 
+
+	public static ArrayList<Lecture> getLectureList() throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<Lecture> lectures = new ArrayList<Lecture>();
+		Lecture lecture = null;
+
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lecture ORDER BY dkswLectureYear DESC, dkswLectureSemester DESC");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				lecture = new Lecture(
+						rset.getInt(1),
+						rset.getInt(2),
+						rset.getInt(3),
+						rset.getString(4),
+						rset.getInt(5),
+						rset.getInt(6)
+				);
+				
+				lectures.add(lecture);
+			}
+			
+			return lectures;
+		
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+		
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+	
+	
 	public static ArrayList<Lecture> getLectureList(int inputDepartmentProfessorNo) throws SQLException {
 
 		Connection con = null;
@@ -95,7 +140,7 @@ public class LectureDAO {
 			}
 		}
 	}
-
+	
 	public static ArrayList<LectureChapter> getLectureChapterList(int inputLectureNo, int inputDepartmemtProfessor) throws SQLException {
 
 		Connection con = null;
@@ -142,4 +187,8 @@ public class LectureDAO {
 			}
 		}
 	}
+	
+	
+	
 }
+
