@@ -28,11 +28,11 @@ function initializeLab(labCode) {
 			}
 			
 			if(response.dkswLabIntroPicture_1 != null) {
-				introPicture += "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide2'><img src='" + response.dkswLabIntroPicture_1 + "' /></a></li>";				
+				introPicture += "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide2'><div class=' image-slide'><img class='image-slide-crop' src='" + response.dkswLabIntroPicture_1 + "' /></div></a></li>";				
 			}
 			
 			if(response.dkswLabIntroPicture_2 != null) {
-				introPicture += "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide3'><img src='" + response.dkswLabIntroPicture_2 + "' /></a></li>";				
+				introPicture += "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide3'><div class=' image-slide'><img class='image-slide-crop' src='" + response.dkswLabIntroPicture_2 + "' /></div></a></li>";			
 			}
 
 			$("#dkswLabIntroIntroduction").html(response.dkswLabIntroIntroduction);

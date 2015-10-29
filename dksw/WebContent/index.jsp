@@ -340,7 +340,7 @@
         <div class="container">
             <h2 class="lg-title lg-title-border">Breaking news</h2>
             <div class="row">
-                <div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.8s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.8s; -moz-animation-delay: 0.8s; animation-delay: 0.8s;">
+                <!--<div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.8s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.8s; -moz-animation-delay: 0.8s; animation-delay: 0.8s;">
                     <div class="news">
                         <img class="img-responsive" src="./01_image/temp/011.jpg" alt="camera">
                         <h3>Post title</h3>
@@ -383,7 +383,7 @@
                             <i class="fa fa-angle-double-right"></i>
                         </a>
                     </div>
-                </div>
+                </div>-->
 
             </div>
         </div>

@@ -29,7 +29,7 @@
 	<jsp:include page="../../../commonNav.jsp" flush="false"/>
 
     <!-- Header Box -->
-    <section class="background-bar-02-01 bg-center bg-cover">
+    <section class="background-bar-02-02 bg-center bg-cover">
         <div class="bg-filter">
             <div class="container section-lg">
                 <h1 class="top-title font-NanumGothic">학과장 인사</h1>

@@ -34,3 +34,10 @@ function initializePermission(id) {
 		
 	return false;
 }
+
+function nav() {
+
+	var src = "/dksw/02_page/sub_02/department_info/index.jsp";
+
+	location.href = src;
+}

@@ -2,6 +2,29 @@
  * 학과 소개 페이지 공통 스크립트
  ******************************************************/
 
+// 학과 소개 페이지 로딩
+function initializeDepartmentIntro() {
+	var action = "/dksw/department?action=getIntroData";
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		dataType : "json",
+		success : function(response) {
+			$("#dkswDepartmentIntroductionContentIntro").text(response.dkswDepartmentIntroductionContentIntro);
+			$("#dkswDepartmentIntroductionContentAptitude").text(response.dkswDepartmentIntroductionContentAptitude);
+			$("#dkswDepartmentIntroductionContentCareer").text(response.dkswDepartmentIntroductionContentCareer);
+			$("#getDkswDepartmentIntroductionEditDate").text(response.getDkswDepartmentIntroductionEditDate);
+			$("#setDkswDepartmentIntroductionEditRightIndex").text(response.setDkswDepartmentIntroductionEditRightIndex);
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+	
+	return false;
+	
+}
+
 // 학과장 인사 페이지 로딩
 function initializeDepartmentGreeting() {
 	
@@ -115,6 +138,35 @@ function initializeDepartmentProfessor() {
 
 	return false;
 }
+
+//동아리 소개 페이지 로딩
+function initializeDepartmentClub(clubCode) {
+	
+	var action = "/dksw/department?action=getClubData";
+	var inputClubCode = "inputClubCode=" + clubCode;
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : inputClubCode,
+		dataType : "json",
+		success: function(response) {
+			
+			$("#dkswDepartmentClubNo").text(response.dkswDepartmentClubNo);
+			$("#dkswDepartmentClubNameKo").text(response.dkswDepartmentClubNameKo);
+			$("#dkswDepartmentClubNameEn").text(response.dkswDepartmentClubNameEn);
+			$("#dkswDepartmentClubContent").html(response.dkswDepartmentClubContent);	
+			$("#dkswDepartmentClubPicture").attr("src", "/dksw/04_upload/files/sub_02/club/" + response.dkswDepartmentClubPicture);	
+			$("#dkswDepartmentClubEditDate").text(response.dkswDepartmentClubEditDate);
+			$("#dkswDepartmentClubEditRightIndex").text(response.dkswDepartmentClubEditRightIndex);
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
+
 
 //연락처 페이지 로딩
 function initializeDepartmentContact() {
