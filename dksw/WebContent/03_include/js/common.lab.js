@@ -19,7 +19,7 @@ function initializeLab(labCode) {
 			var achievements = "";
 			var papers = "";
 			var projects = "";
-			
+			var addMember = "";
 			// Introduction
 			var  introPicture = "";
 			
@@ -51,7 +51,7 @@ function initializeLab(labCode) {
 					memberPicture = "/dksw/04_upload/files/sub_03/members/" + labCode + "/" + response.dkswLabMembers[i].dkswLabMembersPicture;
 				}
 										
-					var member = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='" + memberPicture
+				var member = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='" + memberPicture
 					+ "' style='width:100%' /><div class='content-circle content-center text-center'><ul class='circle-icons icons-list'><li><a href='mailto://"
 					+ response.dkswLabMembers[i].dkswLabMembersEmail
 					+ "' title='Follow us'><i class='fa fa-envelope'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-twitter'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='text-center'>" 
@@ -61,12 +61,33 @@ function initializeLab(labCode) {
 					+ "</small></h3><ul class='info-list-pro i-primary font-NanumGothic'>"
 					+ "<li><i class='fa fa-caret-right'></i>입학년도 : " + response.dkswLabMembers[i].dkswLabMembersAdmissionYear + "</li>"
 					+ "<li><i class='fa fa-caret-right'></i>이메일 : <a href='mailto://" + response.dkswLabMembers[i].dkswLabMembersEmail + "'>이메일 보내기</a></li>"
-					+ "<li><i class='fa fa-caret-right'></i>근무지 : " + response.dkswLabMembers[i].dkswLabMembersWorkPlace + "</li>"
-					+ "</ul></div></div>";
+					+ "<li><i class='fa fa-caret-right'></i>근무지 : " + response.dkswLabMembers[i].dkswLabMembersWorkPlace + "</li>";
 				
-				members += member;
+					if(response.dkswLabModifyPermission == "OK") {
+						member += "<input type='button' class ='btn btn-danger btn-sm' value='삭제' onclick='deleteLabTable(3, " + response.dkswLabMembers[i].dkswLabMembersEmail + ")' />"
+								+ "</ul></div></div>";
+					} else{
+						member +=  "</ul></div></div>"
+					}
+				
+					members += member;
 			}
-			$("#dkswLabMembers").html(members);
+			
+			if(response.dkswLabModifyPermission == "OK"){
+				addMember = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='/dksw/04_upload/files/sub_03/members/no-image.jpg'"
+					+ "style='width:100%' /><div class='content-circle content-center text-center'><ul class='circle-icons icons-list'><li><a href='mailto://"
+					+ "' title='Follow us'><i class='fa fa-envelope'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-twitter'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='text-center'>" 
+					+ "<input type='text' name='data1' maxlength='20' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline' placeholder = '이름(Ko)' />	"
+					+ "</span><small>"
+					+ "<input type='text' name='data2' maxlength='20' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline' placeholder = '이름(En)' />	"
+					+ "</small></h3><ul class='info-list-pro i-primary font-NanumGothic'>"
+					+ "<li><i class='fa fa-caret-right'></i>입학년도 :<input type='text' name='data3' maxlength='2' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline'/> </li>"
+					+ "<li><i class='fa fa-caret-right'></i>이메일 :<input type='text' name='data4' maxlength='50' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline'/> </li>"
+					+ "<li><i class='fa fa-caret-right'></i>근무지 :<input type='text' name='data5' maxlength='20' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline'/> </li>"
+					+ "<input type='button' class ='btn btn-primary-trn btn-sm' value='추가' onclick='writeLabTable(" + labCode + ", 3)' /></ul></div></div>";
+			}
+			
+			$("#dkswLabMembers").html(members + addMember);
 			
 			var professor = "<div class='tab-pane active' id='believe'><div class='row'> "+
 							"<div class='col-sm-6 col-md-6 col-lg-5 wow fadeInLeft animated' style='visibility: visible;'>"+
@@ -205,7 +226,7 @@ function initializeLab(labCode) {
 function writeLabTable(labCode, item) {
 
 	var action = "/dksw/lab?action=writeLabTableData";
-	var itemStr = new Array('Achievements', 'Paper', 'Project');
+	var itemStr = new Array('Achievements', 'Paper', 'Project','Members');
 	var form_data = {
 			inputLabCode : labCode,
 			inputLabItem : item,
@@ -239,6 +260,7 @@ function writeLabTable(labCode, item) {
 
 function deleteLabTable(item, record) {
 
+	var form_data;
 	check = confirm("정말로 삭제하시겠습니까?");
 
 	if(!check) {
@@ -247,11 +269,23 @@ function deleteLabTable(item, record) {
 	} else {
 	
 		var action = "/dksw/lab?action=deleteLabTableData";
-		var itemStr = new Array('Achievements', 'Paper', 'Project');
-		var form_data = {
+		var itemStr = new Array('Achievements', 'Paper', 'Project','Members');
+
+		
+		if(item == 3) {
+			form_data = {
 				inputLabItem : item,
-				inputLabRecordNo : record
-		};
+				inputLabRecordNo : 0,
+				inputLabData1 : record
+			};
+			
+		} else {			
+			form_data = {
+				inputLabItem : item,
+				inputLabRecordNo : record,
+				inputLabData1 : ""	
+			};
+		}
 		
 		$.ajax({
 			type : "POST",

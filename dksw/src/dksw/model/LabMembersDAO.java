@@ -58,128 +58,81 @@ public class LabMembersDAO {
 
 	}
 	
-	// 수정요망
-	public static boolean addLabMembers(int inputLabMembersCode, String inputLabMembersPicture, String inputLabMembersNameKo,
-			String inputLabMembersNameEn, String inputLabMembersAdmissionYear, String inputLabMembersEmail, int inputLabMembersGroup, 
-			String inputLabMembersEtc, long inputLabMembersEditdate ,int inputLabMembersEditRightIndex, int inputDepartmentProfessorNo) throws SQLException {
+	//새로운 값 삽입
+		public static boolean writeRecord(int inputLabCode, String inputLabData1, String inputLabData2, String inputLabData3,String inputLabData4, String inputLabData5) throws SQLException {
 
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
 		
-		try {
-			con = DBUtil.getConnection();
-
-			pstmt = con.prepareStatement("INSERT INTO dksw_lab_members("
-					+ "inputLabMembersCode, inputLabMembersPicture, inputLabMembersNameKo, inputLabMembersNameEn, inputLabMembersAdmissionYear, inputLabMembersEmail, "
-					+ "inputLabMembersGroup, inputLabMembersEtc, inputLabMembersEditdate, inputLabMembersEditRightIndex, inputDepartmentProfessorNo"
-					+ ") values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		
-			pstmt.setInt(1, inputLabMembersCode);
-			pstmt.setString(2, inputLabMembersPicture);
-			pstmt.setString(3, inputLabMembersNameKo);
-			pstmt.setString(4, inputLabMembersNameEn);
-			pstmt.setString(5, inputLabMembersAdmissionYear);
-			pstmt.setString(6, inputLabMembersEmail);
-			pstmt.setInt(7, inputLabMembersGroup);
-			pstmt.setString(8, inputLabMembersEtc);
-			pstmt.setLong(9, inputLabMembersEditdate);
-			pstmt.setInt(10, inputLabMembersEditRightIndex);
-			pstmt.setInt(11, inputDepartmentProfessorNo);
-			pstmt.executeUpdate();
+			int writeQueryCount = 0;
 			
-			return true;
-			
-		} catch (SQLException se) {
-			se.printStackTrace();
-			throw se;
-	
-		} finally {
 			try {
-				DBUtil.close(con, pstmt, rset);
-			} catch (SQLException sqle) {
-				sqle.printStackTrace();
-			}
-		}
-	}
-	
-	// 수정요망
-	public static boolean modifyLabMembers(int inputLabMembersCode, String inputLabMembersPicture, String inputLabMembersNameKo,
-			String inputLabMembersNameEn, String inputLabMembersAdmissionYear, int inputLabMembersGroup, 
-			String inputLabMembersEtc, long inputLabMembersEditdate ,int inputLabMembersEditRightIndex, int inputDepartmentProfessorNo,String inputLabMembersEmail) throws SQLException {
+				con = DBUtil.getConnection();
 
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		try {
-			con = DBUtil.getConnection();
-
-			pstmt = con.prepareStatement("UPDATE dksw_lab_members SET "
-					+ "inputLabMembersCode = ?, inputLabMembersPicture = ?, inputLabMembersNameKo = ?, inputLabMembersNameEn = ?, inputLabMembersAdmissionYear = ?, "
-					+ "inputLabMembersGroup = ?, inputLabMembersEtc = ?, inputLabMembersEditdate, inputLabMembersEditRightIndex, inputDepartmentProfessorNo = ? WHERE inputLabMembersEmail = ? ");
-		
-			pstmt.setInt(1, inputLabMembersCode);
-			pstmt.setString(2, inputLabMembersPicture);
-			pstmt.setString(3, inputLabMembersNameKo);
-			pstmt.setString(4, inputLabMembersNameEn);
-			pstmt.setString(5, inputLabMembersAdmissionYear);
-			pstmt.setInt(6, inputLabMembersGroup);
-			pstmt.setString(7, inputLabMembersEtc);
-			pstmt.setLong(8, inputLabMembersEditdate);
-			pstmt.setInt(9, inputLabMembersEditRightIndex);
-			pstmt.setInt(10, inputDepartmentProfessorNo);
-			pstmt.setString(11, inputLabMembersEmail);
-			pstmt.executeUpdate();
-			
-			return true;
-			
-		} catch (SQLException se) {
-			se.printStackTrace();
-			throw se;
-	
-		} finally {
-			try {
-				DBUtil.close(con, pstmt, rset);
-			} catch (SQLException sqle) {
-				sqle.printStackTrace();
-			}
-		}
-	}
-	
-	// 수정요망
-	public static boolean deleteLabMembers(String inputLabMembersEmail) throws SQLException {
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		int deleteQueryCount = 0;
-		
-		try {
-			con = DBUtil.getConnection();
-
-			pstmt = con.prepareStatement("DELETE FROM dksw_lab_members WHERE inputLabMembersEmail = ?");
-			pstmt.setString(1, inputLabMembersEmail);
-			deleteQueryCount = pstmt.executeUpdate();
-
-			if(deleteQueryCount == 1) {
-				return true;
-			} else {
-				return false;
-			}
+				pstmt = con.prepareStatement("INSERT INTO dksw_lab_members(dkswLabCode, dkswLabMembersNameKo, dkswLabMembersNameEn, dkswLabMembersAdmissionYear,dkswLabMembersEmail,dkswLabMembersWorkPlace) values(?, ?, ?, ?, ?, ?)");
+									
+				pstmt.setInt(1, inputLabCode);
+				pstmt.setString(2, inputLabData1);
+				pstmt.setString(3, inputLabData2);
+				pstmt.setString(4, inputLabData3);
+				pstmt.setString(5, inputLabData4);
+				pstmt.setString(6, inputLabData5);
+				writeQueryCount = pstmt.executeUpdate();
 				
-		} catch (SQLException se) {
-			se.printStackTrace();
-			throw se;
-			
-		} finally {
-			try {
-				DBUtil.close(con, pstmt, rset);
-			} catch (SQLException sqle) {
-				sqle.printStackTrace();
+				if(writeQueryCount == 1) {
+					return true;
+				} else {
+					return false;
+				}
+				
+			} catch (SQLException se) {
+				se.printStackTrace();
+				throw se;
+		
+			} finally {
+				try {
+					DBUtil.close(con, pstmt, rset);
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
 			}
-		}	
-	}
+		}
+		
+		//삭제 
+		public static boolean deleteRecord(String inputLabData1) throws SQLException {
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+				
+			int deleteQueryCount = 0;
+				
+			try {
+				con = DBUtil.getConnection();
+				pstmt = con.prepareStatement("DELETE FROM dksw_lab_members WHERE dkswLabMembersEmail=?");
+				pstmt.setString(1, inputLabData1);
+				deleteQueryCount = pstmt.executeUpdate();
+
+				if(deleteQueryCount == 1) {
+					return true;
+				} else {
+					return false;
+				}
+
+			} catch (SQLException se) {
+				se.printStackTrace();
+				throw se;
+					
+			} finally {
+				try {
+					DBUtil.close(con, pstmt, rset);
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+			}	
+		}
+	
+	
 		
 }
