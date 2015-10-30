@@ -22,13 +22,32 @@
 	            <div class="space-sm"></div>
 	            
 	            <div class="loginForm">
-		            <input type="text" class="form-control" placeholder="이메일 주소" id="inputMemberEmail" /><br />
-		            <input type="password" class="form-control" placeholder="비밀번호" id="inputMemberPassword" />
+		            <input type="text" class="form-control" placeholder="이메일 주소" id="inputMemberEmail" style="font-size:13px;" /><br />
+		            <input type="password" class="form-control" placeholder="비밀번호" id="inputMemberPassword" style="font-size:13px;" />
 		        </div>
 	            <div class="space-sm"></div>
 		        
 		        <button class="btn btn-primary font-NanumGothic" style="width:100%; padding:5px 0px;" onclick="loginMember()"><i class="fa fa-sign-out"></i>로그인</button>
  
+	            <div class="space-sm"></div>
+
+			    <a href="javascript:loginWithKakao()" id="custom-login-btn">
+			      <img src="http://mud-kage.kakao.co.kr/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" style="width:240px;" />
+			    </a>
+    			
+    			<script>
+				// KaKao API
+				Kakao.init('41dcde3d524729798e2358ce473f9fc0');
+				function loginWithKakao() {
+			  		Kakao.Auth.login({
+			    		success: function(authObj) {
+			      			loginByKaKao(authObj);
+			    		}, fail: function(err) {
+			      			alert(JSON.stringify(err))
+			    		}
+			  		});
+				}
+			    </script>
 			</c:if>
 
 			<c:if test="${not empty sessionScope.dkswMemberNo}">

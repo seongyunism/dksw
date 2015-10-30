@@ -1,3 +1,20 @@
+// 초기화
+function initializeLecture(category) {
+	
+	switch(category) {
+		case '6':
+			$(".lecture-year, .lecture-semester").selectpicker();
+			break;
+		case '7':
+			getLectureList();
+			break;
+		default:
+			alert("로그인이 필요합니다.");
+			history.go(-1);
+	}
+}
+
+// [교수모드] 강의 개설하기
 function addLecture() {
 		
 	var action = "/dksw/lecture?action=addLecture";
@@ -30,9 +47,10 @@ function addLecture() {
 	return false;
 }
 
-function getLectureList() {
+// [교수모드] 본인이 개설한 강의 리스트 가져오기
+function getLectureListByProfessor() {
 
-	var action = "/dksw/lecture?action=getLectureList";
+	var action = "/dksw/lecture?action=getLectureListByProfessor";
 
 	$.ajax({
 		type : "POST",
@@ -63,7 +81,7 @@ function getLectureList() {
 				lectures += "</table></div></div></div>";
 			}
 			
-			$("#dkswLectureList").html(lectures);
+			$("#getLectureListByProfessor").html(lectures);
 			
 		}, error: function(xhr,status,error) {
 			alert(error);
@@ -71,4 +89,81 @@ function getLectureList() {
 	});
 		
 	return false;
+}
+
+// [학생모드] 수강 신청 리스트 가져오기
+function getLectureList() {
+		
+	var action = "/dksw/lecture?action=getLectureList";
+
+	$.ajax({
+		type : "POST",
+		url : action,
+		dataType : "json",
+		success: function(response) {
+			var lectures = "";
+			
+			for(i=0; i<response.dkswLectureList.length; i++) {
+			
+				lectures += "	<div class='panel panel-default' style='clear:both;'><a data-toggle='collapse' href='#" + response.dkswLectureList[i].dkswLectureNo + "'><div class='panel-heading' style='height:76px; padding:0px;'>" 
+					+ "<div style='float:left; height:26px; margin:25px 0px 25px 25px;'><h4 class='panel-title  font-NanumGothic'><i class='fa fa-th-list'></i>("
+					+ response.dkswLectureList[i].dkswLectureYear + "-" + response.dkswLectureList[i].dkswLectureSemester + ") " + response.dkswLectureList[i].dkswLectureProfessorName + " - " + response.dkswLectureList[i].dkswLectureName + "</h4></div>"
+					+ "<div style='float:right; height:26px; margin:16px 16px 16px 0px;'><button type='button' class='btn btn-primary' onclick='registerLecture(" + response.dkswLectureList[i].dkswLectureNo + ", " + response.dkswLectureList[i].dkswLectureCount + ")'>수강하기</button></div>"
+					+ "</div></a><div id='" + response.dkswLectureList[i].dkswLectureNo + "' class='panel-collapse collapse' style='clear:both;'></div></div>";		
+			}
+			
+			$("#getLectureList").html(lectures);
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
+
+// [학생모드] 수강 신청하기
+function registerLecture(lecture, count) {
+
+	if(count > 1 && lectureCounter == false) {
+		alert("분반이 존재합니다.\n본인의 분반을 선택해주십시오.");
+		$(".panel-group").slideUp();
+		$(".lecture-counter").slideDown();
+		lectureCounter = true;
+		return false;
+	}
+	
+	var action = "/dksw/lecture?action=registerLecture";
+	var form_data = {
+		inputLectureNo : lecture,
+		inputLectureSemester : $("select[name='inputLectureSemester']").val(),
+		inputLectureName : $("input[name='inputLectureName']").val(),
+		inputLectureCount : $("input[name='inputLectureCount']").val()
+	};
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : form_data,
+		dataType : "test",
+		success: function(response) {
+			if(response == "RegisterOK") {
+				alert("수강신청이 완료되었습니다.");
+				getLectureListByStudent();
+			} else {
+				alert("문제가 발생하였습니다.");
+			}
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
+
+//[학생모드] 수강하고 있는 강의 리스트 가져오기
+function getLectureListByStudent() {
+	
+	
+	
 }

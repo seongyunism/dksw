@@ -4521,3 +4521,7 @@ ul.thumbs {
 .container-sm-img {
 	max-width:800px;
 }
+
+.lecture-counter {
+	display:none;
+}

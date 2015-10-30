@@ -48,4 +48,41 @@ public class AdminDAO {
 			}
 		}
 	}
+	
+	public static boolean addPushLog(long inputAdminPushDate, String inputAdminPushMsg, int inputMemberNo) throws SQLException {
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int check = 0;
+		
+		
+		try {
+			con = DBUtil.getConnection();
+			
+			pstmt = con.prepareStatement("INSERT INTO dksw_admin_push(dkswAdminPushDate, dkswAdminPushMsg, dkswMemberNo) VALUES(?, ?, ?)");
+			pstmt.setLong(1, inputAdminPushDate);
+			pstmt.setString(2, inputAdminPushMsg);
+			pstmt.setInt(3,  inputMemberNo);
+			check = pstmt.executeUpdate();
+			
+			if(check == 1) {
+				return true;
+			} else {
+				return false;
+			}
+						
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
 }

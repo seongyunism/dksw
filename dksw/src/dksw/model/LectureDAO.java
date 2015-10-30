@@ -96,7 +96,6 @@ public class LectureDAO {
 		}
 	}
 	
-	
 	public static ArrayList<Lecture> getLectureList(int inputDepartmentProfessorNo) throws SQLException {
 
 		Connection con = null;
@@ -109,7 +108,7 @@ public class LectureDAO {
 		try {
 			con = DBUtil.getConnection();
 
-			pstmt = con.prepareStatement("SELECT * FROM dksw_lecture WHERE dkswDepartmentProfessorNo=?");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lecture WHERE dkswDepartmentProfessorNo=? ORDER BY dkswLectureYear DESC, dkswLectureSemester DESC");
 			pstmt.setInt(1, inputDepartmentProfessorNo);
 			rset = pstmt.executeQuery();
 			

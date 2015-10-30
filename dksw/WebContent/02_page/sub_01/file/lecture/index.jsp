@@ -11,12 +11,14 @@
 	
 	<!-- Custom Scripts -->
 	<script>
+	var lectureCounter = false;
+
 	$(document).ready(function() {
-		$(".lecture-year, .lecture-semester").selectpicker();
+		initializeLecture('${sessionScope.dkswMemberCategory}');
 	});
 
 	$(window).load(function() {
-
+		
 	});
 	
 	$(function() {
@@ -49,11 +51,7 @@
 		                <a href="#lecture-open" data-toggle="tab">강의 개설</a>
 		            </li>
 		            <li class="">
-		                <a href="#lecture-list" data-toggle="tab" onclick="getLectureList()">강의 관리</a>
-		            </li>
-	
-		            <li class="">
-		                <a href="#lecture-close" data-toggle="tab">강의 닫기</a>
+		                <a href="#lecture-list" data-toggle="tab" onclick="getLectureListByProfessor()">강의 관리</a>
 		            </li>
 		        </ul>
 
@@ -83,7 +81,7 @@
 							</div>				
 							<div style="width:230px; float:left; margin-right:5px;"><input type="text" name="inputLectureName" name="lecture-name" class="form-control" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="강의명" /></div>
 							<div style="width:100px; float:left; margin-right:5px;">
-								<input type="number" min="1" max="5" name="inputLectureCount" class="form-control" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="분반수" maxlength="2" />
+								<input type="number" min="1" max="5" name="inputLectureCount" class="form-control" maxlength="1" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="분반수" maxlength="2" />
 							</div>
 								
 							<div style="width:120px; float:left; text-align:left;">
@@ -101,7 +99,7 @@
 					<div class="tab-pane" id="lecture-list">
 					
 						<div class="panel-group">
-							<div id="dkswLectureList"></div>
+							<div id="getLectureListByProfessor"></div>
 						</div>
 					</div>
 					
@@ -115,66 +113,43 @@
 		<!-- 학생 페이지 -->
        	<c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '7'}">   
 			<div class="container">
-				<div class="panel-group">
-					<div class='panel panel-default' style="clear:both;">
-						<a data-toggle='collapse' href="#test">
-							<div class="panel-heading" style="height:76px; padding:25px;">
-								<div style="float:left; height:26px;"><h4 class="panel-title  font-NanumGothic"><i class='fa fa-th-list'></i>(2015-1) SW종합설계2</h4></div>
-								<div style="float:right; height:26px;"><button type="button" class="btn btn-primary">수강하기</button></div>
-							</div>
-						</a>
-						
-						<div id="test" class="panel-collapse collapse" style="clear:both;">
-							<div class="panel-body">
-								<button type="button" class="btn btn-primary btn-xs margin_right_2">공지사항</button>
-								<button type="button" class="btn btn-primary btn-xs margin_right_2">질문하기</button>
-								<button type="button" class="btn btn-primary btn-xs">과제물</button>
-								<div class="space-sm"></div>
-							
-								<table class="table table-striped">
-									<tr>
-										<td class="text-center text-bold" style="width:70px;">No</td>
-										<td class="text-center text-bold">단원명</td>
-									</tr>
-									
-									<tr>
-										<td class="text-center" style="line-height:31px;">#1</td>
-										<td style="line-height:31px;">오리엔테이션</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
-
-					<div class='panel panel-default' style="clear:both;">
-						<a data-toggle='collapse' href="#test2">
-							<div class="panel-heading">
-								<h4 class='panel-title font-NanumGothic'><i class='fa fa-th-list'></i>(2015-1) SW종합설계2</h4>
-							</div>
-						</a>
-						
-						<div id="test2" class="panel-collapse collapse">
-							<div class="panel-body">
-								<button type="button" class="btn btn-primary btn-xs margin_right_2">공지사항</button>
-								<button type="button" class="btn btn-primary btn-xs margin_right_2">질문하기</button>
-								<button type="button" class="btn btn-primary btn-xs">과제물</button>
-								<div class="space-sm"></div>
-							
-								<table class="table table-striped">
-									<tr>
-										<td class="text-center text-bold" style="width:70px;">No</td>
-										<td class="text-center text-bold">단원명</td>
-									</tr>
-									
-									<tr>
-										<td class="text-center" style="line-height:31px;">#1</td>
-										<td style="line-height:31px;">오리엔테이션</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
-
+			
+		        <ul class="inline-tabs">
+		            <li class="active">
+		                <a href="#lecture-register" data-toggle="tab" onclick="getLectureList()">수강 신청</a>
+		            </li>
+		            <li class="">
+		                <a href="#lecture-list" data-toggle="tab" onclick="getLectureListByStudent()">수강 리스트</a>
+		            </li>
+		        </ul>
+			
+				<div class="tab-content">
+        			<!-- 수강 신청 -->
+	            	<div class="tab-pane active" id="lecture-register">
+	            		<div class="panel-group" id="getLectureList"></div>
+	            	
+	            		<div class="lecture-counter">
+		            		<div class="col-md-5"></div>
+		            		<div class="col-md-2">
+		            			<div style="margin-bottom:2px;">
+			            			<input type="number" min="1" max="5" name="inputLectureCount" class="form-control" maxlength="1" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="분반 번호" maxlength="2" />
+			            		</div>
+			            		<div>
+			            			<div class="btn btn-primary-trn" style="width:100%;" onclick="registerLecture()">
+										<i class="fa fa-check-circle"></i>수강 신청
+									</div>
+								</div>
+		            			<div class="col-md-5"></div>
+		            		</div>
+	            		</div>
+	            	</div>
+	            	
+	            	<!-- 수강 리스트 -->
+					<div class="tab-pane" id="lecture-list"></div>
+			
+					
+				
+				
 				</div>
 			</div>
 		</c:if>

@@ -4,7 +4,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="Dankook University Department of Software" />
 	<meta name="author" content="Seong-Gyun Jeon, Ji-Hoon Hwang, Jae-Seock Heo, Ha-Yarn Kim, Hong-Jun Jang" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
 	<!-- CSS : Boostrap Framework -->
 	<link href="<%=request.getContextPath()%>/03_include/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -76,6 +77,9 @@
     <script src="<%=request.getContextPath()%>/03_include/js/common.board.js"></script>
     <script src="<%=request.getContextPath()%>/03_include/js/common.department.js"></script>
     <script src="<%=request.getContextPath()%>/03_include/js/common.lab.js"></script>
+
+	<!-- Script : KaKao API -->
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
     <!--[if lt IE 9]>
           <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>

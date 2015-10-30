@@ -2,7 +2,7 @@
  * 전체 페이지 공통 스크립트
  ******************************************************/
 
-// Google Analytics -->
+// Google Analytics
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -25,7 +25,7 @@ function initializePermission(id) {
 			if(response == "ApproveOK") {
 				$("#writeBtn, #writeForm").show();				
 			} else {
-				$("#writeBtn, #writeForm").hide();								
+				$("#writeBtn, #writeForm").hide();
 			}
 		}, error: function(xhr,status,error) {
 			alert(error);
@@ -40,4 +40,11 @@ function nav() {
 	var src = "/dksw/02_page/sub_02/department_info/index.jsp";
 
 	location.href = src;
+}
+
+function loginByKaKao(objects) {
+
+	alert(objects.access_token);
+	
+	
 }

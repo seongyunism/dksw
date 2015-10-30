@@ -201,7 +201,7 @@ public class MemberController extends HttpServlet {
 				sessionMember.setAttribute("dkswMemberName", thisMember.getDkswMemberName());
 				
 				// 과사에게 회원가입 푸시 알림
-				AppPushUtil.sendAndroidPush(2, "joinMember", thisMember.getDkswMemberName() + "님이 회원 가입을 하였습니다.");
+				AppPushUtil.sendAndroidPushByCategory(2, "joinMember", thisMember.getDkswMemberName() + "님이 회원 가입을 하였습니다.");
 				
 			} else { // 가입하지 않은 회원 (DB에 인증코드 없음)
 				retMsg = "Fail_Null";
@@ -239,7 +239,7 @@ public class MemberController extends HttpServlet {
 				if(checkMember.getDkswMemberNo() == 1) {
 					sessionMember.setAttribute("dkswMemberAdmin", "true");
 					
-					AppPushUtil.sendAndroidPush(1, "loginAdmin", "관리자 로그인");
+					AppPushUtil.sendAndroidPushByCategory(1, "loginAdmin", "관리자 로그인");
 				}
 				
 				res.getWriter().write("LoginOK");	

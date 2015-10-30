@@ -65,6 +65,16 @@
     <url-pattern>/admin</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>SNSController</servlet-name>
+    <servlet-class>dksw.controller.SNSController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SNSController</servlet-name>
+    <url-pattern>/snsAuth</url-pattern>
+  </servlet-mapping>
+
   <listener>
     <listener-class>dksw.util.UrlPath</listener-class>
   </listener>  

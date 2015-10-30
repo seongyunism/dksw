@@ -20,6 +20,7 @@ import dksw.model.domain.Lecture;
 import dksw.model.domain.LectureChapter;
 
 public class LectureController extends HttpServlet {
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		process(req, res);
 	}
@@ -34,8 +35,12 @@ public class LectureController extends HttpServlet {
 		
 		if(action.equals("addLecture")) {
 			addLecture(req, res);
-		} else if(action.equals("getLectureList")) {
+		} else if(action.equals("getLectureListByProfessor")) {
 			getLectureList(req, res);
+		} else if(action.equals("getLectureList")) {
+			getLectureListByStudent(req, res);
+		} else if(action.equals("registerLecture")) {
+			
 		}
 	}
 
@@ -130,6 +135,48 @@ public class LectureController extends HttpServlet {
 				res.getWriter().write(jObject.toString());
 			}
 
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	private void getLectureListByStudent(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		HttpSession sessionMember = req.getSession();
+		ArrayList<Lecture> lectures = new ArrayList<Lecture>();
+		
+		try {
+			int memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberCategory").toString())) : 0;
+	
+			if(memberCategory == 7) { // 학생인지 확인
+				
+				lectures = LectureDAO.getLectureList();
+
+				JSONObject jObject = new JSONObject();
+				JSONArray jLectureArray = new JSONArray();
+				
+				for(int i=0; i<lectures.size(); i++) { // 강의
+					JSONObject tempLecture = new JSONObject();
+				
+					tempLecture.put("dkswLectureNo", lectures.get(i).getDkswLectureNo());
+					tempLecture.put("dkswLectureName", lectures.get(i).getDkswLectureName());
+					tempLecture.put("dkswLectureYear", lectures.get(i).getDkswLectureYear());
+					tempLecture.put("dkswLectureSemester", lectures.get(i).getDkswLectureSemester());
+					tempLecture.put("dkswLectureCount", lectures.get(i).getDkswLectureCount());
+					tempLecture.put("dkswLectureProfessorName", "교수 " + DepartmentDAO.getProfessorByProfessorNo(lectures.get(i).getDkswDepartmentProfessorNo()).getDkswDepartmentProfessorNameKo());
+					jLectureArray.add(tempLecture);
+				}
+
+				jObject.put("dkswLectureList", jLectureArray);
+
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+
+				res.getWriter().write(jObject.toString());
+			}
+			
 		} catch (SQLException se) {
 			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
