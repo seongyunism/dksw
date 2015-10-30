@@ -38,7 +38,7 @@
 	                        </li>
 	                        <li>
 	                            <i class="fa fa-angle-right fa-fw"></i>
-	                            <a href="http://www.dankook.ac.kr"><span class="link-title" target="_blank">단국대학교 공식홈페이지</span></a>
+	                            <a href="http://www.dankook.ac.kr" target="_blank"><span class="link-title" >단국대학교 공식홈페이지</span></a>
 	                        </li>
 	                        <li>
 	                            <i class="fa fa-angle-right fa-fw"></i>
