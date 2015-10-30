@@ -9,14 +9,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.mysql.jdbc.log.Log;
 
+import dksw.model.AdminDAO;
 import dksw.model.DepartmentDAO;
+import dksw.model.LabAchievementsDAO;
+import dksw.model.LabMembersDAO;
+import dksw.model.LabPaperDAO;
+import dksw.model.LabProjectDAO;
 import dksw.model.MemberDAO;
+import dksw.model.domain.AdminPermission;
 import dksw.model.domain.DepartmentClub;
 import dksw.model.domain.DepartmentContact;
 import dksw.model.domain.DepartmentGreeting;
@@ -24,6 +31,7 @@ import dksw.model.domain.DepartmentHistory;
 import dksw.model.domain.DepartmentIntro;
 import dksw.model.domain.DepartmentProfessor;
 import dksw.util.CommonUtil;
+import dksw.util.PermissionCheck;
 import dksw.util.UnixTimeConvertor;
 
 public class DepartmentController extends HttpServlet {
@@ -52,6 +60,10 @@ public class DepartmentController extends HttpServlet {
 			getIntroData(req, res);
 		} else if(action.equals("getClubData")){
 			getClubData(req, res);
+		} else if(action.equals("writeDepartmentHistoryData")){
+			writeDepartmentHistoryData(req,res);
+		} else if(action.equals("deleteDepartmentHistoryData")){
+			deleteDepartmentHistoryData(req,res);
 		}
 	} 
 
@@ -142,6 +154,7 @@ public class DepartmentController extends HttpServlet {
 			// 데이터를 삽입
 			for (int i = 0; i < thisData.size(); i++) {
 				JSONObject tempData = new JSONObject();
+				tempData.put("dkswDepartmentHistoryNo",thisData.get(i).getDkswDepartmentHistoryNo());
 				tempData.put("dkswDepartmentHistoryYear", thisData.get(i).getDkswDepartmentHistoryYear());
 				tempData.put("dkswDepartmentHistoryMonth", thisData.get(i).getDkswDepartmentHistoryMonth());
 				tempData.put("dkswDepartmentHistoryContent",
@@ -151,6 +164,33 @@ public class DepartmentController extends HttpServlet {
 			}
 
 			jObject.put("dkswDepartmentHistory", jArray);
+			
+			HttpSession sessionMember = req.getSession(false);
+			
+			if(sessionMember != null) { // 세션이 존재하는 경우
+				String memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? (sessionMember.getAttribute("dkswMemberCategory").toString()) : null;
+				int memberNo = (sessionMember.getAttribute("dkswMemberNo") != null) ? Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString()) : 0;
+				
+				if(memberNo > 0) { // 로그인 되어있는 경우
+					AdminPermission permission = null;
+					boolean checkPermission = false;
+					
+					try {
+						String inputAdminPermissionId = "board_department";					
+						permission = AdminDAO.getPermission(inputAdminPermissionId);
+						
+						checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
+						
+						if(checkPermission) {
+							jObject.put("dkswDepartmentModifyPermission", "OK");
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+						
 
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
@@ -274,4 +314,58 @@ public class DepartmentController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
 		}
 	}
+	
+	
+	private void writeDepartmentHistoryData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		boolean checkWriteDepartmentHistoryRecord = false;
+		
+		try {
+			int inputDepartmentData1 = (req.getParameter("inputDepartmentData1") != null) ? Integer.parseInt(req.getParameter("inputDepartmentData1")) : null;
+			int inputDepartmentData2 = (req.getParameter("inputDepartmentData2") != null) ? Integer.parseInt(req.getParameter("inputDepartmentData2")) : null;
+			String inputDepartmentData3 = (req.getParameter("inputDepartmentData3") != null) ? (req.getParameter("inputDepartmentData3")) : null;
+			
+			checkWriteDepartmentHistoryRecord = DepartmentDAO.writeRecord(inputDepartmentData1, inputDepartmentData2, inputDepartmentData3);
+									
+			if(checkWriteDepartmentHistoryRecord) {
+				res.getWriter().write("WriteOK");
+			} else {
+				res.getWriter().write("Fail");				
+			}
+	
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	private void deleteDepartmentHistoryData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		boolean checkDeleteDepartmentHistoryRecord = false;
+		
+		try {
+			int inputDepartmentData1 = (req.getParameter("inputDepartmentData1") != null) ? Integer.parseInt(req.getParameter("inputDepartmentData1")) : null; 
+						
+			
+			checkDeleteDepartmentHistoryRecord = DepartmentDAO.deleteRecord(inputDepartmentData1);
+				
+			
+			if(checkDeleteDepartmentHistoryRecord) {
+				res.getWriter().write("deleteOK");
+			} else {
+				res.getWriter().write("Fail");				
+			}
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	
+	
+	
+	
 }

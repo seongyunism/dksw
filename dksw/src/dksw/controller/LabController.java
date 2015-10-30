@@ -106,6 +106,7 @@ public class LabController extends HttpServlet {
 					jObject.put("dkswLabMembersProfessorEmail", professor.getDkswDepartmentProfessorEmail());
 					
 				} else { // 나머지
+					tempMember.put("dkswLabMembersNo",membersData.get(i).getDkswLabMembersNo());
 					tempMember.put("dkswLabMembersGroup", membersData.get(i).getDkswLabMembersGroup());
 					tempMember.put("dkswLabMembersAdmissionYear", membersData.get(i).getDkswLabMembersAdmissionYear());
 					tempMember.put("dkswLabMembersNameKo", membersData.get(i).getDkswLabMembersNameKo());
@@ -252,8 +253,7 @@ public class LabController extends HttpServlet {
 		try {
 			int inputLabItem = (req.getParameter("inputLabItem") != null) ? Integer.parseInt(req.getParameter("inputLabItem")) : null; 
 			int inputLabRecordNo = (req.getParameter("inputLabRecordNo") != null) ? Integer.parseInt(req.getParameter("inputLabRecordNo")) : null; 
-			String inputLabData1 = (req.getParameter("inputLabData1") != null) ? (req.getParameter("inputLabData1")) : null;
-			System.out.println(inputLabData1);
+	
 			
 			
 			switch(inputLabItem) {
@@ -267,7 +267,7 @@ public class LabController extends HttpServlet {
 					checkDeleteLabRecord = LabProjectDAO.deleteRecord(inputLabRecordNo);
 					break;
 				case 3:	// Members
-					checkDeleteLabRecord = LabMembersDAO.deleteRecord(inputLabData1);
+					checkDeleteLabRecord = LabMembersDAO.deleteRecord(inputLabRecordNo);
 					break;
 				
 			}

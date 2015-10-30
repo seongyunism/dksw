@@ -8,7 +8,7 @@
 	</section>
 
     <section class="section-lg team-grid">
-        <div class="container" name="labMembers">
+        <div class="container" >
             
             <!-- 교수님 -->
             <div class="tab-content text-left" id = "dkswLabMembersProfessor"></div>
@@ -17,7 +17,7 @@
             <div class="space"></div>
                
             <!-- 나머지 -->
-			<div class="row" id="dkswLabMembers"></div>
+			<div class="row" id="dkswLabMembers" name="labMembers"></div>
 			
         </div>
     </section>

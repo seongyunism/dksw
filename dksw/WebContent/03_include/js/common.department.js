@@ -61,23 +61,40 @@ function initializeDepartmentHistory() {
 		url : action,
 		dataType : "json",
 		success : function(response) {
-			var head = "<tr><td class='text-center text-bold'>년도</td><td class='text-center text-bold'>월</td><td class='text-center text-bold'>내용</td></tr>";
+			var head = "<tr><td class='text-center text-bold'>년도</td><td class='text-center text-bold'>월</td><td class='text-center text-bold'>내용</td>";
+			if(response.dkswDepartmentModifyPermission == "OK") {
+				head += "<td class='text-center text-bold' style='width:50px;'>관리</td></tr>";
+			} else {
+				head += "</tr>";
+			}
+			
 			var histories = "";
 			var history = "";
 
 			for (i=0; i<response.dkswDepartmentHistory.length; i++) {
-				var history = "<tr> <td class='history-year' style='line-height:2em;'>"
+				var history = "<tr name = "+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryNo+"> <td class='history-year' style='line-height:2em;'>"
 					+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryYear
 					+ "</td> <td class='history-year' style='line-height:2em;'>"
 					+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryMonth
 					+ "</td> <td style='line-height:2em;'>"
 					+ response.dkswDepartmentHistory[i].dkswDepartmentHistoryContent
-					+ "</td> </tr>";
-				
+					+ "</td>";
+					if(response.dkswDepartmentModifyPermission == "OK") {
+							history += "<td class='text-center' style='width:50px;'><input type='button' class ='btn btn-danger btn-sm' value='삭제' onclick='deleteDepartmentHistoryTable("+response.dkswDepartmentHistory[i].dkswDepartmentHistoryNo +")' /></td></tr>";
+						} else {
+							history += "</tr>";
+						}
 				histories += history;
 			}
+			var historyForm =""
+				
+			if(response.dkswDepartmentModifyPermission == "OK") {
+				historyForm += "<tr><td><input type='text' name='data1' maxlength='4' class='form-control text-center' style='width:66px;padding:0px 3px; display:inline;'placeholder = '연도' /></td>" +
+						"<td><input type='text' name='data2' maxlength='2' class='form-control text-center' style='width:46px;padding:0px 3px; display:inline;' placeholder = '월' /></td>" +
+						"<td><input type='text' name='data3' class='form-control text-center' style='width:100%; padding:0px 3px; display:inline;' placeholder = '내용' /></td><td><input type='button' class ='btn btn-primary-trn btn-sm' value='추가' onclick='writeDepartmentHistoryTable()' /></td></tr>";
+			}
 
-			$("#dkswDepartmentHistory").html(head + histories);
+			$("#dkswDepartmentHistory").html(head + histories + historyForm);
 		},
 		error : function(xhr, status, error) {
 			alert(error);
@@ -232,3 +249,72 @@ function initMap() {
 	    title: '단국대학교 소프트웨어학과'
 	  });
 }
+
+function writeDepartmentHistoryTable() {
+
+	var action = "/dksw/department?action=writeDepartmentHistoryData";
+	
+	var form_data = {
+			inputDepartmentData1 : $("div[name='DepartmentHistory'] input[name='data1']").val(),
+			inputDepartmentData2 : $("div[name='DepartmentHistory'] input[name='data2']").val(),
+			inputDepartmentData3 : $("div[name='DepartmentHistory'] input[name='data3']").val()
+	};
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : form_data,
+		dataType : "text",
+		success: function(response) {
+			if(response == "WriteOK") {
+				location.reload(true);
+			} else {
+				alert("오류가 발생하였습니다.");
+			}
+		},error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
+
+function deleteDepartmentHistoryTable(record) {
+
+	var form_data;
+	check = confirm("정말로 삭제하시겠습니까?");
+
+	if(!check) {
+		return false;
+		
+	} else {
+	
+		var action = "/dksw/department?action=deleteDepartmentHistoryData";
+		form_data = {
+				inputDepartmentData1 : record
+		};
+		
+		
+		$.ajax({
+			type : "POST",
+			url : action,
+			data : form_data,
+			dataType : "text",
+			success: function(response) {
+				if(response == "deleteOK") {
+					
+					$("div[name='DepartmentHistory'] tr[name='"+ record + "']").remove();						
+					
+				} else {
+					alert("오류가 발생하였습니다.");
+				}
+			},error: function(xhr,status,error) {
+				alert(error);
+			}
+		});
+			
+		return false;
+	}
+}
+
+

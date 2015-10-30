@@ -51,7 +51,7 @@ function initializeLab(labCode) {
 					memberPicture = "/dksw/04_upload/files/sub_03/members/" + labCode + "/" + response.dkswLabMembers[i].dkswLabMembersPicture;
 				}
 										
-				var member = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='" + memberPicture
+				var member = "<div class='col-lg-3 col-md-3 col-sm-6' name=" + response.dkswLabMembers[i].dkswLabMembersNo + "><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='" + memberPicture
 					+ "' style='width:100%' /><div class='content-circle content-center text-center'><ul class='circle-icons icons-list'><li><a href='mailto://"
 					+ response.dkswLabMembers[i].dkswLabMembersEmail
 					+ "' title='Follow us'><i class='fa fa-envelope'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-twitter'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='text-center'>" 
@@ -64,7 +64,7 @@ function initializeLab(labCode) {
 					+ "<li><i class='fa fa-caret-right'></i>근무지 : " + response.dkswLabMembers[i].dkswLabMembersWorkPlace + "</li>";
 				
 					if(response.dkswLabModifyPermission == "OK") {
-						member += "<input type='button' class ='btn btn-danger btn-sm' value='삭제' onclick='deleteLabTable(3, " + response.dkswLabMembers[i].dkswLabMembersEmail + ")' />"
+						member += "<input type='button' class ='btn btn-danger btn-sm' value='삭제' onclick='deleteLabTable(3, " + response.dkswLabMembers[i].dkswLabMembersNo + ")' />"
 								+ "</ul></div></div>";
 					} else{
 						member +=  "</ul></div></div>"
@@ -81,9 +81,9 @@ function initializeLab(labCode) {
 					+ "</span><small>"
 					+ "<input type='text' name='data2' maxlength='20' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline' placeholder = '이름(En)' />	"
 					+ "</small></h3><ul class='info-list-pro i-primary font-NanumGothic'>"
-					+ "<li><i class='fa fa-caret-right'></i>입학년도 :<input type='text' name='data3' maxlength='2' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline'/> </li>"
-					+ "<li><i class='fa fa-caret-right'></i>이메일 :<input type='text' name='data4' maxlength='50' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline'/> </li>"
-					+ "<li><i class='fa fa-caret-right'></i>근무지 :<input type='text' name='data5' maxlength='20' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline'/> </li>"
+					+ "<li><i class='fa fa-caret-right'></i>입학년도 : <input type='text' name='data3' maxlength='2' class='form-control text-center' style='width:50px;padding:0px 3px; display:inline'/> </li>"
+					+ "<li><i class='fa fa-caret-right'></i>이메일 : <input type='text' name='data4' maxlength='50' class='form-control text-center' style='width:150px;padding:0px 3px; display:inline'/> </li>"
+					+ "<li><i class='fa fa-caret-right'></i>근무지 : <input type='text' name='data5' maxlength='20' class='form-control text-center' style='width:150px;padding:0px 3px; display:inline'/> </li>"
 					+ "<input type='button' class ='btn btn-primary-trn btn-sm' value='추가' onclick='writeLabTable(" + labCode + ", 3)' /></ul></div></div>";
 			}
 			
@@ -270,22 +270,12 @@ function deleteLabTable(item, record) {
 	
 		var action = "/dksw/lab?action=deleteLabTableData";
 		var itemStr = new Array('Achievements', 'Paper', 'Project','Members');
-
 		
-		if(item == 3) {
-			form_data = {
+		form_data = {
 				inputLabItem : item,
-				inputLabRecordNo : 0,
-				inputLabData1 : record
-			};
-			
-		} else {			
-			form_data = {
-				inputLabItem : item,
-				inputLabRecordNo : record,
-				inputLabData1 : ""	
-			};
-		}
+				inputLabRecordNo : record
+		};
+		
 		
 		$.ajax({
 			type : "POST",
@@ -294,7 +284,11 @@ function deleteLabTable(item, record) {
 			dataType : "text",
 			success: function(response) {
 				if(response == "deleteOK") {
-					$("div[name='lab" + itemStr[item] + "'] tr[name='" + record + "']").remove();
+					if(item == 3) {
+						$("div[name='labMembers'] div[name='" + record + "']").remove();
+					} else {
+						$("div[name='lab" + itemStr[item] + "'] tr[name='" + record + "']").remove();						
+					}
 				} else {
 					alert("오류가 발생하였습니다.");
 				}

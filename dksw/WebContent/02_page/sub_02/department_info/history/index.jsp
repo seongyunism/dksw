@@ -39,8 +39,8 @@
 
 	<!-- Content Section -->
 	<section class="section">
-		<div class="container-sm">
-			<table class="table table-striped" id="dkswDepartmentHistory"></table>
+		<div class="container-sm" name="DepartmentHistory">
+			<table class="table table-striped" id="dkswDepartmentHistory" ></table>
 
 			<!-- 수정일 -->
 			<p class="font-NanumGothic edit-date col-md-4" id="dkswDepartmentHistoryEditDate"></p>

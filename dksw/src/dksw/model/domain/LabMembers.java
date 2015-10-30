@@ -2,6 +2,7 @@ package dksw.model.domain;
 
 public class LabMembers {
 	
+	private int dkswLabMembersNo;
 	private int dkswLabCode;
 	private int dkswLabMembersGroup;
 	private String dkswLabMembersAdmissionYear;
@@ -12,6 +13,12 @@ public class LabMembers {
 	private String dkswLabMembersPicture;
 	private int dkswMemberNo;
 	
+	public int getDkswLabMembersNo() {
+		return dkswLabMembersNo;
+	}
+	public void setDkswLabMembersNo(int dkswLabMembersNo) {
+		this.dkswLabMembersNo = dkswLabMembersNo;
+	}
 	public int getDkswLabCode() {
 		return dkswLabCode;
 	}
@@ -67,10 +74,12 @@ public class LabMembers {
 		this.dkswMemberNo = dkswMemberNo;
 	}
 	
-	public LabMembers(int dkswLabCode, int dkswLabMembersGroup, String dkswLabMembersAdmissionYear,
-			String dkswLabMembersNameKo, String dkswLabMembersNameEn, String dkswLabMembersEmail,
-			String dkswLabMembersWorkPlace, String dkswLabMembersPicture, int dkswMemberNo) {
+	public LabMembers(int dkswLabMembersNo, int dkswLabCode, int dkswLabMembersGroup,
+			String dkswLabMembersAdmissionYear, String dkswLabMembersNameKo, String dkswLabMembersNameEn,
+			String dkswLabMembersEmail, String dkswLabMembersWorkPlace, String dkswLabMembersPicture,
+			int dkswMemberNo) {
 		super();
+		this.dkswLabMembersNo = dkswLabMembersNo;
 		this.dkswLabCode = dkswLabCode;
 		this.dkswLabMembersGroup = dkswLabMembersGroup;
 		this.dkswLabMembersAdmissionYear = dkswLabMembersAdmissionYear;
@@ -81,4 +90,7 @@ public class LabMembers {
 		this.dkswLabMembersPicture = dkswLabMembersPicture;
 		this.dkswMemberNo = dkswMemberNo;
 	}
+	
+	
+	
 }

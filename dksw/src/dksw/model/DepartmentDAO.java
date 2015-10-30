@@ -115,8 +115,9 @@ public class DepartmentDAO {
 				data = new DepartmentHistory(
 						rset.getInt(1),
 						rset.getInt(2),
-						rset.getString(3),
-						rset.getInt(4)
+						rset.getInt(3),
+						rset.getString(4),
+						rset.getInt(5)
 				);
 				
 				datas.add(data);
@@ -318,4 +319,73 @@ public class DepartmentDAO {
 
 	}
 	
+	// 연혁 삽입
+	public static boolean writeRecord(int inputDepartmentData1, int inputDepartmentData2, String inputDepartmentData3) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+	
+		int writeQueryCount = 0;
+		
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("INSERT INTO dksw_department_history(dkswDepartmentHistoryYear, dkswDepartmentHistoryMonth, dkswDepartmentHistoryContent) values(?, ?, ?)");
+			pstmt.setInt(1, inputDepartmentData1);
+			pstmt.setInt(2, inputDepartmentData2);
+			pstmt.setString(3, inputDepartmentData3);
+			writeQueryCount = pstmt.executeUpdate();
+			
+			if(writeQueryCount == 1) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+	//연혁 삭제 
+	public static boolean deleteRecord(int inputDepartmentData1) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+			
+		int deleteQueryCount = 0;
+			
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("DELETE FROM dksw_department_history WHERE dkswDepartmentHistoryNo=?");
+			pstmt.setInt(1, inputDepartmentData1);
+			deleteQueryCount = pstmt.executeUpdate();
+
+			if(deleteQueryCount == 1) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+				
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}	
+	}
 }

@@ -30,13 +30,14 @@ public class LabMembersDAO {
 				member = new LabMembers(
 						rset.getInt(1),
 						rset.getInt(2),
-						rset.getString(3),
+						rset.getInt(3),
 						rset.getString(4),
 						rset.getString(5),
 						rset.getString(6),
 						rset.getString(7),
 						rset.getString(8),
-						rset.getInt(9)
+						rset.getString(9),
+						rset.getInt(10)
 					);
 				
 				members.add(member);
@@ -100,7 +101,7 @@ public class LabMembersDAO {
 		}
 		
 		//삭제 
-		public static boolean deleteRecord(String inputLabData1) throws SQLException {
+		public static boolean deleteRecord(int inputLabRecordNo) throws SQLException {
 
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -110,8 +111,8 @@ public class LabMembersDAO {
 				
 			try {
 				con = DBUtil.getConnection();
-				pstmt = con.prepareStatement("DELETE FROM dksw_lab_members WHERE dkswLabMembersEmail=?");
-				pstmt.setString(1, inputLabData1);
+				pstmt = con.prepareStatement("DELETE FROM dksw_lab_members WHERE dkswLabMembersNo=?");
+				pstmt.setInt(1, inputLabRecordNo);
 				deleteQueryCount = pstmt.executeUpdate();
 
 				if(deleteQueryCount == 1) {

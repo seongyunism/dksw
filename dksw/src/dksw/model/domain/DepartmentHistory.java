@@ -2,11 +2,18 @@ package dksw.model.domain;
 
 public class DepartmentHistory {
 
+	private int dkswDepartmentHistoryNo;
 	private int dkswDepartmentHistoryYear;
 	private int dkswDepartmentHistoryMonth;
 	private String dkswDepartmentHistoryContent;
 	private int dkswDepartmentHistoryVisible;
 	
+	public int getDkswDepartmentHistoryNo() {
+		return dkswDepartmentHistoryNo;
+	}
+	public void setDkswDepartmentHistoryNo(int dkswDepartmentHistoryNo) {
+		this.dkswDepartmentHistoryNo = dkswDepartmentHistoryNo;
+	}
 	public int getDkswDepartmentHistoryYear() {
 		return dkswDepartmentHistoryYear;
 	}
@@ -32,12 +39,15 @@ public class DepartmentHistory {
 		this.dkswDepartmentHistoryVisible = dkswDepartmentHistoryVisible;
 	}
 	
-	public DepartmentHistory(int dkswDepartmentHistoryYear, int dkswDepartmentHistoryMonth,
+	public DepartmentHistory(int dkswDepartmentHistoryNo, int dkswDepartmentHistoryYear, int dkswDepartmentHistoryMonth,
 			String dkswDepartmentHistoryContent, int dkswDepartmentHistoryVisible) {
 		super();
+		this.dkswDepartmentHistoryNo = dkswDepartmentHistoryNo;
 		this.dkswDepartmentHistoryYear = dkswDepartmentHistoryYear;
 		this.dkswDepartmentHistoryMonth = dkswDepartmentHistoryMonth;
 		this.dkswDepartmentHistoryContent = dkswDepartmentHistoryContent;
 		this.dkswDepartmentHistoryVisible = dkswDepartmentHistoryVisible;
 	}
+	
+	
 }
