@@ -93,7 +93,11 @@ function getLectureListByProfessor() {
 
 // [학생모드] 수강 신청 리스트 가져오기
 function getLectureList() {
-		
+	
+	$(".panel-group").show();
+	$(".lecture-counter").hide();
+	lectureCounter = false;
+	
 	var action = "/dksw/lecture?action=getLectureList";
 
 	$.ajax({
@@ -124,21 +128,26 @@ function getLectureList() {
 
 // [학생모드] 수강 신청하기
 function registerLecture(lecture, count) {
-
+	
+	var lectureCount = 1;
+	
 	if(count > 1 && lectureCounter == false) {
 		alert("분반이 존재합니다.\n본인의 분반을 선택해주십시오.");
 		$(".panel-group").slideUp();
 		$(".lecture-counter").slideDown();
+		$("#lectureCounter").attr("onclick", "registerLecture(" + lecture + ", " + count + ")");
 		lectureCounter = true;
 		return false;
+	}
+
+	if(count > 1 && lectureCounter == true) {
+		lectureCount = $(".lecture-counter input[name='inputLectureCount']").val();
 	}
 	
 	var action = "/dksw/lecture?action=registerLecture";
 	var form_data = {
 		inputLectureNo : lecture,
-		inputLectureSemester : $("select[name='inputLectureSemester']").val(),
-		inputLectureName : $("input[name='inputLectureName']").val(),
-		inputLectureCount : $("input[name='inputLectureCount']").val()
+		inputLectureCount : lectureCount
 	};
 	
 	$.ajax({

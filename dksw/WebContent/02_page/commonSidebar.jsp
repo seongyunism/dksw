@@ -40,8 +40,17 @@
 				Kakao.init('41dcde3d524729798e2358ce473f9fc0');
 				function loginWithKakao() {
 			  		Kakao.Auth.login({
+			  			persistAccessToken: true,
+			  			persistRefreshToken: false,
 			    		success: function(authObj) {
-			      			loginByKaKao(authObj);
+			    			Kakao.API.request({
+								url: '/v1/user/me',
+								success: function(res) {
+									loginByKaKao(res.id, authObj.access_token);
+								}, fail: function(error) {
+									console.log(error);
+								}
+							});
 			    		}, fail: function(err) {
 			      			alert(JSON.stringify(err))
 			    		}

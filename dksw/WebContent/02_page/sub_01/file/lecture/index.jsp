@@ -135,12 +135,12 @@
 			            			<input type="number" min="1" max="5" name="inputLectureCount" class="form-control" maxlength="1" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="분반 번호" maxlength="2" />
 			            		</div>
 			            		<div>
-			            			<div class="btn btn-primary-trn" style="width:100%;" onclick="registerLecture()">
+			            			<div class="btn btn-primary-trn" style="width:100%;" id="lectureCounter">
 										<i class="fa fa-check-circle"></i>수강 신청
 									</div>
 								</div>
-		            			<div class="col-md-5"></div>
-		            		</div>
+							</div>
+		            		<div class="col-md-5"></div>
 	            		</div>
 	            	</div>
 	            	

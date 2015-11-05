@@ -42,9 +42,27 @@ function nav() {
 	location.href = src;
 }
 
-function loginByKaKao(objects) {
+function loginByKaKao(id, token) {
 
-	alert(objects.access_token);
+	var action = "/dksw/snsAuth?action=loginByKaKao";
+	var form_data = {
+		inputSNSMemberId : id,
+		inputSNSMemberToken : token
+	};
 	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : form_data,
+		dataType : "json",
+		success: function(response) {
+
+			
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
 	
+	return false;
 }

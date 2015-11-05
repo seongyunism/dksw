@@ -21,7 +21,23 @@ public class SNSController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String action = req.getParameter("action");
 		
-		System.out.println("test");
+		if(action.equals("loginByKaKao")) {
+			loginByKaKao(req, res);
+		}
+	}
+
+	private void loginByKaKao(HttpServletRequest req, HttpServletResponse res) {
+
+		// SNS 테이블 뒤지고
+		
+		
+		
+		// 없어면 회원가입
+		
+		
+		// 있으면 로그인
+		
+		
 	}
 
 

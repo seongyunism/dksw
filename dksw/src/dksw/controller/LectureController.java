@@ -40,7 +40,7 @@ public class LectureController extends HttpServlet {
 		} else if(action.equals("getLectureList")) {
 			getLectureListByStudent(req, res);
 		} else if(action.equals("registerLecture")) {
-			
+			registerLecture(req, res);
 		}
 	}
 
@@ -181,6 +181,26 @@ public class LectureController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	private void registerLecture(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		HttpSession sessionMember = req.getSession();
+		
+		try {
+			int memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberCategory").toString())) : 0;
+			
+			if(memberCategory == 7) { // 학생인지 확인
+			
+				int inputLectureNo = (req.getParameter("inputLectureNo") != null) ? Integer.parseInt(req.getParameter("inputLectureNo")) : null;	
+				int inputLectureCount = (req.getParameter("inputLectureCount") != null) ? Integer.parseInt(req.getParameter("inputLectureCount")) : null;
+			
+				System.out.println(inputLectureCount);
+				
+			}	
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
