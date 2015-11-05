@@ -27,36 +27,15 @@
 		        </div>
 	            <div class="space-sm"></div>
 		        
-		        <button class="btn btn-primary font-NanumGothic" style="width:100%; padding:5px 0px;" onclick="loginMember()"><i class="fa fa-sign-out"></i>로그인</button>
- 
+		        <button class="btn btn-primary font-NanumGothic" style="width:100%; padding:5px 0px; margin-bottom:5px;" onclick="loginMember()"><i class="fa fa-sign-in"></i>로그인</button>
+				<div class="text-center" style="font-size:0.8em;">
+					<span>아이디 및 비밀번호 찾기</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<span>회원가입</span>
+				</div>
+				 
 	            <div class="space-sm"></div>
 
-			    <a href="javascript:loginWithKakao()" id="custom-login-btn">
-			      <img src="http://mud-kage.kakao.co.kr/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" style="width:240px;" />
-			    </a>
-    			
-    			<script>
-				// KaKao API
-				Kakao.init('41dcde3d524729798e2358ce473f9fc0');
-				function loginWithKakao() {
-			  		Kakao.Auth.login({
-			  			persistAccessToken: true,
-			  			persistRefreshToken: false,
-			    		success: function(authObj) {
-			    			Kakao.API.request({
-								url: '/v1/user/me',
-								success: function(res) {
-									loginByKaKao(res.id, authObj.access_token);
-								}, fail: function(error) {
-									console.log(error);
-								}
-							});
-			    		}, fail: function(err) {
-			      			alert(JSON.stringify(err))
-			    		}
-			  		});
-				}
-			    </script>
+
 			</c:if>
 
 			<c:if test="${not empty sessionScope.dkswMemberNo}">
@@ -75,29 +54,46 @@
 	            </ul>
 	            <div class="space-sm"></div>
 		        
-		        <button class="btn btn-primary font-NanumGothic" style="width:100%; padding:5px 0px;" onclick="logoutMember()"><i class="fa fa-sign-out"></i>로그아웃</button>
+		        <button class="btn btn-danger font-NanumGothic" style="width:100%; padding:5px 0px;" onclick="logoutMember()"><i class="fa fa-sign-out"></i>로그아웃</button>
+
+	            <div class="space"></div>
+	            <div class="space"></div>
+
+	            <h4>My Menu</h4>
+
 			</c:if>
 
+
+
+
+
+
 			<!-- Contact Section -->
-            <div style="position:fixed; bottom:0px; margin-bottom:20px;">
-	            <h4>Contact</h4>
-	            <div class="space-sm"></div>
-	            
-	            <ul class="info-list sm-list">
-	                <li>
-	                    <i class="fa fa-envelope fa-fw margin_left_10"></i>
-	                    <a class="text-muted" href="mailto:dankook.sw@gmail.com">dankook.sw@gmail.com</a>
-	                </li>
-	                <li>
-	                    <i class="fa fa-phone fa-fw margin_left_10"></i>
-	                    031) 8005 - 3227
-	                </li>
-	                <li>
-	                    <i class="fa fa-map-marker fa-fw margin_left_10"></i>
-	                    자연과학관 501호
-	                </li>
-	            </ul>
-	    	</div>
+            <c:if test="${empty sessionScope.dkswMemberNo}">
+	            <div style="position:fixed; bottom:0px; margin-bottom:20px;">
+		            <h4>Social Login</h4>
+		            <div class="space-sm"></div>
+		            
+				    <a href="javascript:loginWithKakao()" id="custom-login-btn">
+				      <img src="http://mud-kage.kakao.co.kr/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" style="width:240px;" />
+				    </a>
+	    			
+	    			<script>
+					// KaKao API
+					Kakao.init('41dcde3d524729798e2358ce473f9fc0');
+					function loginWithKakao() {
+				  		Kakao.Auth.login({
+				    		success: function(authObj) {
+				      			loginByKaKao(authObj);
+				    		}, fail: function(err) {
+				      			alert(JSON.stringify(err))
+				    		}
+				  		});
+					}
+				    </script>
+
+		    	</div>
+			</c:if>
 
         </div>
 	</div>

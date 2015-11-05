@@ -242,7 +242,7 @@
 						<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
 			            <div class="space"></div>
 			                        
-			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost('<%=category%>'">
+			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost('<%=category%>')">
 			            	<i class="fa fa-trash-o"></i>완료
 			            </div>
 			            
