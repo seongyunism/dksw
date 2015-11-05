@@ -46,19 +46,24 @@ function loginByKaKao(id, token) {
 
 	var action = "/dksw/snsAuth?action=loginByKaKao";
 	var form_data = {
-		inputSNSMemberId : id,
-		inputSNSMemberToken : token
+		inputMemberSNSCategory : 3,
+		inputMemberSNSId : id,
+		inputMemberSNSToken : token
 	};
 	
 	$.ajax({
 		type : "POST",
 		url : action,
 		data : form_data,
-		dataType : "json",
+		dataType : "text",
 		success: function(response) {
-
-			
-			
+			if(response == "LoginOK") {
+				location.reload(true);
+			} else if(response == "NotSNSMember") {
+				alert("카카오톡 아이디가 등록되지 않았거나 회원이 아닙니다.");
+			} else if(response == "LoginFail") {
+				alert("카카오톡 아이디가 연동되지 않은 회원입니다.");
+			}
 		}, error: function(xhr,status,error) {
 			alert(error);
 		}

@@ -30,12 +30,10 @@
 		        <button class="btn btn-primary font-NanumGothic" style="width:100%; padding:5px 0px; margin-bottom:5px;" onclick="loginMember()"><i class="fa fa-sign-in"></i>로그인</button>
 				<div class="text-center" style="font-size:0.8em;">
 					<span>아이디 및 비밀번호 찾기</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-					<span>회원가입</span>
+					<a href="<%=request.getContextPath()%>/02_page/join/index.jsp"><span>회원가입</span></a>
 				</div>
 				 
 	            <div class="space-sm"></div>
-
-
 			</c:if>
 
 			<c:if test="${not empty sessionScope.dkswMemberNo}">
@@ -60,7 +58,12 @@
 	            <div class="space"></div>
 
 	            <h4>My Menu</h4>
-
+	            <div class="space-sm"></div>
+	           
+	            <ul class="info-list sm-list">
+	            	<li><i class="fa fa-list margin_left_10"></i>수강중인 강의 보기</li>
+	            	<li><i class="fa fa-question-circle margin_left_10"></i>나의 질문 내역</li>
+	            </ul>
 			</c:if>
 
 
@@ -78,20 +81,46 @@
 				      <img src="http://mud-kage.kakao.co.kr/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" style="width:240px;" />
 				    </a>
 	    			
+	    			<div class="space-sm"></div>
+
+				    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+				    <script>
+				      function onSignIn(googleUser) {
+				        // Useful data for your client-side scripts:
+				        var profile = googleUser.getBasicProfile();
+				        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+				        console.log("Name: " + profile.getName());
+				        console.log("Image URL: " + profile.getImageUrl());
+				        console.log("Email: " + profile.getEmail());
+				
+				        // The ID token you need to pass to your backend:
+				        var id_token = googleUser.getAuthResponse().id_token;
+				        console.log("ID Token: " + id_token);
+				      };
+				    </script>
+
 	    			<script>
 					// KaKao API
 					Kakao.init('41dcde3d524729798e2358ce473f9fc0');
 					function loginWithKakao() {
 				  		Kakao.Auth.login({
 				    		success: function(authObj) {
-				      			loginByKaKao(authObj);
+				    			
+				    			Kakao.API.request({
+									url: '/v1/user/me',
+									success: function(res) {
+										loginByKaKao(res.id, authObj.access_token);
+									},
+									fail: function(error) {
+										console.log(error);
+									}
+								});
 				    		}, fail: function(err) {
 				      			alert(JSON.stringify(err))
 				    		}
 				  		});
 					}
 				    </script>
-
 		    	</div>
 			</c:if>
 

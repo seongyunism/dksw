@@ -4,6 +4,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="Dankook University Department of Software" />
 	<meta name="author" content="Seong-Gyun Jeon, Ji-Hoon Hwang, Jae-Seock Heo, Ha-Yarn Kim, Hong-Jun Jang" />
+    <meta name="google-signin-scope" content="dankook.sw@gmail.com" />
+    <meta name="google-signin-client_id" content="984936724628-mo9a5h5jgnedc96ukjgq0g3e4phiu0qs.apps.googleusercontent.com">	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	
 	<!-- CSS : Boostrap Framework -->
@@ -80,6 +82,9 @@
 
 	<!-- Script : KaKao API -->
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+	<!-- Script : Google API -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <!--[if lt IE 9]>
           <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
