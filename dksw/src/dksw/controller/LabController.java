@@ -52,7 +52,35 @@ public class LabController extends HttpServlet {
 			writeLabTableData(req, res);
 		} else if(action.equals("deleteLabTableData")) {
 			deleteLabTableData(req, res);
+		}else if(action.equals("modifyLabIntro")){
+			modifyLabIntro(req, res);
+		}else if(action.equals("getIntroData")) {
+			getIntroData(req, res);
 		}
+		
+	}
+
+	private void getIntroData(HttpServletRequest req, HttpServletResponse res) {
+
+		LabIntro introData = null;
+		
+		try {
+			int inputLabCode = (req.getParameter("inputLabCode") != null) ? Integer.parseInt(req.getParameter("inputLabCode")): null;
+			
+			JSONObject jObject = new JSONObject();
+			introData = LabIntroDAO.getLabIntro(inputLabCode);
+			jObject.put("dkswIntroContent", introData.getDkswLabIntroIntroduction());
+
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+
+			res.getWriter().write(jObject.toString());
+			
+		} catch (SQLException se) {
+		req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (SQL에러)");
+		} catch (IOException ie) {
+		req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
+		}	
 		
 	}
 
@@ -243,6 +271,30 @@ public class LabController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	private void modifyLabIntro(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
+		
+		boolean checkModifylabIntro = false;
+	
+	
+		try{
+			int inputLabCode = (req.getParameter("inputLabCode") != null) ? Integer.parseInt(req.getParameter("inputLabCode")) : null;
+			String inputLabData1 = (req.getParameter("inputLabData1") != null) ? (req.getParameter("inputLabData1")) : null;
+						
+			checkModifylabIntro = LabIntroDAO.modifyRecord(inputLabCode, inputLabData1);
+			
+			if(checkModifylabIntro) {
+				res.getWriter().write("ModifyOK");
+			} else {
+				res.getWriter().write("Fail");				
+			}
+		}
+		
+		catch (SQLException se) {
+		req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+		req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
 	

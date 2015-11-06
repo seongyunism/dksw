@@ -22,6 +22,8 @@ function initializeLab(labCode) {
 			var addMember = "";
 			// Introduction
 			var  introPicture = "";
+			var modifyBtn = "";
+			var modifyIntro = "";
 			
 			if(response.dkswLabIntroPicture_0 != "") {
 				introPicture = "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide1'><div class=' image-slide'><img class='image-slide-crop' src='" + response.dkswLabIntroPicture_0 + "' /></div></a></li>";				
@@ -34,8 +36,15 @@ function initializeLab(labCode) {
 			if(response.dkswLabIntroPicture_2 != null) {
 				introPicture += "<li class='sy-slide fade useCSS' style='transition-duration: 800ms; opacity:0;'><a href='#slide3'><div class=' image-slide'><img class='image-slide-crop' src='" + response.dkswLabIntroPicture_2 + "' /></div></a></li>";			
 			}
+			if(response.dkswLabModifyPermission == "OK")
+			{
+				modifyBtn = "<div class='btn btn-primary-trn pull-right' onclick='modifyIntroMode(" + labCode + ")'><i class='fa fa-wrench'></i>수정</div>";
+				modifyIntro ="<div class='write-form'><textarea name='inputIntroContent' class='form-control font-NanumGothic' style='min-height:500px;'></textarea>" +
+						"<div class='btn btn-primary pull-right margin_left_5' onclick='modifyIntro("+ labCode+ ")'><i class='fa fa-trash-o'></i>완료</div>" +
+						"<div class='btn btn-primary-trn pull-right' onclick='modifyModeCancel()'><i class='fa fa-wrench'></i>취소</div></div>"
+			}
 
-			$("#dkswLabIntroIntroduction").html(response.dkswLabIntroIntroduction);
+			$("#dkswLabIntroIntroduction").html("<div class='view'>" + response.dkswLabIntroIntroduction + modifyBtn + "</div>" + modifyIntro);
 			$("#dkswLabIntroPicture").html(introPicture);
 			jQuery("#dkswLabIntroPicture").slippry();
 			
@@ -166,9 +175,9 @@ function initializeLab(labCode) {
 			var paperForm = "";
 			
 			if(response.dkswLabModifyPermission == "OK") {
-				paperForm += "<tr><td><input type='text' name='data1' maxlength='50' class='form-control text-center' style='width:400px;padding:0px 3px; display:inline' placeholder = '논문명'/> " +
-						"<input type='text' name='data2' maxlength='20' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline'  placeholder = '게재지'/> " +
-						"<input type='text' name='data3' class='form-control text-center' style='width: 200px;padding:0px 3px; display:inline'  placeholder = '논문 저자'/></td>" +
+				paperForm += "<tr><td><input type='text' name='data1' maxlength='50' class='form-control text-center' style='width:40%;padding:0px 3px; display:inline' placeholder = '논문명'/> " +
+						"<input type='text' name='data2' maxlength='20' class='form-control text-center' style='width:30%;padding:0px 3px; display:inline'  placeholder = '게재지'/> " +
+						"<input type='text' name='data3' class='form-control text-center' style='width:27%;padding:0px 3px; display:inline'  placeholder = '논문 저자'/></td>" +
 						"<td><input type='button' class ='btn btn-primary-trn btn-sm' value='추가' onclick='writeLabTable(" + labCode + ", 1)' /></td></tr>";
 			}
 			
@@ -208,8 +217,8 @@ function initializeLab(labCode) {
 						"<input type='text' name='data2' maxlength='2' class='form-control text-center' style='width:25px; padding:0px 3px; display:inline;' placeholder ='월' />" +
 						" ~ <input type='text' name='data3' maxlength = '4' class='form-control text-center' style='width:50px;padding:0px 3px; display:inline;' placeholder ='연도'/> . " +
 						"<input type = 'text' name = 'data4' maxlength='2' class='form-control text-center' style = 'width:25px;padding:0px 3px; display:inline;' placeholder ='월' /></td>" +
-						"<td><input type='text' name='data5' maxlength='50' class='form-control text-center' style='width:500px;padding:0px 3px; display:inline;' placeholder ='프로젝트명' /> " +
-						"<input type='text' name='data6' maxlength='50' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline;' placeholder ='프로젝트 기관명'/> " +
+						"<td><input type='text' name='data5' maxlength='50' class='form-control text-center' style='width:70%;padding:0px 3px; display:inline;' placeholder ='프로젝트명' /> " +
+						"<input type='text' name='data6' maxlength='50' class='form-control text-center' style='width:28%;padding:0px 3px; display:inline;' placeholder ='프로젝트 기관명'/> " +
 						"</td><td><input type='button' class ='btn btn-primary-trn btn-sm' value='추가' onclick='writeLabTable(" + labCode + ", 2)' /></td></tr>";
 			}
 			
@@ -257,6 +266,67 @@ function writeLabTable(labCode, item) {
 		
 	return false;
 }
+function modifyIntro(labCode){
+	var action  = "/dksw/lab?action=modifyLabIntro";
+	var form_data  = {
+			inputLabCode : labCode,
+			inputLabData1 : $("textarea[name='inputIntroContent']").val()
+	};	
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : form_data,
+		dataType : "text",
+		success: function(response) {
+			if(response == "ModifyOK") {
+				location.reload(true);
+			} else {
+				alert("오류가 발생하였습니다.");
+			}
+		},error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
+
+function modifyIntroMode(labCode) {
+	
+	var action = "/dksw/lab?action=getIntroData";
+	var form_data = {
+		inputLabCode : labCode
+	};
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : form_data,
+		dataType : "json",
+		success: function(response) {
+			$(".view").slideUp(500);
+			$(".write-form").slideDown(500);
+			$("textarea[name='inputIntroContent']").val(response.dkswIntroContent);		
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;	
+}
+
+function modifyModeCancel() {
+	
+	$(".view").slideDown(500);
+	$(".write-form").slideUp(500);
+	
+	
+	$(".form-control[name='dkswIntroContent']").val("");
+	
+
+}
+
 
 function deleteLabTable(item, record) {
 

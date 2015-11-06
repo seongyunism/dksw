@@ -50,5 +50,42 @@ public class LabIntroDAO {
 		}
 
 	}	
+	
+	public static boolean modifyRecord(int inputLabCode, String inputLabData1) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+	
+		int writeQueryCount = 0;
+		
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("UPDATE dksw_lab_intro SET dkswLabIntroIntroduction=? WHERE dkswLabCode = ?");
+								
+			pstmt.setString(1, inputLabData1);
+			pstmt.setInt(2, inputLabCode);
+			writeQueryCount = pstmt.executeUpdate();
+			
+			if(writeQueryCount == 1) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+	
 
 }
