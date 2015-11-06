@@ -21,8 +21,7 @@ function addLecture() {
 	var form_data = {
 		inputLectureYear : $("select[name='inputLectureYear']").val(),
 		inputLectureSemester : $("select[name='inputLectureSemester']").val(),
-		inputLectureName : $("input[name='inputLectureName']").val(),
-		inputLectureCount : $("input[name='inputLectureCount']").val()
+		inputLectureName : $("input[name='inputLectureName']").val()
 	};
 
 	$.ajax({
@@ -91,13 +90,11 @@ function getLectureListByProfessor() {
 	return false;
 }
 
-// [학생모드] 수강 신청 리스트 가져오기
+// [학생모드] 전체 강의 리스트 가져오기
 function getLectureList() {
 	
 	$(".panel-group").show();
-	$(".lecture-counter").hide();
-	lectureCounter = false;
-	
+
 	var action = "/dksw/lecture?action=getLectureList";
 
 	$.ajax({
@@ -108,12 +105,15 @@ function getLectureList() {
 			var lectures = "";
 			
 			for(i=0; i<response.dkswLectureList.length; i++) {
+				lectures += "	<div class='panel panel-default' style='clear:both;' name='" + response.dkswLectureList[i].dkswLectureNo + "'><a><div class='panel-heading' style='height:76px; padding:0px;'>" 
+					+ "<div class='left' style='float:left; height:26px; margin:25px 0px 25px 25px;'><h4 class='panel-title font-NanumGothic' value='12'><i class='fa fa-th-list'></i><span class='subject'>("
+					+ response.dkswLectureList[i].dkswLectureYear + "-" + response.dkswLectureList[i].dkswLectureSemester + ") " + response.dkswLectureList[i].dkswLectureProfessorName + " - " + response.dkswLectureList[i].dkswLectureName + "</span></h4></div>"
+					+ "<div class='right' style='float:right; height:26px; margin:16px 16px 16px 0px;'><button type='button' class='btn btn-primary' onclick='addRegisterLecture(" + response.dkswLectureList[i].dkswLectureNo + ")'>수강하기</button></div>"
+					+ "</div></a></div>";		
+			}
 			
-				lectures += "	<div class='panel panel-default' style='clear:both;'><a data-toggle='collapse' href='#" + response.dkswLectureList[i].dkswLectureNo + "'><div class='panel-heading' style='height:76px; padding:0px;'>" 
-					+ "<div style='float:left; height:26px; margin:25px 0px 25px 25px;'><h4 class='panel-title  font-NanumGothic'><i class='fa fa-th-list'></i>("
-					+ response.dkswLectureList[i].dkswLectureYear + "-" + response.dkswLectureList[i].dkswLectureSemester + ") " + response.dkswLectureList[i].dkswLectureProfessorName + " - " + response.dkswLectureList[i].dkswLectureName + "</h4></div>"
-					+ "<div style='float:right; height:26px; margin:16px 16px 16px 0px;'><button type='button' class='btn btn-primary' onclick='registerLecture(" + response.dkswLectureList[i].dkswLectureNo + ", " + response.dkswLectureList[i].dkswLectureCount + ")'>수강하기</button></div>"
-					+ "</div></a><div id='" + response.dkswLectureList[i].dkswLectureNo + "' class='panel-collapse collapse' style='clear:both;'></div></div>";		
+			if(response.dkswLectureCountCheck == "false") {
+				lectures += "<div class='text-center'>등록된 강의를 모두 수강중입니다.</div>";
 			}
 			
 			$("#getLectureList").html(lectures);
@@ -127,41 +127,33 @@ function getLectureList() {
 }
 
 // [학생모드] 수강 신청하기
-function registerLecture(lecture, count) {
+function addRegisterLecture(lecture) {
 	
-	var lectureCount = 1;
-	
-	if(count > 1 && lectureCounter == false) {
-		alert("분반이 존재합니다.\n본인의 분반을 선택해주십시오.");
-		$(".panel-group").slideUp();
-		$(".lecture-counter").slideDown();
-		$("#lectureCounter").attr("onclick", "registerLecture(" + lecture + ", " + count + ")");
-		lectureCounter = true;
-		return false;
-	}
-
-	if(count > 1 && lectureCounter == true) {
-		lectureCount = $(".lecture-counter input[name='inputLectureCount']").val();
-	}
-	
-	var action = "/dksw/lecture?action=registerLecture";
+	var action = "/dksw/lecture?action=addRegisterLecture";
 	var form_data = {
-		inputLectureNo : lecture,
-		inputLectureCount : lectureCount
+		inputLectureNo : lecture
 	};
 	
 	$.ajax({
 		type : "POST",
 		url : action,
 		data : form_data,
-		dataType : "test",
+		dataType : "text",
 		success: function(response) {
 			if(response == "RegisterOK") {
 				alert("수강신청이 완료되었습니다.");
-				getLectureListByStudent();
+				getLectureList();
+				$("#getLectureList div[name='" + lecture + "']").remove();
+			} else if(response == "Already") {
+				alert("이미 수강중인 강의입니다.");
+			} else if(response == "NoStudent") {
+				alert("잘못된 접근입니다.");
+			} else if(response == "Fail") {
+				alert("서버 내부 오류입니다.");
 			} else {
-				alert("문제가 발생하였습니다.");
+				alert("알 수 없는 오류가 발생하였습니다.");
 			}
+			
 		}, error: function(xhr,status,error) {
 			alert(error);
 		}
@@ -170,9 +162,75 @@ function registerLecture(lecture, count) {
 	return false;
 }
 
-//[학생모드] 수강하고 있는 강의 리스트 가져오기
+// [학생모드] 수강하고 있는 강의 리스트 가져오기
 function getLectureListByStudent() {
 	
-	
-	
+	var action = "/dksw/lecture?action=getLectureListByStudent";
+
+	$.ajax({
+		type : "POST",
+		url : action,
+		dataType : "json",
+		success: function(response) {
+			var lectures = "";
+			var chapters = "";
+
+			for(i=0; i<response.dkswLectureList.length; i++) {
+			
+				lectures += "<div class='panel panel-default' name='" + response.dkswLectureList[i].dkswLectureNo + "'><a data-toggle='collapse' href='#" + response.dkswLectureList[i].dkswLectureNo + "'> <div class='panel-heading'><h4 class='panel-title font-NanumGothic'><i class='fa fa-th-list'></i>("
+					+ response.dkswLectureList[i].dkswLectureYear + "-" + response.dkswLectureList[i].dkswLectureSemester + ") " + response.dkswLectureList[i].dkswLectureProfessorName + " - " + response.dkswLectureList[i].dkswLectureName + "</h4></div></a>"
+					+ "<div id='" + response.dkswLectureList[i].dkswLectureNo + "' class='panel-collapse collapse'><div class='panel-body'><button type='button' class='btn btn-primary btn-xs margin_right_2'>강의 공지사항</button><button type='button' class='btn btn-primary btn-xs margin_right_2'>과제물 공지사항</button><button type='button' class='btn btn-danger btn-xs margin_right_2' onclick='cancelRegisterLecture(" + response.dkswLectureList[i].dkswLectureNo + ")'>수강 취소</button>"
+					+ "<div class='space-sm'></div>";
+					
+				var chapters = "<table class='table table-striped'><tr><td class='text-center text-bold' style='width:70px;'>No</td><td class='text-center text-bold'>단원명</td></tr>";
+			
+				for(j=0; j<response.dkswLectureList[i].dkswLectureChapters.length; j++) {
+					chapters += "<tr><td class='text-center' style='line-height:31px;'>#" + response.dkswLectureList[i].dkswLectureChapters[j].dkswLectureChapterCount + "</td><td style='line-height:31px;'>" + response.dkswLectureList[i].dkswLectureChapters[j].dkswLectureChapterName + "</td></tr>";
+				}
+							
+				lectures += chapters;
+				lectures += "</table></div></div></div>";
+			}
+			
+			$("#getLectureListByStudent").html(lectures);
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
+
+// [학생모드] 수강 취소하기
+function cancelRegisterLecture(lecture) {
+	check = confirm("정말로 취소하시겠습니까?");
+
+	if(!check) {
+		return false;
+		
+	} else {		
+		var action = "/dksw/lecture?action=cancelRegisterLecture";
+		var form_data = {
+			inputLectureNo : lecture
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : action,
+			data : form_data,
+			dataType : "text",
+			success: function(response) {
+				if(response == "CancelOK") {
+					$("#getLectureListByStudent div[name='" + lecture + "']").remove();
+				} else {
+					alert("알 수 없는 오류가 발생하였습니다.");
+				}
+			}, error: function(xhr,status,error) {
+				alert(error);
+			}
+		});
+		
+		return false;
+	}
 }

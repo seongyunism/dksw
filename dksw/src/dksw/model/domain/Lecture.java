@@ -6,7 +6,6 @@ public class Lecture {
 	private int dkswLectureYear;
 	private int dkswLectureSemester;
 	private String dkswLectureName;
-	private int dkswLectureCount;
 	private int dkswDepartmentProfessorNo;
 	
 	public int getDkswLectureNo() {
@@ -33,12 +32,6 @@ public class Lecture {
 	public void setDkswLectureName(String dkswLectureName) {
 		this.dkswLectureName = dkswLectureName;
 	}
-	public int getDkswLectureCount() {
-		return dkswLectureCount;
-	}
-	public void setDkswLectureCount(int dkswLectureCount) {
-		this.dkswLectureCount = dkswLectureCount;
-	}
 	public int getDkswDepartmentProfessorNo() {
 		return dkswDepartmentProfessorNo;
 	}
@@ -46,14 +39,12 @@ public class Lecture {
 		this.dkswDepartmentProfessorNo = dkswDepartmentProfessorNo;
 	}
 	
-	public Lecture(int dkswLectureNo, int dkswLectureYear, int dkswLectureSemester, String dkswLectureName,
-			int dkswLectureCount, int dkswDepartmentProfessorNo) {
+	public Lecture(int dkswLectureNo, int dkswLectureYear, int dkswLectureSemester, String dkswLectureName, int dkswDepartmentProfessorNo) {
 		super();
 		this.dkswLectureNo = dkswLectureNo;
 		this.dkswLectureYear = dkswLectureYear;
 		this.dkswLectureSemester = dkswLectureSemester;
 		this.dkswLectureName = dkswLectureName;
-		this.dkswLectureCount = dkswLectureCount;
 		this.dkswDepartmentProfessorNo = dkswDepartmentProfessorNo;
 	}
 }

@@ -79,10 +79,7 @@
 									<option value="2">2학기</option>
 								</select>
 							</div>				
-							<div style="width:230px; float:left; margin-right:5px;"><input type="text" name="inputLectureName" name="lecture-name" class="form-control" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="강의명" /></div>
-							<div style="width:100px; float:left; margin-right:5px;">
-								<input type="number" min="1" max="5" name="inputLectureCount" class="form-control" maxlength="1" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="분반수" maxlength="2" />
-							</div>
+							<div style="width:330px; float:left; margin-right:5px;"><input type="text" name="inputLectureName" name="lecture-name" class="form-control" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="강의명" /></div>
 								
 							<div style="width:120px; float:left; text-align:left;">
 								<div class="btn btn-primary-trn" onclick="addLecture()">
@@ -93,18 +90,13 @@
 						
 						<div class="col-md-2"></div>
 					</div>
-	
 					
 					<!-- 강의 관리 -->
 					<div class="tab-pane" id="lecture-list">
-					
 						<div class="panel-group">
 							<div id="getLectureListByProfessor"></div>
 						</div>
 					</div>
-					
-					<!-- 강의 닫기 -->
-					<div class="tab-pane" id="lecture-close"></div>
 	
 				</div>
 			</div>
@@ -127,29 +119,15 @@
         			<!-- 수강 신청 -->
 	            	<div class="tab-pane active" id="lecture-register">
 	            		<div class="panel-group" id="getLectureList"></div>
-	            	
-	            		<div class="lecture-counter">
-		            		<div class="col-md-5"></div>
-		            		<div class="col-md-2">
-		            			<div style="margin-bottom:2px;">
-			            			<input type="number" min="1" max="5" name="inputLectureCount" class="form-control" maxlength="1" style="text-align:center; box-shadow:none; padding:5px 12px 6px 12px;" placeholder="분반 번호" maxlength="2" />
-			            		</div>
-			            		<div>
-			            			<div class="btn btn-primary-trn" style="width:100%;" id="lectureCounter">
-										<i class="fa fa-check-circle"></i>수강 신청
-									</div>
-								</div>
-							</div>
-		            		<div class="col-md-5"></div>
-	            		</div>
 	            	</div>
 	            	
 	            	<!-- 수강 리스트 -->
-					<div class="tab-pane" id="lecture-list"></div>
-			
-					
-				
-				
+					<div class="tab-pane" id="lecture-list">
+						<div class="panel-group">
+							<div id="getLectureListByStudent"></div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</c:if>
