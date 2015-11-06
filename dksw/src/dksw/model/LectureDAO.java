@@ -193,7 +193,7 @@ public class LectureDAO {
 		try {
 			con = DBUtil.getConnection();
 
-			pstmt = con.prepareStatement("SELECT * FROM dksw_lecture_chapter WHERE dkswLectureChapterNo=?");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lecture_chapter WHERE dkswLectureNo=? ORDER BY dkswLectureChapterCount ASC");
 			pstmt.setInt(1, inputLectureNo);
 			rset = pstmt.executeQuery();
 			

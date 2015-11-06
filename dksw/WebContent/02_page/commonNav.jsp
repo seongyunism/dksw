@@ -104,7 +104,7 @@
 	                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0">게시판</a>
 	                    <ul class="dropdown-menu">
 	                        <li><a href="<%=request.getContextPath()%>/02_page/sub_05/board/index.jsp">자유게시판</a></li>
-	                        <li><a href="#">질문게시판</a></li>
+	                        <li><a href="<%=request.getContextPath()%>/02_page/sub_05/qna/index.jsp">질문게시판</a></li>
 	                    </ul>
 	                </li>
 	
