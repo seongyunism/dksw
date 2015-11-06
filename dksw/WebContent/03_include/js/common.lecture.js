@@ -78,6 +78,8 @@ function getLectureListByProfessor() {
 			
 				lectures += chapters;
 				lectures += "</table></div></div></div>";
+				
+				lastChapterCount = 0;
 			}
 			
 			$("#getLectureListByProfessor").html(lectures);
