@@ -1510,20 +1510,20 @@ ul.primary span {
   }
 }
 
-@media (min-width: 1440px) and (max-width: 1920px) {
+@media (min-width: 1440px) and (max-width: 1919px) {
   .sTop {
     min-height: 1080px;
   }
 }
 
-@media (min-width: 1200px) and (max-width: 1440px) {
+@media (min-width: 1280px) and (max-width: 1439px) {
   .sTop {
-    min-height: 900px;
+    min-height: 1024px;
   }
 }
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1279px) {
   .sTop {
-    min-height: 600px;
+    min-height: 800px;
   }
 }
 @media (max-width: 992px) {
@@ -4265,7 +4265,7 @@ ul.thumbs {
  *                           Custom CSS
  * =================================== */
 
-/********* 공통 *********/
+/********* 怨듯넻 *********/
 
 .font-NanumGothic {
 	font-family:NanumGothic;
@@ -4304,7 +4304,7 @@ ul.thumbs {
 }
 
 
-/********* 초기화면 페이지 *********/
+/********* 珥덇린�솕硫� �럹�씠吏� *********/
 
 .page-main-title {
 	font-weight:bold;
@@ -4328,7 +4328,7 @@ ul.thumbs {
 	color:#000000;
 }
 
-/********* 회원가입 페이지 *********/
+/********* �쉶�썝媛��엯 �럹�씠吏� *********/
 
 .edit-date {
 	float:right;
@@ -4388,7 +4388,7 @@ ul.thumbs {
 }
 
 
-/********* 학과 소개 *********/
+/********* �븰怨� �냼媛� *********/
 
 .history-head {
 	font-weight:bold;
@@ -4403,7 +4403,7 @@ ul.thumbs {
 }
 
 
-/********* 학과 내규 *********/
+/********* �븰怨� �궡洹� *********/
 
 .page-law-title {
 	font-size:1.5em;
