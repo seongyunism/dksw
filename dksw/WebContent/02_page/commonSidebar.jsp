@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <div class="sidebar-off hidden-xs sidebar">
+    <div class="sidebar-off hidden-xs sidebar" id="sidebar">
         <div class="wrap">
 
             <div class="form-lg">

@@ -240,8 +240,11 @@
 					
 						<input type="text" name="inputBoardTitle" class="form-control font-NanumGothic margin_bottom_5" placeholder="제목" style="font-weight:bold;" />
 						<textarea name="inputBoardContent" class="form-control font-NanumGothic" style="min-height:500px;"></textarea> 
-			            <div class="space"></div>
-			                        
+			            <div class="space-sm"></div>
+
+						<iframe class="uploadFrame" src="../../../04_upload/upload.jsp?mode=update&category=board_<%=category%>&no=<%=postNo%>"></iframe>
+						<div class="space-sm"></div>
+ 
 			            <div class="btn btn-primary pull-right margin_left_5" onclick="writePost('<%=category%>')">
 			            	<i class="fa fa-trash-o"></i>완료
 			            </div>

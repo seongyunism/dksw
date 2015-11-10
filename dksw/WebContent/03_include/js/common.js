@@ -87,12 +87,12 @@ function testAPI() {
 function initializePermission(id) {
 
 	var action = "/dksw/admin?action=getPermission";
-	var inputAdminPermissionId = "inputAdminPermissionId=" + id;
+	var inputAdminMenuName = "inputAdminMenuName=" + id;
 	
 	$.ajax({
 		type : "POST",
 		url : action,
-		data : inputAdminPermissionId,
+		data : inputAdminMenuName,
 		dataType : "text",
 		success: function(response) {
 			if(response == "ApproveOK") {

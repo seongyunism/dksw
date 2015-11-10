@@ -10,13 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import dksw.model.AdminDAO;
-import dksw.model.MemberDAO;
 import dksw.model.domain.AdminPermission;
-import dksw.model.domain.Member;
 import dksw.util.PermissionCheck;
 
 public class AdminController extends HttpServlet {
@@ -46,11 +41,10 @@ public class AdminController extends HttpServlet {
 		try {
 			HttpSession sessionPermission = req.getSession();
 			
-			String inputAdminPermissionId = (req.getParameter("inputAdminPermissionId") != null) ? (req.getParameter("inputAdminPermissionId")) : null;
+			String inputAdminMenuName = (req.getParameter("inputAdminMenuName") != null) ? (req.getParameter("inputAdminMenuName")) : null;
 			String memberCategory = (sessionPermission.getAttribute("dkswMemberCategory") != null) ? (sessionPermission.getAttribute("dkswMemberCategory").toString()) : null;
 			
-			permission = AdminDAO.getPermission(inputAdminPermissionId);
-			
+			permission = AdminDAO.getPermission(inputAdminMenuName);
 			checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
 			
 			if(checkPermission) {
@@ -61,8 +55,8 @@ public class AdminController extends HttpServlet {
 			
 		} catch (SQLException se) {
 			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
-	
-
 }

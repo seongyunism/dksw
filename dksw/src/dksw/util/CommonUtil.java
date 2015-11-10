@@ -18,4 +18,20 @@ public class CommonUtil {
 		
 		return list;
 	}
+	
+	public static String uploadPathInitialize(String category) {
+		
+		switch(category) {
+			case "board_department":
+				return "sub_01/board";
+			case "board_student":
+				return "sub_01/board";
+			case "board_job":
+				return "sub_01/board";
+			case "board_free":
+				return "sub_05/board";
+			default:
+				return "FAIL";
+		}
+	}
 }

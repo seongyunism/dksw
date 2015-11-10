@@ -22,6 +22,11 @@
 	$(function() {
 
 	});
+	
+	function openSlideBar() {
+		$("#sidebar").attr("class", "sidebar-on hidden-xs sidebar");
+	}
+	
 	</script>
 </head>
 
@@ -45,7 +50,7 @@
                     <ul class="list-inline">
                         <li><a href="http://dksw.890313.com/app.apk" class="btn btn-default-trn btn-xlg scroll font-NanumGothic"><i class="fa fa-bolt"></i>애플리케이션 다운로드</a></li>
                         <c:if test="${empty sessionScope.dkswMemberNo}"><li><a href="<%=request.getContextPath()%>/02_page/join/index.jsp" class="btn btn-primary btn-xlg scroll font-NanumGothic"><i class="fa fa-user-plus"></i>학과생 인증 및 회원 가입</a></li></c:if>
-                        <c:if test="${empty sessionScope.dkswMemberNo}"><li><a href="" class="btn btn-success btn-xlg scroll font-NanumGothic"><i class="fa fa fa-sign-in"></i>로그인</a></li></c:if>
+                        <c:if test="${empty sessionScope.dkswMemberNo}"><li><button class="btn btn-success btn-xlg scroll font-NanumGothic" onclick="openSlideBar()"><i class="fa fa fa-sign-in"></i>로그인</button></li></c:if>
                     </ul>
                 </div>
             </div>

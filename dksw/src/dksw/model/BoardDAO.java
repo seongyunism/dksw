@@ -112,7 +112,7 @@ public class BoardDAO {
 
 			pstmt = con.prepareStatement("INSERT INTO dksw_board("
 					+ "dkswBoardCategory, dkswMemberNo, dkswBoardWriteDate, dkswBoardReadnum, dkswBoardTitle, dkswBoardContent, "
-					+ "dkswBoardPicture"
+					+ "dkswBoardFiles"
 					+ ") values(?, ?, ?, ?, ?, ?, ?)");
 		
 			pstmt.setInt(1, inputBoardCategory);
@@ -143,7 +143,8 @@ public class BoardDAO {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;	
+		ResultSet rset = null;
+		
 		int check = 0;
 		
 		try {
@@ -207,5 +208,72 @@ public class BoardDAO {
 				sqle.printStackTrace();
 			}
 		}	
+	}
+	
+	public static int getNextPostNo() throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int nextPostNo = 0;
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("SELECT max(dkswBoardNo) FROM dksw_board");
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			nextPostNo = rset.getInt(1) + 1;
+			
+			return nextPostNo;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+			
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+
+	public static boolean setBoardFile(String inputUploadStr, int inputBoardNo) throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int check = 0;
+		
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("UPDATE dksw_board SET dkswBoardFiles=? WHERE dkswBoardNo=?");				
+
+			pstmt.setString(1, inputUploadStr);
+			pstmt.setInt(2, inputBoardNo);
+			check = pstmt.executeUpdate();	
+			
+			if(check == 1) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
 	}
 }
