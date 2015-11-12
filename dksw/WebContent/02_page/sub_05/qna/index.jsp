@@ -12,6 +12,15 @@
 	<jsp:include page="../../commonHeader.jsp" flush="false" />
 	
 	<script>
+	$(document).ready(function() {
+		initializeLecture('${sessionScope.dkswMemberCategory}');
+	});
+
+	$(window).load(function() {
+		
+	});
+	
+	
 	$(document).ready(function(){
 		$("#btn_write").bind("click",function(){
 			location.href="./qna_inerstform.jsp";
@@ -23,6 +32,13 @@
 </head>
 <%
 // 질문 진행중
+
+// 질문 진행중 
+//dkswMemberNo
+
+//HttpSession session = request.getSession(false);
+//int mem_no = (int)session.getAttribute("dkswMemberNo");
+
 
 Context InitContext_ing = null;
 Context envContext_ing = null;
@@ -51,16 +67,6 @@ java.sql.Statement stmt_ct = null;
 ResultSet rs_ct = null;
 int num_ct = 0;
 
-
-	try {
-		InitContext_ct = new InitialContext();
-		envContext_ct = (Context) InitContext_ct.lookup("java:comp/env");
-		ds_ct = (DataSource) envContext_ct.lookup("jdbc/mysql");
-		conn_ct = ds_ct.getConnection();
-		stmt_ct = conn_ct.createStatement();
-		rs_ct = stmt_ct.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N') ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y')end_ct");
-	
-	
 %>
 
 
@@ -78,12 +84,14 @@ int num_ct = 0;
             </div>
         </div>
     </section>
-
+	<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8' || sessionScope.dkswMemberCategory == '6'}"> 
     <!-- Content Section  -->
     <section class="section">
 		<div class="container">
 			<div class="row">
 				<!-- Left Contents -->
+				<!-- 학생 게시글 -->
+				<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8'}"> 
 				<div class="col-md-8 col-lg-9">
 					<div class="bs-example"
 						data-example-id="panel-without-body-with-table">
@@ -106,6 +114,14 @@ int num_ct = 0;
 									</div>
 									<div class="panel-body">
 									<%
+									try {
+										InitContext_ct = new InitialContext();
+										envContext_ct = (Context) InitContext_ct.lookup("java:comp/env");
+										ds_ct = (DataSource) envContext_ct.lookup("jdbc/mysql");
+										conn_ct = ds_ct.getConnection();
+										stmt_ct = conn_ct.createStatement();
+										rs_ct = stmt_ct.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N') ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y')end_ct");
+									
 									while (rs_ct.next()) {
 												int ct_ing = rs_ct.getInt(1);
 												int ct_end = rs_ct.getInt(2);
@@ -118,7 +134,7 @@ int num_ct = 0;
 										<div class="progress-bar" role="progressbar"
 											aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
 											style="width: <%=bar%>%;">
-											<span class="sr-only">60% Complete</span>
+											<span class="sr-only"><%=bar%>% Complete</span>
 										</div>
 									</div>
 									<%
@@ -128,7 +144,7 @@ int num_ct = 0;
 			
 
 										} catch (Exception e) {
-											out.println(e);
+											
 											
 										} finally {
 											try {
@@ -157,8 +173,8 @@ int num_ct = 0;
 												<tr>
 													<th>#</th>
 													<th>제목</th>
-													<th>진행사항</th>
 													<th>담당교수</th>
+													<th>작성일</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -167,14 +183,16 @@ int num_ct = 0;
 												InitContext_ing = new InitialContext();
 												envContext_ing = (Context) InitContext_ing.lookup("java:comp/env");
 												ds_ing = (DataSource) envContext_ing.lookup("jdbc/mysql");
-												conn_ing = ds_ing.getConnection();
+												conn_ing = ds_ing.getConnection();                          
 												stmt_ing = conn_ing.createStatement();
-												rs_ing = stmt_ing.executeQuery("Select Qa_title,qa_aPIdx, qa_regDate from dksw_qna_board where qa_answerYN = 'N'");
+												//rs_ing = stmt_ing.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ), qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N' and=qa_writer" );
+												//rs_ing = stmt_ing.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N' and"+mem_no+ "=qa_writer" );
+												rs_ing = stmt_ing.executeQuery("Select Qa_title,qa_pIdx, qa_regDate from dksw_qna_board where qa_answerYN = 'N'");
 											
 											
 											while (rs_ing.next()) {
 												String qa_title_ing = rs_ing.getString("qa_title");
-												String qa_aPIdx_ing = rs_ing.getString("qa_aPIdx");
+												String qa_pIdx_ing = rs_ing.getString("qa_pIdx");
 												String qa_regDate_ing = rs_ing.getString("qa_regDate");
 												num_ing++;
 													
@@ -182,7 +200,7 @@ int num_ct = 0;
 												<tr>
 													<th scope="row"><%=num_ing %></th>
 													<td><a href="./qna_viewcontent.jsp"><%=qa_title_ing %></a></td>
-													<td><a href="./qna_viewcontent.jsp"><%=qa_aPIdx_ing %></a></td>
+													<td><a href="./qna_viewcontent.jsp"><%=qa_pIdx_ing %></a></td>
 													<td><a href="./qna_viewcontent.jsp"><%=qa_regDate_ing %></a></td>
 												</tr>	
 												<%
@@ -196,8 +214,19 @@ int num_ct = 0;
 											
 										} finally {
 											try {
-												if (stmt_ing != null)
-													stmt_ing.close();
+												if (stmt_ing != null){
+													if(num_ing == 0)
+													{
+													%>
+													<tr>
+														<th scope="row"><%=num_ing %></th>
+														<td>해당 글이 없습니다.</td>
+													
+													</tr>
+													<%
+													}
+												stmt_ing.close();
+												}
 											} catch (Exception e) {
 											}
 											try {
@@ -222,12 +251,12 @@ int num_ct = 0;
 
 										<!-- Table -->
 										<table class="table">
-											<thead>
+											<thead id="end_table">
 												<tr>
 													<th>#</th>
 													<th>제목</th>
-													<th>진행사항</th>
 													<th>담당교수</th>
+													<th>작성일</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -238,14 +267,15 @@ int num_ct = 0;
 												ds_end = (DataSource) envContext_end.lookup("jdbc/mysql");
 												conn_end = ds_end.getConnection();
 												stmt_end = conn_end.createStatement();
-												rs_end = stmt_end.executeQuery("Select Qa_title,qa_aPIdx, qa_regDate from dksw_qna_board where qa_answerYN = 'Y'");
-											
+												//rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ), qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'Y' and=qa_writer");
+												//rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'Y' and"+mem_no+"=qa_writer");
+												rs_ing = stmt_ing.executeQuery("Select Qa_title,qa_pIdx, qa_regDate from dksw_qna_board where qa_answerYN = 'Y'");
 											%>
 											<%
 
 											while (rs_end.next()) {
 												String qa_title_end = rs_end.getString("qa_title");
-												String qa_aPIdx_end = rs_end.getString("qa_aPIdx");
+												String qa_pIdx_end = rs_end.getString("qa_pIdx");
 												String qa_regDate_end = rs_end.getString("qa_regDate");
 												num_end++;
 													
@@ -254,7 +284,7 @@ int num_ct = 0;
 												<tr>
 													<th scope="row"><%=num_end %></th>
 													<td><a href="./qna_viewcontent.jsp"><%=qa_title_end %></a></td>
-													<td><a href="./qna_viewcontent.jsp"><%=qa_aPIdx_end %></a></td>
+													<td><a href="./qna_viewcontent.jsp"><%=qa_pIdx_end %></a></td>
 													<td><a href="./qna_viewcontent.jsp"><%=qa_regDate_end %></a></td>
 												</tr>	
 												<%
@@ -262,13 +292,23 @@ int num_ct = 0;
 														rs_end.close();
 														stmt_end.close();
 
-													} catch (Exception e) {
-														out.println(e);
+													} catch (Exception e) {												
 
 													} finally {
 														try {
-															if (stmt_end != null)
+															if (stmt_end != null){
+																if(num_end == 0)
+																	{
+																	%>
+																	<tr>
+																		<th scope="row"><%=num_end %></th>
+																		<td>해당 글이 없습니다.</td>
+																	
+																	</tr>
+																	<%
+																	}
 																stmt_end.close();
+																}
 														} catch (Exception e) {
 														}
 														try {
@@ -288,6 +328,249 @@ int num_ct = 0;
 						</div>
 					</div>
 				</div>
+				</c:if>
+				<!-- 교수님 게시글 -->
+				<c:if test="${sessionScope.dkswMemberCategory == '6'}"> 
+				<div class="col-md-8 col-lg-9">
+					<div class="bs-example"
+						data-example-id="panel-without-body-with-table">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3>진행 및 완료사항
+								<button type="button" class="btn btn-default btn-sm"
+									aria-label="Right Align" style="float:right">
+									<li id="btn_write">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+										<span class="glyphicon-class" >글쓰기</span>
+									</li>
+								</button>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h3 class="panel-title">진행사항</h3>
+									</div>
+									<div class="panel-body">
+									<%
+									try {
+										InitContext_ct = new InitialContext();
+										envContext_ct = (Context) InitContext_ct.lookup("java:comp/env");
+										ds_ct = (DataSource) envContext_ct.lookup("jdbc/mysql");
+										conn_ct = ds_ct.getConnection();
+										stmt_ct = conn_ct.createStatement();
+										rs_ct = stmt_ct.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N') ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y')end_ct");
+									
+									while (rs_ct.next()) {
+												int ct_ing = rs_ct.getInt(1);
+												int ct_end = rs_ct.getInt(2);
+												float bar = (float)ct_end/((float)ct_ing+(float)ct_end)*100;
+									%>
+										<a href="./qna_ing.jsp">진행중 <span class="badge"><%=ct_ing %></span></a>
+										<a href="./qna_end.jsp">완료 <span class="badge"><%=ct_end %></span></a>
+									</div>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+											style="width: <%=bar%>%;">
+											<span class="sr-only"><%=bar%>% Complete</span>
+										</div>
+									</div>
+									<%
+											}
+											rs_ct.close();
+											stmt_ct.close();
+			
+
+										} catch (Exception e) {
+											
+											
+										} finally {
+											try {
+												if (stmt_ct != null)
+													stmt_ct.close();
+											} catch (Exception e) {
+											}
+											try {
+												if (conn_ct != null)
+													conn_ct.close();
+											} catch (Exception e) {
+											}
+										}
+													%>
+								</div>
+								<div class="bs-example"
+									data-example-id="panel-without-body-with-table">
+									<div class="panel panel-warning">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<h3 class="panel-title">답변 진행중</h3>
+										</div>
+										<!-- Table -->
+										<table class="table">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>제목</th>
+													<th>작성학생</th>
+													<th>작성일</th>
+												</tr>
+											</thead>
+											<tbody>
+											<%
+											try {
+												InitContext_ing = new InitialContext();
+												envContext_ing = (Context) InitContext_ing.lookup("java:comp/env");
+												ds_ing = (DataSource) envContext_ing.lookup("jdbc/mysql");
+												conn_ing = ds_ing.getConnection();                          
+												stmt_ing = conn_ing.createStatement();
+												//rs_ing = stmt_ing.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ), qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N' and=qa_writer" );
+												//rs_ing = stmt_ing.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N' and"+mem_no+ "=qa_writer" );
+												rs_ing = stmt_ing.executeQuery("Select Qa_title,qa_writer, qa_regDate from dksw_qna_board where qa_answerYN = 'N' and qa_QA='Q'");
+											
+											
+											while (rs_ing.next()) {
+												String qa_title_ing = rs_ing.getString("qa_title");
+												String qa_pIdx_ing = rs_ing.getString("qa_writer");
+												String qa_regDate_ing = rs_ing.getString("qa_regDate");
+												num_ing++;
+													
+											%>
+												<tr>
+													<th scope="row"><%=num_ing %></th>
+													<td><a href="./qna_viewcontent.jsp"><%=qa_title_ing %></a></td>
+													<td><a href="./qna_viewcontent.jsp"><%=qa_pIdx_ing %></a></td>
+													<td><a href="./qna_viewcontent.jsp"><%=qa_regDate_ing %></a></td>
+												</tr>	
+												<%
+											}
+											rs_ing.close();
+											stmt_ing.close();
+			
+
+										} catch (Exception e) {
+											out.println(e);
+											
+										} finally {
+											try {
+												if (stmt_ing != null){
+													if(num_ing == 0)
+													{
+													%>
+													<tr>
+														<th scope="row"><%=num_ing %></th>
+														<td>해당 글이 없습니다.</td>
+													
+													</tr>
+													<%
+													}
+												stmt_ing.close();
+												}
+											} catch (Exception e) {
+											}
+											try {
+												if (conn_ing != null)
+													conn_ing.close();
+											} catch (Exception e) {
+											}
+										}
+													%>
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="bs-example"
+									data-example-id="panel-without-body-with-table">
+									<div class="panel panel-success">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<h3 class="panel-title">답변 완료</h3>
+										</div>
+
+										<!-- Table -->
+										<table class="table">
+											<thead id="end_table">
+												<tr>
+													<th>#</th>
+													<th>제목</th>
+													<th>작성학생</th>
+													<th>작성일</th>
+												</tr>
+											</thead>
+											<tbody>
+											<%
+											try {
+												InitContext_end = new InitialContext();
+												envContext_end = (Context) InitContext_end.lookup("java:comp/env");
+												ds_end = (DataSource) envContext_end.lookup("jdbc/mysql");
+												conn_end = ds_end.getConnection();
+												stmt_end = conn_end.createStatement();
+												//rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ), qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'Y' and=qa_writer");
+												//rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'Y' and"+mem_no+"=qa_writer");
+												rs_ing = stmt_ing.executeQuery("Select Qa_title,qa_aPIdx, qa_regDate from dksw_qna_board where qa_answerYN = 'Y'");
+											
+											%>
+											<%
+
+											while (rs_end.next()) {
+												String qa_title_end = rs_end.getString("qa_title");
+												String qa_pIdx_end = rs_end.getString("qa_pIdx");
+												String qa_regDate_end = rs_end.getString("qa_regDate");
+												num_end++;
+													
+											%>
+	
+												<tr>
+													<th scope="row"><%=num_end %></th>
+													<td><a href="./qna_viewcontent.jsp"><%=qa_title_end %></a></td>
+													<td><a href="./qna_viewcontent.jsp"><%=qa_pIdx_end %></a></td>
+													<td><a href="./qna_viewcontent.jsp"><%=qa_regDate_end %></a></td>
+												</tr>	
+												<%
+													}
+														rs_end.close();
+														stmt_end.close();
+
+													} catch (Exception e) {												
+
+													} finally {
+														try {
+															if (stmt_end != null){
+																if(num_end == 0)
+																	{
+																	%>
+																	<tr>
+																		<th scope="row"><%=num_end %></th>
+																		<td>해당 글이 없습니다.</td>
+																	
+																	</tr>
+																	<%
+																	}
+																stmt_end.close();
+																}
+														} catch (Exception e) {
+														}
+														try {
+															if (conn_end != null)
+																conn_end.close();
+														} catch (Exception e) {
+														}
+													}
+												%>						
+											
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</c:if>
+				
+				
 				<!-- Right Contents -->
 					<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
 						<!-- Search Box -->
@@ -316,7 +599,7 @@ int num_ct = 0;
 
 			</div>
 	</section>
-
+	</c:if>
     <!--Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
@@ -336,3 +619,4 @@ int num_ct = 0;
 	
 </body>
 </html>
+

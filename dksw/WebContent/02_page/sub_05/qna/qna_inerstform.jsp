@@ -23,6 +23,37 @@ try {
 	stmt_pfN = conn_pfN.createStatement();
 	rs_pfN = stmt_pfN.executeQuery("SELECT dkswDepartmentProfessorNameKo FROM `dksw_department_professor` ORDER BY`dkswDepartmentProfessorNo` ASC ");
 %>
+<script type="text/javascript" >
+	/*값이 입력 안된부분 알림*/
+	function writeCheck()
+	{
+	 var form = document.writeform;
+	 if( !form.title.value )   // form 에 있는 name 값이 없을 때
+	 {
+	  alert( "제목을 적어주세요" ); // 경고창 띄움
+	  form.title.focus();   // form 에 있는 name 위치로 이동
+	  return;
+	 }
+	 
+	 if(form.pf.value=="교수님" )
+	 {
+	  alert( "담당교수님을 선택해주세요" );
+	  form.pf.focus();
+	  return;
+	 }
+	 
+	if(!form.qa_content.value)
+	 {
+	  alert( "내용을 적어주세요" );
+	  form.qa_content.focus();
+	  return;
+	 }
+	form.submit();
+	}
+</script>
+
+
+
 
 <head>
 	<title>단국대학교 소프트웨어학과 | 질문게시판</title>
@@ -58,26 +89,11 @@ try {
 						<div class="panel-heading">
 							<h3>질문작성</h3>
 						</div>
-						<form class="form-horizontal">
+						<form class="form-horizontal" name=writeform method=post action="qna_insert_accept.jsp">
 							<div class="form-group">
-								<label for="inputPassword" class="col-sm-2 control-label">제목</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" id="inputPassword"
-										placeholder="제목">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">작성자명</label>
-								<div class="col-sm-8">
-									<p class="form-control-static">홍길동</p>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">대상 교수님</label>
-								<div class="col-sm-2">
-										<select class="lecture-year" style="text-align:center;"
+								<select class="lecture-year"  name="pf" style="text-align:center;"
 											>
-											<option>교수님</option>
+											<option >교수님</option>
 											<%
 											while (rs_pfN.next()) {
 														String pfN = rs_pfN.getString("dkswDepartmentProfessorNameKo");
@@ -110,22 +126,25 @@ try {
 											}
 											%>
 											
-										</select>
-
+								</select>
+								<div class="col-sm-10">
+										<input type="text" class="form-control" id="inputTitle" name ="title"
+										placeholder="제목">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">내용</label>
-								<div class="col-sm-8">
-									<textarea class="col-md-8 form-control" rows="6"
-										placeholder="Textarea"></textarea>
+						
+								<div class="col-sm-10">
+									<textarea class="col-md-8 form-control" rows="6" name ="qa_content"
+										placeholder="내용을입력해주세요"></textarea>
 								</div>
 							</div>
 							<div class="form-group" >
-								<div class="col-sm-4" style="float:right">
+								<div class="col-sm-5" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
-										<button type="button" class="btn btn-success default">등록</button>
+										<button type="button" class="btn btn-success default" OnClick="javascript:writeCheck();">등록</button>
 										<button type="button" class="btn btn-danger default" id="insert_cancel">취소</button>
+										<button type="button" class="btn btn-warning default" id="insert_cancel">임시보관</button>
 									</div>
 								</div>
 							</div>

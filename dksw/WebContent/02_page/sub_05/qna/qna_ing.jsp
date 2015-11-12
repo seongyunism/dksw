@@ -32,7 +32,7 @@ String sql = "";
 		ds = (DataSource) envContext.lookup("jdbc/mysql");
 		conn = ds.getConnection();
 		stmt = conn.createStatement();
-		rs = stmt.executeQuery("Select Qa_title,qa_aPIdx, qa_regDate from dksw_qna_board where qa_answerYN = 'N'");
+		rs = stmt.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N'");
 	
 %>
 
@@ -76,7 +76,7 @@ String sql = "";
 								<%
 								while (rs.next()) {
 									String qa_title = rs.getString("qa_title");
-									String qa_aPIdx = rs.getString("qa_aPIdx");
+									String qa_pIdx = rs.getString("qa_pIdx");
 									String qa_regDate = rs.getString("qa_regDate");
 									System.out.println(qa_title);
 									num++;
@@ -85,7 +85,7 @@ String sql = "";
 									<tr>
 										<th scope="row"><%=num %></th>
 										<td><a href="./qna_viewcontent.jsp" ><%=qa_title %></a></td>
-										<td><a href="./qna_viewcontent.jsp" ><%=qa_aPIdx %></a></td>
+										<td><a href="./qna_viewcontent.jsp" ><%=qa_pIdx %></a></td>
 										<td><a href="./qna_viewcontent.jsp" ><%=qa_regDate %></a></td>
 									</tr>
 									<%
