@@ -78,4 +78,36 @@ public class UploadDAO {
 			}
 		}
 	}
+
+	public static String getFileSrc(int inputUploadNo) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String fileSrc = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("SELECT dkswUploadFileSrc FROM dksw_upload WHERE dkswUploadNo=?");
+			pstmt.setInt(1, inputUploadNo);
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			fileSrc = rset.getString(1);
+			
+			return fileSrc;
+		
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+			
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
 }

@@ -46,7 +46,7 @@ function initializeBoard(board) {
 					post = "<div class='row blog-post wow fadeInUp' name='"
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><div class='col-sm-3'><img class='img-responsive' src='"
-						+ response.dkswBoard[i].dkswBoardPicture
+						+ response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile
 						+ "'></div><div class='col-sm-9'><a href='./view.jsp?category=" + category + "&postNo="
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><h3>"
@@ -271,20 +271,19 @@ function getNews(){
 		dataType : "json",
 		success: function(response) {
 
-			for(i = 0; i<4;i++){
-			
-				var post = "<div class='col-md-3 col-lg-3 col-sm-6'data-wow-delay='0.8s'>" +
-					"<div class='news'><img class='img-responsive'src='"+response.dkswBoard[i].dkswBoardPicture+"' alt=''>" +
-					"<h3>"+response.dkswBoard[i].dkswBoardTitle+"</h3><em>"+response.dkswBoard[i].dkswBoardWriteDate+"</em>" +
-					"<p>"+response.dkswBoard[i].dkswBoardContent+"</p>" +
-					"<a href='02_page/sub_01/notice/view.jsp?postNo="	+ response.dkswBoard[i].dkswBoardNo+
-					"'class='btn btn-default-trn-v2'>Read more <i class='fa fa-angle-double-right'></i></a></div></div>"	
+			for(i=0; i<3; i++) {
+				var post = "<a href='02_page/sub_01/notice/view.jsp?postNo=" + response.dkswBoard[i].dkswBoardNo + "' class='txtMain'>"
+					+ "<div class='col-md-4 col-lg-4 col-sm-6' data-wow-delay='0.8s'>" 
+					+ "<div class='news'><img class='img-responsive'src='" + response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile + "' alt=''>"
+					+ "<h3 class='EllipsText'>" + response.dkswBoard[i].dkswBoardTitle + "</h3>"
+					+ "<p style='padding-top:5px;'>" + response.dkswBoard[i].dkswBoardContent + "</p>"
+					+ "<p style='text-align:right;'><em>" + response.dkswBoard[i].dkswBoardWriteDate + "</em><p>"
+					+ "</div></div></a>"
 				
 				posts += post;
 			}
 
-			$("#dkswBreakingNews").html(posts);
-			
+			$("#dkswBoardNews").html(posts);
 			
 		}, error: function(xhr,status,error) {
 			alert(error);

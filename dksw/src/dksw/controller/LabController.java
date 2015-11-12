@@ -107,8 +107,8 @@ public class LabController extends HttpServlet {
 			// Intro
 			jObject.put("dkswLabIntroIntroduction", introData.getDkswLabIntroIntroduction().replaceAll("\n", "<br />"));
 
-			for(int i=0; i<CommonUtil.userSpilt(introData.getDkswLabIntroPicture()).size(); i++) {
-				jObject.put("dkswLabIntroPicture_" + i, CommonUtil.userSpilt(introData.getDkswLabIntroPicture()).get(i));
+			for(int i=0; i<CommonUtil.commonSpilt(introData.getDkswLabIntroPicture()).size(); i++) {
+				jObject.put("dkswLabIntroPicture_" + i, CommonUtil.commonSpilt(introData.getDkswLabIntroPicture()).get(i));
 			}
 			
 			jObject.put("dkswLabIntroEditDate", introData.getDkswLabIntroEditDate());

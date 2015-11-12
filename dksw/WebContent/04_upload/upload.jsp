@@ -23,7 +23,7 @@
 	
 	<!-- Custom Style -->
 	<style>
-	html, body {width:100%; height:100%; margin:0px; padding:0px;}
+	html, body {width:100%; height:100%; margin:0px; padding:0px; overflow:hidden;}
 	</style>
 	
 	<!-- Custom Scripts -->
@@ -66,10 +66,10 @@
 		<input type="hidden" name="inputUploadMode" value="<%=inputUploadMode %>" />
 		
 		<div style="width:100%;">
-			<div class="left" style="width:85%; float:left;"><input type="file" id="inputUploadFiles" class="btn btn-default btn-sm margin_right_2" style="width:100%; outline:0px;" value="" name="inputUploadFiles" multiple onchange="commonFileUploadFormChange()" onclick="commonFileUploadFormClick()" /></div>
-			<div class="right" style="width:15%; float:left;"><button type="submit" class="btn btn-primary-trn btn-sm" style="width:100%;">업로드 하기</button></div>
+			<div class="left" style="width:85%; float:left;"><input type="file" id="inputUploadFiles" class="btn btn-default btn-sm margin_right_2" style="width:100%; height:35px; outline:0px;" value="" name="inputUploadFiles" multiple onchange="commonFileUploadFormChange()" onclick="commonFileUploadFormClick()" /></div>
+			<div class="right" style="width:15%; float:left;"><button type="submit" class="btn btn-primary-trn btn-sm" style="width:100%; height:35px;">업로드 하기</button></div>
 		</div>
-		<div class="text-center font-NanumGothic" style="width:100%;"><span class="txtUpload">Ctrl키나 Shift키로 다중 선택하여 여러 개의 파일을 동시에 업로드할 수 있습니다. (한 파일당 최대 20MB)</span></div>
+		<div class="text-center font-NanumGothic" style="width:100%; clear:both;"><span class="txtUpload">Ctrl키나 Shift키로 다중 선택하여 여러 개의 파일을 동시에 업로드할 수 있습니다. (한 파일당 최대 20MB)</span></div>
 	</form>
 </body>
 </html>

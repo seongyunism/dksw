@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CommonUtil {
 
-	public static List<String> userSpilt(String str) {
+	public static List<String> commonSpilt(String str) {
 		
 		List<String> list = new ArrayList<String>();
 		String[] temp = null;

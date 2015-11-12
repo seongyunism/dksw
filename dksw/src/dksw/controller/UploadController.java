@@ -50,9 +50,11 @@ public class UploadController extends HttpServlet {
 
 		HashMap<String, String> map = new HashMap<String, String>();
 
-		String uploadPath = ""; // 업로드 디렉토리 주소
+		String realUploadPath = ""; // 업로드 디렉토리 주소
+		String contextUploadPath = "";
 		String uploadFilePath = ""; // 업로드 파일 주소
 		String uploadFilePostNo = "";
+		String dbUploadFilePath = "";
 		int uploadFileCount = 0;
 
 		int[] uploadQueryCheck;
@@ -94,30 +96,28 @@ public class UploadController extends HttpServlet {
 								return;								
 							}
 							
-							System.out.println("1");
-							
 						} else if(paramName.equals("inputUploadPostNo")) {
 							uploadFilePostNo = String.format("%04d", Integer.parseInt(paramValue));
-							System.out.println("2");
 							
 						} else if(paramName.equals("inputUploadCategory")) { // 업로드할 디렉토리 생성
-										
 							permission = AdminDAO.getPermission(paramValue);
 							checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
 							
 							if(checkPermission) { // 허가된 사용자인 경우
-								uploadPath = getServletContext().getRealPath("") + "04_upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;						
-								File file = new File(uploadPath);
+								realUploadPath = getServletContext().getRealPath("") + File.separator + "04_upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;
+								contextUploadPath  = getServletContext().getContextPath() + File.separator + "04_upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;
+
+								File file = new File(realUploadPath);
 								file.mkdir();
+								
+								System.out.println(contextUploadPath);
 
 							} else { // 회원이지만 허가된 사용자가 아님
 								System.out.println("ERROR : 허가된 사용자 아님");
 								return;
 							}
-							
-							System.out.println("3");
 						}
-						System.out.println(paramName + " : " + paramValue);
+
 						map.put(paramName, paramValue);
 						
 					// 파일일 때
@@ -126,7 +126,8 @@ public class UploadController extends HttpServlet {
 	//					filePart.setRenamePolicy(new DefaultFileRenamePolicy()); //중복 파일 이름 정의    
 	
 						String uploadFileName = filePart.getFileName();
-						uploadFilePath = uploadPath + File.separator + uploadFileName;
+						uploadFilePath = realUploadPath + File.separator + uploadFileName;
+						dbUploadFilePath = contextUploadPath + File.separator + uploadFileName;
 						
 						if (uploadFileName != null) {
 							if(paramName.equals("inputUploadFiles")) {
@@ -145,7 +146,7 @@ public class UploadController extends HttpServlet {
 								map.put(paramName + "_" + uploadFileCount, uploadFilePath);
 								
 								uploadQueryCheck = new int[Integer.parseInt(map.get("inputUploadCount").toString())];
-								uploadQueryCheck[uploadFileCount] = UploadDAO.addUploadFile(AdminDAO.getMenuNo(map.get("inputUploadCategory")), Integer.parseInt(map.get("inputUploadPostNo").toString()), inputUploadDate, inputMemberNo, uploadFileName, uploadFilePath);
+								uploadQueryCheck[uploadFileCount] = UploadDAO.addUploadFile(AdminDAO.getMenuNo(map.get("inputUploadCategory")), Integer.parseInt(map.get("inputUploadPostNo").toString()), inputUploadDate, inputMemberNo, uploadFileName, dbUploadFilePath);
 																
 								uploadFileCount++;
 							}

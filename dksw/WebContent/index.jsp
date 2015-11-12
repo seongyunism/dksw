@@ -57,6 +57,15 @@
         </div>
     </section>
 
+    <!-- Breaking news -->
+	<section class="section">
+        <div class="container">
+            <h2 class="lg-title lg-title-border">Lastest News</h2>
+            <div class="row" id="dkswBoardNews"></div>
+        </div>
+    </section>
+
+
     <!-- Features section -->
     <!--<div id="learn-more"></div>
     <section class="section">
@@ -355,15 +364,6 @@
             </div>
         </div>
     </section>-->
-
-    <!-- Breaking news -->
-	<section class="section bg-grey">
-        <div class="container">
-            <h2 class="lg-title lg-title-border">Breaking news</h2>
-            <div class="row" id ="dkswBreakingNews">
-            </div>
-        </div>
-    </section>
 
     <!-- Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>

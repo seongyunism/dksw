@@ -4538,6 +4538,10 @@ ul.thumbs {
 	padding-top:5px;
 }
 
+a.txtMain p, a.txtMain em  {
+	color:#555555;
+}
+
 .uploadFrame {
 	width:100%;
 	height:55px;
@@ -4554,4 +4558,13 @@ ul.thumbs {
 	width:100%;
 	font-size:0.8em;
 	text-align:center;
+}
+
+.EllipsText {
+	overflow : hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	-ms-text-overflow:ellipsis;
+	-moz-binding:url(/xe/ellipsis.xml#ellipsis);
 }

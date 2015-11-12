@@ -3,6 +3,7 @@ package dksw.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +17,10 @@ import org.json.simple.JSONObject;
 import dksw.model.AdminDAO;
 import dksw.model.BoardDAO;
 import dksw.model.MemberDAO;
+import dksw.model.UploadDAO;
 import dksw.model.domain.AdminPermission;
 import dksw.model.domain.Board;
+import dksw.util.CommonUtil;
 import dksw.util.PermissionCheck;
 import dksw.util.UnixTimeConvertor;
 
@@ -189,7 +192,22 @@ public class BoardController extends HttpServlet {
 				jObject.put("dkswBoardContent", post.getDkswBoardContent().trim());
 			}
 
-			jObject.put("dkswBoardFiles", post.getDkswBoardFiles());
+			// 파일 가져오기
+			JSONArray jFileArray = new JSONArray();
+			List<String> files = new ArrayList<String>();
+			files = CommonUtil.commonSpilt(post.getDkswBoardFiles());
+
+			for(int i=0; i<files.size(); i++) {
+				JSONObject tempChapter = new JSONObject();
+				int pos = files.get(i).lastIndexOf(".");
+				String ext = files.get(i).substring( pos + 1 );
+				
+				tempChapter.put("dkswBoardType", ext);
+				tempChapter.put("dkswBoardFile", files.get(i));
+				jFileArray.add(tempChapter);
+			}
+			
+			jObject.put("dkswBoardFiles", jFileArray);
 					
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
@@ -230,13 +248,30 @@ public class BoardController extends HttpServlet {
 		        tempContent = posts.get(i).getDkswBoardContent().split("\n\n");
 				temp.put("dkswBoardContent", tempContent[0]);
 				
-				// 대체 이미지 삽입
+				// 파일 가져오기
+				JSONArray jFileArray = new JSONArray();
+				List<String> files = new ArrayList<String>();
+
+				files = CommonUtil.commonSpilt(posts.get(i).getDkswBoardFiles());
 				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
-					temp.put("dkswBoardPicture", req.getContextPath() + "/04_upload/files/sub_01/board/no-image.jpg");					
+					JSONObject tempFile = new JSONObject();
+					
+					tempFile.put("dkswBoardType", "jpg");
+					tempFile.put("dkswBoardFile", req.getContextPath() + "/04_upload/files/sub_01/board/no-image.jpg");
+					jFileArray.add(tempFile);
+					
 				} else {
-					temp.put("dkswBoardPicture", posts.get(i).getDkswBoardFiles());
+					JSONObject tempFile = new JSONObject();
+					int pos = files.get(i).lastIndexOf(".");
+					String ext = files.get(i).substring( pos + 1 );
+
+					tempFile.put("dkswBoardType", ext);
+					tempFile.put("dkswBoardFile", UploadDAO.getFileSrc(Integer.parseInt(files.get(i))));
+					jFileArray.add(tempFile);	
 				}
 				
+				temp.put("dkswBoardFiles", jFileArray);
+
 				jArray.add(temp);
 			}
 			
@@ -279,12 +314,29 @@ public class BoardController extends HttpServlet {
 		        tempContent = posts.get(i).getDkswBoardContent().split("\n\n");
 				temp.put("dkswBoardContent", tempContent[0]);
 				
-				// 대체 이미지 삽입
+				// 파일 가져오기
+				JSONArray jFileArray = new JSONArray();
+				List<String> files = new ArrayList<String>();
+
+				files = CommonUtil.commonSpilt(posts.get(i).getDkswBoardFiles());
 				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
-					temp.put("dkswBoardPicture", req.getContextPath() + "/04_upload/files/sub_01/board/no-image.jpg");					
+					JSONObject tempFile = new JSONObject();
+					
+					tempFile.put("dkswBoardType", "jpg");
+					tempFile.put("dkswBoardFile", req.getContextPath() + "/04_upload/files/sub_01/board/no-image.jpg");
+					jFileArray.add(tempFile);
+					
 				} else {
-					temp.put("dkswBoardPicture", posts.get(i).getDkswBoardFiles());
+					JSONObject tempFile = new JSONObject();
+					int pos = files.get(i).lastIndexOf(".");
+					String ext = files.get(i).substring( pos + 1 );
+
+					tempFile.put("dkswBoardType", ext);
+					tempFile.put("dkswBoardFile", UploadDAO.getFileSrc(Integer.parseInt(files.get(i))));
+					jFileArray.add(tempFile);	
 				}
+				
+				temp.put("dkswBoardFiles", jFileArray);
 				
 				jArray.add(temp);
 			}
@@ -295,7 +347,6 @@ public class BoardController extends HttpServlet {
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
 			
-			System.out.println(jObject.toString());
 			res.getWriter().write(jObject.toString());
 			
 		} catch (SQLException se) {
@@ -304,8 +355,6 @@ public class BoardController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}	
-	
-	
 	
 	// 포스트 삭제하기
 	private void deletePost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {

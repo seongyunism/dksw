@@ -69,7 +69,7 @@ public class DepartmentController extends HttpServlet {
 		try {
 			thisData = DepartmentDAO.getIntro();
 
-			list = CommonUtil.userSpilt(thisData.getdkswDepartmentIntroductionContent());
+			list = CommonUtil.commonSpilt(thisData.getdkswDepartmentIntroductionContent());
 
 			JSONObject jObject = new JSONObject();
 			JSONArray jArray = new JSONArray();

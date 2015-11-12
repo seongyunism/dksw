@@ -289,7 +289,7 @@ public class BoardDAO {
 		try {
 			con = DBUtil.getConnection();
 			
-			pstmt = con.prepareStatement("SELECT * FROM dksw_board ORDER BY dkswBoardNo DESC LIMIT 4");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_board ORDER BY dkswBoardNo DESC LIMIT 3");
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

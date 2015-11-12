@@ -16,6 +16,8 @@
 	var category = "<%=category%>";
 	
 	$(document).ready(function() {
+		initializePermission('board_' + category);
+		
 		initializeBoard(1);
 		initializeBoard(2);
 		initializeBoard(3);		
