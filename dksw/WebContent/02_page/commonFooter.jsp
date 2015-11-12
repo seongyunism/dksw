@@ -26,7 +26,7 @@
 	                    <ul class="info-list md-list i-primary">
 	                        <li>
 	                            <i class="fa fa-angle-right fa-fw"></i>
-	                            <a href="#"><span class="link-title" target="_blank">가입 방법 및 절차</span></a>
+	                            <a href="<%=request.getContextPath()%>/02_page/join/method.jsp"><span class="link-title" target="_blank">가입 방법 및 절차</span></a>
 	                        </li>      
 	                        <li>
 	                            <i class="fa fa-angle-right fa-fw"></i>
