@@ -12,7 +12,7 @@
 	<!-- Custom Scripts -->
 	<script>
 	$(document).ready(function() {
-
+		getNews();
 	});
 
 	$(window).load(function() {
@@ -360,52 +360,7 @@
 	<section class="section bg-grey">
         <div class="container">
             <h2 class="lg-title lg-title-border">Breaking news</h2>
-            <div class="row">
-                <!--<div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.8s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.8s; -moz-animation-delay: 0.8s; animation-delay: 0.8s;">
-                    <div class="news">
-                        <img class="img-responsive" src="./01_image/temp/011.jpg" alt="camera">
-                        <h3>Post title</h3>
-                        <em>January 26, 2014 by John</em>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis condimentum augue id magna semper rutrum. In enim a arcu imperdiet malesuada.</p>
-                        <a href="#" class="btn btn-default-trn-v2">Read more
-                            <i class="fa fa-angle-double-right"></i>
-						</a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.6s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.6s; -moz-animation-delay: 0.6s; animation-delay: 0.6s;">
-                    <div class="news">
-                        <img class="img-responsive" src="./01_image/temp/31f6.JPG" alt="macbook">
-                        <h3>Post title</h3>
-                        <em>January 10, 2014 by Ben</em>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis condimentum augue id magna semper rutrum. In enim a arcu imperdiet malesuada.</p>
-                        <a href="#" class="btn btn-default-trn-v2">Read more
-							<i class="fa fa-angle-double-right"></i>
-						</a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.4s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.4s; -moz-animation-delay: 0.4s; animation-delay: 0.4s;">
-                    <div class="news">
-                        <img class="img-responsive" src="./01_image/temp/picjumbo.com.jpg" alt="devices">
-                        <h3>Post title</h3>
-                        <em>December 27, 2013 by Nicole</em>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis condimentum augue id magna semper rutrum. In enim a arcu imperdiet malesuada.</p>
-                        <a href="#" class="btn btn-default-trn-v2">Read more
-                            <i class="fa fa-angle-double-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.2s" style="visibility: hidden; -webkit-animation-name: none; -moz-animation-name: none; animation-name: none;-webkit-animation-delay: 0.2s; -moz-animation-delay: 0.2s; animation-delay: 0.2s;">
-                    <div class="news">
-                        <img class="img-responsive" src="./01_image/temp/macbook-air.jpg" alt="macbook">
-                        <h3>Post title</h3>
-                        <em>December 13, 2013 by Adele</em>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis condimentum augue id magna semper rutrum. In enim a arcu imperdiet malesuada.</p>
-                        <a href="#" class="btn btn-default-trn-v2">Read more
-                            <i class="fa fa-angle-double-right"></i>
-                        </a>
-                    </div>
-                </div>-->
-
+            <div class="row" id ="dkswBreakingNews">
             </div>
         </div>
     </section>

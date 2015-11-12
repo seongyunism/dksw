@@ -276,4 +276,49 @@ public class BoardDAO {
 			}
 		}
 	}
+
+	public static ArrayList<Board> getBoardNews() throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		ArrayList<Board> list = new ArrayList<Board>();
+		Board data = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			
+			pstmt = con.prepareStatement("SELECT * FROM dksw_board ORDER BY dkswBoardNo DESC LIMIT 4");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				data = new Board(
+						rset.getInt(1),
+						rset.getInt(2),
+						rset.getInt(3),
+						rset.getInt(4),
+						rset.getInt(5),
+						rset.getString(6),
+						rset.getString(7),
+						rset.getString(8)
+				);
+				
+				list.add(data);
+			}
+
+			return list;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
 }

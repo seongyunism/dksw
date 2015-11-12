@@ -259,3 +259,38 @@ function deletePost() {
 		return false;
 	}
 }
+
+function getNews(){
+	var action = "/dksw/board?action=getBoardNewsListData";
+	
+	var posts = "";
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		dataType : "json",
+		success: function(response) {
+
+			for(i = 0; i<4;i++){
+			
+				var post = "<div class='col-md-3 col-lg-3 col-sm-6'data-wow-delay='0.8s'>" +
+					"<div class='news'><img class='img-responsive'src='"+response.dkswBoard[i].dkswBoardPicture+"' alt=''>" +
+					"<h3>"+response.dkswBoard[i].dkswBoardTitle+"</h3><em>"+response.dkswBoard[i].dkswBoardWriteDate+"</em>" +
+					"<p>"+response.dkswBoard[i].dkswBoardContent+"</p>" +
+					"<a href='02_page/sub_01/notice/view.jsp?postNo="	+ response.dkswBoard[i].dkswBoardNo+
+					"'class='btn btn-default-trn-v2'>Read more <i class='fa fa-angle-double-right'></i></a></div></div>"	
+				
+				posts += post;
+			}
+
+			$("#dkswBreakingNews").html(posts);
+			
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+	
+}

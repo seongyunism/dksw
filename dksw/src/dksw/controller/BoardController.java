@@ -43,6 +43,8 @@ public class BoardController extends HttpServlet {
 			writePost(req, res);
 		} else if(action.equals("deletePost")) {
 			deletePost(req, res);
+		} else if(action.equals("getBoardNewsListData")) {
+			getBoardNewsListData(req, res);
 		}
 	}
 	
@@ -220,7 +222,7 @@ public class BoardController extends HttpServlet {
 				temp.put("dkswBoardNo", posts.get(i).getDkswBoardNo());
 				temp.put("dkswBoardCategory", posts.get(i).getDkswBoardCategory());
 				temp.put("dkswMemberNo", posts.get(i).getDkswMemberNo());
-				temp.put("dkswBoardWriteDate", posts.get(i).getDkswBoardWriteDate());
+				temp.put("dkswBoardWriteDate", UnixTimeConvertor.toConvertTimeFromUnixTime(posts.get(i).getDkswBoardWriteDate()));
 				temp.put("dkswBoardReadnum", posts.get(i).getDkswBoardReadnum());
 				temp.put("dkswBoardTitle", posts.get(i).getDkswBoardTitle());
 				
@@ -230,7 +232,7 @@ public class BoardController extends HttpServlet {
 				
 				// 대체 이미지 삽입
 				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
-					temp.put("dkswBoardPicture", req.getContextPath() + "/04_upload/files/sub_01/notice/no-image.jpg");					
+					temp.put("dkswBoardPicture", req.getContextPath() + "/04_upload/files/sub_01/board/no-image.jpg");					
 				} else {
 					temp.put("dkswBoardPicture", posts.get(i).getDkswBoardFiles());
 				}
@@ -251,6 +253,59 @@ public class BoardController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}	
+
+	public void getBoardNewsListData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		ArrayList<Board> posts = null;
+		String[] tempContent = null;
+		
+		try {
+			
+			posts = BoardDAO.getBoardNews();
+		
+			JSONObject jObject = new JSONObject();
+			JSONArray jArray = new JSONArray();
+				
+			for(int i=0; i<posts.size(); i++) {
+				JSONObject temp = new JSONObject();
+				temp.put("dkswBoardNo", posts.get(i).getDkswBoardNo());
+				temp.put("dkswBoardCategory", posts.get(i).getDkswBoardCategory());
+				temp.put("dkswMemberNo", posts.get(i).getDkswMemberNo());
+				temp.put("dkswBoardWriteDate", UnixTimeConvertor.toConvertTimeFromUnixTime(posts.get(i).getDkswBoardWriteDate()));
+				temp.put("dkswBoardReadnum", posts.get(i).getDkswBoardReadnum());
+				temp.put("dkswBoardTitle", posts.get(i).getDkswBoardTitle());
+				
+				// 본문 앞부분 자르기
+		        tempContent = posts.get(i).getDkswBoardContent().split("\n\n");
+				temp.put("dkswBoardContent", tempContent[0]);
+				
+				// 대체 이미지 삽입
+				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
+					temp.put("dkswBoardPicture", req.getContextPath() + "/04_upload/files/sub_01/board/no-image.jpg");					
+				} else {
+					temp.put("dkswBoardPicture", posts.get(i).getDkswBoardFiles());
+				}
+				
+				jArray.add(temp);
+			}
+			
+			
+			jObject.put("dkswBoard", jArray);
+				
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+			
+			System.out.println(jObject.toString());
+			res.getWriter().write(jObject.toString());
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}	
+	
+	
 	
 	// 포스트 삭제하기
 	private void deletePost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
