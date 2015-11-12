@@ -68,8 +68,8 @@ String sql = "";
 									<tr>
 										<th>#</th>
 										<th>제목</th>
-										<th>진행사항</th>
 										<th>담당교수</th>
+										<th>등록날짜</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -78,7 +78,6 @@ String sql = "";
 									String qa_title = rs.getString("qa_title");
 									String qa_pIdx = rs.getString("qa_pIdx");
 									String qa_regDate = rs.getString("qa_regDate");
-									System.out.println(qa_title);
 									num++;
 										
 								%>

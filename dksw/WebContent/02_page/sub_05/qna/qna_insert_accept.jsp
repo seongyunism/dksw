@@ -29,9 +29,15 @@
  	Connection conn_idx = null;
  	java.sql.Statement stmt_idx = null;
  	ResultSet rs_idx = null;
+	HttpSession sessionMember = request.getSession();
+	
+
+ 	
  	
  	try {
-		InitContext_idx = new InitialContext();
+ 		ct_qIdx  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+		System.out.println(ct_qIdx);
+ 		InitContext_idx = new InitialContext();
 		envContext_idx = (Context) InitContext_idx.lookup("java:comp/env");
 		ds_idx = (DataSource) envContext_idx.lookup("jdbc/mysql");
 		conn_idx = ds_idx.getConnection();
@@ -68,7 +74,7 @@
  		envContext = (Context) InitContext.lookup("java:comp/env");
  		ds = (DataSource) envContext.lookup("jdbc/mysql");
  		//사용자 값으로 글 idx 구분 필요
- 		String query = "INSERT INTO dksw_qna_board q_b(qa_title, qa_pIdx, qa_contents,qa_regDate,qa_answerYN,qa_QA, qa_qIdx) VALUES(?,(select dkswMemberNo from dksw_department_professor where dkswDepartmentProfessorNameKo=?),?,current_date(),'N','Q',"+ct_qIdx+")";
+ 		String query = "INSERT INTO dksw_qna_board(qa_title, qa_pIdx, qa_contents,qa_regDate,qa_answerYN,qa_QA, qa_qIdx) VALUES(?,(select dkswMemberNo from dksw_department_professor where dkswDepartmentProfessorNameKo=?),?,current_date(),'N','Q',"+ct_qIdx+")";
  		conn = ds.getConnection();
  		pstmt = conn.prepareStatement(query);
  		pstmt.setString(1,title);

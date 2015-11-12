@@ -77,7 +77,6 @@ String sql = "";
 									String qa_title = rs.getString("qa_title");
 									String qa_pIdx = rs.getString("qa_pIdx");
 									String qa_regDate = rs.getString("qa_regDate");
-									System.out.println(qa_title);
 									num++;
 										
 								%>

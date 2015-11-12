@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, javax.sql.*, javax.naming.*"%>
+<%@ page import="javax.sql.DataSource"%>
 
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
@@ -15,9 +17,59 @@
 			});
 		
 		});
-	
+		
 	</script>
+<%
 
+Context InitContext = null;
+Context envContext = null;
+DataSource ds = null;
+Connection conn = null;
+java.sql.Statement stmt = null;
+ResultSet rs = null;
+int mem_no = 0;
+
+int num = 0;
+
+HttpSession sessionMember = request.getSession();
+num = Integer.parseInt(request.getParameter("num"));
+try {
+	mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+	InitContext = new InitialContext();
+	envContext = (Context) InitContext.lookup("java:comp/env");
+	ds = (DataSource) envContext.lookup("jdbc/mysql");
+	conn = ds.getConnection();
+	stmt = conn.createStatement();
+	rs = stmt.executeQuery("");
+			
+	//	String qa_title_ing = rs_ing.getString("qa_title");
+	//	String qa_pIdx_ing = rs_ing.getString("qa_pIdx");
+	//	String qa_regDate_ing = rs_ing.getString("qa_regDate");
+	//	String qa_qIdx_ing = rs_ing.getString("qa_qIdx");
+	//	num_ing++;
+	
+	rs.close();
+	stmt.close();
+
+} catch (Exception e) {
+	out.println(e);
+
+} finally {
+	try {
+		if (stmt != null) {
+			stmt.close();
+		}
+	} catch (Exception e) {
+	}
+	try {
+		if (conn!= null)
+			conn.close();
+	} catch (Exception e) {
+	}
+}
+
+
+%>
 
 	
 </head>
@@ -72,6 +124,7 @@
 								</div>
 					</div>
 				</div>
+				
 		</div>
 
 				<!-- Right Contents -->
