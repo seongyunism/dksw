@@ -14,15 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.mysql.jdbc.log.Log;
-
 import dksw.model.AdminDAO;
 import dksw.model.DepartmentDAO;
-import dksw.model.LabAchievementsDAO;
-import dksw.model.LabMembersDAO;
-import dksw.model.LabPaperDAO;
-import dksw.model.LabProjectDAO;
-import dksw.model.MemberDAO;
 import dksw.model.domain.AdminPermission;
 import dksw.model.domain.DepartmentClub;
 import dksw.model.domain.DepartmentContact;
@@ -86,8 +79,7 @@ public class DepartmentController extends HttpServlet {
 			jObject.put("dkswDepartmentIntroductionContentAptitude", list.get(1));
 			jObject.put("dkswDepartmentIntroductionContentCareer", list.get(2));
 			jObject.put("getDkswDepartmentIntroductionEditDate", thisData.getDkswDepartmentIntroductionEditDate());
-			jObject.put("setDkswDepartmentIntroductionEditRightIndex",
-					thisData.getDkswDepartmentIntroductionEditRightIndex());
+			jObject.put("setDkswDepartmentIntroductionEditRightIndex", thisData.getDkswDepartmentIntroductionEditRightIndex());
 
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
@@ -117,16 +109,11 @@ public class DepartmentController extends HttpServlet {
 			jObject.put("dkswDepartmentGreetingTitle", thisData.getDkswDepartmentGreetingTitle());
 			jObject.put("dkswDepartmentGreetingPicture", thisData.getDkswDepartmentGreetingPicture());
 			jObject.put("dkswDepartmentGreetingContent", thisData.getDkswDepartmentGreetingContent());
-			jObject.put("dkswDepartmentGreetingEditDate",
-					UnixTimeConvertor.toConvertTimeFromUnixTime(thisData.getDkswDepartmentGreetingEditDate()));
-			jObject.put("dkswDepartmentProfessorNameKo",
-					DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorNameKo());
-			jObject.put("dkswDepartmentProfessorContact",
-					DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorContact());
-			jObject.put("dkswDepartmentProfessorLabLocation",
-					DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorLabLocation());
-			jObject.put("dkswDepartmentProfessorEmail",
-					DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorEmail());
+			jObject.put("dkswDepartmentGreetingEditDate", UnixTimeConvertor.toConvertTimeFromUnixTime(thisData.getDkswDepartmentGreetingEditDate()));
+			jObject.put("dkswDepartmentProfessorNameKo", DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorNameKo());
+			jObject.put("dkswDepartmentProfessorContact", DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorContact());
+			jObject.put("dkswDepartmentProfessorLabLocation", DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorLabLocation());
+			jObject.put("dkswDepartmentProfessorEmail", DepartmentDAO.getProfessor(thisData.getDkswMemberNo()).getDkswDepartmentProfessorEmail());
 
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
@@ -157,8 +144,7 @@ public class DepartmentController extends HttpServlet {
 				tempData.put("dkswDepartmentHistoryNo",thisData.get(i).getDkswDepartmentHistoryNo());
 				tempData.put("dkswDepartmentHistoryYear", thisData.get(i).getDkswDepartmentHistoryYear());
 				tempData.put("dkswDepartmentHistoryMonth", thisData.get(i).getDkswDepartmentHistoryMonth());
-				tempData.put("dkswDepartmentHistoryContent",
-						thisData.get(i).getDkswDepartmentHistoryContent().replaceAll("\n", "<br />"));
+				tempData.put("dkswDepartmentHistoryContent", thisData.get(i).getDkswDepartmentHistoryContent().replaceAll("\n", "<br />"));
 				tempData.put("dkswDepartmentHistoryVisible", thisData.get(i).getDkswDepartmentHistoryVisible());
 				jArray.add(tempData);
 			}
@@ -176,21 +162,19 @@ public class DepartmentController extends HttpServlet {
 					boolean checkPermission = false;
 					
 					try {
-						String inputAdminPermissionId = "board_department";					
-						permission = AdminDAO.getPermission(inputAdminPermissionId);
-						
+						String inputAdminMenuName = "page_department_history";
+						permission = AdminDAO.getPermission(inputAdminMenuName);
 						checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
 						
 						if(checkPermission) {
 							jObject.put("dkswDepartmentModifyPermission", "OK");
 						}
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
 			}
-			
-						
 
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
@@ -224,8 +208,7 @@ public class DepartmentController extends HttpServlet {
 				tempData.put("dkswDepartmentProfessorNameEn", thisData.get(i).getDkswDepartmentProfessorNameEn());
 				tempData.put("dkswDepartmentProfessorLabName", thisData.get(i).getDkswDepartmentProfessorLabName());
 				tempData.put("dkswDepartmentProfessorField", thisData.get(i).getDkswDepartmentProfessorField());
-				tempData.put("dkswDepartmentProfessorLabLocation",
-						thisData.get(i).getDkswDepartmentProfessorLabLocation());
+				tempData.put("dkswDepartmentProfessorLabLocation", thisData.get(i).getDkswDepartmentProfessorLabLocation());
 				tempData.put("dkswDepartmentProfessorEmail", thisData.get(i).getDkswDepartmentProfessorEmail());
 				tempData.put("dkswDepartmentProfessorContact", thisData.get(i).getDkswDepartmentProfessorContact());
 				tempData.put("dkswDepartmentProfessorPicture", thisData.get(i).getDkswDepartmentProfessorPicture());
@@ -347,10 +330,8 @@ public class DepartmentController extends HttpServlet {
 		try {
 			int inputDepartmentData1 = (req.getParameter("inputDepartmentData1") != null) ? Integer.parseInt(req.getParameter("inputDepartmentData1")) : null; 
 						
-			
 			checkDeleteDepartmentHistoryRecord = DepartmentDAO.deleteRecord(inputDepartmentData1);
 				
-			
 			if(checkDeleteDepartmentHistoryRecord) {
 				res.getWriter().write("deleteOK");
 			} else {
@@ -363,9 +344,4 @@ public class DepartmentController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
-	
-	
-	
-	
-	
 }

@@ -14,7 +14,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dksw.model.AdminDAO;
-import dksw.model.BoardDAO;
 import dksw.model.DepartmentDAO;
 import dksw.model.LabAchievementsDAO;
 import dksw.model.LabIntroDAO;
@@ -33,7 +32,6 @@ import dksw.util.PermissionCheck;
 
 public class LabController extends HttpServlet {
 
-	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		process(req, res);
 	}
@@ -77,11 +75,10 @@ public class LabController extends HttpServlet {
 			res.getWriter().write(jObject.toString());
 			
 		} catch (SQLException se) {
-		req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (SQL에러)");
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
-		req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
-		}	
-		
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
 	}
 
 	private void getLabData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
@@ -204,14 +201,15 @@ public class LabController extends HttpServlet {
 					boolean checkPermission = false;
 					
 					try {
-						String inputAdminPermissionId = "page_lab";					
-						permission = AdminDAO.getPermission(inputAdminPermissionId);
+						String inputAdminMenuName = "page_lab_db";
+						permission = AdminDAO.getPermission(inputAdminMenuName);
 						
 						checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
 						
 						if(checkPermission) {
 							jObject.put("dkswLabModifyPermission", "OK");
 						}
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -222,13 +220,12 @@ public class LabController extends HttpServlet {
 			res.setCharacterEncoding("UTF-8");
 
 			res.getWriter().write(jObject.toString());
-
-			
+	
 		} catch (SQLException se) {
-			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (SQL에러)");
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
-			req.setAttribute("errorMsg", "ERROR : 데이터 가져오기 실패! (IO에러)");
-		}				
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}			
 	}
 	
 	private void writeLabTableData(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {

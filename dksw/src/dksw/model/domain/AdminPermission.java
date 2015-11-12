@@ -2,16 +2,16 @@ package dksw.model.domain;
 
 public class AdminPermission {
 
-	private String dkswAdminPermissionId;
+	private String dkswMenuNo;
 	private long dkswAdminPermissionEditdate;
 	private String dkswAdminPermissionMaster;
 	private String dkswAdminPermissionAuthor;
 	
-	public String getDkswAdminPermissionId() {
-		return dkswAdminPermissionId;
+	public String getDkswMenuNo() {
+		return dkswMenuNo;
 	}
-	public void setDkswAdminPermissionId(String dkswAdminPermissionId) {
-		this.dkswAdminPermissionId = dkswAdminPermissionId;
+	public void setDkswMenuNo(String dkswMenuNo) {
+		this.dkswMenuNo = dkswMenuNo;
 	}
 	public long getDkswAdminPermissionEditdate() {
 		return dkswAdminPermissionEditdate;
@@ -32,10 +32,10 @@ public class AdminPermission {
 		this.dkswAdminPermissionAuthor = dkswAdminPermissionAuthor;
 	}
 	
-	public AdminPermission(String dkswAdminPermissionId, long dkswAdminPermissionEditdate,
-			String dkswAdminPermissionMaster, String dkswAdminPermissionAuthor) {
+	public AdminPermission(String dkswMenuNo, long dkswAdminPermissionEditdate, String dkswAdminPermissionMaster,
+			String dkswAdminPermissionAuthor) {
 		super();
-		this.dkswAdminPermissionId = dkswAdminPermissionId;
+		this.dkswMenuNo = dkswMenuNo;
 		this.dkswAdminPermissionEditdate = dkswAdminPermissionEditdate;
 		this.dkswAdminPermissionMaster = dkswAdminPermissionMaster;
 		this.dkswAdminPermissionAuthor = dkswAdminPermissionAuthor;

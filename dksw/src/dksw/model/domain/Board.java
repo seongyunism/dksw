@@ -9,7 +9,7 @@ public class Board {
 	private int dkswBoardReadnum;
 	private String dkswBoardTitle;
 	private String dkswBoardContent;
-	private String dkswBoardPicture;
+	private String dkswBoardFiles;
 	
 	public int getDkswBoardNo() {
 		return dkswBoardNo;
@@ -53,15 +53,15 @@ public class Board {
 	public void setDkswBoardContent(String dkswBoardContent) {
 		this.dkswBoardContent = dkswBoardContent;
 	}
-	public String getDkswBoardPicture() {
-		return dkswBoardPicture;
+	public String getDkswBoardFiles() {
+		return dkswBoardFiles;
 	}
-	public void setDkswBoardPicture(String dkswBoardPicture) {
-		this.dkswBoardPicture = dkswBoardPicture;
+	public void setDkswBoardFiles(String dkswBoardFiles) {
+		this.dkswBoardFiles = dkswBoardFiles;
 	}
 	
 	public Board(int dkswBoardNo, int dkswBoardCategory, int dkswMemberNo, long dkswBoardWriteDate,
-			int dkswBoardReadnum, String dkswBoardTitle, String dkswBoardContent, String dkswBoardPicture) {
+			int dkswBoardReadnum, String dkswBoardTitle, String dkswBoardContent, String dkswBoardFiles) {
 		super();
 		this.dkswBoardNo = dkswBoardNo;
 		this.dkswBoardCategory = dkswBoardCategory;
@@ -70,6 +70,6 @@ public class Board {
 		this.dkswBoardReadnum = dkswBoardReadnum;
 		this.dkswBoardTitle = dkswBoardTitle;
 		this.dkswBoardContent = dkswBoardContent;
-		this.dkswBoardPicture = dkswBoardPicture;
+		this.dkswBoardFiles = dkswBoardFiles;
 	}
 }

@@ -1,23 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String labCode = request.getParameter("labCode").toString();
+String labId = "";
 String labName = "";
 
 switch(labCode) {
 	case "1":
 		labName = "데이터베이스 연구실";
+		labId = "db";
 		break;
 	case "2":
 		labName = "임베디드 연구실";
+		labId = "em";
 		break;
 	case "3":
 		labName = "모바일콘텐츠 연구실";
+		labId = "mo";
 		break;
 	case "4":
 		labName = "멀티미디어 연구실";
+		labId = "mu";
 		break;
 	case "5":
 		labName = "운영체제/보안 연구실";
+		labId = "se";
 		break;
 }
 %>
@@ -33,6 +39,8 @@ switch(labCode) {
 	<!-- Custom Scripts -->
 	<script>
 	$(document).ready(function() {
+		initializePermission("page_lab_" + "<%=labId%>");		
+		
 		initializeLab(<%=labCode%>);
 	});
 

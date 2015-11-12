@@ -74,8 +74,7 @@ public class LectureController extends HttpServlet {
 			} else {
 				res.getWriter().write("NoProfessor");
 			}
-			
-				
+					
 		} catch (SQLException se) {
 			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {

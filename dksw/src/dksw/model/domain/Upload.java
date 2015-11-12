@@ -5,7 +5,7 @@ public class Upload {
 	private int dkswUploadNo;
 	private int dkswUploadCategory;
 	private int dkswUploadPostNo;
-	private int dkswUploadDate;
+	private long dkswUploadDate;
 	private int dkswMemberNo;
 	private String dkswUploadFileName;
 	private String dkswUploadFileSrc;
@@ -28,10 +28,10 @@ public class Upload {
 	public void setDkswUploadPostNo(int dkswUploadPostNo) {
 		this.dkswUploadPostNo = dkswUploadPostNo;
 	}
-	public int getDkswUploadDate() {
+	public long getDkswUploadDate() {
 		return dkswUploadDate;
 	}
-	public void setDkswUploadDate(int dkswUploadDate) {
+	public void setDkswUploadDate(long dkswUploadDate) {
 		this.dkswUploadDate = dkswUploadDate;
 	}
 	public int getDkswMemberNo() {
@@ -53,7 +53,7 @@ public class Upload {
 		this.dkswUploadFileSrc = dkswUploadFileSrc;
 	}
 	
-	public Upload(int dkswUploadNo, int dkswUploadCategory, int dkswUploadPostNo, int dkswUploadDate, int dkswMemberNo,
+	public Upload(int dkswUploadNo, int dkswUploadCategory, int dkswUploadPostNo, long dkswUploadDate, int dkswMemberNo,
 			String dkswUploadFileName, String dkswUploadFileSrc) {
 		super();
 		this.dkswUploadNo = dkswUploadNo;

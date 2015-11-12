@@ -75,6 +75,16 @@
     <url-pattern>/snsAuth</url-pattern>
   </servlet-mapping>
 
+    <servlet>
+    <servlet-name>UploadController</servlet-name>
+    <servlet-class>dksw.controller.UploadController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>UploadController</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+  
   <listener>
     <listener-class>dksw.util.UrlPath</listener-class>
   </listener>  

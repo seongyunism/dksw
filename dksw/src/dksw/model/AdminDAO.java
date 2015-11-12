@@ -10,7 +10,7 @@ import dksw.util.DBUtil;
 
 public class AdminDAO {
 
-	public static AdminPermission getPermission(String inputAdminPermissionId) throws SQLException {
+	public static AdminPermission getPermission(String inputMenuName) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -21,8 +21,8 @@ public class AdminDAO {
 		try {
 			con = DBUtil.getConnection();
 			
-			pstmt = con.prepareStatement("SELECT * FROM dksw_admin_permission WHERE dkswAdminPermissionId=?");
-			pstmt.setString(1, inputAdminPermissionId);
+			pstmt = con.prepareStatement("SELECT * FROM dksw_admin_permission WHERE dkswMenuNo=?");
+			pstmt.setInt(1, getMenuNo(inputMenuName));
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -47,6 +47,40 @@ public class AdminDAO {
 				sqle.printStackTrace();
 			}
 		}
+	}
+	
+	public static int getMenuNo(String inputAdminMenuName) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		int outputAdminMenuNo = 0;
+		
+		try {
+			con = DBUtil.getConnection();
+			
+			pstmt = con.prepareStatement("SELECT dkswAdminMenuNo FROM dksw_admin_menu WHERE dkswAdminMenuName=?");
+			pstmt.setString(1, inputAdminMenuName);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				outputAdminMenuNo = rset.getInt(1);
+			}
+
+			return outputAdminMenuNo;
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}	
 	}
 	
 	public static boolean addPushLog(long inputAdminPushDate, String inputAdminPushMsg, int inputMemberNo) throws SQLException {

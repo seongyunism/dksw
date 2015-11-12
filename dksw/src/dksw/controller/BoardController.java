@@ -70,11 +70,10 @@ public class BoardController extends HttpServlet {
 					boolean checkPermission = false;
 					
 					try {
-						String inputAdminPermissionId = (req.getParameter("inputAdminPermissionId") != null) ? (req.getParameter("inputAdminPermissionId")) : null;
+						String inputAdminMenuName = (req.getParameter("inputAdminMenuName") != null) ? (req.getParameter("inputAdminMenuName")) : null;
 						String memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? (sessionMember.getAttribute("dkswMemberCategory").toString()) : null;
 						
-						permission = AdminDAO.getPermission(inputAdminPermissionId);
-						
+						permission = AdminDAO.getPermission(inputAdminMenuName);
 						checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
 						
 						if(checkPermission) {
@@ -133,7 +132,7 @@ public class BoardController extends HttpServlet {
 					
 					jObject.put("dkswBoardSubTitle", tempContent[0]);
 					jObject.put("dkswBoardContent", content.trim().replaceAll("\n", "<br />"));
-					jObject.put("dkswBoardPicture", modifiedPost.getDkswBoardPicture());
+					jObject.put("dkswBoardFiles", modifiedPost.getDkswBoardFiles());
 				}
 				
 				res.setContentType("application/json");
@@ -188,7 +187,7 @@ public class BoardController extends HttpServlet {
 				jObject.put("dkswBoardContent", post.getDkswBoardContent().trim());
 			}
 
-			jObject.put("dkswBoardPicture", post.getDkswBoardPicture());
+			jObject.put("dkswBoardFiles", post.getDkswBoardFiles());
 					
 			res.setContentType("application/json");
 			res.setCharacterEncoding("UTF-8");
@@ -230,10 +229,10 @@ public class BoardController extends HttpServlet {
 				temp.put("dkswBoardContent", tempContent[0]);
 				
 				// 대체 이미지 삽입
-				if(posts.get(i).getDkswBoardPicture().equals("")) { // 저장된 이미지가 없을 경우
+				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
 					temp.put("dkswBoardPicture", req.getContextPath() + "/04_upload/files/sub_01/notice/no-image.jpg");					
 				} else {
-					temp.put("dkswBoardPicture", posts.get(i).getDkswBoardPicture());
+					temp.put("dkswBoardPicture", posts.get(i).getDkswBoardFiles());
 				}
 				
 				jArray.add(temp);

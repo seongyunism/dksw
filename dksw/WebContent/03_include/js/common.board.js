@@ -64,7 +64,7 @@ function initializeBoard(board) {
 			}
 			
 		}, error: function(xhr,status,error) {
-			alert(error);
+//			alert(error);
 		}
 	});
 		
