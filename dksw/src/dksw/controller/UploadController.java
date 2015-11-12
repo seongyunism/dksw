@@ -23,6 +23,7 @@ import dksw.model.UploadDAO;
 import dksw.model.domain.AdminPermission;
 import dksw.util.CommonUtil;
 import dksw.util.PermissionCheck;
+import javafx.scene.layout.Pane;
 
 public class UploadController extends HttpServlet {
 
@@ -54,7 +55,7 @@ public class UploadController extends HttpServlet {
 		String uploadFilePostNo = "";
 		int uploadFileCount = 0;
 
-		int[] uploadQueryCheck = null;
+		int[] uploadQueryCheck;
 		boolean boardQueryCheck = false;
 		
 		Part part = null;
@@ -64,8 +65,7 @@ public class UploadController extends HttpServlet {
 		HttpSession sessionMember = req.getSession();
 		AdminPermission permission = null;
 		boolean checkPermission = false;
-		
-		
+			
 		try {
 			long inputUploadDate = (System.currentTimeMillis())/1000;
 			String memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? (sessionMember.getAttribute("dkswMemberCategory").toString()) : null;
@@ -90,13 +90,15 @@ public class UploadController extends HttpServlet {
 						
 						if(paramName.equals("inputUploadCount")) { // 파일 개수 체크
 							if(paramValue.equals("0")) {
+								System.out.println("ERROR : 파일 개수 0개");
 								return;								
-							} else {
-								uploadQueryCheck = new int[Integer.parseInt(paramValue)];
 							}
+							
+							System.out.println("1");
 							
 						} else if(paramName.equals("inputUploadPostNo")) {
 							uploadFilePostNo = String.format("%04d", Integer.parseInt(paramValue));
+							System.out.println("2");
 							
 						} else if(paramName.equals("inputUploadCategory")) { // 업로드할 디렉토리 생성
 										
@@ -104,15 +106,18 @@ public class UploadController extends HttpServlet {
 							checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
 							
 							if(checkPermission) { // 허가된 사용자인 경우
-								uploadPath = getServletContext().getRealPath("") + "04_upload/files/" + CommonUtil.uploadPathInitialize(paramValue) + "/" + uploadFilePostNo;						
+								uploadPath = getServletContext().getRealPath("") + "04_upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;						
 								File file = new File(uploadPath);
 								file.mkdir();
-								
+
 							} else { // 회원이지만 허가된 사용자가 아님
+								System.out.println("ERROR : 허가된 사용자 아님");
 								return;
 							}
+							
+							System.out.println("3");
 						}
-						
+						System.out.println(paramName + " : " + paramValue);
 						map.put(paramName, paramValue);
 						
 					// 파일일 때
@@ -121,7 +126,7 @@ public class UploadController extends HttpServlet {
 	//					filePart.setRenamePolicy(new DefaultFileRenamePolicy()); //중복 파일 이름 정의    
 	
 						String uploadFileName = filePart.getFileName();
-						uploadFilePath = uploadPath + "/" + uploadFileName;
+						uploadFilePath = uploadPath + File.separator + uploadFileName;
 						
 						if (uploadFileName != null) {
 							if(paramName.equals("inputUploadFiles")) {
@@ -130,11 +135,16 @@ public class UploadController extends HttpServlet {
 								File file = new File(uploadFilePath);
 								long size = filePart.writeTo(file); // 파일 업로드 (파일명이 같을 경우 덮어씌움)
 								
+								System.out.println("파일 생성 완료 : " + size);
+								
 								if(size == 0) { // 파일이 정상적으로 업로드되지 않았을 경우
+									System.out.println("ERROR : 파일 쓰기 실패");
 									return;
 								}
 								
 								map.put(paramName + "_" + uploadFileCount, uploadFilePath);
+								
+								uploadQueryCheck = new int[Integer.parseInt(map.get("inputUploadCount").toString())];
 								uploadQueryCheck[uploadFileCount] = UploadDAO.addUploadFile(AdminDAO.getMenuNo(map.get("inputUploadCategory")), Integer.parseInt(map.get("inputUploadPostNo").toString()), inputUploadDate, inputMemberNo, uploadFileName, uploadFilePath);
 																
 								uploadFileCount++;
@@ -142,22 +152,27 @@ public class UploadController extends HttpServlet {
 						}
 					}
 				}
+				
+				// 게시판과 연결 처리
+				String inputUploadStr = "";
+				for(int i=0; i<Integer.parseInt(map.get("inputUploadCount").toString()); i++) {
+					inputUploadStr += nextUploadNo + ";";
+					nextUploadNo++;
+				}
+				
+				boardQueryCheck = BoardDAO.setBoardFile(inputUploadStr, Integer.parseInt(map.get("inputUploadPostNo")));
+				
+				if(boardQueryCheck) {
+					res.setCharacterEncoding("UTF-8");
+					res.getWriter().write("업로드가 완료되었습니다.");
+//					res.sendRedirect("index.jsp");
+				}			
+				
+			} else {
+				System.out.println("ERROR : 회원이 아님");
+				return;
 			}
 
-			// 게시판과 연결 처리
-			String inputUploadStr = "";
-			for(int i=0; i<Integer.parseInt(map.get("inputUploadCount").toString()); i++) {
-				inputUploadStr += nextUploadNo + ";";
-				nextUploadNo++;
-			}
-			
-			boardQueryCheck = BoardDAO.setBoardFile(inputUploadStr, Integer.parseInt(map.get("inputUploadPostNo")));
-			
-			if(boardQueryCheck) {
-				res.setCharacterEncoding("UTF-8");
-				res.getWriter().write("업로드가 완료되었습니다.");
-//				res.sendRedirect("index.jsp");
-			}	
 			
 		} catch (SQLException se) {
 			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
