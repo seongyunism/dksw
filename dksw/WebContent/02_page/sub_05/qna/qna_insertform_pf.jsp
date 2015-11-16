@@ -19,6 +19,13 @@
 	 }
 	form.submit();
 	}
+	$(document).ready(function(){
+		$("#insert_cancel").bind("click",function(){
+			history.back();
+		});
+	
+	});
+	
 </script>
 <%
 String title = request.getParameter("title");
