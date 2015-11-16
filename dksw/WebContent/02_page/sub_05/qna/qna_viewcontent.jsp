@@ -7,16 +7,21 @@
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
 
 <head>
+
 	<title>단국대학교 소프트웨어학과 | 질문게시판</title>
 
 	<jsp:include page="../../commonHeader.jsp" flush="false" />
 	<script>
 		$(document).ready(function(){
-			$("#view_return").bind("click",function(){
-				location.href= "./index.jsp";
+			$("#insert_cancel").bind("click",function(){
+				history.back();
 			});
 		
 		});
+		$(document).ready(function() {
+			initializeLecture('${sessionScope.dkswMemberCategory}');
+		});
+
 		
 	</script>
 <%
@@ -29,49 +34,14 @@ java.sql.Statement stmt = null;
 ResultSet rs = null;
 int mem_no = 0;
 
+
 int num = 0;
 
 HttpSession sessionMember = request.getSession();
-num = Integer.parseInt(request.getParameter("num"));
-try {
-	mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
-	InitContext = new InitialContext();
-	envContext = (Context) InitContext.lookup("java:comp/env");
-	ds = (DataSource) envContext.lookup("jdbc/mysql");
-	conn = ds.getConnection();
-	stmt = conn.createStatement();
-	rs = stmt.executeQuery("");
-			
-	//	String qa_title_ing = rs_ing.getString("qa_title");
-	//	String qa_pIdx_ing = rs_ing.getString("qa_pIdx");
-	//	String qa_regDate_ing = rs_ing.getString("qa_regDate");
-	//	String qa_qIdx_ing = rs_ing.getString("qa_qIdx");
-	//	num_ing++;
+num = Integer.parseInt(request.getParameter("aPIdx"));
+
 	
-	rs.close();
-	stmt.close();
-
-} catch (Exception e) {
-	out.println(e);
-
-} finally {
-	try {
-		if (stmt != null) {
-			stmt.close();
-		}
-	} catch (Exception e) {
-	}
-	try {
-		if (conn!= null)
-			conn.close();
-	} catch (Exception e) {
-	}
-}
-
-
 %>
-
-	
 </head>
 
 
@@ -87,33 +57,81 @@ try {
             </div>
         </div>
     </section>
-
+	<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8' || sessionScope.dkswMemberCategory == '6'}">
     <!-- Content Section  -->
     <section class="section">
         <div class="container">
             <div class="row">
+            	<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8'}">
                 <!-- Left Contents -->
-                 <div class="col-md-8 col-lg-9">
+                <%
+                try {
+                	mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+                	InitContext = new InitialContext();
+                	envContext = (Context) InitContext.lookup("java:comp/env");
+                	ds = (DataSource) envContext.lookup("jdbc/mysql");
+                	conn = ds.getConnection();
+                	stmt = conn.createStatement();
+                	rs = stmt.executeQuery("SELECT (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_writer =" +mem_no+ " and qa_qIdx= "+num);
+                		
+                	if(rs.next()){
+                	String qa_title = rs.getString("qa_title");
+                	String qa_pIdx = rs.getString("qa_pIdx");
+                	String qa_regDate = rs.getString("qa_regDate");
+                	String qa_qIdx = rs.getString("qa_qIdx");
+                	String qa_writer = rs.getString("qa_writer");
+                	String qa_contents = rs.getString("qa_contents");
+
+                
+                %>
+           <div class="col-md-8 col-lg-9">
 				<div class="row">
 					<div class="col-md-2">
 						<p class="bg-primary text-center">작성자</p>
 					</div>
-					<div class="col-md-2">홍길동</div>
+					<div class="col-md-2"><%=qa_writer %></div>
 					<div class="col-md-2" ><p class="bg-primary text-center">담당교수</p></div>
-					<div class="col-md-2">테스트교수님</div>
+					<div class="col-md-2"><%=qa_pIdx %></div>
 					<div class="col-md-2" ><p class="bg-primary text-center">작성날짜</p></div>
-					<div class="col-md-2">2015년8월2일</div>
+					<div class="col-md-2"><%=qa_regDate %></div>
 				</div>
 				<div class="row">
-					<div class="col-md-12"><h4>제목입니다.</h4></div>
+					<div class="col-md-12"><h4><%=qa_title %></h4></div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="bs-example" data-example-id="body-copy">
-						안녕하세요동해물과백 두산이 마르고 닳도록 하느님이 보우하사 우리 나라만세 무궁화 삼천리 화려 강산 대한사람 대한으로 길이 보전하세
+						<%=qa_contents %>
 						</div>
 					</div>
 				</div>
+				<%
+				
+	}
+				rs.close();
+				stmt.close();
+
+			} catch (Exception e) {
+				out.println(e);
+
+			} finally {
+				try {
+					if (stmt != null) {
+						stmt.close();
+					}
+				} catch (Exception e) {
+				}
+				try {
+					if (conn!= null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+
+				
+				
+				%>
+				
 				<div class="row">
 					<div class="form-group" >
 								<div class="col-sm-2" style="float:right">
@@ -126,6 +144,90 @@ try {
 				</div>
 				
 		</div>
+		</c:if>
+		<c:if test="${sessionScope.dkswMemberCategory == '6'}">
+                <!-- Left Contents -->
+                <%
+                try {
+                	mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+                	InitContext = new InitialContext();
+                	envContext = (Context) InitContext.lookup("java:comp/env");
+                	ds = (DataSource) envContext.lookup("jdbc/mysql");
+                	conn = ds.getConnection();
+                	stmt = conn.createStatement();
+                	rs = stmt.executeQuery("SELECT qa_idx,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_aPIdx= "+num);
+                		
+                	if(rs.next()){
+                	String qa_idx = rs.getString("qa_idx");
+                	String qa_title = rs.getString("qa_title");
+                	String qa_pIdx = rs.getString("qa_pIdx");
+                	String qa_regDate = rs.getString("qa_regDate");
+                	String qa_qIdx = rs.getString("qa_qIdx");
+                	String qa_writer = rs.getString("qa_writer");
+                	String qa_contents = rs.getString("qa_contents");
+
+                
+                %>
+           <div class="col-md-8 col-lg-9">
+				<div class="row">
+					<div class="col-md-2">
+						<p class="bg-primary text-center">작성자</p>
+					</div>
+					<div class="col-md-2"><%=qa_writer %></div>
+					<div class="col-md-2" ><p class="bg-primary text-center">담당교수</p></div>
+					<div class="col-md-2"><%=qa_pIdx %></div>
+					<div class="col-md-2" ><p class="bg-primary text-center">작성날짜</p></div>
+					<div class="col-md-2"><%=qa_regDate %></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12"><h4><%=qa_title %></h4></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="bs-example" data-example-id="body-copy">
+						<%=qa_contents %>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="row">
+					<div class="form-group" >
+								<div class="col-sm-3" style="float:right">
+									<div class="btn-right group" role="group" aria-label="...">
+										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글 작성</button>
+										<button type="button" class="btn btn-danger default btn-sm" id="insert_cancel">취소</button>
+									</div>
+								</div>
+					</div>
+				</div>
+							<%
+								}
+											rs.close();
+											stmt.close();
+
+										} catch (Exception e) {
+											out.println(e);
+
+										} finally {
+											try {
+												if (stmt != null) {
+													stmt.close();
+												}
+											} catch (Exception e) {
+											}
+											try {
+												if (conn != null)
+													conn.close();
+											} catch (Exception e) {
+											}
+										}
+							%>
+
+						</div>
+		</c:if>
+		
+		
 
 				<!-- Right Contents -->
                 <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
@@ -143,6 +245,7 @@ try {
 					<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">
+					    	<li><i class="fa fa-angle-right fa-fw"></i><a href="./index.jsp" title="Category Business">메인</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp" title="Category photos">답변 완료</a></li>
 					    </ul>
@@ -154,7 +257,7 @@ try {
         </div>
      
     </section>
-
+	</c:if>
     <!--Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 

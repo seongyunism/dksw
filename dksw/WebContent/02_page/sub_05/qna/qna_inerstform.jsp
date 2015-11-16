@@ -28,10 +28,10 @@ try {
 	function writeCheck()
 	{
 	 var form = document.writeform;
-	 if( !form.title.value )   // form 에 있는 name 값이 없을 때
+	 if( !form.title.value )   // form 에 있는 title 값이 없을 때
 	 {
 	  alert( "제목을 적어주세요" ); // 경고창 띄움
-	  form.title.focus();   // form 에 있는 name 위치로 이동
+	  form.title.focus();   // form 에 있는 title 위치로 이동
 	  return;
 	 }
 	 
@@ -50,20 +50,20 @@ try {
 	 }
 	form.submit();
 	}
+	
+	function submitEvent(){
+		if(event.keyCode ==13){
+			return false;
+		}
+	}
+	
 </script>
-
-
-
-
 <head>
 	<title>단국대학교 소프트웨어학과 | 질문게시판</title>
 
 	<jsp:include page="../../commonHeader.jsp" flush="false" />
 
 </head>
-
-
-
 <body>
     <!-- Navigation -->
 	<jsp:include page="../../commonNav.jsp" flush="false"/>
@@ -91,7 +91,7 @@ try {
 						</div>
 						<form class="form-horizontal" name=writeform method=post action="qna_insert_accept.jsp">
 							<div class="form-group">
-								<select class="lecture-year"  name="pf" style="text-align:center;"
+								<select class="lecture-year" name="pf" style="text-align:center;"
 											>
 											<option >교수님</option>
 											<%
@@ -101,7 +101,6 @@ try {
 											
 											<option role="presentation"><a role="menuitem" tabindex="-1"
 												href="#" name="pf_sel" alt="<%=pfN%>>"><%=pfN %></a></option>
-
 											<%
 											num_pfN++;
 											}
@@ -129,7 +128,7 @@ try {
 								</select>
 								<div class="col-sm-10">
 										<input type="text" class="form-control" id="inputTitle" name ="title"
-										placeholder="제목">
+										placeholder="제목" onKeyPress="submitEvent();">
 								</div>
 							</div>
 							<div class="form-group">
@@ -169,6 +168,7 @@ try {
 					<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">
+					    	<li><i class="fa fa-angle-right fa-fw"></i><a href="./index.jsp" title="Category Business">메인</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp" title="Category photos">답변 완료</a></li>
 					    </ul>

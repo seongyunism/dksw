@@ -91,8 +91,8 @@
 				<div class="row">
 					<!-- Left Contents -->
 					<!-- 학생 게시글 -->
-					<c:if
-						test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8'}">
+					<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8'}">
+						
 						<div class="col-md-8 col-lg-9">
 							<div class="bs-example"
 								data-example-id="panel-without-body-with-table">
@@ -124,13 +124,12 @@
 																conn_ct = ds_ct.getConnection();
 																stmt_ct = conn_ct.createStatement();
 																rs_ct = stmt_ct
-																		.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N' and qa_writer = "+mem_no+ ") ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y' and qa_writer = " +mem_no+")end_ct");
+																		.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N' and qa_writer = "+mem_no+ ") ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y' and qa_writer = " +mem_no+" and qa_QA = 'Q')end_ct");
 
 																while (rs_ct.next()) {
 																	int ct_ing = rs_ct.getInt(1);
 																	int ct_end = rs_ct.getInt(2);
-																	float bar = (float) ct_end
-																			/ ((float) ct_ing + (float) ct_end) * 100;
+																	float bar = (float) ct_end / ((float) ct_ing + (float) ct_end) * 100;
 												%>
 												<a href="./qna_ing.jsp">진행중 <span class="badge"><%=ct_ing%></span></a>
 												<a href="./qna_end.jsp">완료 <span class="badge"><%=ct_end%></span></a>
@@ -183,6 +182,7 @@
 													<tbody>
 														<%
 															try {
+																		num_ing = 1;
 																		InitContext_ing = new InitialContext();
 																		envContext_ing = (Context) InitContext_ing
 																				.lookup("java:comp/env");
@@ -190,8 +190,6 @@
 																				.lookup("jdbc/mysql");
 																		conn_ing = ds_ing.getConnection();
 																		stmt_ing = conn_ing.createStatement();
-																		//rs_ing = stmt_ing.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ), qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N' and=qa_writer" );
-																		//rs_ing = stmt_ing.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N' and"+mem_no+ "=qa_writer" );
 																		rs_ing = stmt_ing
 																				.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_answerYN = 'N' and qa_writer="+mem_no+" order by qa_qIdx");
 
@@ -200,7 +198,7 @@
 																			String qa_pIdx_ing = rs_ing.getString("qa_pIdx");
 																			String qa_regDate_ing = rs_ing.getString("qa_regDate");
 																			String qa_qIdx_ing = rs_ing.getString("qa_qIdx");
-																			num_ing++;
+																			
 														%>
 														<tr>
 															<th scope="row"><%=num_ing%></th>
@@ -209,6 +207,7 @@
 															<td><%=qa_regDate_ing%></td>
 														</tr>
 														<%
+															num_ing++;
 															}
 																		rs_ing.close();
 																		stmt_ing.close();
@@ -219,7 +218,7 @@
 																	} finally {
 																		try {
 																			if (stmt_ing != null) {
-																				if (num_ing == 0) {
+																				if (num_ing == 1) {
 														%>
 														<tr>
 															<th scope="row"><%=num_ing%></th>
@@ -239,7 +238,7 @@
 																		}
 																	}
 
-																	if (num_ing == 4) {
+																	if (num_ing >= 4) {
 														%>
 														<button type="button"
 															class="btn btn-primary btn-lg btn-block" onclick ="window.location ='qna_ing.jsp'">게시글 더 보기</button>
@@ -272,6 +271,7 @@
 													<tbody>
 														<%
 															try {
+																		num_end = 1; //변수 초기화
 																		InitContext_end = new InitialContext();
 																		envContext_end = (Context) InitContext_end
 																				.lookup("java:comp/env");
@@ -279,27 +279,25 @@
 																				.lookup("jdbc/mysql");
 																		conn_end = ds_end.getConnection();
 																		stmt_end = conn_end.createStatement();
-																		//rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ), qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'Y' and=qa_writer");
-																		//rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'Y' and"+mem_no+"=qa_writer");
-																		rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_answerYN = 'Y' and qa_writer="+mem_no+" order by qa_qIdx");
-																				
+																		rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_answerYN = 'Y' and qa_writer="+mem_no+" and qa_QA = 'Q' order by qa_qIdx");	
 														%>
 														<%
-															while (rs_end.next()) {
+															while ((rs_end.next())&&(num_end < 4)) {
 																			String qa_title_end = rs_end.getString("qa_title");
 																			String qa_pIdx_end = rs_end.getString("qa_pIdx");
 																			String qa_regDate_end = rs_end.getString("qa_regDate");
 																			String qa_qIdx_end = rs_end.getString("qa_qIdx");
-																			num_end++;
+																			
 														%>
 
 														<tr>
 															<th scope="row"><%=num_end%></th>
-															<td><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx_end%>"><%=qa_title_end%></a></td>
+															<td><a href="./qna_viewcontent_end.jsp?aPIdx=<%=qa_qIdx_end%>&"><%=qa_title_end%></a></td>
 															<td><%=qa_pIdx_end%></td>
 															<td><%=qa_regDate_end%></td>
 														</tr>
 														<%
+															num_end++;
 															}
 																		rs_end.close();
 																		stmt_end.close();
@@ -309,7 +307,7 @@
 																	} finally {
 																		try {
 																			if (stmt_end != null) {
-																				if (num_end == 0) {
+																				if (num_end == 1) {
 														%>
 														<tr>
 															<th scope="row"><%=num_end%></th>
@@ -328,7 +326,7 @@
 																		} catch (Exception e) {
 																		}
 																	}
-																	if (num_end == 4) {
+																	if (num_end >= 4) {
 														%>
 														<tr>
 															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_end.jsp'">게시글
@@ -358,12 +356,7 @@
 									<div class="panel-heading">
 										<h3>
 											진행 및 완료사항
-											<button type="button" class="btn btn-default btn-sm"
-												aria-label="Right Align" style="float: right">
-												<li id="btn_write"><span
-													class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-													<span class="glyphicon-class">글쓰기</span></li>
-											</button>
+											
 										</h3>
 									</div>
 									<div class="panel-body">
@@ -382,7 +375,7 @@
 																conn_ct = ds_ct.getConnection();
 																stmt_ct = conn_ct.createStatement();
 																rs_ct = stmt_ct
-																		.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N' and qa_PIdx = "+mem_no+ ") ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y' and qa_PIdx = " +mem_no+")end_ct");
+																		.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N' and qa_PIdx = "+mem_no+ ") ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y' and qa_pIdx = " +mem_no+" and qa_QA = 'Q')end_ct");
 
 																while (rs_ct.next()) {
 																	int ct_ing = rs_ct.getInt(1);
@@ -441,6 +434,7 @@
 													<tbody>
 														<%
 															try {
+																		num_ing = 1; //변수 초기화
 																		InitContext_ing = new InitialContext();
 																		envContext_ing = (Context) InitContext_ing
 																				.lookup("java:comp/env");
@@ -448,8 +442,6 @@
 																				.lookup("jdbc/mysql");
 																		conn_ing = ds_ing.getConnection();
 																		stmt_ing = conn_ing.createStatement();
-																		//rs_ing = stmt_ing.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ), qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N' and=qa_writer" );
-																		//rs_ing = stmt_ing.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N' and"+mem_no+ "=qa_writer" );
 																		rs_ing = stmt_ing.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_answerYN = 'N' and qa_pIdx="+mem_no+" order by qa_aPIdx");
 																				
 
@@ -458,7 +450,7 @@
 																			String qa_writer_ing = rs_ing.getString("qa_writer");
 																			String qa_regDate_ing = rs_ing.getString("qa_regDate");
 																			String qa_aPIdx_ing = rs_ing.getString("qa_aPIdx");
-																			num_ing++;
+																			
 														%>
 														<tr>
 															<th scope="row"><%=num_ing%></th>
@@ -467,6 +459,7 @@
 															<td><%=qa_regDate_ing%></td>
 														</tr>
 														<%
+															num_ing++;
 															}
 																		rs_ing.close();
 																		stmt_ing.close();
@@ -477,7 +470,7 @@
 																	} finally {
 																		try {
 																			if (stmt_ing != null) {
-																				if (num_ing == 0) {
+																				if (num_ing == 1) {
 														%>
 														<tr>
 															<th scope="row"><%=num_ing%></th>
@@ -496,7 +489,7 @@
 																		} catch (Exception e) {
 																		}
 																	}
-																	if (num_ing == 4) {
+																	if (num_ing >= 4) {
 														%>
 														<tr>
 															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_ing.jsp'">게시글
@@ -533,6 +526,7 @@
 													<tbody>
 														<%
 															try {
+																		num_end = 1; //변수초기화
 																		InitContext_end = new InitialContext();
 																		envContext_end = (Context) InitContext_end
 																				.lookup("java:comp/env");
@@ -540,27 +534,26 @@
 																				.lookup("jdbc/mysql");
 																		conn_end = ds_end.getConnection();
 																		stmt_end = conn_end.createStatement();
-																		//rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ), qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'Y' and=qa_writer");
-																		//rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'Y' and"+mem_no+"=qa_writer");
-																		rs_ing = stmt_end.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_answerYN = 'Y' and qa_pIdx="+mem_no+" order by qa_aPIdx");
+																		rs_end = stmt_end.executeQuery("Select qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_answerYN = 'Y' and qa_pIdx="+mem_no+" and qa_QA = 'Q' order by qa_aPIdx");
 																				
 														%>
 														<%
-															while (rs_end.next()) {
+															while ((rs_end.next())&&(num_end < 4)) {
 																			String qa_title_end = rs_end.getString("qa_title");
-																			String qa_pIdx_end = rs_end.getString("qa_pIdx");
+																			String qa_pIdx_end = rs_end.getString("qa_writer");
 																			String qa_regDate_end = rs_end.getString("qa_regDate");
 																			String qa_aPIdx_end = rs_end.getString("qa_aPIdx");
-																			num_end++;
+																			
 														%>
 
 														<tr>
 															<th scope="row"><%=num_end%></th>
-															<td><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_aPIdx_end%>"><%=qa_title_end%></a></td>
+															<td><a href="./qna_viewcontent_end.jsp?aPIdx=<%=qa_aPIdx_end%>"><%=qa_title_end%></a></td>
 															<td><%=qa_pIdx_end%></td>
 															<td><%=qa_regDate_end%></td>
 														</tr>
 														<%
+															num_end++;
 															}
 																		rs_end.close();
 																		stmt_end.close();
@@ -570,7 +563,7 @@
 																	} finally {
 																		try {
 																			if (stmt_end != null) {
-																				if (num_end == 0) {
+																				if (num_end == 1) {
 														%>
 														<tr>
 															<th scope="row"><%=num_end%></th>
@@ -589,7 +582,7 @@
 																		} catch (Exception e) {
 																		}
 																	}
-																	if (num_end == 4) {
+																	if (num_end >= 4) {
 														%>
 														<tr>
 															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_end.jsp'">게시글
@@ -628,6 +621,8 @@
 						<div class="categories simple-box">
 							<h3>Categories</h3>
 							<ul class="list-unstyled">
+								<li><i class="fa fa-angle-right fa-fw"></i><a
+									href="./index.jsp" title="Category Business">메인</a></li>
 								<li><i class="fa fa-angle-right fa-fw"></i><a
 									href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
 								<li><i class="fa fa-angle-right fa-fw"></i><a

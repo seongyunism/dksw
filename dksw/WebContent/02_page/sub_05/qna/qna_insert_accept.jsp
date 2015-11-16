@@ -21,51 +21,96 @@
  	qa_content = qa_content.replaceAll("\u0020", "&nbsp;");
  	
  	//사용자 idx를 위한 카운트 값
- 	int ct_qIdx = 0;
+ 	int ct_qIdx = 1;
+ 	int ct_pIdx = 1;
+ 	int writerNo = 0;
  	
- 	Context InitContext_idx = null;
- 	Context envContext_idx = null;
- 	DataSource ds_idx = null;
- 	Connection conn_idx = null;
- 	java.sql.Statement stmt_idx = null;
- 	ResultSet rs_idx = null;
+ 	Context InitContext_qidx = null;
+ 	Context envContext_qidx = null;
+ 	DataSource ds_qidx = null;
+ 	Connection conn_qidx = null;
+ 	java.sql.Statement stmt_qidx = null;
+ 	ResultSet rs_qidx = null;
+ 	
+ 	Context InitContext_pidx = null;
+ 	Context envContext_pidx = null;
+ 	DataSource ds_pidx = null;
+ 	Connection conn_pidx = null;
+ 	java.sql.Statement stmt_pidx = null;
+ 	ResultSet rs_pidx = null;
+ 	
 	HttpSession sessionMember = request.getSession();
 	
 
  	
  	
  	try {
- 		ct_qIdx  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
-		System.out.println(ct_qIdx);
- 		InitContext_idx = new InitialContext();
-		envContext_idx = (Context) InitContext_idx.lookup("java:comp/env");
-		ds_idx = (DataSource) envContext_idx.lookup("jdbc/mysql");
-		conn_idx = ds_idx.getConnection();
-		stmt_idx = conn_idx.createStatement();
-		rs_idx = stmt_idx.executeQuery("select count(*)+1 from dksw_qna_board  where qa_writer=6  group by qa_writer");
-		ct_qIdx = rs_idx.getInt(1);
+ 		writerNo  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+ 		
+ 		//qa_qIdx를 위한 선언
+ 		InitContext_qidx = new InitialContext();
+		envContext_qidx = (Context) InitContext_qidx.lookup("java:comp/env");
+		ds_qidx = (DataSource) envContext_qidx.lookup("jdbc/mysql");
+		conn_qidx = ds_qidx.getConnection();
+		stmt_qidx = conn_qidx.createStatement();
+		rs_qidx = stmt_qidx.executeQuery("select count(*)+1 from dksw_qna_board  where qa_writer="+writerNo+"  group by qa_writer");
 		
-		rs_idx.close();
-		stmt_idx.close();
+		if(rs_qidx.next()){
+			ct_qIdx = (rs_qidx.getInt(1));
+		}
+		rs_qidx.close();
+		stmt_qidx.close();
  	}
-	
-	
 	 catch (Exception e) {
 		
 		
 	} finally {
 		try {
-			if (stmt_idx != null)
-				stmt_idx.close();
+			if (stmt_qidx != null)
+				stmt_qidx.close();
 		} catch (Exception e) {
 		}
 		try {
-			if (conn_idx != null)
-				conn_idx.close();
+			if (conn_qidx != null)
+				conn_qidx.close();
+		} catch (Exception e) {
+		}
+	}
+ 	try {	
+ 	
+ 	//qa_aPIdx를 위한 선언
+	InitContext_pidx = new InitialContext();
+	envContext_pidx = (Context) InitContext_pidx.lookup("java:comp/env");
+	ds_pidx = (DataSource) envContext_pidx.lookup("jdbc/mysql");
+	conn_pidx = ds_pidx.getConnection();
+	stmt_pidx = conn_pidx.createStatement();
+	rs_pidx = stmt_pidx.executeQuery("select count(*)+1 from dksw_qna_board  where qa_pIdx=(select dkswMemberNo from dksw_department_professor where dkswDepartmentProfessorNameKo='"+ pf+"')  group by qa_writer");
+	
+ 	
+ 	
+	if(rs_pidx.next()){
+		ct_pIdx = (rs_pidx.getInt(1));
+	}
+	
+	rs_pidx.close();
+	stmt_pidx.close();
+ 	}
+	 catch (Exception e) {
+		
+		
+	} finally {
+		try {
+			if (stmt_pidx != null)
+				stmt_pidx.close();
+		} catch (Exception e) {
+		}
+		try {
+			if (conn_pidx != null)
+				conn_pidx.close();
 		} catch (Exception e) {
 		}
 }
-				
+ 	
  	
  	
  	
@@ -74,7 +119,7 @@
  		envContext = (Context) InitContext.lookup("java:comp/env");
  		ds = (DataSource) envContext.lookup("jdbc/mysql");
  		//사용자 값으로 글 idx 구분 필요
- 		String query = "INSERT INTO dksw_qna_board(qa_title, qa_pIdx, qa_contents,qa_regDate,qa_answerYN,qa_QA, qa_qIdx) VALUES(?,(select dkswMemberNo from dksw_department_professor where dkswDepartmentProfessorNameKo=?),?,current_date(),'N','Q',"+ct_qIdx+")";
+ 		String query = "INSERT INTO dksw_qna_board(qa_title, qa_pIdx, qa_contents, qa_writer, qa_regDate,qa_answerYN,qa_QA, qa_qIdx,qa_aPIdx) VALUES(?,(select dkswMemberNo from dksw_department_professor where dkswDepartmentProfessorNameKo=?),?, "+ writerNo+" ,current_date(),'N','Q',"+ct_qIdx+","+ct_pIdx+")"; 
  		conn = ds.getConnection();
  		pstmt = conn.prepareStatement(query);
  		pstmt.setString(1,title);
@@ -83,8 +128,6 @@
  		
  		pstmt.executeUpdate();
  		//INSERT INTO firstboard(qa_title,qa_contents,qa_regDate,qa_writer,qa_pIdx,qa_answerYN,qa_QA) VALUES(?,?,GETDATE(),writer,교수님,'N','Q')
- 	
-
  	} catch (Exception e) {
  		out.println(e);
 

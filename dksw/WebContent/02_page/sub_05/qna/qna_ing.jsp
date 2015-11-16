@@ -11,7 +11,12 @@
 
 	<jsp:include page="../../commonHeader.jsp" flush="false" />
 	
+<script>
+$(document).ready(function() {
+	initializeLecture('${sessionScope.dkswMemberCategory}');
+});
 
+</script>
 
 	
 </head>
@@ -26,14 +31,10 @@ java.sql.Statement stmt = null;
 ResultSet rs = null;
 String sql = "";
 
-	try {
-		InitContext = new InitialContext();
-		envContext = (Context) InitContext.lookup("java:comp/env");
-		ds = (DataSource) envContext.lookup("jdbc/mysql");
-		conn = ds.getConnection();
-		stmt = conn.createStatement();
-		rs = stmt.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate from dksw_qna_board qa_b where qa_answerYN = 'N'");
-	
+int mem_no = 0;//멤버넘버 저장 변수
+HttpSession sessionMember = request.getSession();
+
+
 %>
 
 <body>
@@ -48,10 +49,12 @@ String sql = "";
             </div>
         </div>
     </section>
-
+	<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8' || sessionScope.dkswMemberCategory == '6'}">
     <!-- Content Section  -->
     <section class="section">
         <div class="container">
+        
+        <c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8'}">				
             <div class="row">
             			
                 <!-- Left Contents -->
@@ -74,20 +77,35 @@ String sql = "";
 								</thead>
 								<tbody>
 								<%
+								try {
+									mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+									InitContext = new InitialContext();
+									envContext = (Context) InitContext.lookup("java:comp/env");
+									ds = (DataSource) envContext.lookup("jdbc/mysql");
+									conn = ds.getConnection();
+									stmt = conn.createStatement();
+									rs = stmt.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_answerYN = 'N' and qa_writer="+mem_no+" order by qa_qIdx");
+								
+								
+								
 								while (rs.next()) {
 									String qa_title = rs.getString("qa_title");
 									String qa_pIdx = rs.getString("qa_pIdx");
 									String qa_regDate = rs.getString("qa_regDate");
+									String qa_qIdx = rs.getString("qa_qIdx");
 									num++;
 										
 								%>
 									<tr>
 										<th scope="row"><%=num %></th>
-										<td><a href="./qna_viewcontent.jsp" ><%=qa_title %></a></td>
-										<td><a href="./qna_viewcontent.jsp" ><%=qa_pIdx %></a></td>
-										<td><a href="./qna_viewcontent.jsp" ><%=qa_regDate %></a></td>
+										<td><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" ><%=qa_title %></a></td>
+										<td><%=qa_pIdx %></td>
+										<td><%=qa_regDate %></td>
 									</tr>
 									<%
+									
+									
+									
 									}
 										rs.close();
 										stmt.close();
@@ -114,7 +132,87 @@ String sql = "";
 						</div>
 					</div>
 				</div>
+                </c:if>
                 
+                <c:if test="${sessionScope.dkswMemberCategory == '6'}">				
+            	<div class="row">
+            			
+                <!-- Left Contents -->
+                <div class="col-md-8 col-lg-9">
+					<div class="bs-example"
+						data-example-id="panel-without-body-with-table">
+						<div class="panel panel-default">
+							<!-- Default panel contents -->
+							<div class="panel-heading"><h3>답변 진행중</h3></div>
+
+							<!-- Table -->
+							<table class="table">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>제목</th>
+										<th>작성학생</th>
+										<th>등록날짜</th>
+									</tr>
+								</thead>
+								<tbody>
+								<%
+								try {
+									mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+									InitContext = new InitialContext();
+									envContext = (Context) InitContext.lookup("java:comp/env");
+									ds = (DataSource) envContext.lookup("jdbc/mysql");
+									conn = ds.getConnection();
+									stmt = conn.createStatement();
+									rs = stmt.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_answerYN = 'N' and qa_pIdx="+mem_no+" order by qa_aPIdx");
+								
+								
+								
+								while (rs.next()) {
+									String qa_title = rs.getString("qa_title");
+									String qa_pIdx = rs.getString("qa_writer");
+									String qa_regDate = rs.getString("qa_regDate");
+									String qa_qIdx = rs.getString("qa_aPIdx");
+									num++;
+										
+								%>
+									<tr>
+										<th scope="row"><%=num %></th>
+										<td><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" ><%=qa_title %></a></td>
+										<td><%=qa_pIdx %></td>
+										<td><%=qa_regDate %></td>
+									</tr>
+									<%
+									
+									
+									
+									}
+										rs.close();
+										stmt.close();
+		
+
+									} catch (Exception e) {
+										out.println(e);
+										
+									} finally {
+										try {
+											if (stmt != null)
+												stmt.close();
+										} catch (Exception e) {
+										}
+										try {
+											if (conn != null)
+												conn.close();
+										} catch (Exception e) {
+										}
+									}
+								 %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+                </c:if>
                 
                 <!-- Right Contents -->
                 <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
@@ -132,6 +230,7 @@ String sql = "";
 					<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">
+					    	<li><i class="fa fa-angle-right fa-fw"></i><a href="./index.jsp" title="Category Business">메인</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp" title="Category photos">답변 완료</a></li>
 					    </ul>
@@ -143,6 +242,7 @@ String sql = "";
         </div>
      
     </section>
+    </c:if>
 
     <!--Back to top-->
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>

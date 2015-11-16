@@ -1,30 +1,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, javax.sql.*, javax.naming.*" %>
+<%@ page import="javax.sql.DataSource"%> 
 
 <!DOCTYPE html>
 <html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
+
+<script type="text/javascript" >
+	/*값이 입력 안된부분 알림*/
+	function writeCheck()
+	{
+	var form = document.writeform;
+	if(!form.qa_content.value)
+	 {
+	  alert( "내용을 적어주세요" );
+	  form.qa_content.focus();
+	  return;
+	 }
+	form.submit();
+	}
+</script>
+<%
+String title = request.getParameter("title");
+String qa_idx = request.getParameter("qa_idx");
+%>
+
+
 
 <head>
 	<title>단국대학교 소프트웨어학과 | 질문게시판</title>
 
 	<jsp:include page="../../commonHeader.jsp" flush="false" />
-	<script>
-		$(document).ready(function(){
-			$("#insert_cancel").bind("click",function(){
-				location.href= "./index.jsp";
-			});
-			$("#")
-			
-		
-		});
-	
-	</script>
-	
 
-
-	
 </head>
-
 <body>
     <!-- Navigation -->
 	<jsp:include page="../../commonNav.jsp" flush="false"/>
@@ -50,38 +58,25 @@
 						<div class="panel-heading">
 							<h3>답변작성</h3>
 						</div>
-						<form class="form-horizontal">
+						<form class="form-horizontal" name=writeform method=post action="qna_insert_accept_pf.jsp?qa_idx=<%=qa_idx%>">
 							<div class="form-group">
-								<label for="inputPassword" class="col-sm-2 control-label">제목</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" id="inputPassword"
-										placeholder="제목">
+								<div class="col-sm-10">
+										<h3><b>[RE]<%=title %></b></h3>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">작성자명</label>
-								<div class="col-sm-8">
-									<p class="form-control-static">홍길동</p>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">해당학생</label>
-								<div class="col-sm-8">
-									<p class="form-control-static">김태희</p>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label">내용</label>
-								<div class="col-sm-8">
-									<textarea class="col-md-8 form-control" rows="6"
-										placeholder="Textarea"></textarea>
+						
+								<div class="col-sm-10">
+									<textarea class="col-md-8 form-control" rows="6" name ="qa_content"
+										placeholder="내용을입력해주세요"></textarea>
 								</div>
 							</div>
 							<div class="form-group" >
-								<div class="col-sm-4" style="float:right">
+								<div class="col-sm-5" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
-										<button type="button" class="btn btn-success default">등록</button>
+										<button type="button" class="btn btn-success default" OnClick="javascript:writeCheck();">등록</button>
 										<button type="button" class="btn btn-danger default" id="insert_cancel">취소</button>
+										<button type="button" class="btn btn-warning default" id="insert_cancel">임시보관</button>
 									</div>
 								</div>
 							</div>
@@ -106,6 +101,7 @@
 					<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">
+					    	<li><i class="fa fa-angle-right fa-fw"></i><a href="./index.jsp" title="Category Business">메인</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp" title="Category photos">답변 완료</a></li>
 					    </ul>
@@ -134,6 +130,22 @@
 	<div id="ascrail2000-hr" class="nicescroll-rails" style="height: 8px; z-index: 999999; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; display: none; opacity: 0; background: rgb(221, 221, 221);">
 		<div style="position: relative; top: 0px; height: 8px; border: none; border-radius: 0px; width: 1396px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
 	</div>
+<script>
+	var k;
+
+	$(document).ready(function(){
+		$("#insert_cancel").bind("click",function(){
+			location.href= "./index.jsp";
+		});
+		$("#")
+		
 	
+	});
+
+
+</script>	
+
 </body>
+
+
 </html>
