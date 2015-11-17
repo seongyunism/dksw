@@ -84,7 +84,7 @@ HttpSession sessionMember = request.getSession();
 									ds = (DataSource) envContext.lookup("jdbc/mysql");
 									conn = ds.getConnection();
 									stmt = conn.createStatement();
-									rs = stmt.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_answerYN = 'N' and qa_writer="+mem_no+" order by qa_qIdx");
+									rs = stmt.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx, qa_udtCheck_stu from dksw_qna_board qa_b where qa_endCheck = 'N' and qa_QA = 'Q' and qa_writer="+mem_no+" order by qa_qIdx DESC");
 								
 								
 								
@@ -93,17 +93,30 @@ HttpSession sessionMember = request.getSession();
 									String qa_pIdx = rs.getString("qa_pIdx");
 									String qa_regDate = rs.getString("qa_regDate");
 									String qa_qIdx = rs.getString("qa_qIdx");
+									String qa_udtCheck_stu = rs.getString("qa_udtCheck_stu");
 									num++;
+									
+									if(qa_udtCheck_stu.equals("Y")){
 										
 								%>
+									<tr>
+										<th scope="row"><%=num %></th>
+										<td><i class="fa fa-commenting-o"></i></span><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" >&nbsp&nbsp<%=qa_title %></a></td>
+										<td><%=qa_pIdx %></td>
+										<td><%=qa_regDate %></td>
+									</tr>
+									<%
+									}
+									else if (qa_udtCheck_stu.equals("N")){
+									%>
 									<tr>
 										<th scope="row"><%=num %></th>
 										<td><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" ><%=qa_title %></a></td>
 										<td><%=qa_pIdx %></td>
 										<td><%=qa_regDate %></td>
 									</tr>
-									<%
-									
+									<%	
+									}
 									
 									
 									}
@@ -164,18 +177,32 @@ HttpSession sessionMember = request.getSession();
 									ds = (DataSource) envContext.lookup("jdbc/mysql");
 									conn = ds.getConnection();
 									stmt = conn.createStatement();
-									rs = stmt.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_answerYN = 'N' and qa_pIdx="+mem_no+" order by qa_aPIdx");
-								
-								
+									rs = stmt.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx, qa_udtCheck_pf from dksw_qna_board qa_b where qa_endCheck = 'N' and qa_QA = 'Q' and qa_pIdx="+mem_no+" order by qa_aPIdx DESC");
 								
 								while (rs.next()) {
 									String qa_title = rs.getString("qa_title");
 									String qa_pIdx = rs.getString("qa_writer");
 									String qa_regDate = rs.getString("qa_regDate");
 									String qa_qIdx = rs.getString("qa_aPIdx");
+									String qa_udtCheck_pf = rs.getString("qa_udtCheck_pf");
+									
 									num++;
 										
+									if(qa_udtCheck_pf.equals("Y")){
+										
+									
 								%>
+									<tr>
+										<th scope="row"><%=num %></th>
+										<td><i class="fa fa-commenting-o"></i><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" >&nbsp&nbsp<%=qa_title %></a></td>
+										<td><%=qa_pIdx %></td>
+										<td><%=qa_regDate %></td>
+									</tr>
+									<%
+									}
+									else if(qa_udtCheck_pf.equals("N")){
+										
+									%>
 									<tr>
 										<th scope="row"><%=num %></th>
 										<td><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" ><%=qa_title %></a></td>
@@ -183,7 +210,7 @@ HttpSession sessionMember = request.getSession();
 										<td><%=qa_regDate %></td>
 									</tr>
 									<%
-									
+									}
 									
 									
 									}
@@ -215,18 +242,20 @@ HttpSession sessionMember = request.getSession();
                 </c:if>
                 
                 <!-- Right Contents -->
-                <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
-                	<!-- Search Box -->
-                    <div class="simple-box ">
-					    <div class="input-group form-lg " role="search">
-					        <input type="text" class="form-control" placeholder="Find answer" />
-					        <span class="input-group-btn">
-					            <button class="btn btn-primary" title="Search" type="button">
-					                <i class="fa fa-search"></i>
-					            </button>
-					        </span>
-					    </div>
-					</div>
+				<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
+						<!-- Search Box -->
+					<form  method=post action="qna_search.jsp" class="form-inline">
+						<div class="simple-box ">
+							<div class="input-group form-lg " role="search">
+									<input type="text" class="form-control"
+										placeholder="Search Word" name="word" /> <span class="input-group-btn">
+										<button class="btn btn-primary" title="Search" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+										</span>
+							</div>
+						</div>
+					</form>
 					<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">

@@ -21,6 +21,7 @@ $(document).ready(function() {
 	
 </head>
 <%
+request.setCharacterEncoding("UTF-8");
 Context InitContext = null;
 Context envContext = null;
 DataSource ds = null;
@@ -33,7 +34,7 @@ String sql = "";
 
 int mem_no = 0;//멤버넘버 저장 변수
 HttpSession sessionMember = request.getSession();
-
+String search_word = request.getParameter("word");
 
 %>
 
@@ -63,7 +64,7 @@ HttpSession sessionMember = request.getSession();
 						data-example-id="panel-without-body-with-table">
 						<div class="panel panel-default">
 							<!-- Default panel contents -->
-							<div class="panel-heading"><h3>답변 완료</h3></div>
+							<div class="panel-heading"><h3>검색 결과</h3></div>
 
 							<!-- Table -->
 							<table class="table">
@@ -78,13 +79,14 @@ HttpSession sessionMember = request.getSession();
 								<tbody>
 								<%
 								try {
+									
 									mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
 									InitContext = new InitialContext();
 									envContext = (Context) InitContext.lookup("java:comp/env");
 									ds = (DataSource) envContext.lookup("jdbc/mysql");
 									conn = ds.getConnection();
 									stmt = conn.createStatement();
-									rs = stmt.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_endCheck = 'Y' and qa_writer="+mem_no+" and qa_QA='Q' order by qa_qIdx DESC");
+									rs = stmt.executeQuery("select a.qa_title, (select dkswDepartmentProfessorNameKo from dksw_department_professor where a.qa_pIdx=dkswMemberNo ) qa_pIdx, a.qa_regDate, a.qa_qIdx, a.qa_udtCheck_stu from (select * from dksw_qna_board where qa_QA = 'Q' and qa_writer="+mem_no+" order by qa_qIdx DESC) a where a.qa_title like '%"+search_word+"%' or a.qa_contents like '%"+search_word+"%' or (select dkswDepartmentProfessorNameKo from dksw_department_professor where a.qa_pIdx=dkswMemberNo ) like '%"+search_word+"%' ");
 								
 								
 								
@@ -93,17 +95,30 @@ HttpSession sessionMember = request.getSession();
 									String qa_pIdx = rs.getString("qa_pIdx");
 									String qa_regDate = rs.getString("qa_regDate");
 									String qa_qIdx = rs.getString("qa_qIdx");
+									String qa_udtCheck_stu = rs.getString("qa_udtCheck_stu");
 									num++;
+									
+									if(qa_udtCheck_stu.equals("Y")){
 										
 								%>
 									<tr>
 										<th scope="row"><%=num %></th>
-										<td><a href="./qna_viewcontent_end.jsp?aPIdx=<%=qa_qIdx %>" ><%=qa_title %></a></td>
+										<td><i class="fa fa-commenting-o"></i></span><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" >&nbsp&nbsp<%=qa_title %></a></td>
 										<td><%=qa_pIdx %></td>
 										<td><%=qa_regDate %></td>
 									</tr>
 									<%
-									
+									}
+									else if (qa_udtCheck_stu.equals("N")){
+									%>
+									<tr>
+										<th scope="row"><%=num %></th>
+										<td><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" ><%=qa_title %></a></td>
+										<td><%=qa_pIdx %></td>
+										<td><%=qa_regDate %></td>
+									</tr>
+									<%	
+									}
 									
 									
 									}
@@ -143,7 +158,7 @@ HttpSession sessionMember = request.getSession();
 						data-example-id="panel-without-body-with-table">
 						<div class="panel panel-default">
 							<!-- Default panel contents -->
-							<div class="panel-heading"><h3>답변 완료</h3></div>
+							<div class="panel-heading"><h3>검색 결과</h3></div>
 
 							<!-- Table -->
 							<table class="table">
@@ -164,25 +179,41 @@ HttpSession sessionMember = request.getSession();
 									ds = (DataSource) envContext.lookup("jdbc/mysql");
 									conn = ds.getConnection();
 									stmt = conn.createStatement();
-									rs = stmt.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_endCheck = 'Y' and qa_pIdx="+mem_no+" and qa_QA='Q' order by qa_aPIdx DESC");
-								
-								
+									rs = stmt.executeQuery("select a.qa_title, (select dkswMemberName from dksw_member where a.qa_writer=dkswMemberNo ) qa_writer, a.qa_regDate, a.qa_aPIdx, a.qa_udtCheck_pf from (select * from dksw_qna_board where qa_QA = 'Q' and qa_pIdx="+mem_no+" order by qa_qIdx DESC) a where a.qa_title like '%"+search_word+"%' or a.qa_contents like '%"+search_word+"%' or (select dkswDepartmentProfessorNameKo from dksw_department_professor where a.qa_pIdx=dkswMemberNo ) like '%"+search_word+"%' ");
 								
 								while (rs.next()) {
 									String qa_title = rs.getString("qa_title");
 									String qa_pIdx = rs.getString("qa_writer");
 									String qa_regDate = rs.getString("qa_regDate");
 									String qa_qIdx = rs.getString("qa_aPIdx");
+									String qa_udtCheck_pf = rs.getString("qa_udtCheck_pf");
+									
 									num++;
 										
+									if(qa_udtCheck_pf.equals("Y")){
+										
+									
 								%>
 									<tr>
 										<th scope="row"><%=num %></th>
-										<td><a href="./qna_viewcontent_end.jsp?aPIdx=<%=qa_qIdx %>" ><%=qa_title %></a></td>
+										<td><i class="fa fa-commenting-o"></i><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" >&nbsp&nbsp<%=qa_title %></a></td>
 										<td><%=qa_pIdx %></td>
 										<td><%=qa_regDate %></td>
 									</tr>
 									<%
+									}
+									else if(qa_udtCheck_pf.equals("N")){
+										
+									%>
+									<tr>
+										<th scope="row"><%=num %></th>
+										<td><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx %>" ><%=qa_title %></a></td>
+										<td><%=qa_pIdx %></td>
+										<td><%=qa_regDate %></td>
+									</tr>
+									<%
+									}
+									
 									
 									}
 										rs.close();

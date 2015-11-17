@@ -139,11 +139,10 @@ try {
 								</div>
 							</div>
 							<div class="form-group" >
-								<div class="col-sm-5" style="float:right">
+								<div class="col-sm-4" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
 										<button type="button" class="btn btn-success default" OnClick="javascript:writeCheck();">등록</button>
 										<button type="button" class="btn btn-danger default" id="insert_cancel">취소</button>
-										<button type="button" class="btn btn-warning default" id="insert_cancel">임시보관</button>
 									</div>
 								</div>
 							</div>
@@ -153,18 +152,20 @@ try {
 
 
 				<!-- Right Contents -->
-                <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
-                	<!-- Search Box -->
-                    <div class="simple-box ">
-					    <div class="input-group form-lg " role="search">
-					        <input type="text" class="form-control" placeholder="Find answer" />
-					        <span class="input-group-btn">
-					            <button class="btn btn-primary" title="Search" type="button">
-					                <i class="fa fa-search"></i>
-					            </button>
-					        </span>
-					    </div>
-					</div>
+				<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
+						<!-- Search Box -->
+					<form  method=post action="qna_search.jsp" class="form-inline">
+						<div class="simple-box ">
+							<div class="input-group form-lg " role="search">
+									<input type="text" class="form-control"
+										placeholder="Search Word" name="word" /> <span class="input-group-btn">
+										<button class="btn btn-primary" title="Search" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+										</span>
+							</div>
+						</div>
+					</form>
 					<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">

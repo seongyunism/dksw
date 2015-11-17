@@ -124,7 +124,7 @@
 																conn_ct = ds_ct.getConnection();
 																stmt_ct = conn_ct.createStatement();
 																rs_ct = stmt_ct
-																		.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N' and qa_writer = "+mem_no+ ") ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y' and qa_writer = " +mem_no+" and qa_QA = 'Q')end_ct");
+																		.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_endCheck = 'N' and qa_QA = 'Q' and qa_writer = "+mem_no+ ") ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_endCheck = 'Y'  and qa_writer = " +mem_no+" and qa_QA = 'Q')end_ct");
 
 																while (rs_ct.next()) {
 																	int ct_ing = rs_ct.getInt(1);
@@ -191,14 +191,28 @@
 																		conn_ing = ds_ing.getConnection();
 																		stmt_ing = conn_ing.createStatement();
 																		rs_ing = stmt_ing
-																				.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_answerYN = 'N' and qa_writer="+mem_no+" order by qa_qIdx");
+																				.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx, qa_udtCheck_stu from dksw_qna_board qa_b where qa_endCheck = 'N' and qa_QA = 'Q' and qa_writer="+mem_no+" order by qa_qIdx DESC");
 
 																		while ((rs_ing.next()) && (num_ing < 4)) {
 																			String qa_title_ing = rs_ing.getString("qa_title");
 																			String qa_pIdx_ing = rs_ing.getString("qa_pIdx");
 																			String qa_regDate_ing = rs_ing.getString("qa_regDate");
 																			String qa_qIdx_ing = rs_ing.getString("qa_qIdx");
+																			String qa_udtCheck_stu = rs_ing.getString("qa_udtCheck_stu");
 																			
+																			if(qa_udtCheck_stu.equals("Y")){
+														%>
+														<tr>
+															<th scope="row"><%=num_ing%></th>
+															<td><i class="fa fa-commenting-o"></i><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_qIdx_ing%>">&nbsp&nbsp<%=qa_title_ing%></a></td>
+															<td><%=qa_pIdx_ing%></td>
+															<td><%=qa_regDate_ing%></td>
+														</tr>
+														<%				
+																			}
+																			else if(qa_udtCheck_stu.equals("N")){
+																				
+																				
 														%>
 														<tr>
 															<th scope="row"><%=num_ing%></th>
@@ -206,8 +220,11 @@
 															<td><%=qa_pIdx_ing%></td>
 															<td><%=qa_regDate_ing%></td>
 														</tr>
+														
 														<%
-															num_ing++;
+																			}
+														
+																		num_ing++;
 															}
 																		rs_ing.close();
 																		stmt_ing.close();
@@ -279,7 +296,7 @@
 																				.lookup("jdbc/mysql");
 																		conn_end = ds_end.getConnection();
 																		stmt_end = conn_end.createStatement();
-																		rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_answerYN = 'Y' and qa_writer="+mem_no+" and qa_QA = 'Q' order by qa_qIdx");	
+																		rs_end = stmt_end.executeQuery("Select qa_title,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo ) qa_pIdx, qa_regDate,qa_qIdx from dksw_qna_board qa_b where qa_endCheck = 'Y' and qa_writer="+mem_no+" and qa_QA = 'Q' order by qa_qIdx DESC");	
 														%>
 														<%
 															while ((rs_end.next())&&(num_end < 4)) {
@@ -375,7 +392,7 @@
 																conn_ct = ds_ct.getConnection();
 																stmt_ct = conn_ct.createStatement();
 																rs_ct = stmt_ct
-																		.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'N' and qa_PIdx = "+mem_no+ ") ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_answerYN = 'Y' and qa_pIdx = " +mem_no+" and qa_QA = 'Q')end_ct");
+																		.executeQuery("SELECT (SELECT count( * ) FROM dksw_qna_board WHERE qa_endCheck = 'N' and qa_QA = 'Q' and qa_PIdx = "+mem_no+ ") ing_ct, (SELECT count( * ) FROM dksw_qna_board WHERE qa_endCheck = 'Y' and qa_pIdx = " +mem_no+" and qa_QA = 'Q')end_ct");
 
 																while (rs_ct.next()) {
 																	int ct_ing = rs_ct.getInt(1);
@@ -442,7 +459,7 @@
 																				.lookup("jdbc/mysql");
 																		conn_ing = ds_ing.getConnection();
 																		stmt_ing = conn_ing.createStatement();
-																		rs_ing = stmt_ing.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_answerYN = 'N' and qa_pIdx="+mem_no+" order by qa_aPIdx");
+																		rs_ing = stmt_ing.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx, qa_udtCheck_pf from dksw_qna_board qa_b where qa_endCheck = 'N' and qa_QA = 'Q' and qa_pIdx="+mem_no+" order by qa_aPIdx DESC");
 																				
 
 																		while ((rs_ing.next()) && (num_ing < 4)) {
@@ -450,7 +467,20 @@
 																			String qa_writer_ing = rs_ing.getString("qa_writer");
 																			String qa_regDate_ing = rs_ing.getString("qa_regDate");
 																			String qa_aPIdx_ing = rs_ing.getString("qa_aPIdx");
+																			String qa_udtCheck_pf = rs_ing.getString("qa_udtCheck_pf");
 																			
+																			if(qa_udtCheck_pf.equals("Y")){
+																				System.out.println(qa_aPIdx_ing);
+														%>
+														<tr>
+															<th scope="row"><%=num_ing%></th>
+															<td><i class="fa fa-commenting-o"></i><a href="./qna_viewcontent.jsp?aPIdx=<%=qa_aPIdx_ing%>">&nbsp&nbsp<%=qa_title_ing%></a></td>
+															<td><%=qa_writer_ing%></td>
+															<td><%=qa_regDate_ing%></td>
+														</tr>
+														<%
+																			}
+																			else if(qa_udtCheck_pf.equals("N")){
 														%>
 														<tr>
 															<th scope="row"><%=num_ing%></th>
@@ -459,6 +489,7 @@
 															<td><%=qa_regDate_ing%></td>
 														</tr>
 														<%
+																			}
 															num_ing++;
 															}
 																		rs_ing.close();
@@ -534,7 +565,7 @@
 																				.lookup("jdbc/mysql");
 																		conn_end = ds_end.getConnection();
 																		stmt_end = conn_end.createStatement();
-																		rs_end = stmt_end.executeQuery("Select qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_answerYN = 'Y' and qa_pIdx="+mem_no+" and qa_QA = 'Q' order by qa_aPIdx");
+																		rs_end = stmt_end.executeQuery("Select qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx from dksw_qna_board qa_b where qa_endCheck = 'Y' and qa_pIdx="+mem_no+" and qa_QA = 'Q' order by qa_aPIdx DESC");
 																				
 														%>
 														<%
@@ -608,16 +639,18 @@
 					<!-- Right Contents -->
 					<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
 						<!-- Search Box -->
+					<form  method=post action="qna_search.jsp" class="form-inline">
 						<div class="simple-box ">
 							<div class="input-group form-lg " role="search">
-								<input type="text" class="form-control"
-									placeholder="Find answer" /> <span class="input-group-btn">
-									<button class="btn btn-primary" title="Search" type="button">
-										<i class="fa fa-search"></i>
-									</button>
-								</span>
+									<input type="text" class="form-control"
+										placeholder="Search Word" name="word" /> <span class="input-group-btn">
+										<button class="btn btn-primary" title="Search" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+										</span>
 							</div>
 						</div>
+					</form>
 						<div class="categories simple-box">
 							<h3>Categories</h3>
 							<ul class="list-unstyled">

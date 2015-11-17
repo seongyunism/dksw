@@ -84,7 +84,7 @@
 	ds_pidx = (DataSource) envContext_pidx.lookup("jdbc/mysql");
 	conn_pidx = ds_pidx.getConnection();
 	stmt_pidx = conn_pidx.createStatement();
-	rs_pidx = stmt_pidx.executeQuery("select count(*)+1 from dksw_qna_board  where qa_pIdx=(select dkswMemberNo from dksw_department_professor where dkswDepartmentProfessorNameKo='"+ pf+"')  group by qa_writer");
+	rs_pidx = stmt_pidx.executeQuery("select count(*)+1 from dksw_qna_board  where qa_pIdx=(select dkswMemberNo from dksw_department_professor where dkswDepartmentProfessorNameKo='"+ pf+"') and qa_writer="+writerNo+"   group by qa_writer");
 	
  	
  	

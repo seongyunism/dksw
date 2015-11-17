@@ -12,16 +12,12 @@
 
 	<jsp:include page="../../commonHeader.jsp" flush="false" />
 	<script>
-		$(document).ready(function(){
-			$("#insert_cancel").bind("click",function(){
-				history.back();
-			});
-		
+	$(document).ready(function(){
+		$("#insert_cancel").bind("click",function(){
+			history.back();
 		});
-		$(document).ready(function() {
-			initializeLecture('${sessionScope.dkswMemberCategory}');
-		});
-
+	
+	});
 		
 	</script>
 <%
@@ -33,14 +29,33 @@ Connection conn = null;
 java.sql.Statement stmt = null;
 ResultSet rs = null;
 int mem_no = 0;
+int qa_idx = 0;
 
 
 int num = 0;
+String qa_title = null;
+String qa_pIdx = null;
+String qa_regDate = null;
+int qa_qIdx = 0;
+String qa_writer = null;
+String qa_contents = null;
+
+//답변완료를 위한 변수선언
+int qa_idx_endCheck = 0;
+
+//확인 체크를 위한 선언
+Context InitContext_upt = null;
+Context envContext_upt = null;
+DataSource ds_upt = null;
+Connection conn_upt = null;
+PreparedStatement pstmt_upt = null;
+ResultSet rs_upt = null;
+
+
 
 HttpSession sessionMember = request.getSession();
 num = Integer.parseInt(request.getParameter("aPIdx"));
 
-	
 %>
 </head>
 
@@ -57,34 +72,36 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
             </div>
         </div>
     </section>
-	<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8' || sessionScope.dkswMemberCategory == '6'}">
+<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8' || sessionScope.dkswMemberCategory == '6'}">
     <!-- Content Section  -->
     <section class="section">
         <div class="container">
             <div class="row">
-            	<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8'}">
+                <c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8'}">
                 <!-- Left Contents -->
                 <%
-                try {
-                	mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
-                	InitContext = new InitialContext();
-                	envContext = (Context) InitContext.lookup("java:comp/env");
-                	ds = (DataSource) envContext.lookup("jdbc/mysql");
-                	conn = ds.getConnection();
-                	stmt = conn.createStatement();
-                	rs = stmt.executeQuery("SELECT (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_writer =" +mem_no+ " and qa_qIdx= "+num);
-                		
-                	if(rs.next()){
-                	String qa_title = rs.getString("qa_title");
-                	String qa_pIdx = rs.getString("qa_pIdx");
-                	String qa_regDate = rs.getString("qa_regDate");
-                	String qa_qIdx = rs.getString("qa_qIdx");
-                	String qa_writer = rs.getString("qa_writer");
-                	String qa_contents = rs.getString("qa_contents");
+        		try {
+    				mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+    				InitContext = new InitialContext();
+    				envContext = (Context) InitContext.lookup("java:comp/env");
+    				ds = (DataSource) envContext.lookup("jdbc/mysql");
+    				conn = ds.getConnection();
+    				stmt = conn.createStatement();
+    				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_writer =" +mem_no+ " and qa_QA='Q' and qa_qIdx= "+num);
+    					
+    				if(rs.next()){
+    				qa_idx_endCheck = rs.getInt("qa_idx");
+    				qa_idx = rs.getInt("qa_idx");
+    				qa_title = rs.getString("qa_title");
+    				qa_pIdx = rs.getString("qa_pIdx");
+    				qa_regDate = rs.getString("qa_regDate");
+    				qa_qIdx = rs.getInt("qa_qIdx");
+    				qa_writer = rs.getString("qa_writer");
+    				qa_contents = rs.getString("qa_contents");
 
-                
-                %>
-           <div class="col-md-8 col-lg-9">
+    					
+                %>  
+                 <div class="col-md-8 col-lg-9">
 				<div class="row">
 					<div class="col-md-2">
 						<p class="bg-primary text-center">작성자</p>
@@ -96,7 +113,7 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 					<div class="col-md-2"><%=qa_regDate %></div>
 				</div>
 				<div class="row">
-					<div class="col-md-12"><h4><%=qa_title %></h4></div>
+					<div class="col-md-12"><h4><b><%=qa_title %></b></h4></div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -105,9 +122,12 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 						</div>
 					</div>
 				</div>
-				<%
+				<div><br/></div>
+				<div><br/></div>
+			<%
+	
 				
-	}
+			}
 				rs.close();
 				stmt.close();
 
@@ -127,16 +147,71 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				} catch (Exception e) {
 				}
 			}
+			
+			try {
+				mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+				InitContext = new InitialContext();
+				envContext = (Context) InitContext.lookup("java:comp/env");
+				ds = (DataSource) envContext.lookup("jdbc/mysql");
+				conn = ds.getConnection();
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_qIdx= "+num+" and qa_QA = 'A' order by qa_idx");
 
-				
+				while(rs.next()){
+				qa_idx = rs.getInt("qa_idx");
+				qa_title = rs.getString("qa_title");
+				qa_pIdx = rs.getString("qa_pIdx");
+				qa_regDate = rs.getString("qa_regDate");
+				qa_qIdx = rs.getInt("qa_qIdx");
+				qa_writer = rs.getString("qa_writer");
+				qa_contents = rs.getString("qa_contents");
 				
 				%>
-				
-				<div class="row">
+					<div class="panel panel-default">
+						<!-- Default panel contents -->
+						<div class="panel-heading"><%=qa_title %></div>
+						<div class="panel-body">
+							<p><%=qa_contents %></p>
+						</div>
+						<!-- Table -->
+						<table class="table">
+							<tr>
+								<th>작성자&nbsp&nbsp:&nbsp&nbsp<%=qa_writer %></th>
+								<th>작성일&nbsp&nbsp:&nbsp&nbsp<%=qa_regDate %></th>
+							</tr>
+						</table>
+					</div>
+				<%
+							
+				}
+							rs.close();
+							stmt.close();
+			
+						} catch (Exception e) {
+							out.println(e);
+			
+						} finally {
+							try {
+								if (stmt != null) {
+									stmt.close();
+								}
+							} catch (Exception e) {
+							}
+							try {
+								if (conn!= null)
+									conn.close();
+							} catch (Exception e) {
+							}
+						}
+			
+				%>
+					
+					<div class="row">
 					<div class="form-group" >
-								<div class="col-sm-2" style="float:right">
+								<div class="col-sm-4" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
-										<button type="button" class="btn btn-success default btn-sm">수정</button>
+										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글작성</button>
+										<button type="button" class="btn btn-primary default btn-sm" OnClick="window.location='qna_finish_accept.jsp?qa_idx=<%=qa_idx_endCheck%>'">질문완료</button>
 										<button type="button" class="btn btn-danger default btn-sm" id="insert_cancel">취소</button>
 									</div>
 								</div>
@@ -144,31 +219,53 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				</div>
 				
 		</div>
+				<%
+			 	
+				try {	
+					
+			 	 	//qa_aPIdx를 위한 선언
+			 		InitContext_upt = new InitialContext();
+			 		envContext_upt = (Context) InitContext_upt.lookup("java:comp/env");
+			 		ds_upt = (DataSource) envContext_upt.lookup("jdbc/mysql");
+			 		String query = "UPDATE dksw_qna_board SET qa_udtCheck_stu = 'N'  where qa_idx ="+qa_idx_endCheck+"";
+			 		conn_upt = ds_upt.getConnection();
+			 		pstmt_upt = conn_upt.prepareStatement(query);
+			 		pstmt_upt.executeUpdate();
+			 		
+			 		pstmt_upt.close();
+			 		conn_upt.close();
+			 	 	
+					} catch(SQLException e) {
+						out.println( e.toString() );
+					} 
+				
+				
+				%>
 		</c:if>
 		<c:if test="${sessionScope.dkswMemberCategory == '6'}">
                 <!-- Left Contents -->
                 <%
                 try {
-                	mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
-                	InitContext = new InitialContext();
-                	envContext = (Context) InitContext.lookup("java:comp/env");
-                	ds = (DataSource) envContext.lookup("jdbc/mysql");
-                	conn = ds.getConnection();
-                	stmt = conn.createStatement();
-                	rs = stmt.executeQuery("SELECT qa_idx,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_aPIdx= "+num);
-                		
-                	if(rs.next()){
-                	String qa_idx = rs.getString("qa_idx");
-                	String qa_title = rs.getString("qa_title");
-                	String qa_pIdx = rs.getString("qa_pIdx");
-                	String qa_regDate = rs.getString("qa_regDate");
-                	String qa_qIdx = rs.getString("qa_qIdx");
-                	String qa_writer = rs.getString("qa_writer");
-                	String qa_contents = rs.getString("qa_contents");
-
+    				mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+    				InitContext = new InitialContext();
+    				envContext = (Context) InitContext.lookup("java:comp/env");
+    				ds = (DataSource) envContext.lookup("jdbc/mysql");
+    				conn = ds.getConnection();
+    				stmt = conn.createStatement();
+    				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_QA='Q' and qa_aPIdx= "+num);
+    					
+    				if(rs.next()){
+    				qa_idx_endCheck = rs.getInt("qa_idx");
+    				qa_idx = rs.getInt("qa_idx");
+    				qa_title = rs.getString("qa_title");
+    				qa_pIdx = rs.getString("qa_pIdx");
+    				qa_regDate = rs.getString("qa_regDate");
+    				qa_qIdx = rs.getInt("qa_qIdx");
+    				qa_writer = rs.getString("qa_writer");
+    				qa_contents = rs.getString("qa_contents");
                 
                 %>
-           <div class="col-md-8 col-lg-9">
+                 <div class="col-md-8 col-lg-9">
 				<div class="row">
 					<div class="col-md-2">
 						<p class="bg-primary text-center">작성자</p>
@@ -178,9 +275,12 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 					<div class="col-md-2"><%=qa_pIdx %></div>
 					<div class="col-md-2" ><p class="bg-primary text-center">작성날짜</p></div>
 					<div class="col-md-2"><%=qa_regDate %></div>
+					<div></div>
+					<div></div>
+					<div></div>
 				</div>
 				<div class="row">
-					<div class="col-md-12"><h4><%=qa_title %></h4></div>
+					<div class="col-md-12"><h4><b><%=qa_title %></b></h4></div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -189,59 +289,138 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 						</div>
 					</div>
 				</div>
+				<div><br/></div>
+				<div><br/></div>
+			<%
 				
+			}
+				rs.close();
+				stmt.close();
+
+			} catch (Exception e) {
+				out.println(e);
+
+			} finally {
+				try {
+					if (stmt != null) {
+						stmt.close();
+					}
+				} catch (Exception e) {
+				}
+				try {
+					if (conn!= null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+			
+			try {
+				mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+				InitContext = new InitialContext();
+				envContext = (Context) InitContext.lookup("java:comp/env");
+				ds = (DataSource) envContext.lookup("jdbc/mysql");
+				conn = ds.getConnection();
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_aPIdx= "+num+" and qa_QA = 'A' order by qa_idx");
+					
+				while(rs.next()){
+				qa_idx = rs.getInt("qa_idx");
+				qa_title = rs.getString("qa_title");
+				qa_pIdx = rs.getString("qa_pIdx");
+				qa_regDate = rs.getString("qa_regDate");
+				qa_qIdx = rs.getInt("qa_qIdx");
+				qa_writer = rs.getString("qa_writer");
+				qa_contents = rs.getString("qa_contents");
 				
-				<div class="row">
+				%>
+					<div class="panel panel-default">
+						<!-- Default panel contents -->
+						<div class="panel-heading"><%=qa_title %></div>
+						<div class="panel-body">
+							<p><%=qa_contents %></p>
+						</div>
+						<!-- Table -->
+						<table class="table">
+							<tr>
+								<th>작성자&nbsp&nbsp:&nbsp&nbsp<%=qa_writer %></th>
+								<th>작성일&nbsp&nbsp:&nbsp&nbsp<%=qa_regDate %></th>
+							</tr>
+						</table>
+					</div>
+				<%
+							
+				}
+							rs.close();
+							stmt.close();
+			
+						} catch (Exception e) {
+							out.println(e);
+			
+						} finally {
+							try {
+								if (stmt != null) {
+									stmt.close();
+								}
+							} catch (Exception e) {
+							}
+							try {
+								if (conn!= null)
+									conn.close();
+							} catch (Exception e) {
+							}
+						}
+			
+				%>
+					
+					<div class="row">
 					<div class="form-group" >
 								<div class="col-sm-3" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
-										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글 작성</button>
+										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글작성</button>
 										<button type="button" class="btn btn-danger default btn-sm" id="insert_cancel">취소</button>
 									</div>
 								</div>
 					</div>
 				</div>
-							<%
-								}
-											rs.close();
-											stmt.close();
+				
+		</div>
+		<%
+		try {	
+			System.out.println(qa_idx_endCheck);
+	 	 	//qa_aPIdx를 위한 선언
+	 		InitContext_upt = new InitialContext();
+	 		envContext_upt = (Context) InitContext_upt.lookup("java:comp/env");
+	 		ds_upt = (DataSource) envContext_upt.lookup("jdbc/mysql");
+	 		String query = "UPDATE dksw_qna_board SET qa_udtCheck_pf = 'N'  where qa_idx ="+qa_idx_endCheck+"";
+	 		conn_upt = ds_upt.getConnection();
+	 		pstmt_upt = conn_upt.prepareStatement(query);
+	 		pstmt_upt.executeUpdate();
+	 		
+	 		pstmt_upt.close();
+	 		conn_upt.close();
+	 	 	
+			} catch(SQLException e) {
+				out.println( e.toString() );
+			} 
 
-										} catch (Exception e) {
-											out.println(e);
-
-										} finally {
-											try {
-												if (stmt != null) {
-													stmt.close();
-												}
-											} catch (Exception e) {
-											}
-											try {
-												if (conn != null)
-													conn.close();
-											} catch (Exception e) {
-											}
-										}
-							%>
-
-						</div>
+		%>
+		
 		</c:if>
-		
-		
-
 				<!-- Right Contents -->
-                <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
-                	<!-- Search Box -->
-                    <div class="simple-box ">
-					    <div class="input-group form-lg " role="search">
-					        <input type="text" class="form-control" placeholder="Find answer" />
-					        <span class="input-group-btn">
-					            <button class="btn btn-primary" title="Search" type="button">
-					                <i class="fa fa-search"></i>
-					            </button>
-					        </span>
-					    </div>
-					</div>
+				<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
+						<!-- Search Box -->
+					<form  method=post action="qna_search.jsp" class="form-inline">
+						<div class="simple-box ">
+							<div class="input-group form-lg " role="search">
+									<input type="text" class="form-control"
+										placeholder="Search Word" name="word" /> <span class="input-group-btn">
+										<button class="btn btn-primary" title="Search" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+										</span>
+							</div>
+						</div>
+					</form>
 					<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">

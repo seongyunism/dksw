@@ -142,9 +142,9 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				ds = (DataSource) envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_qIdx= "+num+" and qa_QA = 'A'");
+				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_qIdx= "+num+" and qa_QA = 'A' order by qa_idx");
 					
-				if(rs.next()){
+				while(rs.next()){
 				qa_idx = rs.getInt("qa_idx");
 				qa_title = rs.getString("qa_title");
 				qa_pIdx = rs.getString("qa_pIdx");
@@ -163,10 +163,8 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 						<!-- Table -->
 						<table class="table">
 							<tr>
-								<th>작성자&nbsp&nbsp:</th>
-								<th><%=qa_writer %></th>
-								<th>작성일&nbsp&nbsp:</th>
-								<th><%=qa_regDate %></th>
+								<th>작성자&nbsp&nbsp:&nbsp&nbsp<%=qa_writer %></th>
+								<th>작성일&nbsp&nbsp:&nbsp&nbsp<%=qa_regDate %></th>
 							</tr>
 						</table>
 					</div>
@@ -197,9 +195,8 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 					
 					<div class="row">
 					<div class="form-group" >
-								<div class="col-sm-3" style="float:right">
+								<div class="col-sm-1" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
-										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글작성</button>
 										<button type="button" class="btn btn-danger default btn-sm" id="insert_cancel">취소</button>
 									</div>
 								</div>
@@ -218,7 +215,7 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
     				ds = (DataSource) envContext.lookup("jdbc/mysql");
     				conn = ds.getConnection();
     				stmt = conn.createStatement();
-    				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_qIdx= "+num);
+    				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_aPIdx= "+num);
     					
     				if(rs.next()){
     				qa_idx = rs.getInt("qa_idx");
@@ -286,9 +283,9 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				ds = (DataSource) envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_qIdx= "+num+" and qa_QA = 'A' ");
+				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_aPIdx= "+num+" and qa_QA = 'A' order by qa_idx");
 					
-				if(rs.next()){
+				while(rs.next()){
 				qa_idx = rs.getInt("qa_idx");
 				qa_title = rs.getString("qa_title");
 				qa_pIdx = rs.getString("qa_pIdx");
@@ -307,10 +304,8 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 						<!-- Table -->
 						<table class="table">
 							<tr>
-								<th>작성자&nbsp&nbsp:</th>
-								<th><%=qa_writer %></th>
-								<th>작성일&nbsp&nbsp:</th>
-								<th><%=qa_regDate%></th>
+								<th>작성자&nbsp&nbsp:&nbsp&nbsp<%=qa_writer %></th>
+								<th>작성일&nbsp&nbsp:&nbsp&nbsp<%=qa_regDate %></th>
 							</tr>
 						</table>
 					</div>
@@ -341,9 +336,8 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 					
 					<div class="row">
 					<div class="form-group" >
-								<div class="col-sm-3" style="float:right">
+								<div class="col-sm-1" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
-										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글작성</button>
 										<button type="button" class="btn btn-danger default btn-sm" id="insert_cancel">취소</button>
 									</div>
 								</div>
@@ -353,18 +347,20 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 		</div>
 		</c:if>
 				<!-- Right Contents -->
-                <div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
-                	<!-- Search Box -->
-                    <div class="simple-box ">
-					    <div class="input-group form-lg " role="search">
-					        <input type="text" class="form-control" placeholder="Find answer" />
-					        <span class="input-group-btn">
-					            <button class="btn btn-primary" title="Search" type="button">
-					                <i class="fa fa-search"></i>
-					            </button>
-					        </span>
-					    </div>
-					</div>
+				<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
+						<!-- Search Box -->
+					<form  method=post action="qna_search.jsp" class="form-inline">
+						<div class="simple-box ">
+							<div class="input-group form-lg " role="search">
+									<input type="text" class="form-control"
+										placeholder="Search Word" name="word" /> <span class="input-group-btn">
+										<button class="btn btn-primary" title="Search" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+										</span>
+							</div>
+						</div>
+					</form>
 					<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">

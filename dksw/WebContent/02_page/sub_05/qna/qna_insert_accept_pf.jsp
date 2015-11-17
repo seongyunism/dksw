@@ -3,6 +3,14 @@
 <%@ page import="java.sql.*, javax.sql.*, javax.naming.*" %>
 <%@ page import="javax.sql.DataSource"%> 
 
+<script>
+$(document).ready(function() {
+	initializeLecture('${sessionScope.dkswMemberCategory}');
+});
+
+
+</script>
+
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -118,7 +126,7 @@
  		} catch (Exception e) {
  		}
  	}
- 	
+ 
  	try {	
  	 	//qa_aPIdx를 위한 선언
  		InitContext_upt = new InitialContext();
@@ -129,24 +137,61 @@
  		pstmt_upt = conn_upt.prepareStatement(query);
  		pstmt_upt.executeUpdate();
  		
- 	 	}
- 		 catch (Exception e) {
- 			
- 			
- 		} finally {
- 			try {
- 				if (stmt_get != null)
- 					stmt_get.close();
- 			} catch (Exception e) {
- 			}
- 			try {
- 				if (conn_get != null)
- 					conn_get.close();
- 			} catch (Exception e) {
- 			}
- 		}
+ 		pstmt_upt.close();
+ 		conn_upt.close();
+ 	 	
+		} catch(SQLException e) {
+			out.println( e.toString() );
+		} 
+		
  	
- %>
+ %>	
+<script>
+ <c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8'}">
+ 	<%
+	try {	
+ 	InitContext_upt = new InitialContext();
+	envContext_upt = (Context) InitContext_upt.lookup("java:comp/env");
+	ds_upt = (DataSource) envContext_upt.lookup("jdbc/mysql");
+	String query = "UPDATE dksw_qna_board SET qa_udtCheck_pf = 'Y'  where qa_idx ="+qa_idx+"";
+	conn_upt = ds_upt.getConnection();
+	pstmt_upt = conn_upt.prepareStatement(query);
+	pstmt_upt.executeUpdate();
+	
+	pstmt_upt.close();
+ 	conn_upt.close();
+ 	 	
+		} catch(SQLException e) {
+			out.println( e.toString() );
+		} 
+		
+ 	%>
+ </c:if>
+ 
+ <c:if test="${sessionScope.dkswMemberCategory == '6'}">
+	<%
+	try {	
+	InitContext_upt = new InitialContext();
+	envContext_upt = (Context) InitContext_upt.lookup("java:comp/env");
+	ds_upt = (DataSource) envContext_upt.lookup("jdbc/mysql");
+	String query = "UPDATE dksw_qna_board SET qa_udtCheck_stu = 'Y'  where qa_idx ="+qa_idx+"";
+	conn_upt = ds_upt.getConnection();
+	pstmt_upt = conn_upt.prepareStatement(query);
+	pstmt_upt.executeUpdate();
+	
+	pstmt_upt.close();
+	conn_upt.close();
+	 	
+		} catch(SQLException e) {
+			out.println( e.toString() );
+		} 
+		
+	%>
+</c:if>
+ 
+</script>
+ 
+ 
 <script type="text/javascript" >
 //입력완료시 알림창으로 알림 후 게시판 으로 이동
    self.window.alert("입력한 글을 저장하였습니다.");
