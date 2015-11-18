@@ -48,9 +48,11 @@ public class BoardController extends HttpServlet {
 			deletePost(req, res);
 		} else if(action.equals("getBoardNewsListData")) {
 			getBoardNewsListData(req, res);
+		} else if(action.equals("sendPush")) {
+			sendPush(req, res);
 		}
 	}
-	
+
 	private void writePost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 		int checkModifyPost = 0;
@@ -388,5 +390,15 @@ public class BoardController extends HttpServlet {
 		} catch (IOException ie) {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
+	}
+	
+	// 게시판에서 푸시 발송하기
+	private void sendPush(HttpServletRequest req, HttpServletResponse res) {
+
+	
+	
+	
+	
+	
 	}
 }

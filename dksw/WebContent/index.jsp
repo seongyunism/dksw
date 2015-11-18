@@ -60,7 +60,7 @@
     <!-- Breaking news -->
 	<section class="section">
         <div class="container">
-            <h2 class="lg-title lg-title-border">Lastest News</h2>
+            <h2 class="lg-title lg-title-border">Latest News</h2>
             <div class="row" id="dkswBoardNews"></div>
         </div>
     </section>

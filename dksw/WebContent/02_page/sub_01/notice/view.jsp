@@ -72,6 +72,9 @@
 	            <div class="space"></div>
 	            
 	            <c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '2' || sessionScope.dkswMemberCategory == '5'}">        
+		            <div class="btn btn-primary pull-left margin_left_5" onclick="sendPush('<%=postNo%>')">
+		            	<i class="fa fa-bell"></i>푸시 발송
+		            </div>
 		            <div class="btn btn-primary pull-right margin_left_5" onclick="deletePost()">
 		            	<i class="fa fa-trash-o"></i>삭제
 		            </div>

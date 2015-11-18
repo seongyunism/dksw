@@ -299,3 +299,24 @@ function getNews(){
 	return false;
 	
 }
+
+function sendPush(no) {
+	var action = "/dksw/board?action=sendPush";
+	var form_data = {
+		inputPostNo : no
+	};
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : form_data,
+		dataType : "text",
+		success: function(response) {
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});
+		
+	return false;
+}
