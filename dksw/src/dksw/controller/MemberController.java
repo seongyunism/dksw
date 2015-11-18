@@ -315,6 +315,43 @@ public class MemberController extends HttpServlet {
 		}
 	}
 	
+	// 모바일 회원 정보 (회원번호)
+		private void getMember_mobile(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+			Member checkMember = null;
+			JSONObject jObject = null;
+
+			try {
+				int inputMemberNo = (req.getParameter("inputMemberNo") != null) ? Integer.parseInt(req.getParameter("inputMemberNo")) : null;
+
+				checkMember = MemberDAO.getMember(inputMemberNo);
+
+				jObject = new JSONObject();
+				jObject.put("dkswMemberNo", checkMember.getDkswMemberNo());
+				jObject.put("dkswMemberCategory", checkMember.getDkswMemberCategory());
+				jObject.put("dkswMemberEmail", checkMember.getDkswMemberEmail());
+				jObject.put("dkswMemberPassword", checkMember.getDkswMemberPassword());
+				jObject.put("dkswMemberStudentNo", checkMember.getDkswMemberStudentNo());
+				jObject.put("dkswMemberName", checkMember.getDkswMemberName());
+				jObject.put("dkswMemberSNS", checkMember.getDkswMemberSNS());
+				jObject.put("dkswMemberOnlineAuth", checkMember.getDkswMemberOnlineAuth());
+				jObject.put("dkswMemberOnlineAuthCode", checkMember.getDkswMemberOnlineAuthCode());
+				jObject.put("dkswMemberOfflineAuthCode", checkMember.getDkswMemberOfflineAuthCode());
+				jObject.put("dkswMemberJoinDate", checkMember.getDkswMemberJoinDate());
+				jObject.put("dkswMemberAdminAuth", checkMember.getDkswMemberAdminAuth());
+				
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+			
+				res.getWriter().write(jObject.toString());
+					
+			} catch (SQLException se) {
+				req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+			} catch (IOException ie) {
+				req.setAttribute("errorMsg", "ERROR : IO ERROR");
+			}
+		}
+	
 	// 모바일 토큰 관리
 	private void getMemberToken_mobile(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
