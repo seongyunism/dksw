@@ -45,14 +45,13 @@
 		
 			<p class="page-law-title text-center text-bold">한국IBM 산학협력프로그램 모집요강(06.02 update)</p>
 			<div class="space"></div>
-			<img src="../../../04_upload/files/sub_04/sanhak/IBM.jpg" />
+			<img src="../../../04_upload/files/sub_04/sanhak/IBM.jpg" width="800" height="450" />
 			<div class="space"></div>
 			
 
 			<div class="page-law-content">
 				<p class="page-law-content-jo">IBM 산학협력 프로그램 추가 지원가능 기간을 6월 5일(금)까지 연장합니다 .</p>
 				<p class="page-law-content-jo">가능한 많은 학생 선발 예정이며, 영어는 단순한 레벨 테스트로 너무 걱정하지 않아도 됩니다.</p>
-				<p class="page-law-content-jo">가능한 많은 학생 선발 예정이며, 영어는 단순한 레벨 테스트로 너무 걱정하지 않아도 됩니다. </p>
 				<p class="page-law-content-jo"> 추가 지원 학생들은 박규식 교수(kspark@dankook.ac.kr) 또는 미디어센터 414호로 직접 방문하기 바랍니다.</p>
 				<p class="page-law-content-jo">한국IBM 산학협력프로그램 모집요강에 대하여 아래와 같이 추가 및 재공지합니다. </p>
 				<p class="page-law-content-jo">소프트웨어학과 학부생 여러분의 많은 관심 바랍니다</p>
@@ -139,9 +138,6 @@
 				</ul>
 			</div>
 			
-			<div class="page-law-content">
-				<p class="page-law-content-jo">자세한 사항은 첨부된 문서를 참고해주세요.</p>
-			</div>
 			
 		</div>
     </section>

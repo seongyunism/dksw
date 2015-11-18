@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.json.simple.JSONObject;
 
 import dksw.model.MemberDAO;
+import dksw.model.MemberTokenDAO;
 import dksw.model.domain.Member;
 import dksw.util.AppPushUtil;
 import dksw.util.EmailUtil;
@@ -43,6 +45,10 @@ public class MemberController extends HttpServlet {
 			loginMember(req, res);
 		} else if(action.equals("logoutMember")) {
 			logoutMember(req, res);
+		} else if(action.equals("loginMember_mobile")){
+			loginMember_mobile(req, res);
+		}else if(action.equals("getMemberToken_mobile")){
+			getMemberToken_mobile(req, res);
 		}
 	}
 
@@ -268,6 +274,69 @@ public class MemberController extends HttpServlet {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	// 모바일 회원 로그인 정보
+	private void loginMember_mobile(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		Member checkMember = null;
+		JSONObject jObject = null;
+
+		try {
+			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
+			String inputMemberPassword = (req.getParameter("inputMemberPassword") != null) ? req.getParameter("inputMemberPassword") : null;
+
+			checkMember = MemberDAO.checkLoginMember(inputMemberEmail, inputMemberPassword);
+
+			jObject = new JSONObject();
+			jObject.put("dkswMemberNo", checkMember.getDkswMemberNo());
+			jObject.put("dkswMemberCategory", checkMember.getDkswMemberCategory());
+			jObject.put("dkswMemberEmail", checkMember.getDkswMemberEmail());
+			jObject.put("dkswMemberPassword", checkMember.getDkswMemberPassword());
+			jObject.put("dkswMemberStudentNo", checkMember.getDkswMemberStudentNo());
+			jObject.put("dkswMemberName", checkMember.getDkswMemberName());
+			jObject.put("dkswMemberSNS", checkMember.getDkswMemberSNS());
+			jObject.put("dkswMemberOnlineAuth", checkMember.getDkswMemberOnlineAuth());
+			jObject.put("dkswMemberOnlineAuthCode", checkMember.getDkswMemberOnlineAuthCode());
+			jObject.put("dkswMemberOfflineAuthCode", checkMember.getDkswMemberOfflineAuthCode());
+			jObject.put("dkswMemberJoinDate", checkMember.getDkswMemberJoinDate());
+			jObject.put("dkswMemberAdminAuth", checkMember.getDkswMemberAdminAuth());
+			
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+		
+			res.getWriter().write(jObject.toString());
+				
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
+	// 모바일 토큰 관리
+	private void getMemberToken_mobile(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		boolean checkToken;
+		JSONObject jObject = null;
+
+		try {
+			int inputMemberNo = (req.getParameter("inputMemberNo") != null) ? Integer.parseInt(req.getParameter("inputMemberNo")) :null ;
+			int inputMemberTokenDevice = (req.getParameter("inputMemberTokenDevice") != null) ? Integer.parseInt(req.getParameter("inputMemberTokenDevice")) : null;
+			long inputMemberTokenDate = (req.getParameter("inputMemberTokenDate") != null) ? Long.parseLong(req.getParameter("inputMemberTokenDate")) : null;
+			String inputMemberTokenKey = (req.getParameter("inputMemberTokenKey") != null) ? req.getParameter("inputMemberTokenKey") : null;
+			
+			checkToken = MemberTokenDAO.checkMemberToken(inputMemberNo, inputMemberTokenDevice, inputMemberTokenDate, inputMemberTokenKey);
+		
+			if(checkToken)
+				res.getWriter().write("OK");
+			else res.getWriter().write("Fail");
+				
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
 }
