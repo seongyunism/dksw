@@ -49,6 +49,8 @@ public class MemberController extends HttpServlet {
 			loginMember_mobile(req, res);
 		}else if(action.equals("getMemberToken_mobile")){
 			getMemberToken_mobile(req, res);
+		}else if(action.equals("getMember_mobile")){
+			getMember_mobile(req, res);
 		}
 	}
 
