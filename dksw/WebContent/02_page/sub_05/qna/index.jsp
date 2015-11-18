@@ -131,8 +131,8 @@
 																	int ct_end = rs_ct.getInt(2);
 																	float bar = (float) ct_end / ((float) ct_ing + (float) ct_end) * 100;
 												%>
-												<a href="./qna_ing.jsp">진행중 <span class="badge"><%=ct_ing%></span></a>
-												<a href="./qna_end.jsp">완료 <span class="badge"><%=ct_end%></span></a>
+												<a href="./qna_ing.jsp?index_num=1">진행중 <span class="badge"><%=ct_ing%></span></a>
+												<a href="./qna_end.jsp?index_num=1">완료 <span class="badge"><%=ct_end%></span></a>
 											</div>
 											<div class="progress">
 												<div class="progress-bar" role="progressbar"
@@ -258,7 +258,7 @@
 																	if (num_ing >= 4) {
 														%>
 														<button type="button"
-															class="btn btn-primary btn-lg btn-block" onclick ="window.location ='qna_ing.jsp'">게시글 더 보기</button>
+															class="btn btn-primary btn-lg btn-block" onclick ="window.location ='qna_ing.jsp?index_num=1'">게시글 더 보기</button>
 														<%
 															}
 														%>
@@ -346,7 +346,7 @@
 																	if (num_end >= 4) {
 														%>
 														<tr>
-															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_end.jsp'">게시글
+															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_end.jsp?index_num=1'">게시글
 																더 보기</button>
 														</tr>
 													</tbody>
@@ -400,8 +400,8 @@
 																	float bar = (float) ct_end
 																			/ ((float) ct_ing + (float) ct_end) * 100;
 												%>
-												<a href="./qna_ing.jsp">진행중 <span class="badge"><%=ct_ing%></span></a>
-												<a href="./qna_end.jsp">완료 <span class="badge"><%=ct_end%></span></a>
+												<a href="./qna_ing.jsp?index_num=1">진행중 <span class="badge"><%=ct_ing%></span></a>
+												<a href="./qna_end.jsp?index_num=1">완료 <span class="badge"><%=ct_end%></span></a>
 											</div>
 											<div class="progress">
 												<div class="progress-bar" role="progressbar"
@@ -470,7 +470,7 @@
 																			String qa_udtCheck_pf = rs_ing.getString("qa_udtCheck_pf");
 																			
 																			if(qa_udtCheck_pf.equals("Y")){
-																				System.out.println(qa_aPIdx_ing);
+																			
 														%>
 														<tr>
 															<th scope="row"><%=num_ing%></th>
@@ -523,7 +523,7 @@
 																	if (num_ing >= 4) {
 														%>
 														<tr>
-															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_ing.jsp'">게시글
+															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_ing.jsp?index_num=1'">게시글
 																더 보기</button>
 														</tr>
 													</tbody>
@@ -616,7 +616,7 @@
 																	if (num_end >= 4) {
 														%>
 														<tr>
-															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_end.jsp'">게시글
+															<button type="button" class="btn btn-info btn-block" onclick="window.location = 'qna_end.jsp?index_num=1'">게시글
 																더 보기</button>
 														</tr>
 													</tbody>
@@ -639,7 +639,7 @@
 					<!-- Right Contents -->
 					<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
 						<!-- Search Box -->
-					<form  method=post action="qna_search.jsp" class="form-inline">
+					<form  method=post action="qna_search.jsp?index_num=1" class="form-inline">
 						<div class="simple-box ">
 							<div class="input-group form-lg " role="search">
 									<input type="text" class="form-control"
@@ -657,9 +657,9 @@
 								<li><i class="fa fa-angle-right fa-fw"></i><a
 									href="./index.jsp" title="Category Business">메인</a></li>
 								<li><i class="fa fa-angle-right fa-fw"></i><a
-									href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
+									href="./qna_ing.jsp?index_num=1" title="Category Business">답변 진행중</a></li>
 								<li><i class="fa fa-angle-right fa-fw"></i><a
-									href="./qna_end.jsp" title="Category photos">답변 완료</a></li>
+									href="./qna_end.jsp?index_num=1" title="Category photos">답변 완료</a></li>
 							</ul>
 						</div>
 

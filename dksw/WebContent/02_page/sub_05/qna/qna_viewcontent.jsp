@@ -155,7 +155,7 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				ds = (DataSource) envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_qIdx= "+num+" and qa_QA = 'A' order by qa_idx");
+				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_writer =" +mem_no+ " and  qa_qIdx= "+num+" and qa_QA = 'A' order by qa_idx");
 
 				while(rs.next()){
 				qa_idx = rs.getInt("qa_idx");
@@ -321,7 +321,7 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				ds = (DataSource) envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_aPIdx= "+num+" and qa_QA = 'A' order by qa_idx");
+				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_aPIdx= "+num+" and qa_QA = 'A' order by qa_idx");
 					
 				while(rs.next()){
 				qa_idx = rs.getInt("qa_idx");
@@ -386,7 +386,6 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 		</div>
 		<%
 		try {	
-			System.out.println(qa_idx_endCheck);
 	 	 	//qa_aPIdx를 위한 선언
 	 		InitContext_upt = new InitialContext();
 	 		envContext_upt = (Context) InitContext_upt.lookup("java:comp/env");
@@ -409,7 +408,7 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				<!-- Right Contents -->
 				<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
 						<!-- Search Box -->
-					<form  method=post action="qna_search.jsp" class="form-inline">
+					<form  method=post action="qna_search.jsp?index_num=1" class="form-inline">
 						<div class="simple-box ">
 							<div class="input-group form-lg " role="search">
 									<input type="text" class="form-control"
@@ -425,8 +424,8 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">
 					    	<li><i class="fa fa-angle-right fa-fw"></i><a href="./index.jsp" title="Category Business">메인</a></li>
-					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
-					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp" title="Category photos">답변 완료</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp?index_num=1" title="Category Business">답변 진행중</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp?index_num=1" title="Category photos">답변 완료</a></li>
 					    </ul>
 					</div>
 

@@ -154,7 +154,7 @@ try {
 				<!-- Right Contents -->
 				<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
 						<!-- Search Box -->
-					<form  method=post action="qna_search.jsp" class="form-inline">
+					<form  method=post action="qna_search.jsp?index_num=1" class="form-inline">
 						<div class="simple-box ">
 							<div class="input-group form-lg " role="search">
 									<input type="text" class="form-control"
@@ -170,8 +170,8 @@ try {
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">
 					    	<li><i class="fa fa-angle-right fa-fw"></i><a href="./index.jsp" title="Category Business">메인</a></li>
-					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
-					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp" title="Category photos">답변 완료</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp?index_num=1" title="Category Business">답변 진행중</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp?index_num=1" title="Category photos">답변 완료</a></li>
 					    </ul>
 					</div>
 

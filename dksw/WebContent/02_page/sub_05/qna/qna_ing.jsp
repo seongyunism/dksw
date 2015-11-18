@@ -34,7 +34,19 @@ String sql = "";
 int mem_no = 0;//멤버넘버 저장 변수
 HttpSession sessionMember = request.getSession();
 
+//페이지응 변수 선언
+Context InitContext_ct = null;
+Context envContext_ct = null;
+DataSource ds_ct = null;
+Connection conn_ct = null;
+java.sql.Statement stmt_ct = null;
+ResultSet rs_ct = null;
 
+int index_num = Integer.parseInt(request.getParameter("index_num"));
+int total_page_num = 0;
+int cp_num = 0;
+int ct_index = 0;
+int break_num = 0;
 %>
 
 <body>
@@ -79,6 +91,40 @@ HttpSession sessionMember = request.getSession();
 								<%
 								try {
 									mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+									InitContext_ct = new InitialContext();
+									envContext_ct = (Context) InitContext_ct.lookup("java:comp/env");
+									ds_ct = (DataSource) envContext_ct.lookup("jdbc/mysql");
+									conn_ct = ds_ct.getConnection();
+									stmt_ct = conn_ct.createStatement();
+									rs_ct = stmt_ct.executeQuery("Select count(*) ct from dksw_qna_board where qa_endCheck = 'N' and qa_QA = 'Q' and qa_writer="+mem_no+"");
+								
+								if(rs_ct.next()){
+									total_page_num = rs_ct.getInt("ct");
+								}
+								rs_ct.close();
+								stmt_ct.close();
+
+
+								} catch (Exception e) {
+									out.println(e);
+									
+								} finally {
+									try {
+										if (stmt_ct != null)
+											stmt_ct.close();
+									} catch (Exception e) {
+									}
+									try {
+										if (conn_ct != null)
+											conn_ct.close();
+									} catch (Exception e) {
+									}
+								}
+								
+								cp_num  = ((index_num-1)*10);
+								
+								try {
+									mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
 									InitContext = new InitialContext();
 									envContext = (Context) InitContext.lookup("java:comp/env");
 									ds = (DataSource) envContext.lookup("jdbc/mysql");
@@ -89,12 +135,14 @@ HttpSession sessionMember = request.getSession();
 								
 								
 								while (rs.next()) {
+									if(ct_index>=cp_num){
 									String qa_title = rs.getString("qa_title");
 									String qa_pIdx = rs.getString("qa_pIdx");
 									String qa_regDate = rs.getString("qa_regDate");
 									String qa_qIdx = rs.getString("qa_qIdx");
 									String qa_udtCheck_stu = rs.getString("qa_udtCheck_stu");
 									num++;
+									break_num++;
 									
 									if(qa_udtCheck_stu.equals("Y")){
 										
@@ -116,8 +164,13 @@ HttpSession sessionMember = request.getSession();
 										<td><%=qa_regDate %></td>
 									</tr>
 									<%	
+										}
 									}
+									ct_index++;
 									
+									if(break_num>=10){
+										break;
+									}
 									
 									}
 										rs.close();
@@ -143,8 +196,40 @@ HttpSession sessionMember = request.getSession();
 								</tbody>
 							</table>
 						</div>
+							<nav>
+						  	<ul class="pager">
+						    	<li id="prev"><a id="prev_a" href="qna_ing.jsp?index_num=<%=index_num-1%>">이전</a></li>
+						    	<li id="next"><a id="next_a" href="qna_ing.jsp?index_num=<%=index_num+1%>">다음</a></li>
+						 	</ul>
+						</nav>
 					</div>
-				</div>
+					</div>
+				<%
+				int page_index = (total_page_num-1)/10 + 1;
+				
+				if(index_num==1){
+				%>
+				<script>
+				var prev = document.getElementById("prev");
+				var pev_a = document.getElementById("prev_a");
+				prev.setAttribute('class','disabled');
+				prev_a.setAttribute('href','#');
+				
+				</script>
+				<%
+				}
+				if(index_num==page_index){
+				%>
+				<script>
+				var next = document.getElementById("next");
+				var next_a = document.getElementById("next_a");
+				next.setAttribute('class','disabled');
+				next_a.setAttribute('href','#');
+				
+				</script>
+				<%
+				}
+				%>
                 </c:if>
                 
                 <c:if test="${sessionScope.dkswMemberCategory == '6'}">				
@@ -172,6 +257,41 @@ HttpSession sessionMember = request.getSession();
 								<%
 								try {
 									mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
+									InitContext_ct = new InitialContext();
+									envContext_ct = (Context) InitContext_ct.lookup("java:comp/env");
+									ds_ct = (DataSource) envContext_ct.lookup("jdbc/mysql");
+									conn_ct = ds_ct.getConnection();
+									stmt_ct = conn_ct.createStatement();
+									rs_ct = stmt_ct.executeQuery("Select count(*) ct from dksw_qna_board where qa_endCheck = 'N' and qa_QA = 'Q' and qa_pIdx="+mem_no+"");
+								
+								if(rs_ct.next()){
+									total_page_num = rs_ct.getInt("ct");
+								}
+								rs_ct.close();
+								stmt_ct.close();
+
+
+								} catch (Exception e) {
+									out.println(e);
+									
+								} finally {
+									try {
+										if (stmt_ct != null)
+											stmt_ct.close();
+									} catch (Exception e) {
+									}
+									try {
+										if (conn_ct != null)
+											conn_ct.close();
+									} catch (Exception e) {
+									}
+								}
+								
+								cp_num  = ((index_num-1)*10);
+
+								
+								try {
+									mem_no  = Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString());
 									InitContext = new InitialContext();
 									envContext = (Context) InitContext.lookup("java:comp/env");
 									ds = (DataSource) envContext.lookup("jdbc/mysql");
@@ -180,17 +300,17 @@ HttpSession sessionMember = request.getSession();
 									rs = stmt.executeQuery("Select Qa_title,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo ) qa_writer, qa_regDate, qa_aPIdx, qa_udtCheck_pf from dksw_qna_board qa_b where qa_endCheck = 'N' and qa_QA = 'Q' and qa_pIdx="+mem_no+" order by qa_aPIdx DESC");
 								
 								while (rs.next()) {
+									if(ct_index>=cp_num){
 									String qa_title = rs.getString("qa_title");
 									String qa_pIdx = rs.getString("qa_writer");
 									String qa_regDate = rs.getString("qa_regDate");
 									String qa_qIdx = rs.getString("qa_aPIdx");
 									String qa_udtCheck_pf = rs.getString("qa_udtCheck_pf");
-									
 									num++;
-										
-									if(qa_udtCheck_pf.equals("Y")){
-										
+									break_num++;
 									
+									if(qa_udtCheck_pf.equals("Y")){
+
 								%>
 									<tr>
 										<th scope="row"><%=num %></th>
@@ -211,7 +331,13 @@ HttpSession sessionMember = request.getSession();
 									</tr>
 									<%
 									}
+									}
+									ct_index++;
 									
+									if(break_num>=10){
+										break;
+									}
+								
 									
 									}
 										rs.close();
@@ -237,14 +363,49 @@ HttpSession sessionMember = request.getSession();
 								</tbody>
 							</table>
 						</div>
+						<nav>
+						  	<ul class="pager">
+						    	<li id="prev"><a id="prev_a" href="qna_ing.jsp?index_num=<%=index_num-1%>">이전</a></li>
+						    	<li id="next"><a id="next_a" href="qna_ing.jsp?index_num=<%=index_num+1%>">다음</a></li>
+						 	</ul>
+						</nav>
 					</div>
-				</div>
+					</div>
+				<%
+				int page_index = (total_page_num-1)/10 + 1;
+				
+				if(index_num==1){
+				%>
+				<script>
+				var prev = document.getElementById("prev");
+				var pev_a = document.getElementById("prev_a");
+				prev.setAttribute('class','disabled');
+				prev_a.setAttribute('href','#');
+				
+				</script>
+				<%
+				}
+				if(index_num==page_index){
+				%>
+				<script>
+				var next = document.getElementById("next");
+				var next_a = document.getElementById("next_a");
+				next.setAttribute('class','disabled');
+				next_a.setAttribute('href','#');
+				
+				</script>
+				<%
+				}
+				%>
+
+
+
                 </c:if>
                 
                 <!-- Right Contents -->
 				<div class="col-md-4 col-lg-3 hidden-sm hidden-xs">
 						<!-- Search Box -->
-					<form  method=post action="qna_search.jsp" class="form-inline">
+					<form  method=post action="qna_search.jsp?index_num=1" class="form-inline">
 						<div class="simple-box ">
 							<div class="input-group form-lg " role="search">
 									<input type="text" class="form-control"
@@ -260,8 +421,8 @@ HttpSession sessionMember = request.getSession();
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">
 					    	<li><i class="fa fa-angle-right fa-fw"></i><a href="./index.jsp" title="Category Business">메인</a></li>
-					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp" title="Category Business">답변 진행중</a></li>
-					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp" title="Category photos">답변 완료</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_ing.jsp?index_num=1" title="Category Business">답변 진행중</a></li>
+					        <li><i class="fa fa-angle-right fa-fw"></i><a href="./qna_end.jsp?index_num=1" title="Category photos">답변 완료</a></li>
 					    </ul>
 					</div>
 
