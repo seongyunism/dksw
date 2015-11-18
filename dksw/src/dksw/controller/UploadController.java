@@ -110,8 +110,6 @@ public class UploadController extends HttpServlet {
 								File file = new File(realUploadPath);
 								file.mkdir();
 								
-								System.out.println(contextUploadPath);
-
 							} else { // 회원이지만 허가된 사용자가 아님
 								System.out.println("ERROR : 허가된 사용자 아님");
 								return;
@@ -166,7 +164,7 @@ public class UploadController extends HttpServlet {
 				if(boardQueryCheck) {
 					res.setCharacterEncoding("UTF-8");
 					res.getWriter().write("업로드가 완료되었습니다.");
-//					res.sendRedirect("index.jsp");
+					res.setHeader("Refresh", "3; URL=04_upload/upload.jsp");
 				}			
 				
 			} else {

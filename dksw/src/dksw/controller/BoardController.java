@@ -174,6 +174,7 @@ public class BoardController extends HttpServlet {
 			jObject.put("dkswMemberNo", post.getDkswMemberNo());	
 			jObject.put("dkswMemberName", MemberDAO.getMember(post.getDkswMemberNo()).getDkswMemberName());
 			jObject.put("dkswBoardWriteDate", UnixTimeConvertor.toConvertTimeFromUnixTime(post.getDkswBoardWriteDate()));
+			jObject.put("dkswBoardWriteDate_m", (Long)post.getDkswBoardWriteDate());
 			jObject.put("dkswBoardReadnum", post.getDkswBoardReadnum());
 			jObject.put("dkswBoardTitle", post.getDkswBoardTitle());
 					
@@ -241,6 +242,7 @@ public class BoardController extends HttpServlet {
 				temp.put("dkswBoardCategory", posts.get(i).getDkswBoardCategory());
 				temp.put("dkswMemberNo", posts.get(i).getDkswMemberNo());
 				temp.put("dkswBoardWriteDate", UnixTimeConvertor.toConvertTimeFromUnixTime(posts.get(i).getDkswBoardWriteDate()));
+				temp.put("dkswBoardWriteDate_m", (Long)posts.get(i).getDkswBoardWriteDate());
 				temp.put("dkswBoardReadnum", posts.get(i).getDkswBoardReadnum());
 				temp.put("dkswBoardTitle", posts.get(i).getDkswBoardTitle());
 				
@@ -307,6 +309,7 @@ public class BoardController extends HttpServlet {
 				temp.put("dkswBoardCategory", posts.get(i).getDkswBoardCategory());
 				temp.put("dkswMemberNo", posts.get(i).getDkswMemberNo());
 				temp.put("dkswBoardWriteDate", UnixTimeConvertor.toConvertTimeFromUnixTime(posts.get(i).getDkswBoardWriteDate()));
+				temp.put("dkswBoardWriteDate_m", (Long)posts.get(i).getDkswBoardWriteDate());
 				temp.put("dkswBoardReadnum", posts.get(i).getDkswBoardReadnum());
 				temp.put("dkswBoardTitle", posts.get(i).getDkswBoardTitle());
 				
