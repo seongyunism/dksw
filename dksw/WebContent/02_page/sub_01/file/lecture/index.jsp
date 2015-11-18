@@ -40,7 +40,7 @@
         </div>
     </section>
 
-     <section class="section"  style="min-height:500px;">
+	<section class="section"  style="min-height:500px;">
 
 		<!-- 교수 페이지 -->
        	<c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '6'}">   

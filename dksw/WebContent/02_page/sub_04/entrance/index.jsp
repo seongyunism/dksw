@@ -42,99 +42,93 @@
     <section class="section-lg">
 		<div class="container-sm">
 		
-			<p class="page-law-title text-center text-bold">수시</p>
+			<p class="page-law-title text-center text-bold">수시 모집</p>
 			<div class="space"></div>
 			
 
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●모집시기</p>
+				<p class="page-law-content-jo">모집시기</p>
 				<ul class="page-law-content-hang">
 					<li>매년 9월 초에 서류접수가 시작됩니다. 자세한 공지는 단국대학교 홈페이지에서 확인 가능 합니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●지원자격</p>
+				<p class="page-law-content-jo">지원자격</p>
 				<ul class="page-law-content-hang">
 					<li>지원자격에 따라 학생부교과우수자, 특성화고졸재직자, 고른기회학생, 특성화고졸재직자 등에 지원할 수 있습니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●지원서 접수</p>
+				<p class="page-law-content-jo">지원서 접수</p>
 				<ul class="page-law-content-hang">
 					<li>온라인이나 팩스를 통해 접수되며 전형에따라 제출서류들을 제출하여야합니다. 제출서류는 단국대학교 홈페이지 수시란을 참고하시기 바랍니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●선발 방식</p>
+				<p class="page-law-content-jo">선발 방식</p>
 				<ul class="page-law-content-hang">
 					<li>항목에 따라, 서류, 논술, 면접 등을 통하여 이루어집니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●합격자 발표</p>
+				<p class="page-law-content-jo">합격자 발표</p>
 				<ul class="page-law-content-hang">
 					<li>단국대학교 홈페이지를 통해 각 전형별로 11~12월에 발표됩니다.</li>
 				</ul>
 			</div>
 			
-			<div class="page-law-content">
-				<p class="page-law-content-jo">●비고</p>
-				<ul class="page-law-content-hang">
-					<li>정확한 내용은 단국대학교 홈페이지를 참고하시기 바랍니다.(http://www.dankook.ac.kr)</li>
-				</ul>
-			</div>
-			
 			<div class="space"></div>
 			<div class="space"></div>
 			<div class="space"></div>
 			
-			<p class="page-law-title text-center text-bold">정시</p>
+			<p class="page-law-title text-center text-bold">정시 모집</p>
 			<div class="space"></div>
 			
 
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●모집시기</p>
+				<p class="page-law-content-jo">모집시기</p>
 				<ul class="page-law-content-hang">
 					<li>매년 12월 중순쯤에 서류접수가 시작됩니다. 자세한 공지는 단국대학교 홈페이지에서 확인 가능 합니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●지원자격</p>
+				<p class="page-law-content-jo">지원자격</p>
 				<ul class="page-law-content-hang">
 					<li>지원자격에 따라 일반학생(수능, 실기), 특수교육대상자, 기회균형선발, 농어촌 학생 등에 지원할 수 있습니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●지원서 접수</p>
+				<p class="page-law-content-jo">지원서 접수</p>
 				<ul class="page-law-content-hang">
 					<li>온라인이나 팩스를 통해 접수되며 전형에따라 제출서류들을 제출하여야합니다. 제출서류는 단국대학교 홈페이지 정시란을 참고하시기 바랍니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●선발 방식</p>
+				<p class="page-law-content-jo">선발 방식</p>
 				<ul class="page-law-content-hang">
 					<li>항목에 따라, 서류, 논술, 면접 등을 통하여 이루어집니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●합격자 발표</p>
+				<p class="page-law-content-jo">합격자 발표</p>
 				<ul class="page-law-content-hang">
 					<li>합격자 발표, 충원합격자발표로 나누어 발표됩니다.</li>
-				</ul>
-			</div>
-			
-			<div class="page-law-content">
-				<p class="page-law-content-jo">●비고</p>
-				<ul class="page-law-content-hang">
-					<li>정확한 내용은 단국대학교 홈페이지를 참고하시기 바랍니다.(http://www.dankook.ac.kr)</li>
 				</ul>
 			</div>
 			
@@ -147,58 +141,43 @@
 			
 
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●모집시기</p>
+				<p class="page-law-content-jo">모집시기</p>
 				<ul class="page-law-content-hang">
 					<li>매년 12월 초에 서류접수가 시작됩니다. 자세한 공지는 단국대학교 홈페이지에서 확인 가능 합니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●지원자격</p>
+				<p class="page-law-content-jo">지원자격</p>
 				<ul class="page-law-content-hang">
 					<li>일반편입은 국내외 4년제 대학 2학년 수료(예정), 국내외 전문대학 졸업(예정), (전문)학사학위취득(예정)자 등의 경우 지원 가능 합니다. 학사편입은 학사학위취득(예정)자에 한해 지원 가능합니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●지원서 접수</p>
+				<p class="page-law-content-jo">지원서 접수</p>
 				<ul class="page-law-content-hang">
 					<li>필요한 서류는 단국대학교 홈페이지 편입학전용란을 참고하시기 바랍니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●선발 방식</p>
+				<p class="page-law-content-jo">선발 방식</p>
 				<ul class="page-law-content-hang">
 					<li>항목에 따라, 서류, 논술, 면접 등을 통하여 이루어집니다.</li>
 				</ul>
 			</div>
+			<div class="space-sm"></div>
 			
 			<div class="page-law-content">
-				<p class="page-law-content-jo">●합격자 발표</p>
+				<p class="page-law-content-jo">합격자 발표</p>
 				<ul class="page-law-content-hang">
 					<li>단국대학교 홈페이지를 통해 매년 2월경에 발표됩니다.</li>
 				</ul>
 			</div>
-			
-			<div class="page-law-content">
-				<p class="page-law-content-jo">●비고</p>
-				<ul class="page-law-content-hang">
-					<li>정확한 내용은 단국대학교 홈페이지를 참고하시기 바랍니다.(http://www.dankook.ac.kr)</li>
-				</ul>
-			</div>
-
-			
-
-
-
-
-
-
-
-
-
-
 		
 		</div>
     </section>

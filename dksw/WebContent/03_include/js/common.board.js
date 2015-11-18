@@ -21,8 +21,8 @@ function initializeBoard(board) {
 				for(i=0; i<response.dkswBoard.length; i++) {
 					post = "<div class='row blog-post' name='"
 						+ response.dkswBoard[i].dkswBoardNo
-						+ "'><div class='col-sm-4'><div class='hover-content'><img class='img-responsive' alt='Blog Image' src='"
-						+ response.dkswBoard[i].dkswBoardPicture
+						+ "'><div class='col-sm-4'><div class='hover-content'><img class='img-responsive' src='"
+						+ response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile
 						+ "'></div></div><div class='col-sm-8'><a href='./view.jsp?category=" + category + "&postNo="
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><h2>"
@@ -272,7 +272,13 @@ function getNews(){
 		success: function(response) {
 
 			for(i=0; i<3; i++) {
-				var post = "<a href='02_page/sub_01/notice/view.jsp?postNo=" + response.dkswBoard[i].dkswBoardNo + "' class='txtMain'>"
+				var target = "sub_01/notice";
+				
+				if(response.dkswBoard[i].dkswBoardCategory == 4) {
+					target = "sub_05/board";
+				}
+				
+				var post = "<a href='02_page/" + target + "/view.jsp?postNo=" + response.dkswBoard[i].dkswBoardNo + "' class='txtMain'>"
 					+ "<div class='col-md-4 col-lg-4 col-sm-6' data-wow-delay='0.8s'>" 
 					+ "<div class='news'><img class='img-responsive'src='" + response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile + "' alt=''>"
 					+ "<h3 class='EllipsText'>" + response.dkswBoard[i].dkswBoardTitle + "</h3>"

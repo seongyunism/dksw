@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String category = request.getParameter("category").toString();%>
+<% String category = (request.getParameter("category") != null) ? (request.getParameter("category").toString()) : null; %>
 <% String postNo = request.getParameter("postNo").toString(); %>
 
 <!DOCTYPE html>
@@ -48,16 +48,16 @@
 
 			<div class="article-info">
 				<ul class="tags list-unstyled pull-left">
-					<li><i class="fa fa-user fa-fw"></i><a href="#" title="View Profile" id="dkswMemberName"></a></li>
-					<li><i class="fa fa-user fa-clock-o"></i><a href="#" title="View Profile" id="dkswBoardWriteDate"></a></li>
+					<li><i class="fa fa-user fa-fw"></i><a href="#" id="dkswMemberName"></a></li>
+					<li><i class="fa fa-user fa-clock-o"></i><a href="#" id="dkswBoardWriteDate"></a></li>
 
                     <!--<li><i class="fa fa-comments fa-fw"></i><a href="#" title="Read Comments">27 Comments</a></li> -->
                 </ul>
                 
-                <ul class="square-icons share-icons-list pull-right">
+                <!--<ul class="square-icons share-icons-list pull-right">
                     <li><a href="#" title="Share"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#" title="Share"><i class="fa fa-facebook"></i></a></li>
-                </ul>
+                </ul>-->
             </div>
             
 			<div class="view">

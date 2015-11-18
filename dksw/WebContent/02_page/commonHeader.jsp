@@ -8,6 +8,9 @@
     <meta name="google-signin-client_id" content="984936724628-mo9a5h5jgnedc96ukjgq0g3e4phiu0qs.apps.googleusercontent.com">	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="<%=request.getContextPath()%>/01_image/favicon.ico" />
+	
 	<!-- CSS : Boostrap Framework -->
 	<link href="<%=request.getContextPath()%>/03_include/css/bootstrap.min.css" rel="stylesheet" />
 

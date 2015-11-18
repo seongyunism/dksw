@@ -52,14 +52,10 @@
 			</section>
 
 			<!-- 내용 -->
-			<p class="font-NanumGothic"	id="dkswDepartmentClubNameEn"	style="line-height: 1.8em;"></p>
+			<h4 id="dkswDepartmentClubNameEn"></h4>
 			<div class="space-sm"></div>
 
-			<h4>소개</h4>
 			<p class="font-NanumGothic"	id="dkswDepartmentClubContent" style="line-height: 1.8em;"></p>
-			<div class="space-sm"></div>
-
-			<div class="space-sm"></div>
 			<div class="space-sm"></div>
 
 			<!-- 수정일 -->
@@ -67,7 +63,6 @@
 			
 			<div class="space-sm"></div>
 
-			<hr class="hr">
 
 		</div>
 	</section>

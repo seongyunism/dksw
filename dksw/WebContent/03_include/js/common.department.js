@@ -173,7 +173,7 @@ function initializeDepartmentClub(clubCode) {
 			$("#dkswDepartmentClubNameKo").text(response.dkswDepartmentClubNameKo);
 			$("#dkswDepartmentClubNameEn").text(response.dkswDepartmentClubNameEn);
 			$("#dkswDepartmentClubContent").html(response.dkswDepartmentClubContent);	
-			$("#dkswDepartmentClubPicture").attr("src", "/dksw/04_upload/files/sub_02/club/" + response.dkswDepartmentClubPicture);	
+			$("#dkswDepartmentClubPicture").attr("src", "/dksw/04_upload/files/sub_02/club_info/" + response.dkswDepartmentClubPicture);	
 			$("#dkswDepartmentClubEditDate").text(response.dkswDepartmentClubEditDate);
 			$("#dkswDepartmentClubEditRightIndex").text(response.dkswDepartmentClubEditRightIndex);
 		}, error: function(xhr,status,error) {

@@ -84,9 +84,10 @@
 			</div>
 		</div>
 	</section>
+	
 	<c:if test="${sessionScope.dkswMemberCategory == '7' || sessionScope.dkswMemberCategory == '8' || sessionScope.dkswMemberCategory == '6'}">
 		<!-- Content Section  -->
-		<section class="section">
+		<section class="section" style="min-height:500px;">
 			<div class="container">
 				<div class="row">
 					<!-- Left Contents -->

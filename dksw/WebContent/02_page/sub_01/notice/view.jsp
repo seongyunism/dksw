@@ -48,14 +48,15 @@
 
 			<div class="article-info">
 				<ul class="tags list-unstyled pull-left">
-					<li><i class="fa fa-user fa-fw"></i><a href="#" title="View Profile" id="dkswMemberName"></a></li>
+					<li><i class="fa fa-user fa-fw"></i><a href="#" id="dkswMemberName"></a></li>
+					<li><i class="fa fa-user fa-clock-o"></i><a href="#" id="dkswBoardWriteDate"></a></li>
                     <!--<li><i class="fa fa-comments fa-fw"></i><a href="#" title="Read Comments">27 Comments</a></li> -->
                 </ul>
                 
-                <ul class="square-icons share-icons-list pull-right">
+                <!--<ul class="square-icons share-icons-list pull-right">
                     <li><a href="#" title="Share"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#" title="Share"><i class="fa fa-facebook"></i></a></li>
-                </ul>
+                </ul>-->
             </div>
             
 			<div class="view">

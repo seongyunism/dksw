@@ -43,92 +43,85 @@
     <section class="section-lg">
 		<div class="container-sm">
 		
-			<p class="page-law-title text-center text-bold">한국IBM 산학협력프로그램 모집요강(06.02 update)</p>
+			<p class="page-law-title text-center text-bold">한국IBM 산학협력프로그램 모집요강</p>
 			<div class="space"></div>
 			<img src="../../../04_upload/files/sub_04/sanhak/IBM.jpg" width="800" height="450" />
 			<div class="space"></div>
 			
 
 			<div class="page-law-content">
-				<p class="page-law-content-jo">IBM 산학협력 프로그램 추가 지원가능 기간을 6월 5일(금)까지 연장합니다 .</p>
-				<p class="page-law-content-jo">가능한 많은 학생 선발 예정이며, 영어는 단순한 레벨 테스트로 너무 걱정하지 않아도 됩니다.</p>
-				<p class="page-law-content-jo"> 추가 지원 학생들은 박규식 교수(kspark@dankook.ac.kr) 또는 미디어센터 414호로 직접 방문하기 바랍니다.</p>
-				<p class="page-law-content-jo">한국IBM 산학협력프로그램 모집요강에 대하여 아래와 같이 추가 및 재공지합니다. </p>
-				<p class="page-law-content-jo">소프트웨어학과 학부생 여러분의 많은 관심 바랍니다</p>
+				<p class="page-law-content-jo">지원자격요건</p>
 				<ul class="page-law-content-hang">
-					<li>지원자격요건</li>
+					<li>매해 2월 졸업 예정자</li>
+					<li>대상학과 전공자</li>
 					<li>
-						<ul class="page-law-content-hang-s">
-							<li>매해 2월 졸업 예정자</li>
-							<li>대상학과 전공자</li>
-							<li>
-								<ul>
-									<li>– 단국대 : 국제학부 모바일시스템공학전공, 소프트웨어학과, 응용컴퓨터학과</li>
-								</ul>
-							</li>
-							<li>선수 과목 이수자</li>
-							<li>
-								<ul>
-									<li>– 또는 선수 과목에 상응하는 다른 강의 또는 외부 기관 교육 이수자</li>
-									<li>– 또는 선수 과목에 상응하는 자격증 보유자(대상 자격증 참조)</li>
-								</ul>
-							</li>
-							<li>병역필 또는 면제자로 해외여행에 결격사유가 없는 자</li>
-							<li> 프로그래밍 능통자 우대</li>
+						<ul>
+							<li>단국대 : 국제학부 모바일시스템공학전공, 소프트웨어학과, 응용컴퓨터학과</li>
 						</ul>
 					</li>
-					<li>선수과목</li>
+					<li>선수 과목 이수자</li>
 					<li>
-						<ul class="page-law-content-hang-s">
-							<li>국제학부 모바일시스템공학전공 : 모바일프로그래밍 1, 2, 객체지향프로그래밍 중 모바일 프로그래밍 1 또는 2 포함 2개 이상 수강</li>
-							<li>소프트웨어학과 : 소프트웨어공학, 객체지향프로그래밍(JAVA), DB, 웹프로그래밍 중 2개 이상 수강</li>
-							<li>응용컴퓨터학과 : DB, 프로그래밍 1, 2 중 DB 포함 2개 이상 수강</li>
+						<ul>
+							<li>또는 선수 과목에 상응하는 다른 강의 또는 외부 기관 교육 이수자</li>
+							<li>또는 선수 과목에 상응하는 자격증 보유자(대상 자격증 참조)</li>
 						</ul>
 					</li>
-					<li>대상 자격증</li>
-					<li>
-						<ul class="page-law-content-hang-s">
-							<li>Java개발 – Java, DB, Web Programming관련 자격증</li>
-						</ul>
-					</li>
-					<li>산학협력프로그램 일정</li>
-					<li>
-						<ul class="page-law-content-hang-s">
-							<li>5월 : 산학프로그램 설명회 및 지원서 접수</li>
-							<li>6월 : 서류전형 및 면접전형</li>
-							<li>7월 : 산학프로그램 합격자 발표</li>
-							<li>8월 ~ 12월 : IBM 지정교육(1개월) 및 IBM 프로젝트 사이트에서 현장실습(4개월)</li>
-							<li>12월 : 산학협력프로그램 수료</li>							
-						</ul>
-					</li>
-					<li>지원서 접수기간</li>
-					<li>
-						<ul class="page-law-content-hang-s">
-							<li>매년 5월중순~ 말  // (접수기간은 매해 약간의 차이가 있을수 있습니다.)</li>							
-						</ul>
-					</li>
-					<li>지원방법</li>
-					<li>
-						<ul class="page-law-content-hang-s">
-							<li> IBM 산학협력프로그램 모집 홈페이지를 통해 온라인 접수만 가능(방문/우편접수 불가)</li>	
-							<li>https://ibm.intojob.co.kr/gbsacdemic.html</li>
-						</ul>
-					</li>
-					<li>제출 서류</li>
-					<li>
-						<ul class="page-law-content-hang-s">
-							<li> 전학년 성적증명서 1부, 공인 영어성적 증명서 1부(영어성적 보유자) 합격자에 한하여 추후 제출</li>	
-						</ul>
-					</li>
-					<li>혜택</li>
-					<li>
-						<ul class="page-law-content-hang-s">
-							<li>지원자 중 최종 평가를 거쳐 IBM 정규직 채용</li>	
-							<li>현장실습 기간 중 실습비 지급</li>
-							<li>산학협력프로그램 수료 시 학점인정</li>
-						</ul>
-					</li>
+					<li>병역필 또는 면제자로 해외여행에 결격사유가 없는 자</li>
+					<li>프로그래밍 능통자 우대</li>
 				</ul>
+				<div class="space"></div>
+				
+				<p class="page-law-content-jo">선수과목</p>
+				<ul class="page-law-content-hang">
+					<li>국제학부 모바일시스템공학전공 : 모바일프로그래밍 1, 2, 객체지향프로그래밍 중 모바일 프로그래밍 1 또는 2 포함 2개 이상 수강</li>
+					<li>소프트웨어학과 : 소프트웨어공학, 객체지향프로그래밍(JAVA), DB, 웹프로그래밍 중 2개 이상 수강</li>
+					<li>응용컴퓨터학과 : DB, 프로그래밍 1, 2 중 DB 포함 2개 이상 수강</li>
+				</ul>
+				<div class="space"></div>
+				
+				<p class="page-law-content-jo">대상 자격증</p>
+				<ul class="page-law-content-hang">					
+					<li>Java개발 – Java, DB, Web Programming관련 자격증</li>
+				</ul>
+				<div class="space"></div>
+				
+				<p class="page-law-content-jo">산학협력프로그램 일정</p>
+				<ul class="page-law-content-hang">
+					<li>5월 : 산학프로그램 설명회 및 지원서 접수</li>
+					<li>6월 : 서류전형 및 면접전형</li>
+					<li>7월 : 산학프로그램 합격자 발표</li>
+					<li>8월 ~ 12월 : IBM 지정교육(1개월) 및 IBM 프로젝트 사이트에서 현장실습(4개월)</li>
+					<li>12월 : 산학협력프로그램 수료</li>							
+				</ul>
+				<div class="space"></div>				
+				
+				<p class="page-law-content-jo">지원서 접수기간</p>
+				<ul class="page-law-content-hang">
+					<li>매년 5월중순~ 말  // (접수기간은 매해 약간의 차이가 있을수 있습니다.)</li>							
+				</ul>
+				<div class="space"></div>	
+				
+				<p class="page-law-content-jo">지원방법</p>
+				<ul class="page-law-content-hang">
+					<li>IBM 산학협력프로그램 모집 홈페이지를 통해 온라인 접수만 가능(방문/우편접수 불가)</li>	
+					<li>https://ibm.intojob.co.kr/gbsacdemic.html</li>
+				</ul>
+				<div class="space"></div>
+				
+				<p class="page-law-content-jo">제출 서류</p>
+				<ul class="page-law-content-hang">
+					<li>전학년 성적증명서 1부, 공인 영어성적 증명서 1부(영어성적 보유자) 합격자에 한하여 추후 제출</li>	
+				</ul>
+				<div class="space"></div>
+				
+				<p class="page-law-content-jo">혜택</p>
+				<ul class="page-law-content-hang">
+					<li>지원자 중 최종 평가를 거쳐 IBM 정규직 채용</li>	
+					<li>현장실습 기간 중 실습비 지급</li>
+					<li>산학협력프로그램 수료 시 학점인정</li>
+				</ul>
+				<div class="space"></div>
+
 			</div>
 			
 			<div class="page-law-content">
