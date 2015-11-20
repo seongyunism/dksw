@@ -59,13 +59,21 @@
 
 	            <h4>My Menu</h4>
 	            <div class="space-sm"></div>
-	            
+
+	          	<c:if test="${sessionScope.dkswMemberCategory == '2'}">
+		            <ul class="info-list sm-list">
+		            	<li><i class="fa fa-list margin_left_10"></i>현재 승인 대기 중인 회원</li>
+		            </ul>
+	            </c:if>
 	          	<c:if test="${sessionScope.dkswMemberCategory == '7'}">
 		            <ul class="info-list sm-list">
 		            	<li><i class="fa fa-list margin_left_10"></i>수강중인 강의 보기</li>
 		            	<li><i class="fa fa-question-circle margin_left_10"></i>나의 질문 내역</li>
 		            </ul>
 	            </c:if>
+	            
+	            
+	            
 			</c:if>
 
 

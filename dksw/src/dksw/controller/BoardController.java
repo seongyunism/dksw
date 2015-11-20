@@ -20,6 +20,7 @@ import dksw.model.MemberDAO;
 import dksw.model.UploadDAO;
 import dksw.model.domain.AdminPermission;
 import dksw.model.domain.Board;
+import dksw.util.AppPushUtil;
 import dksw.util.CommonUtil;
 import dksw.util.PermissionCheck;
 import dksw.util.UnixTimeConvertor;
@@ -393,12 +394,29 @@ public class BoardController extends HttpServlet {
 	}
 	
 	// 게시판에서 푸시 발송하기
-	private void sendPush(HttpServletRequest req, HttpServletResponse res) {
+	private void sendPush(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
+		Board post = null;
+		HttpSession sessionMember = req.getSession();
+
+		try {
+			int inputPostNo = (req.getParameter("inputPostNo") != null) ? Integer.parseInt(req.getParameter("inputPostNo")) : 0;
+			int memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberCategory").toString())) : 0;
+			
+			if(memberCategory == 2) { // 과사인지 확인		
+				post = BoardDAO.getPost(inputPostNo); 
+				AppPushUtil.sendAndroidPushByCategory(7, "notice", "공지사항 : " + post.getDkswBoardTitle());
+				
+				res.getWriter().write("OK");
+			} else {
+				res.getWriter().write("Fail");
+			}
 	
-	
-	
-	
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
 	
 	}
 }

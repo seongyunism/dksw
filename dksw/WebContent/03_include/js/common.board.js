@@ -301,22 +301,34 @@ function getNews(){
 }
 
 function sendPush(no) {
-	var action = "/dksw/board?action=sendPush";
-	var form_data = {
-		inputPostNo : no
-	};
-	
-	$.ajax({
-		type : "POST",
-		url : action,
-		data : form_data,
-		dataType : "text",
-		success: function(response) {
-			
-		}, error: function(xhr,status,error) {
-			alert(error);
-		}
-	});
+	check = confirm("푸시를 발송하시겠습니까?\n등록된 회원 수에 따라 지연이 발생할 수 있습니다.");
+
+	if(!check) {
+		return false;
 		
-	return false;
+	} else {
+	
+		var action = "/dksw/board?action=sendPush";
+		var form_data = {
+			inputPostNo : no
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : action,
+			data : form_data,
+			dataType : "text",
+			success: function(response) {
+				if(response = "ok") {
+					alert("푸시를 발송하였습니다.");
+				} else {
+					alert("푸시 발송에 실패하였습니다.");
+				}
+			}, error: function(xhr,status,error) {
+				alert(error);
+			}
+		});
+			
+		return false;
+	}
 }

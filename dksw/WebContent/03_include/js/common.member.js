@@ -245,6 +245,16 @@ function loginMember() {
 				location.reload(true);
 			} else if(response == "Fail") {
 				alert("로그인에 실패하였습니다.");
+			} else if(response == "InitialPassword") {
+				
+				check = confirm("초기 비밀번호 입니다.\n수정하시겠습니까?");
+
+				if(!check) {
+					return false;
+					
+				} else {
+					alert("현재 기능구현중입니다.");
+				}
 			}
 		}, error: function(xhr,status,error) {
 			alert(error);
@@ -270,3 +280,14 @@ function logoutMember() {
 	});
 }
 
+function joinFacebook() {
+	alert("현재 준비중입니다.");
+}
+
+function joinTwitter() {
+	alert("현재 준비중입니다.");
+}
+
+function joinKaKao() {
+	alert("현재 준비중입니다.");
+}

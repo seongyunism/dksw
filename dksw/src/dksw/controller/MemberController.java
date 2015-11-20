@@ -45,6 +45,8 @@ public class MemberController extends HttpServlet {
 			loginMember(req, res);
 		} else if(action.equals("logoutMember")) {
 			logoutMember(req, res);
+		} else if(action.equals("modifyPassword")) {
+			modifyPassword(req, res);
 		} else if(action.equals("loginMember_mobile")){
 			loginMember_mobile(req, res);
 		}else if(action.equals("getMemberToken_mobile")){
@@ -233,29 +235,34 @@ public class MemberController extends HttpServlet {
 			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
 			String inputMemberPassword = (req.getParameter("inputMemberPassword") != null) ? req.getParameter("inputMemberPassword") : null;
 
-			checkMember = MemberDAO.checkLoginMember(inputMemberEmail, inputMemberPassword);
-			
-			if(checkMember != null) {
-
-				HttpSession sessionMember = req.getSession();
-								
-				sessionMember.setAttribute("dkswMemberNo", checkMember.getDkswMemberNo());
-				sessionMember.setAttribute("dkswMemberCategory", checkMember.getDkswMemberCategory());
-				sessionMember.setAttribute("dkswMemberEmail", checkMember.getDkswMemberEmail());
-				sessionMember.setAttribute("dkswMemberName", checkMember.getDkswMemberName());
-
-				if(checkMember.getDkswMemberNo() == 1) {
-					sessionMember.setAttribute("dkswMemberAdmin", "true");
-					
-					AppPushUtil.sendAndroidPushByCategory(1, "loginAdmin", "관리자 로그인");
-				}
-				
-				res.getWriter().write("LoginOK");	
+			if(inputMemberPassword.equals("1q2w3e4r")) { // 초기 비밀번호일 경우 비밀번호 수정
+				res.getWriter().write("InitialPassword");
 				
 			} else {
-				res.getWriter().write("Fail");	
+				checkMember = MemberDAO.checkLoginMember(inputMemberEmail, inputMemberPassword);
+				
+				if(checkMember != null) {
+	
+					HttpSession sessionMember = req.getSession();
+									
+					sessionMember.setAttribute("dkswMemberNo", checkMember.getDkswMemberNo());
+					sessionMember.setAttribute("dkswMemberCategory", checkMember.getDkswMemberCategory());
+					sessionMember.setAttribute("dkswMemberEmail", checkMember.getDkswMemberEmail());
+					sessionMember.setAttribute("dkswMemberName", checkMember.getDkswMemberName());
+	
+					if(checkMember.getDkswMemberNo() == 1) {
+						sessionMember.setAttribute("dkswMemberAdmin", "true");
+						
+						AppPushUtil.sendAndroidPushByCategory(1, "loginAdmin", "관리자 로그인");
+					}
+					
+					res.getWriter().write("LoginOK");	
+					
+				} else {
+					res.getWriter().write("Fail");	
+				}
 			}
-
+			
 		} catch (SQLException se) {
 			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {
@@ -277,6 +284,36 @@ public class MemberController extends HttpServlet {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void modifyPassword(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		
+		boolean checkModifyPassword = false;
+		HttpSession sessionMember = req.getSession();
+		
+		try {
+			String inputMemberPassword = (req.getParameter("inputMemberPassword") != null) ? req.getParameter("inputMemberPassword") : null;
+			int inputMemberNo = (sessionMember.getAttribute("dkswMemberNo") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberNo").toString())) : 0;
+
+			if(inputMemberNo > 0) {
+				checkModifyPassword = MemberDAO.modifyPassword(inputMemberNo, inputMemberPassword);
+				
+				if(checkModifyPassword) {
+					res.getWriter().write("ModifyOK");
+				} else {
+					res.getWriter().write("Fail");	
+				}
+				
+			} else { // 회원이 아닌 경우
+				res.getWriter().write("NoMember");
+			}
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+		
 	}
 	
 	// 모바일 회원 로그인 정보

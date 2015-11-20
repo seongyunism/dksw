@@ -313,4 +313,40 @@ public class MemberDAO {
 			}
 		}	
 	}
+
+	public static boolean modifyPassword(int inputMemberNo, String inputMemberPassword) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int check = 0;
+		
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("UPDATE dksw_Member SET dkswMemberPassword=password(?) WHERE dkswMemberNo=?");				
+
+			pstmt.setString(1, inputMemberPassword);
+			pstmt.setInt(2, inputMemberNo);
+			check = pstmt.executeUpdate();	
+			
+			if(check == 1) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
 }

@@ -91,21 +91,21 @@
 			                    	<a href="#" title=" Sing up with Facebook">
 										<div class="sign-up-btn facebook">
 			                            	<div class="icon"><i class="fa fa-facebook"></i></div>
-			                            	<div class="text">Sign up with <span class="company">Facebook</span></div>
+			                            	<div class="text" onclick="joinFacebook()">Sign up with <span class="company">Facebook</span></div>
 			                        	</div>
 			                        </a>
 			                            
 			                        <a href="#" title=" Sing up with Twitter">
 			                        	<div class="sign-up-btn twitter">
 			                            	<div class="icon"><i class="fa fa-twitter"></i></div>
-			                                <div class="text">Sign up with <span class="company">Twitter</span></div>
+			                                <div class="text" onclick="joinTwitter()">Sign up with <span class="company">Twitter</span></div>
 			                            </div>
 			                        </a>
 			                            
 			                        <a href="#" title=" Sing up with KakaoTalk">
 			                        	<div class="sign-up-btn kakaotalk">
 			                            	<div class="icon" style="line-height:40px;"><i class="fa fa-commenting"></i></div>
-			                                	<div class="text">Sign up with <span class="company">KakaoTalk</span></div>
+			                                	<div class="text" onclick="joinKaKao()">Sign up with <span class="company">KakaoTalk</span></div>
 			                            </div>
 			                        </a>
 								</div>
