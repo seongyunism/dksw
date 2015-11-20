@@ -12,11 +12,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 
+import dksw.model.BoardDAO;
 import dksw.model.MemberDAO;
 import dksw.model.MemberTokenDAO;
 import dksw.model.domain.Member;
 import dksw.util.AppPushUtil;
 import dksw.util.EmailUtil;
+import dksw.util.EncryptUtil;
 import dksw.util.ShellUtil;
 
 public class MemberController extends HttpServlet {
@@ -45,6 +47,8 @@ public class MemberController extends HttpServlet {
 			loginMember(req, res);
 		} else if(action.equals("logoutMember")) {
 			logoutMember(req, res);
+		} else if(action.equals("modifyInitialPassword")) {
+			modifyInitialPassword(req, res);
 		} else if(action.equals("modifyPassword")) {
 			modifyPassword(req, res);
 		} else if(action.equals("loginMember_mobile")){
@@ -230,21 +234,29 @@ public class MemberController extends HttpServlet {
 	private void loginMember(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
 		Member checkMember = null;
+		HttpSession sessionMember = req.getSession();
 
 		try {
 			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
 			String inputMemberPassword = (req.getParameter("inputMemberPassword") != null) ? req.getParameter("inputMemberPassword") : null;
 
 			if(inputMemberPassword.equals("1q2w3e4r")) { // 초기 비밀번호일 경우 비밀번호 수정
-				res.getWriter().write("InitialPassword");
+				int checkInitialMemberNo = 0;
+				checkInitialMemberNo = MemberDAO.checkLoginInitialMember(inputMemberEmail, inputMemberPassword);
+				
+				if(checkInitialMemberNo > 0) {
+					sessionMember.setAttribute("dkswMemberEmail_Initial", EncryptUtil.getSHA256(inputMemberEmail));
+					sessionMember.setAttribute("dkswMemberNo_Initial", checkInitialMemberNo);
+					res.getWriter().write("InitialPassword");					
+				} else {
+					res.getWriter().write("Fail");			
+				}
 				
 			} else {
 				checkMember = MemberDAO.checkLoginMember(inputMemberEmail, inputMemberPassword);
 				
 				if(checkMember != null) {
-	
-					HttpSession sessionMember = req.getSession();
-									
+										
 					sessionMember.setAttribute("dkswMemberNo", checkMember.getDkswMemberNo());
 					sessionMember.setAttribute("dkswMemberCategory", checkMember.getDkswMemberCategory());
 					sessionMember.setAttribute("dkswMemberEmail", checkMember.getDkswMemberEmail());
@@ -286,6 +298,38 @@ public class MemberController extends HttpServlet {
 		}
 	}
 
+	// 초기 비밀번호 변경
+	private void modifyInitialPassword(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		
+		boolean checkModifyPassword = false;
+		HttpSession sessionMember = req.getSession();
+		
+		try {
+			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail").toString() : null;
+			String inputMemberPassword = (req.getParameter("inputMemberPassword") != null) ? req.getParameter("inputMemberPassword").toString() : null;
+			String checkEmail = (sessionMember.getAttribute("dkswMemberEmail_Initial") != null) ? sessionMember.getAttribute("dkswMemberEmail_Initial").toString() : null;
+			int inputMemberNo = (sessionMember.getAttribute("dkswMemberNo_Initial") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberNo_Initial").toString())) : 0;
+			
+			if(EncryptUtil.getSHA256(inputMemberEmail).equals(checkEmail) && inputMemberNo == MemberDAO.getMember(inputMemberNo).getDkswMemberNo()) {
+				checkModifyPassword = MemberDAO.modifyPassword(inputMemberEmail, inputMemberPassword);
+			}
+			
+			if(checkModifyPassword) {
+				sessionMember.removeAttribute("dkswMemberEmail_Initial");
+				sessionMember.removeAttribute("dkswMemberNo_Initial");
+				
+				res.getWriter().write("ModifyOK");
+			} else {
+				res.getWriter().write("Fail");	
+			}
+				
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+	
 	private void modifyPassword(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		
 		boolean checkModifyPassword = false;

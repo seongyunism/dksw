@@ -280,6 +280,47 @@ public class MemberDAO {
 		}	
 	}
 
+	public static int checkLoginInitialMember(String inputMemberEmail, String inputMemberPassword) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int memberNo = 0;
+		
+		try {
+			con = DBUtil.getConnection(); 
+			
+			pstmt = con.prepareStatement("SELECT dkswMemberNo FROM dksw_member WHERE dkswMemberEmail=? AND dkswMemberPassword=password(?) AND dkswMemberOnlineAuth=1 AND dkswMemberAdminAuth=1");
+			pstmt.setString(1, inputMemberEmail);
+			pstmt.setString(2, inputMemberPassword);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memberNo = rset.getInt(1);
+			}
+			
+			if(memberNo > 0) {
+				return memberNo;
+			} else {
+				return 0;
+			}
+						
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}	
+	}
+	
+	
+	
 	public static ArrayList<Integer> getSameCategoryMembers(int inputMemberCategory) throws SQLException {
 
 		Connection con = null;
@@ -314,6 +355,42 @@ public class MemberDAO {
 		}	
 	}
 
+	public static boolean modifyPassword(String inputMemberEmail, String inputMemberPassword) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int check = 0;
+		
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement("UPDATE dksw_member SET dkswMemberPassword=password(?) WHERE dkswMemberEmail=?");				
+
+			pstmt.setString(1, inputMemberPassword);
+			pstmt.setString(2, inputMemberEmail);
+			check = pstmt.executeUpdate();	
+			
+			if(check == 1) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+	
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}	
+	
 	public static boolean modifyPassword(int inputMemberNo, String inputMemberPassword) throws SQLException {
 
 		Connection con = null;
@@ -325,7 +402,7 @@ public class MemberDAO {
 		try {
 			con = DBUtil.getConnection();
 
-			pstmt = con.prepareStatement("UPDATE dksw_Member SET dkswMemberPassword=password(?) WHERE dkswMemberNo=?");				
+			pstmt = con.prepareStatement("UPDATE dksw_member SET dkswMemberPassword=password(?) WHERE dkswMemberNo=?");				
 
 			pstmt.setString(1, inputMemberPassword);
 			pstmt.setInt(2, inputMemberNo);

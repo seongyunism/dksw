@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String inputMemberNo = (request.getParameter("inputMemberNo") != null) ? request.getParameter("inputMemberNo") : null; %>
+<% String inputMemberEmail = (request.getParameter("inputMemberEmail") != null) ? request.getParameter("inputMemberEmail") : null; %>
+<%
+	if(inputMemberEmail.isEmpty()) {
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -33,10 +38,14 @@
         <div class="bg-filter">
             <div class="hv-center">
                 
-	            <div class="sign-up" style="text-align:center; color:#555555;">
-					<h4 class="txtStatus-onlineAuthCode">처리중입니다.</h4>
-				</div>
-	
+                <form method="post">
+                	<input type="hidden" name="inputMemberEmail" value="<%=inputMemberEmail%>" />
+                
+		            <div class="sign-up" style="text-align:center; color:#555555;">
+		            	<div class="col-md-9" style="padding:0px;"><input type="password" name="inputMemberPassword" class="form-control text-center" placeholder="변경할 비밀번호를 입력하시오." /></div>
+		            	<div class="col-me-3"><button type="button" class="btn btn-success" onclick="modifyInitialPassword()"><i class="fa fa-check"></i>서버로 전송</button></div>
+					</div>
+				</form>
             </div>
         </div>
     </section>

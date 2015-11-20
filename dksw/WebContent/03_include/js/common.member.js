@@ -243,17 +243,18 @@ function loginMember() {
 		success: function(response) {
 			if(response == "LoginOK") {
 				location.reload(true);
+				
 			} else if(response == "Fail") {
 				alert("로그인에 실패하였습니다.");
-			} else if(response == "InitialPassword") {
 				
+			} else if(response == "InitialPassword") {
 				check = confirm("초기 비밀번호 입니다.\n수정하시겠습니까?");
 
 				if(!check) {
 					return false;
 					
 				} else {
-					alert("현재 기능구현중입니다.");
+					location.href = "/dksw/02_page/join/modify.jsp?inputMemberEmail=" + $("#inputMemberEmail").val();
 				}
 			}
 		}, error: function(xhr,status,error) {
@@ -264,8 +265,36 @@ function loginMember() {
 	return false;	
 }
 
+function modifyInitialPassword() {
+
+	var action = "/dksw/member?action=modifyInitialPassword";	
+	var form_data = {
+		inputMemberEmail : $("input[name='inputMemberEmail']").val(),
+		inputMemberPassword : $("input[name='inputMemberPassword']").val()
+	};
+	
+	$.ajax({
+		type : "POST",
+		url : action,
+		data : form_data,
+		dataType : "text",
+		success: function(response) {
+			if(response == "ModifyOK") {
+				alert("정상적으로 수정되었습니다.");
+				location.href = "http://dksw.dankook.ac.kr";		
+			} else {
+				alert("잘못된 접근입니다.");
+			}
+			
+		}, error: function(xhr,status,error) {
+			alert(error);
+		}
+	});	
+}
+
 // 로그아웃 처리
 function logoutMember() {
+	
 	$.ajax({
 		type : "POST",
 		url : "/dksw/member?action=logoutMember",
