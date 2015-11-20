@@ -85,7 +85,7 @@
 	            <div class="space"></div>
 	
 				<c:if test="${not empty sessionScope.dkswMemberNo}">
-		            <div class="comment-box-1 icon">
+		            <!--<div class="comment-box-1 icon">
 		                <h4>덧글 남기기</h4>
 		                <div class="row">
 							<div class="col-md-12">
@@ -103,7 +103,7 @@
 		                    </div>
 		                    
 		                </div>
-		            </div>
+		            </div>-->
 	            </c:if>
 	            
 		       	<!--<div class="comment-box-3">
