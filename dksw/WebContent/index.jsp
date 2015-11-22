@@ -48,7 +48,7 @@
                     <div class="space-sm"></div>
                     
                     <ul class="list-inline">
-                        <li><a href="http://dksw.dankook.ac.kr/app.apk" class="btn btn-default-trn btn-xlg scroll font-NanumGothic"><i class="fa fa-android"></i>애플리케이션 다운로드</a></li>
+                        <li><a href="http://dksw.dankook.ac.kr:8080/app.apk" class="btn btn-default-trn btn-xlg scroll font-NanumGothic"><i class="fa fa-android"></i>애플리케이션 다운로드</a></li>
                         <c:if test="${empty sessionScope.dkswMemberNo}"><li><a href="<%=request.getContextPath()%>/02_page/join/index.jsp" class="btn btn-primary btn-xlg scroll font-NanumGothic"><i class="fa fa-user-plus"></i>학과생 인증 및 회원 가입</a></li></c:if>
                         <c:if test="${empty sessionScope.dkswMemberNo}"><li><button class="btn btn-success btn-xlg scroll font-NanumGothic" onclick="openSlideBar()"><i class="fa fa fa-sign-in"></i>로그인</button></li></c:if>
                     </ul>
