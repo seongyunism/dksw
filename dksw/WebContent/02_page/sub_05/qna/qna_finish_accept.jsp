@@ -40,5 +40,5 @@
 <script type="text/javascript" >
 //입력완료시 알림창으로 알림 후 게시판 으로 이동
    self.window.alert("완료 처리 되었습니다.");
-   location.href="qna_ing.jsp"; 
+   location.href="qna_ing.jsp?index_num=1"; 
    </script>
