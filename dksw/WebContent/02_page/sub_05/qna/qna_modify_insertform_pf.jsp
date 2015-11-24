@@ -28,8 +28,51 @@
 	
 </script>
 <%
-String title = request.getParameter("title");
 String qa_idx = request.getParameter("qa_idx");
+
+Context InitContext = null;
+Context envContext = null;
+DataSource ds = null;
+Connection conn = null;
+java.sql.Statement stmt = null;
+ResultSet rs = null;
+
+String get_contents = null;
+String get_title = null;
+
+try {
+	InitContext = new InitialContext();
+	envContext = (Context) InitContext.lookup("java:comp/env");
+	ds = (DataSource) envContext.lookup("jdbc/mysql");
+	conn = ds.getConnection();
+	stmt = conn.createStatement();
+	rs = stmt.executeQuery("Select qa_title ,qa_contents from dksw_qna_board where qa_idx="+qa_idx+"");
+
+if(rs.next()){
+	get_contents = rs.getString("qa_contents");
+	get_contents = get_contents.replaceAll("<br>", "\r\n");
+ 	get_contents = get_contents.replaceAll("&nbsp;", "\u0020");
+	get_title = rs.getString("qa_title");
+}
+rs.close();
+stmt.close();
+
+
+} catch (Exception e) {
+	out.println(e);
+	
+} finally {
+	try {
+		if (stmt != null)
+			stmt.close();
+	} catch (Exception e) {
+	}
+	try {
+		if (conn != null)
+			conn.close();
+	} catch (Exception e) {
+	}
+}
 %>
 
 
@@ -65,17 +108,17 @@ String qa_idx = request.getParameter("qa_idx");
 						<div class="panel-heading">
 							<h3>답변작성</h3>
 						</div>
-						<form class="form-horizontal" name=writeform method=post action="qna_insert_accept_pf.jsp?qa_idx=<%=qa_idx%>">
+						<form class="form-horizontal" name=writeform method=post action="qna_modify_accept_pf.jsp?qa_idx=<%=qa_idx%>&qa_title=<%=get_title%>">
 							<div class="form-group">
 								<div class="col-sm-10">
-										<h3><b>[RE]<%=title %></b></h3>
+										<h3><b><%=get_title %></b></h3>
 								</div>
 							</div>
 							<div class="form-group">
 						
 								<div class="col-sm-10">
 									<textarea class="col-md-8 form-control" rows="6" name ="qa_content"
-										placeholder="내용을입력해주세요"></textarea>
+										><%=get_contents%></textarea>
 								</div>
 							</div>
 							<div class="form-group" >
@@ -83,6 +126,7 @@ String qa_idx = request.getParameter("qa_idx");
 									<div class="btn-right group" role="group" aria-label="...">
 										<button type="button" class="btn btn-success default" OnClick="javascript:writeCheck();">등록</button>
 										<button type="button" class="btn btn-danger default" id="insert_cancel">취소</button>
+										
 									</div>
 								</div>
 							</div>

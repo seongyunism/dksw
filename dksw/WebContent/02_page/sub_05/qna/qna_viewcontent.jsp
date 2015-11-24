@@ -51,7 +51,12 @@ Connection conn_upt = null;
 PreparedStatement pstmt_upt = null;
 ResultSet rs_upt = null;
 
+//수정을 위한 변수선언
+int edit_qa_idx = 0;
+String edit_qa_QA = null;
+int edit_check_writer = 0;
 
+int check_pidx = 0;
 
 HttpSession sessionMember = request.getSession();
 num = Integer.parseInt(request.getParameter("aPIdx"));
@@ -87,9 +92,16 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
     				ds = (DataSource) envContext.lookup("jdbc/mysql");
     				conn = ds.getConnection();
     				stmt = conn.createStatement();
-    				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_writer =" +mem_no+ " and qa_QA='Q' and qa_qIdx= "+num);
+    				
+    				rs = stmt.executeQuery("SELECT qa_QA ,qa_idx, qa_pIdx qa_pIdx_check, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_writer =" +mem_no+ " and qa_QA='Q' and qa_qIdx= "+num);
     					
     				if(rs.next()){
+    				edit_qa_idx = rs.getInt("qa_idx");
+    				edit_qa_QA = rs.getString("qa_QA");   				
+    				
+    				check_pidx = rs.getInt("qa_pIdx_check");
+    				
+    				
     				qa_idx_endCheck = rs.getInt("qa_idx");
     				qa_idx = rs.getInt("qa_idx");
     				qa_title = rs.getString("qa_title");
@@ -155,9 +167,12 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				ds = (DataSource) envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_writer =" +mem_no+ " and  qa_qIdx= "+num+" and qa_QA = 'A' order by qa_idx");
-
+				rs = stmt.executeQuery("SELECT qa_QA ,qa_idx, qa_b.qa_writer qa_writer_num ,(select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +check_pidx+ " and  qa_qIdx= "+num+" and qa_QA = 'A' order by qa_idx");
 				while(rs.next()){
+				edit_qa_idx = rs.getInt("qa_idx");
+   				edit_qa_QA = rs.getString("qa_QA");
+   				edit_check_writer = rs.getInt("qa_writer_num");
+					
 				qa_idx = rs.getInt("qa_idx");
 				qa_title = rs.getString("qa_title");
 				qa_pIdx = rs.getString("qa_pIdx");
@@ -205,13 +220,33 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 						}
 			
 				%>
-					
 					<div class="row">
 					<div class="form-group" >
 								<div class="col-sm-4" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
 										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글작성</button>
+					<%
+					if(edit_qa_QA.equals("A"))
+					{
+					%>					
 										<button type="button" class="btn btn-primary default btn-sm" OnClick="window.location='qna_finish_accept.jsp?qa_idx=<%=qa_idx_endCheck%>'">질문완료</button>
+										
+				<%
+					}
+					if(edit_qa_QA.equals("Q"))
+					{
+				%>
+										<button type="button" class="btn btn-primary default btn-sm" OnClick="window.location='qna_modify_insertform.jsp?qa_idx=<%=edit_qa_idx%>'">수정</button>
+				<%
+					}
+
+					if((edit_qa_QA.equals("A")) && (edit_check_writer==mem_no))
+					{
+				%>
+										<button type="button" class="btn btn-primary default btn-sm" OnClick="window.location='qna_modify_insertform_pf.jsp?qa_idx=<%=edit_qa_idx%>'">수정</button>
+				<%
+					}
+				%>
 										<button type="button" class="btn btn-danger default btn-sm" id="insert_cancel">취소</button>
 									</div>
 								</div>
@@ -252,9 +287,12 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
     				ds = (DataSource) envContext.lookup("jdbc/mysql");
     				conn = ds.getConnection();
     				stmt = conn.createStatement();
-    				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_QA='Q' and qa_aPIdx= "+num);
+    				rs = stmt.executeQuery("SELECT qa_QA ,qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_QA='Q' and qa_aPIdx= "+num);
     					
     				if(rs.next()){
+        			edit_qa_idx = rs.getInt("qa_idx");
+        			edit_qa_QA = rs.getString("qa_QA");	
+    					
     				qa_idx_endCheck = rs.getInt("qa_idx");
     				qa_idx = rs.getInt("qa_idx");
     				qa_title = rs.getString("qa_title");
@@ -321,9 +359,13 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 				ds = (DataSource) envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT qa_idx, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_aPIdx= "+num+" and qa_QA = 'A' order by qa_idx");
+				rs = stmt.executeQuery("SELECT qa_QA ,qa_idx, qa_b.qa_writer qa_writer_num, (select dkswMemberName from dksw_member where qa_b.qa_writer=dkswMemberNo) qa_writer,(select dkswDepartmentProfessorNameKo from dksw_department_professor where qa_b.qa_pIdx=dkswMemberNo) qa_pIdx, qa_regDate, qa_qIdx, qa_title, qa_contents FROM dksw_qna_board qa_b WHERE qa_pIdx =" +mem_no+ " and qa_aPIdx= "+num+" and qa_QA = 'A' order by qa_idx");
 					
 				while(rs.next()){
+				edit_qa_idx = rs.getInt("qa_idx");
+   				edit_qa_QA = rs.getString("qa_QA");
+   				edit_check_writer = rs.getInt("qa_writer_num");
+					
 				qa_idx = rs.getInt("qa_idx");
 				qa_title = rs.getString("qa_title");
 				qa_pIdx = rs.getString("qa_pIdx");
@@ -377,6 +419,22 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 								<div class="col-sm-3" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
 										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글작성</button>
+																			
+				<%
+					if(edit_qa_QA.equals("Q"))
+					{
+				%>
+										<button type="button" class="btn btn-primary default btn-sm" OnClick="window.location='qna_modify_insertform.jsp?qa_idx=<%=edit_qa_idx%>'">수정</button>
+				<%
+					}
+
+					if((edit_qa_QA.equals("A")) && (edit_check_writer==mem_no))
+					{
+				%>
+										<button type="button" class="btn btn-primary default btn-sm" OnClick="window.location='qna_modify_insertform_pf.jsp?qa_idx=<%=edit_qa_idx%>'">수정</button>
+				<%
+					}
+				%>
 										<button type="button" class="btn btn-danger default btn-sm" id="insert_cancel">취소</button>
 									</div>
 								</div>

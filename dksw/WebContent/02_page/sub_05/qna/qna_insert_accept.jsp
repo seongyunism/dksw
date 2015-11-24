@@ -15,6 +15,7 @@
  	//파라미터 전달 값 받기
  	String title = request.getParameter("title");
  	String pf = request.getParameter("pf"); 
+ 	System.out.println(pf);
  	String qa_content = request.getParameter("qa_content");
  	//전달 값 중 스페이스바와 엔터키 표현
  	qa_content = qa_content.replaceAll("\r\n", "<br>");
