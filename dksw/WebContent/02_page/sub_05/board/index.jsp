@@ -104,7 +104,7 @@
 					</div>
 					
 					<!-- Category Box -->
-					<div class="categories simple-box">
+					<!--<div class="categories simple-box">
 					    <h3>Categories</h3>
 					    <ul class="list-unstyled">
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="#" title="Category Business">교수님</a></li>
@@ -113,7 +113,7 @@
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="#" title="Category Music">졸업생</a></li>
 					        <li><i class="fa fa-angle-right fa-fw"></i><a href="#" title="Category Movies">기타</a></li>
 					    </ul>
-					</div>
+					</div>-->
 
 					<!-- Tag Box -->
 					<!--<div class="tags simple-box">

@@ -125,7 +125,7 @@ public class LabController extends HttpServlet {
 					
 					jObject.put("dkswLabMembersProfessorNameKo", professor.getDkswDepartmentProfessorNameKo());
 					jObject.put("dkswLabMembersProfessorNameEn",professor.getDkswDepartmentProfessorNameEn());
-					jObject.put("dkswLabMembersProfessorField",professor.getDkswDepartmentProfessorField());
+					jObject.put("dkswLabMembersProfessorField",professor.getDkswDepartmentProfessorField().replaceAll("\n", "<br />"));
 					jObject.put("dkswLabMembersProfessorPicture", professor.getDkswDepartmentProfessorPicture());
 					jObject.put("dkswLabMembersProfessorContact", professor.getDkswDepartmentProfessorContact());
 					jObject.put("dkswLabMembersProfessorEmail", professor.getDkswDepartmentProfessorEmail());

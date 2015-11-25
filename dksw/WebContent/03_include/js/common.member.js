@@ -137,6 +137,8 @@ function offlineAuthCode() {
 
 // 온라인 인증
 function onlineAuth() {
+
+	$("#joinStatus").slideDown(1000);
 	
 	formClickCount++;
 	
@@ -164,6 +166,7 @@ function onlineAuth() {
 				checkOfflineAuthCode = false;
 				$("div.offline-auth-code input").val("");
 
+				$("#joinStatus").slideUp(1000);
 				$(".join-form").slideUp();
 				$(".offline-auth").slideUp();
 				$(".online-auth").slideDown();
@@ -228,7 +231,7 @@ function onlineAuthCode(inputCode) {
 
 // 로그인 처리
 function loginMember() {
-	
+
 	var action = "/dksw/member?action=loginMember";	
 	var form_data = {
 		inputMemberEmail : $("#inputMemberEmail").val(),
@@ -262,7 +265,7 @@ function loginMember() {
 		}
 	});
 			
-	return false;	
+	return false;
 }
 
 function modifyInitialPassword() {

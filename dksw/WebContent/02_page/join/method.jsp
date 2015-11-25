@@ -41,34 +41,28 @@
     </section>
 
     <section class="section">
-        <div class="container">
-        	<!-- 타이틀 -->
-            <h2 class="big-title font-NanumGothic">가입 방법 및 절차</h2> 
+        <div class="container-sm">
+            <img class="img-responsive" src="../../01_image/join/method_01.jpg" />
+            <h4 class="text-center">① 홈페이지 메인 화면에서 '학과생 인증 및 회원가입' 버튼을 클릭합니다.</h4>
+            <hr class="hr" />
             
-            <div class="space-sm"></div>
-            <div class="space-sm"></div>
-                      
+            <img class="img-responsive" src="../../01_image/join/method_02.jpg" />
+ 			<h4 class="text-center">② 다음과 같은 화면이 나오면 본인이 속한 그룹을 선택하고 개인정보를 입력합니다.</h4>
+            <h4 class="text-center">③ 개인정보를 모두 입력한 후 '회원가입' 버튼을 클릭합니다.</h4>
+            <hr class="hr" />
             
-            <!-- 내용 -->
-            <h3 class="font-NanumGothic" style="line-height:1.8em;">1. 홈페이지 메인 화면에서 ‘학과생 인증 및 회원가입‘ 버튼을 클릭합니다. </h3>
-            <img src="../../01_image/join/method1.PNG">     
-            <hr>
- 			<h3 class="font-NanumGothic" style="line-height:1.8em;">2. 다음과 같은 화면이 나오면 회원이 속한 그룹을 선택하고  개인정보를 입력합니다.</h3>
-            <img src="../../01_image/join/method2.PNG">
-            <h3 class="font-NanumGothic" style="line-height:1.8em;">3. 개인정보를 모두 입력한 후 회원가입 버튼을 클릭합니다.</h3>
-            <hr>
-            <img src="../../01_image/join/method3.PNG">
-            <h3 class="font-NanumGothic" style="line-height:1.8em;">3-1. 학부생의 경우 학과 사무실 앞 게시판에 공지되어있는 오프라인 인증코드를 입력하고 ‘서버로 전송’ 버튼을 클릭합니다.</h3>
-           	<hr>
-           	<img src="../../01_image/join/method4.PNG">
-           	<h3 class="font-NanumGothic" style="line-height:1.8em;">4. 다음의 화면이 나타나면 입력한 이메일 주소로 인증 메일이 발송되며 인증 메일을  확인하면 <br>회원가입 절차가 완료됩니다.
-  (학부생이 아닌 경우 관리자의 승인이 이루어져야 글 작성이 가능합니다.)
-</h3>
-            <div class="space-sm"></div>
-            <div class="space-sm"></div>
-            
-			
-			
+            <img class="img-responsive" src="../../01_image/join/method_03.jpg" />
+            <h4 class="text-center">④ (학부생) 학과 사무실 앞 게시판에 공지된 인증코드를 입력하고, '서버로 전송' 버튼을 클릭합니다.</h4>
+           	<hr class="hr" />
+           	
+           	<img class="img-responsive" src="../../01_image/join/method_04.jpg" />
+           	<h4 class="text-center">⑤ 입력한 이메일 주소로 인증 메일이 발송되었습니다.</h4>
+           	<hr class="hr" />
+           	
+           	<img class="img-responsive" src="../../01_image/join/method_05.jpg" /><br />
+           	<img class="img-responsive" src="../../01_image/join/method_06.jpg" />
+           	<h4 class="text-center">⑥ '인증 완료' 버튼을 클릭하면 회원가입이 완료 후 로그인이 완료됩니다.</h4>
+           	
         </div>
     </section>
 

@@ -260,9 +260,8 @@ function deletePost() {
 	}
 }
 
-function getNews(){
+function getNews() {
 	var action = "/dksw/board?action=getBoardNewsListData";
-	
 	var posts = "";
 	
 	$.ajax({
@@ -292,7 +291,7 @@ function getNews(){
 			$("#dkswBoardNews").html(posts);
 			
 		}, error: function(xhr,status,error) {
-			alert(error);
+//			alert(error);
 		}
 	});
 		

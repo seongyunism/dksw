@@ -98,16 +98,26 @@ function initializeLab(labCode) {
 			
 			$("#dkswLabMembers").html(members + addMember);
 			
-			var professor = "<div class='tab-pane active' id='believe'><div class='row'> "+
-							"<div class='col-sm-6 col-md-6 col-lg-5 wow fadeInLeft animated' style='visibility: visible;'>"+
-							"<div class='space visible-sm'></div><img class='img-responsive' src='" +response.dkswLabMembersProfessorPicture+ "'>" +
-							"</div><div class='col-sm-6 col-md-6 col-lg-7 wow fadeInRight animated' style='visibility: visible;'>"+
-							"<h2>Professor</h2><h1>"+response.dkswLabMembersProfessorNameKo+"</h1>" +
-							"<h4>"+response.dkswLabMembersProfessorNameEn+"</h4><div class='space-sm'>" +
-							"</div><ul class='info-list md-list style i-primary'><li><i class='fa fa-play'>" +
-							"</i>Phone No. : " +response.dkswLabMembersProfessorContact+"</li><li><i class='fa fa-play'>" +
-							"</i>E-mail: " +response.dkswLabMembersProfessorEmail+"</li><li><i class='fa fa-play'>" +
-							"</i>Research Interest:" +response.dkswLabMembersProfessorField+"</li></ul></div></div></div>"
+			var professor = 
+							"<div class='active'>" +
+								"<div class='row'> "+
+									"<div class='col-sm-6 col-md-6 col-lg-5 wow fadeInLeft animated' style='visibility: visible;'>"+
+										"<div class='space visible-sm'></div>" +
+										"<img class='img-responsive' style='width:100%;' src='" + response.dkswLabMembersProfessorPicture+ "'/>" +
+									"</div>" +
+									"<div class='col-sm-6 col-md-6 col-lg-7 wow fadeInRight animated' style='visibility: visible;'>"+
+										"<h1>"+response.dkswLabMembersProfessorNameKo+"</h1>" +
+										"<h4>"+response.dkswLabMembersProfessorNameEn+"</h4>" +
+									"<div class='space-sm'></div>" +
+									"<ul class='info-list md-list style i-primary'>" +
+										"<li><i class='fa fa-play'></i>연락처 : " +response.dkswLabMembersProfessorContact+"</li>" +
+										"<li><i class='fa fa-play'></i>이메일 주소 : <a href='mailto://" + response.dkswLabMembersProfessorEmail+"'>이메일 보내기</a></li>" +
+										"<li><i class='fa fa-play'></i>연구분야</li>" +
+										"<li><p style='font-size:1.15em; line-height:1.75em; padding-left:30px;'>" + response.dkswLabMembersProfessorField + "</p></li>" +
+									"</ul>" +
+								"</div>" +
+							"</div>";
+						
 			
 			$("#dkswLabMembersProfessor").html(professor);
 			
