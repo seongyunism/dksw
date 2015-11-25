@@ -320,4 +320,51 @@ public class LectureController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
+	private void getLectureChpaterList_mobile(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		HttpSession sessionMember = req.getSession();
+		ArrayList<LectureChapter> chapters = new ArrayList<LectureChapter>();
+		ArrayList<Lecture> lectures = new ArrayList<Lecture>();
+		
+		try {
+			int memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberCategory").toString())) : 0;
+			int inputMemberNo = (sessionMember.getAttribute("dkswMemberNo") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberNo").toString())) : 0;	
+			
+			if(memberCategory == 7) { // 학생인지 확인
+				chapters = LectureDAO.getLectureChapterList_mobile(inputMemberNo);
+				lectures = LectureDAO.getLectureList(inputMemberNo);
+
+				JSONObject jObject = new JSONObject();
+				JSONArray jChpaterArray = new JSONArray();
+				
+				for(int i=0; i<chapters.size(); i++) { // 강의
+					JSONObject tempChapter = new JSONObject();
+				
+					tempChapter.put("dkswLectureChapterNo", chapters.get(i).getDkswLectureChapterNo());
+					tempChapter.put("dkswLectureChapterCount", chapters.get(i).getDkswLectureChapterCount());
+					tempChapter.put("dkswLectureChapterName", chapters.get(i).getDkswLectureChapterName());
+					tempChapter.put("dkswLectureNo", chapters.get(i).getDkswLectureNo());
+					tempChapter.put("dkswLectureName", LectureDAO.getLecture(chapters.get(i).getDkswLectureChapterNo()).getDkswLectureName());
+					tempChapter.put("dkswLectureYear", LectureDAO.getLecture(chapters.get(i).getDkswLectureChapterNo()).getDkswLectureYear());
+					tempChapter.put("dkswLectureSemester", LectureDAO.getLecture(chapters.get(i).getDkswLectureChapterNo()).getDkswLectureSemester());
+					tempChapter.put("dkswLectureProfessorName", "교수 " + DepartmentDAO.getProfessorByProfessorNo(lectures.get(i).getDkswDepartmentProfessorNo()).getDkswDepartmentProfessorNameKo());
+					jChpaterArray.add(tempChapter);
+				}
+				
+				jObject.put("dkswLectureChapterList", jChpaterArray);
+
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+
+				res.getWriter().write(jObject.toString());
+			}
+			
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	}
+
+
 }

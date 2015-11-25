@@ -365,6 +365,8 @@ public class MemberController extends HttpServlet {
 
 		Member checkMember = null;
 		JSONObject jObject = null;
+		
+		HttpSession sessionMember = req.getSession();
 
 		try {
 			String inputMemberEmail = (req.getParameter("inputMemberEmail") != null) ? req.getParameter("inputMemberEmail") : null;
@@ -404,6 +406,8 @@ public class MemberController extends HttpServlet {
 			Member checkMember = null;
 			JSONObject jObject = null;
 
+			HttpSession sessionMember = req.getSession();
+			
 			try {
 				int inputMemberNo = (req.getParameter("inputMemberNo") != null) ? Integer.parseInt(req.getParameter("inputMemberNo")) : null;
 
