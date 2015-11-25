@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class ShellUtil {
 
-	public static void execCommand(String cmd[]) {
+	public static boolean execCommand(String cmd[]) {
 		
 		Process proc = null;
 		
@@ -14,16 +14,18 @@ public class ShellUtil {
 			
 			if(proc.exitValue() != 0) {
 				System.out.println("exit value was non-zero");
+				return false;
+			} else {
+				System.out.println("실행완료");
+				return true;
 			}
-			System.out.println("실행완료");
-			
+
 		} catch(IOException e) {
 			e.printStackTrace();
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
 		
+		return false;
 	}
-	
-	
 }
