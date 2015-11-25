@@ -419,14 +419,7 @@ num = Integer.parseInt(request.getParameter("aPIdx"));
 								<div class="col-sm-3" style="float:right">
 									<div class="btn-right group" role="group" aria-label="...">
 										<button type="button" class="btn btn-success default btn-sm" OnClick="window.location='qna_insertform_pf.jsp?title=<%=qa_title%>&qa_idx=<%=qa_idx%>'">답글작성</button>
-																			
 				<%
-					if(edit_qa_QA.equals("Q"))
-					{
-				%>
-										<button type="button" class="btn btn-primary default btn-sm" OnClick="window.location='qna_modify_insertform.jsp?qa_idx=<%=edit_qa_idx%>'">수정</button>
-				<%
-					}
 
 					if((edit_qa_QA.equals("A")) && (edit_check_writer==mem_no))
 					{
