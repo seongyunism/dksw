@@ -142,7 +142,7 @@ public class MemberController extends HttpServlet {
 			}
 			
 			// 온라인 인증코드를 입력받은 이메일로 발송 
-			checkSendOnlineAuthCode = EmailUtil.SendEmail(inputMemberEmail, "단국대학교 소프트웨어학과 홈페이지 인증메일입니다.", "<a href='http://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/02_page/join/auth.jsp?authCode="+ inputMemberCategory + inputMemberOnlineAuthCode + "' target='_blank'>인증완료</a>");		
+			checkSendOnlineAuthCode = EmailUtil.SendEmail(inputMemberEmail, "단국대학교 소프트웨어학과 홈페이지 인증메일입니다.", "<p style='font-size:0px; line-height:0px;'><img src='http://dksw.dankook.ac.kr:8080/dksw/01_image/join/join_01.png' /><br /><a href='http://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/02_page/join/auth.jsp?authCode="+ inputMemberCategory + inputMemberOnlineAuthCode + "' target='_blank'><img src='http://dksw.dankook.ac.kr:8080/dksw/01_image/join/join_02.png' /></a><br /><img src='http://dksw.dankook.ac.kr:8080/dksw/01_image/join/join_03.png' /></p>");		
 
 			// 사용자 정보를 DB에 삽입
 			checkInsertMemberRecord = MemberDAO.checkJoinMember(inputMemberCategory, inputMemberEmail, inputMemberPassword, inputMemberStudentNo, inputMemberName,
@@ -165,7 +165,7 @@ public class MemberController extends HttpServlet {
 	private void checkOnlineAuthCode(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
 		int searchOnlineAuthCode = 0;
-		boolean checkOnlineAuthCode = false; // 0 : 기본, 1 : 코드존재, 2: 코드없음, 3 : 인증완료=
+		boolean checkOnlineAuthCode = false; // 0 : 기본, 1 : 코드존재, 2: 코드없음, 3 : 인증완료
 		String retMsg = "Fail";
 		
 		try {

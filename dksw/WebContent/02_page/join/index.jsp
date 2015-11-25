@@ -28,6 +28,8 @@
 </head>
 
 <body>
+	<div id="joinStatus" style="position:absolute; top:50%; width:100%; height:100px; font-size:2em; text-align:center; text-shadow:1px 1px 5px 1px rgba(0, 0, 0, 0.3); line-height:100px; color:#eeeeee; margin-top:-50px; background:rgba(0, 0, 0, 0.5); z-index:100; box-shadow:0px 0px 5px 1px rgba(0, 0, 0, 0.5); display:none;">인증 메일을 발송하고 있습니다.</div>
+
     <!-- Navigation -->
 	<jsp:include page="../commonNav.jsp" flush="false"/>
 

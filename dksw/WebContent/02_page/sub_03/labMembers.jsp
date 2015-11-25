@@ -8,16 +8,20 @@
 	</section>
 
     <section class="section-lg team-grid">
-        <div class="container" >
-            
-            <!-- 교수님 -->
-            <div class="tab-content text-left" id = "dkswLabMembersProfessor"></div>
-            <div class="space"></div>
-            <div class="space"></div>
-            <div class="space"></div>
-               
-            <!-- 나머지 -->
+        <!-- 교수님 -->
+        <div class="container-sm">
+            <div class="text-left" id="dkswLabMembersProfessor"></div>
+		</div>
+		
+        <div class="space"></div>
+        <div class="space"></div>
+		<hr class="hr" />
+        <div class="space"></div>
+        <div class="space"></div>
+		
+		
+        <!-- 나머지 -->
+		<div class="container">
 			<div class="row" id="dkswLabMembers" name="labMembers"></div>
-			
         </div>
     </section>
