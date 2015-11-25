@@ -21,9 +21,9 @@ function initializeBoard(board) {
 				for(i=0; i<response.dkswBoard.length; i++) {
 					post = "<div class='row blog-post' name='"
 						+ response.dkswBoard[i].dkswBoardNo
-						+ "'><div class='col-sm-4'><div class='hover-content'><img class='img-responsive' src='"
+						+ "'><div class='col-sm-4'><div class='hover-content'><div class='image-crop-box'><img class='img-responsive image-crop' src='"
 						+ response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile
-						+ "'></div></div><div class='col-sm-8'><a href='./view.jsp?category=" + category + "&postNo="
+						+ "' /></div></div></div><div class='col-sm-8'><a href='./view.jsp?category=" + category + "&postNo="
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><h2>"
 						+ response.dkswBoard[i].dkswBoardTitle
@@ -45,9 +45,9 @@ function initializeBoard(board) {
 				for(i=0; i<response.dkswBoard.length; i++) {
 					post = "<div class='row blog-post wow fadeInUp' name='"
 						+ response.dkswBoard[i].dkswBoardNo
-						+ "'><div class='col-sm-3'><img class='img-responsive' src='"
+						+ "'><div class='col-sm-4'><div class='image-crop-box'><img class='img-responsive image-crop' src='"
 						+ response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile
-						+ "'></div><div class='col-sm-9'><a href='./view.jsp?category=" + category + "&postNo="
+						+ "' /></div></div><div class='col-sm-8'><a href='./view.jsp?category=" + category + "&postNo="
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><h3>"
 						+ response.dkswBoard[i].dkswBoardTitle
@@ -112,7 +112,7 @@ function writePost(category) {
 	
 	var action = "/dksw/board?action=modifyPost";
 	var form_data = {
-		inputAdminPermissionId : "board_" + category,
+		inputAdminMenuName : "board_" + category,
 		inputMode : $("input[name='inputMode']").val(),
 		inputBoardNo : $(".view").attr("name"),
 		inputBoardCategory : boardCategory,
@@ -279,7 +279,7 @@ function getNews() {
 				
 				var post = "<a href='02_page/" + target + "/view.jsp?postNo=" + response.dkswBoard[i].dkswBoardNo + "' class='txtMain'>"
 					+ "<div class='col-md-4 col-lg-4 col-sm-6' data-wow-delay='0.8s'>" 
-					+ "<div class='news'><img class='img-responsive'src='" + response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile + "' alt=''>"
+					+ "<div class='news'><div class='image-crop-box'><img class='img-responsive image-crop' src='" + response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile + "' alt=''></div>"
 					+ "<h3 class='EllipsText'>" + response.dkswBoard[i].dkswBoardTitle + "</h3>"
 					+ "<p style='padding-top:5px;'>" + response.dkswBoard[i].dkswBoardContent + "</p>"
 					+ "<p style='text-align:right;'><em>" + response.dkswBoard[i].dkswBoardWriteDate + "</em><p>"
@@ -296,7 +296,6 @@ function getNews() {
 	});
 		
 	return false;
-	
 }
 
 function sendPush_board(no) {

@@ -46,6 +46,8 @@ public class LectureController extends HttpServlet {
 			getLectureListByStudent(req, res);
 		} else if(action.equals("getLectureList")) {
 			getLectureList(req, res);
+		} else if(action.equals("getLectureChpaterList_mobile")) {
+			getLectureChpaterList_mobile(req, res);
 		} else if(action.equals("cancelRegisterLecture")) {
 			cancelRegisterLecture(req, res);
 		} else if(action.equals("sendPush")){
@@ -383,16 +385,12 @@ public class LectureController extends HttpServlet {
 			int inputChapterNo = (req.getParameter("inputChapterNo") != null) ? Integer.parseInt(req.getParameter("inputChapterNo")) : 0;
 			int memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberCategory").toString())) : 0;
 			
-			System.out.println(inputLectureNo);
-			System.out.println(inputChapterNo);
-			System.out.println(memberCategory);
-			
 			if(memberCategory == 6) { // 교수인지 확인		
 				students = LectureDAO.getStdentListByLecture(inputLectureNo);
 				lectureName = LectureDAO.getLecture(inputLectureNo).getDkswLectureName();
 				chapter = LectureDAO.getChapter(inputChapterNo);
 								
-				AppPushUtil.sendAndroidPushByArray(students, "lecture", "강의자료가 업로드되었습니다. (" + lectureName + ", #" + chapter.getDkswLectureChapterCount() + " " + chapter.getDkswLectureChapterName());
+				AppPushUtil.sendAndroidPushByArray(students, "lecture", "강의자료가 업로드되었습니다. (" + lectureName + ", #" + chapter.getDkswLectureChapterCount() + " " + chapter.getDkswLectureChapterName() + ")");
 				
 				res.getWriter().write("OK");
 			} else {

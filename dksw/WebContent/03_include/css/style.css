@@ -81,6 +81,9 @@ html {
   .sTop .title {
     font-size: 5em;
   }
+  .image-crop-box {
+  	height:230px;
+  }
 }
 @media (max-width: 992px) {
   .portfolio-grid .hover-content,
@@ -95,6 +98,9 @@ html {
   }
   .lg-tab-content img {
     margin-top: 50px;
+  }
+  .image-crop-box {
+  	height:230px;
   }
 }
 @media (min-width: 992px) {
@@ -112,6 +118,9 @@ html {
   }
   .last.panel.prices {
     right: 45px;
+  }
+  .image-crop-box {
+  	height:196px;
   }
 }
 @media (min-width: 1200px) {
@@ -135,6 +144,9 @@ html {
   }
   .last.panel.prices {
     right: 80px;
+  }
+  .image-crop-box {
+  	height:240px;
   }
 }
 a {
@@ -1538,13 +1550,10 @@ ul.primary span {
   .sTop {
     min-height: 550px;
   }
-  .sTop .jumbotron h1 {
-    font-size: 50px;
-  }
 }
 @media (max-width: 480px) {
-  .sTop .jumbotron h1 {
-    font-size: 36px;
+  .sTop {
+    font-size: 24px;
   }
 }
 /*
@@ -4270,10 +4279,77 @@ ul.thumbs {
 }
 
 /* ===================================
- *                           Custom CSS
+ *         Custom CSS
  * =================================== */
 
-/********* 怨듯넻 *********/
+
+@media (min-width: 1920px) {
+	div.page-main-title {
+		font-size:4em;
+	}
+	
+	div.page-main-subtitle {
+		font-size:2.2em;
+		line-height:1.5em;
+	}	
+}
+
+@media (min-width: 1440px) and (max-width: 1919px) {
+	div.page-main-title {
+		font-size:4em;
+	}
+	
+	div.page-main-subtitle {
+		font-size:2.2em;
+		line-height:1.5em;
+	}	
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+	div.page-main-title {
+		font-size:4em;
+	}
+	
+	div.page-main-subtitle {
+		font-size:2em;
+		line-height:1.6em;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1279px) {
+	div.page-main-title {
+		font-size:3.5em;
+	}
+	
+	div.page-main-subtitle {
+		font-size:2em;
+		line-height:2em;
+	}
+}
+
+@media (min-width: 480px) and (max-width: 991px) {
+	div.page-main-title {
+		font-size:2em;
+	}
+	
+	div.page-main-subtitle {
+		font-size:1.15em;
+		line-height:2em;
+	}
+}
+
+@media (max-width: 480px) {
+	div.page-main-title {
+		font-size:0.8em;
+	}
+	
+	div.page-main-subtitle {
+		font-size:0.4em;
+		line-height:2.5em;
+	}
+}
+
+/********* Common *********/
 
 .font-NanumGothic {
 	font-family:NanumGothic;
@@ -4311,19 +4387,44 @@ ul.thumbs {
 	margin-left:10px;
 }
 
-
-/********* 珥덇린�솕硫� �럹�씠吏� *********/
-
-.page-main-title {
-	font-weight:bold;
-	text-shadow:3px 3px 2px rgba(0, 0, 0, 0.5);
-	background:rgba(0, 0, 0, 0.25);
-	padding:5px 10px;
+.padding_left_5 {
+	padding-left:5px;
 }
 
-.page-main-subtitle {
+.padding_right_5 {
+	padding-right:5px;
+}
+
+.padding_left_10 {
+	padding-left:10px;
+}
+
+.padding_right_10 {
+	padding-right:10px;
+}
+
+.padding_top_5 {
+	padding-top:5px;
+}
+
+.padding_bottom_5 {
+	padding-bottom:5px;
+}
+
+.bg-color-black-20 {
 	background:rgba(0, 0, 0, 0.2);
-	padding:5px 10px;
+}
+
+/********* main *********/
+
+.page-main-title {
+	margin-bottom:15px;
+}
+
+.page-main-title span {
+	font-weight:bold;
+	text-shadow:3px 3px 2px rgba(0, 0, 0, 0.5);
+	padding:5px 10px;	
 }
 
 .page-main-subtitle-offline {
@@ -4336,7 +4437,7 @@ ul.thumbs {
 	color:#000000;
 }
 
-/********* �쉶�썝媛��엯 �럹�씠吏� *********/
+/********* join *********/
 
 .edit-date {
 	float:right;
@@ -4575,4 +4676,22 @@ a.txtMain p, a.txtMain em  {
 	-o-text-overflow:ellipsis;
 	-ms-text-overflow:ellipsis;
 	-moz-binding:url(/xe/ellipsis.xml#ellipsis);
+}
+
+.image-crop-box {
+	width:100%;
+    overflow: hidden;
+    margin:0px;
+    position: relative;
+}
+
+.image-crop {
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+	position: absolute;
+    margin: auto; 
+    min-height: 100%;
+    min-width: 100%;
 }

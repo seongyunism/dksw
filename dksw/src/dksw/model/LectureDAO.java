@@ -370,12 +370,20 @@ public class LectureDAO {
 		try {
 			con = DBUtil.getConnection();
 
-			pstmt = con.prepareStatement("SELECT * FROM dksw_lecture WHERE dkswLectureNo=? ORDER BY dkswLectureNo ASC");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_lecture WHERE dkswLectureNo=?");
 			pstmt.setInt(1, inputLectureNo);
 			rset = pstmt.executeQuery();
 
-			lecture = new Lecture(rset.getInt(1), rset.getInt(2), rset.getInt(3), rset.getString(4), rset.getInt(5));
-
+			if(rset.next()) {
+				lecture = new Lecture(
+					rset.getInt(1),
+					rset.getInt(2),
+					rset.getInt(3),
+					rset.getString(4),
+					rset.getInt(5)
+				);
+			}
+			
 			return lecture;
 
 		} catch (SQLException se) {

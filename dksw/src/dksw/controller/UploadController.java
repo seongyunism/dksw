@@ -72,7 +72,9 @@ public class UploadController extends HttpServlet {
 			long inputUploadDate = (System.currentTimeMillis())/1000;
 			String memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? (sessionMember.getAttribute("dkswMemberCategory").toString()) : null;
 			int inputMemberNo = (sessionMember.getAttribute("dkswMemberNo") != null) ? Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString()) : 0;
-
+			String inputUploadCategory = null;
+			int inputUploadPostNo = 0;
+			
 			int nextUploadNo = UploadDAO.getNextUploadNo();
 			
 			if(inputMemberNo > 0) { // 회원인지 확인
@@ -97,16 +99,22 @@ public class UploadController extends HttpServlet {
 							}
 							
 						} else if(paramName.equals("inputUploadPostNo")) {
+							inputUploadPostNo = Integer.parseInt(paramValue);
 							uploadFilePostNo = String.format("%04d", Integer.parseInt(paramValue));
 							
 						} else if(paramName.equals("inputUploadCategory")) { // 업로드할 디렉토리 생성
+							inputUploadCategory = paramValue;
 							permission = AdminDAO.getPermission(paramValue);
 							checkPermission = PermissionCheck.checkPermission(permission.getDkswAdminPermissionAuthor(), memberCategory);
 							
 							if(checkPermission) { // 허가된 사용자인 경우
-								realUploadPath = getServletContext().getRealPath("") + File.separator + "04_upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;
-								contextUploadPath  = getServletContext().getContextPath() + File.separator + "04_upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;
+								realUploadPath = File.separator + "home" + File.separator + "dksw" + File.separator + "upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;
+								contextUploadPath  = "/upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;
 
+								System.out.println(realUploadPath);
+								System.out.println(contextUploadPath);
+								
+								
 								File file = new File(realUploadPath);
 								file.mkdir();
 								
@@ -164,7 +172,7 @@ public class UploadController extends HttpServlet {
 				if(boardQueryCheck) {
 					res.setCharacterEncoding("UTF-8");
 					res.getWriter().write("업로드가 완료되었습니다.");
-					res.setHeader("Refresh", "3; URL=04_upload/upload.jsp");
+					res.setHeader("Refresh", "3; URL=/dksw/04_upload/upload.jsp?mode=update&category=" + inputUploadCategory + "&no=" + inputUploadPostNo);
 				}			
 				
 			} else {

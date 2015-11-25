@@ -262,16 +262,16 @@ public class BoardController extends HttpServlet {
 					JSONObject tempFile = new JSONObject();
 					
 					tempFile.put("dkswBoardType", "jpg");
-					tempFile.put("dkswBoardFile", req.getContextPath() + "/04_upload/files/sub_01/board/no-image.jpg");
+					tempFile.put("dkswBoardFile", "/upload/files/sub_01/board/no-image.jpg");
 					jFileArray.add(tempFile);
 					
 				} else {
 					JSONObject tempFile = new JSONObject();
-					int pos = files.get(i).lastIndexOf(".");
-					String ext = files.get(i).substring( pos + 1 );
+					int pos = files.get(0).lastIndexOf(".");
+					String ext = files.get(0).substring( pos + 1 );
 
 					tempFile.put("dkswBoardType", ext);
-					tempFile.put("dkswBoardFile", UploadDAO.getFileSrc(Integer.parseInt(files.get(i))));
+					tempFile.put("dkswBoardFile", UploadDAO.getFileSrc(Integer.parseInt(files.get(0))));
 					jFileArray.add(tempFile);	
 				}
 				
@@ -325,20 +325,21 @@ public class BoardController extends HttpServlet {
 				List<String> files = new ArrayList<String>();
 
 				files = CommonUtil.commonSpilt(posts.get(i).getDkswBoardFiles());
+				
 				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
 					JSONObject tempFile = new JSONObject();
 					
 					tempFile.put("dkswBoardType", "jpg");
-					tempFile.put("dkswBoardFile", req.getContextPath() + "/04_upload/files/sub_01/board/no-image.jpg");
+					tempFile.put("dkswBoardFile", "/upload/files/sub_01/board/no-image.jpg");
 					jFileArray.add(tempFile);
 					
 				} else {
 					JSONObject tempFile = new JSONObject();
-					int pos = files.get(i).lastIndexOf(".");
-					String ext = files.get(i).substring( pos + 1 );
+					int pos = files.get(0).lastIndexOf(".");
+					String ext = files.get(0).substring( pos + 1 );
 
 					tempFile.put("dkswBoardType", ext);
-					tempFile.put("dkswBoardFile", UploadDAO.getFileSrc(Integer.parseInt(files.get(i))));
+					tempFile.put("dkswBoardFile", UploadDAO.getFileSrc(Integer.parseInt(files.get(0))));
 					jFileArray.add(tempFile);	
 				}
 				
@@ -346,7 +347,6 @@ public class BoardController extends HttpServlet {
 				
 				jArray.add(temp);
 			}
-			
 			
 			jObject.put("dkswBoard", jArray);
 				

@@ -1,73 +1,91 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="ko" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters" style="overflow: hidden;">
+<html lang="ko"
+	class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths adownload bgsizecover boxsizing csscalc cubicbezierrange cssfilters lastchild mediaqueries no-overflowscrolling no-csspositionsticky no-regions cssresize cssscrollbar shapes subpixelfont supports no-userselect no-ie8compat svgfilters"
+	style="overflow: hidden;">
 
 <head>
-	<title>단국대학교 소프트웨어학과</title>
+<title>단국대학교 소프트웨어학과</title>
 
-	<jsp:include page="./02_page/commonHeader.jsp" flush="false" />
+<jsp:include page="./02_page/commonHeader.jsp" flush="false" />
 
-	<!-- Custom Scripts -->
-	<script>
+<!-- Custom Scripts -->
+<script>
 	$(document).ready(function() {
 		getNews();
 	});
 
 	$(window).load(function() {
-		
+
 	});
-	
+
 	$(function() {
 
 	});
-	
+
 	function openSlideBar() {
 		$("#sidebar").attr("class", "sidebar-on hidden-xs sidebar");
 	}
-	
-	</script>
+</script>
 </head>
 
 <body>
-    <!-- Navigation -->
-	<jsp:include page="./02_page/commonNav.jsp" flush="false"/>
+	<!-- Navigation -->
+	<jsp:include page="./02_page/commonNav.jsp" flush="false" />
 
-    <!-- Header Section  -->
-    <section class="background-bar-main bg-centerTop70 bg-cover">
-        <div class="bg-filter sTop">
-            <div class="container">
-                <div class="jumbotron trn v-center">
-                    <h1 class="page-main-title">DKU Department of Software</h1>
-                    
-                    <div class="space"></div>
-                    
-                    <p class="font-NanumGothic" style="line-height:1.7em;"><span class="page-main-subtitle">단국대학교 소프트웨어학과 홈페이지에 오신 것을 환영합니다.</span><br /><span class="page-main-subtitle">본교 학과 학생들은 <span class="page-main-subtitle-offline text-bold" title="자연과학관 5층 학과 사무실 앞 게시판">학과 오프라인 게시판 확인</span> 후 필히 가입바랍니다.</span></p>
-                    
-                    <div class="space-sm"></div>
-                    
-                    <ul class="list-inline">
-                        <li><a href="http://dksw.dankook.ac.kr:8080/app.apk" class="btn btn-default-trn btn-xlg scroll font-NanumGothic"><i class="fa fa-android"></i>애플리케이션 다운로드</a></li>
-                        <c:if test="${empty sessionScope.dkswMemberNo}"><li><a href="<%=request.getContextPath()%>/02_page/join/index.jsp" class="btn btn-primary btn-xlg scroll font-NanumGothic"><i class="fa fa-user-plus"></i>학과생 인증 및 회원 가입</a></li></c:if>
-                        <c:if test="${empty sessionScope.dkswMemberNo}"><li><button class="btn btn-success btn-xlg scroll font-NanumGothic" onclick="openSlideBar()"><i class="fa fa fa-sign-in"></i>로그인</button></li></c:if>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+	<!-- Header Section  -->
+	<section class="background-bar-main bg-centerTop70 bg-cover">
+		<div class="bg-filter sTop">
+			<div class="container">
+				<div class="jumbotron trn v-center">
+					<div class="page-main-title">
+						<span class="bg-color-black-20">DKU Department of Software</span>
+					</div>
 
-    <!-- Breaking news -->
+					<div class="page-main-subtitle">
+						<span
+							class="bg-color-black-20 padding_left_5 padding_right_5 padding_top_5 padding_bottom_5">단국대학교
+							소프트웨어학과 홈페이지에 오신 것을 환영합니다.</span><br /> <span
+							class="bg-color-black-20 padding_left_5 padding_top_5 padding_bottom_5">본교
+							학과 학생들은 </span><span
+							class="bg-color-black-20 page-main-subtitle-offline text-bold padding_top_5 padding_bottom_5"
+							title="자연과학관 5층 학과 사무실 앞 게시판">학과 오프라인 게시판 확인</span><span
+							class="bg-color-black-20 padding_right_5 padding_top_5 padding_bottom_5">
+							후 필히 가입바랍니다.</span>
+					</div>
+
+					<div class="space-sm"></div>
+
+					<ul class="list-inline">
+						<li><a href="http://dksw.dankook.ac.kr:8080/app.apk"
+							class="btn btn-default-trn btn-xlg scroll"><i
+								class="fa fa-android"></i>애플리케이션 다운로드</a></li>
+						<c:if test="${empty sessionScope.dkswMemberNo}">
+							<li><a href="<%=request.getContextPath()%>/02_page/join/index.jsp" class="btn btn-primary btn-xlg scroll"><i class="fa fa-user-plus"></i>학과생 인증 및 회원 가입</a></li>
+						</c:if>
+						<c:if test="${empty sessionScope.dkswMemberNo}">
+							<li><button class="btn btn-success btn-xlg scroll" onclick="openSlideBar()"><i class="fa fa fa-sign-in"></i>로그인</button></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Breaking news -->
 	<section class="section">
-        <div class="container">
-            <h2 class="lg-title lg-title-border">Latest News</h2>
-            <div class="row" id="dkswBoardNews"></div>
-        </div>
-    </section>
+		<div class="container">
+			<h2 class="lg-title lg-title-border">Latest News</h2>
+			<div class="row" id="dkswBoardNews"></div>
+		</div>
+	</section>
 
 
-    <!-- Features section -->
-    <!--<div id="learn-more"></div>
+	<!-- Features section -->
+	<!--<div id="learn-more"></div>
     <section class="section">
         <div class="container">
             <div class="row">
@@ -103,8 +121,8 @@
         </div>
     </section>-->
 
-    <!-- Services section -->
-    <!--<section class="section-lg bg-grey">
+	<!-- Services section -->
+	<!--<section class="section-lg bg-grey">
         <div class="container">
             <div class="row">
                 <h2 class="lg-title lg-title-border">What we do?</h2>
@@ -132,8 +150,8 @@
         </div>
     </section>-->
 
-    <!-- Our works/ projects section -->
-    <!--<section class="section-lg">
+	<!-- Our works/ projects section -->
+	<!--<section class="section-lg">
         <div class="container">
 
             <h2 class="lg-title lg-title-border">Our work</h2>
@@ -239,7 +257,7 @@
         </div>
     </section>-->
 
-    <!--<div class="bg-11 bg-cover bg-center">
+	<!--<div class="bg-11 bg-cover bg-center">
         <div class="section-lg bg-filter-v2">
             <div class="container">
                 <div id="testimonial" class="carousel slide" data-ride="carousel" data-interval="9000">
@@ -285,8 +303,8 @@
         </div>
     </div>-->
 
-    <!-- Pricing tables -->
-    <!--<div id="get-started"></div>
+	<!-- Pricing tables -->
+	<!--<div id="get-started"></div>
     <section class="section">
         <div class="container">
             <h2 class="lg-title lg-title-border">Our plans</h2>
@@ -365,22 +383,26 @@
         </div>
     </section>-->
 
-    <!-- Back to top-->
-    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+	<!-- Back to top-->
+	<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-    <!-- Side Menu -->
-	<jsp:include page="./02_page/commonSidebar.jsp" flush="false"/>
+	<!-- Side Menu -->
+	<jsp:include page="./02_page/commonSidebar.jsp" flush="false" />
 
-    <!-- Footer-->
-	<jsp:include page="./02_page/commonFooter.jsp" flush="false"/>
+	<!-- Footer-->
+	<jsp:include page="./02_page/commonFooter.jsp" flush="false" />
 
-	<div id="ascrail2000" class="nicescroll-rails" style="width: 8px; z-index: 999999; position: fixed; top: 0px; height: 100%; right: 0px; cursor: default; opacity: 0; background: rgb(221, 221, 221);">
-		<div style="position: relative; float: right; width: 8px; border: none; border-radius: 0px; height: 137px; top: 0px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
+	<div id="ascrail2000" class="nicescroll-rails"
+		style="width: 8px; z-index: 999999; position: fixed; top: 0px; height: 100%; right: 0px; cursor: default; opacity: 0; background: rgb(221, 221, 221);">
+		<div
+			style="position: relative; float: right; width: 8px; border: none; border-radius: 0px; height: 137px; top: 0px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
 	</div>
-	
-	<div id="ascrail2000-hr" class="nicescroll-rails" style="height: 8px; z-index: 999999; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; opacity: 0; display: none; background: rgb(221, 221, 221);">
-		<div style="position: relative; top: 0px; height: 8px; border: none; border-radius: 0px; width: 1395px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
+
+	<div id="ascrail2000-hr" class="nicescroll-rails"
+		style="height: 8px; z-index: 999999; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; opacity: 0; display: none; background: rgb(221, 221, 221);">
+		<div
+			style="position: relative; top: 0px; height: 8px; border: none; border-radius: 0px; width: 1395px; background-color: rgb(153, 153, 153); background-clip: padding-box;"></div>
 	</div>
-	
+
 </body>
 </html>
