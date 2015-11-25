@@ -196,7 +196,7 @@ public class LabController extends HttpServlet {
 				String memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? (sessionMember.getAttribute("dkswMemberCategory").toString()) : null;
 				int memberNo = (sessionMember.getAttribute("dkswMemberNo") != null) ? Integer.parseInt(sessionMember.getAttribute("dkswMemberNo").toString()) : 0;
 				
-				if(memberNo > 0) { // 로그인 되어있는 경우
+				if(memberNo > 0 && (memberNo == inputLabCode+4)) { // 로그인 되어있는 경우
 					AdminPermission permission = null;
 					boolean checkPermission = false;
 					
