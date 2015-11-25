@@ -263,7 +263,7 @@ int break_num = 0;
 									ds_ct = (DataSource) envContext_ct.lookup("jdbc/mysql");
 									conn_ct = ds_ct.getConnection();
 									stmt_ct = conn_ct.createStatement();
-									rs_ct = stmt_ct.executeQuery("Select count(*) ct from (select * from dksw_qna_board where qa_QA = 'Q' and qa_pIdx="+mem_no+" order by qa_qIdx DESC) a where a.qa_title like '%"+search_word+"%' or a.qa_contents like '%"+search_word+"%' or (select dkswDepartmentProfessorNameKo from dksw_department_professor where a.qa_pIdx=dkswMemberNo ) like '%"+search_word+"%' ");
+									rs_ct = stmt_ct.executeQuery("Select count(*) ct from (select * from dksw_qna_board where qa_QA = 'Q' and qa_pIdx="+mem_no+" order by qa_qIdx DESC) a where a.qa_title like '%"+search_word+"%' or a.qa_contents like '%"+search_word+"%' or (select dkswMemberName from dksw_member where a.qa_writer=dkswMemberNo ) like '%"+search_word+"%' ");
 								
 								if(rs_ct.next()){
 									total_page_num = rs_ct.getInt("ct");
@@ -298,7 +298,7 @@ int break_num = 0;
 									ds = (DataSource) envContext.lookup("jdbc/mysql");
 									conn = ds.getConnection();
 									stmt = conn.createStatement();
-									rs = stmt.executeQuery("select a.qa_title, (select dkswMemberName from dksw_member where a.qa_writer=dkswMemberNo ) qa_writer, a.qa_regDate, a.qa_aPIdx, a.qa_udtCheck_pf from (select * from dksw_qna_board where qa_QA = 'Q' and qa_pIdx="+mem_no+" order by qa_qIdx DESC) a where a.qa_title like '%"+search_word+"%' or a.qa_contents like '%"+search_word+"%' or (select dkswDepartmentProfessorNameKo from dksw_department_professor where a.qa_pIdx=dkswMemberNo ) like '%"+search_word+"%' ");
+									rs = stmt.executeQuery("select a.qa_title, (select dkswMemberName from dksw_member where a.qa_writer=dkswMemberNo ) qa_writer, a.qa_regDate, a.qa_aPIdx, a.qa_udtCheck_pf from (select * from dksw_qna_board where qa_QA = 'Q' and qa_pIdx="+mem_no+" order by qa_qIdx DESC) a where a.qa_title like '%"+search_word+"%' or a.qa_contents like '%"+search_word+"%' or (select dkswMemberName from dksw_member where a.qa_writer=dkswMemberNo) like '%"+search_word+"%' ");
 								
 								while (rs.next()) {
 									if(ct_index>=cp_num){

@@ -211,9 +211,7 @@
 														</tr>
 														<%				
 																			}
-																			else if(qa_udtCheck_stu.equals("N")){
-																				
-																				
+																			else if(qa_udtCheck_stu.equals("N")){				
 														%>
 														<tr>
 															<th scope="row"><%=num_ing%></th>
