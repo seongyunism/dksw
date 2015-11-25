@@ -299,7 +299,7 @@ function getNews() {
 	
 }
 
-function sendPush(no) {
+function sendPush_board(no) {
 	check = confirm("푸시를 발송하시겠습니까?\n등록된 회원 수에 따라 지연이 발생할 수 있습니다.");
 
 	if(!check) {

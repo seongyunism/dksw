@@ -13,11 +13,14 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dksw.model.BoardDAO;
 import dksw.model.DepartmentDAO;
 import dksw.model.LectureDAO;
+import dksw.model.domain.Board;
 import dksw.model.domain.DepartmentProfessor;
 import dksw.model.domain.Lecture;
 import dksw.model.domain.LectureChapter;
+import dksw.util.AppPushUtil;
 
 public class LectureController extends HttpServlet {
 	
@@ -45,6 +48,8 @@ public class LectureController extends HttpServlet {
 			getLectureList(req, res);
 		} else if(action.equals("cancelRegisterLecture")) {
 			cancelRegisterLecture(req, res);
+		} else if(action.equals("sendPush")){
+			sendPush(req,res);
 		}
 	}
 
@@ -365,6 +370,37 @@ public class LectureController extends HttpServlet {
 			req.setAttribute("errorMsg", "ERROR : IO ERROR");
 		}
 	}
+	
+	private void sendPush(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
+		ArrayList<Integer> students = null;
+		String lectureName = null;
+		LectureChapter chapter = null;
+		int chapterCount = 0;
+		HttpSession sessionMember = req.getSession();
+
+		try {
+			int inputLectureNo = (req.getParameter("inputLectureNo") != null) ? Integer.parseInt(req.getParameter("inputLectureNo")) : 0;
+			int inputChapterNo = (req.getParameter("inputChapterNo") != null) ? Integer.parseInt(req.getParameter("inputChapterNo")) : 0;
+			int memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberCategory").toString())) : 0;
+			
+			if(memberCategory == 6) { // 교수인지 확인		
+				students = LectureDAO.getStdentListByLecture(inputLectureNo);
+				lectureName = LectureDAO.getLecture(inputLectureNo).getDkswLectureName();
+				chapter = LectureDAO.getChapter(inputChapterNo);
+				AppPushUtil.sendAndroidPushByArray(students, "lecture", "강의자료가 업로드되었습니다. (" + lectureName + ", #" + chapter.getDkswLectureChapterCount() + " " + chapter.getDkswLectureChapterName());
+				
+				res.getWriter().write("OK");
+			} else {
+				res.getWriter().write("Fail");
+			}
+	
+		} catch (SQLException se) {
+			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
+		} catch (IOException ie) {
+			req.setAttribute("errorMsg", "ERROR : IO ERROR");
+		}
+	
+	}
 
 }

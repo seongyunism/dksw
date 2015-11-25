@@ -390,4 +390,78 @@ public class LectureDAO {
 			}
 		}
 	}
+	
+	public static ArrayList<Integer> getStdentListByLecture(int inputLectureNo) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		ArrayList<Integer> students = new ArrayList<Integer>();
+
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement(
+					"SELECT dkswMemberNO FROM dksw_lecture_register WHERE dkswLectureNo=? ");
+			pstmt.setInt(1, inputLectureNo);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				students.add(rset.getInt(1));
+			}
+
+			return students;
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+	}
+
+	public static LectureChapter getChapter(int inputChapterNo)throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		LectureChapter chapter = null;
+		
+		try{
+			con = DBUtil.getConnection();
+			
+			pstmt = con.prepareStatement(
+					"SELECT * FROM dksw_lecture_chapter WHERE dkswLectureChapterNo=? ");
+			pstmt.setInt(1, inputChapterNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				chapter = new LectureChapter(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getInt(4),rset.getString(5),rset.getInt(6),rset.getInt(7),rset.getInt(8)); 
+								
+			}
+			
+			return chapter;
+			
+		}catch (SQLException se) {
+			se.printStackTrace();
+			throw se;
+
+		} finally {
+			try {
+				DBUtil.close(con, pstmt, rset);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
 }

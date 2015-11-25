@@ -70,7 +70,7 @@ function getLectureListByProfessor() {
 				var chapters = "<table class='table table-striped'><tr><td class='text-center text-bold' style='width:70px;'>No</td><td class='text-center text-bold'>단원명</td><td class='text-center text-bold' style='width:190px;'>관리</td></tr>";
 			
 				for(j=0; j<response.dkswLectureList[i].dkswLectureChapters.length; j++) {
-					chapters += "<tr><td class='text-center' style='line-height:31px;'>#" + response.dkswLectureList[i].dkswLectureChapters[j].dkswLectureChapterCount + "</td><td style='line-height:31px;'>" + response.dkswLectureList[i].dkswLectureChapters[j].dkswLectureChapterName + "</td><td><button type='button' class='btn btn-success btn-sm margin_right_2 '>푸시알림</button><button type='button' class='btn btn-warning btn-sm margin_right_2 '>수정</button><button type='button' class='btn btn-danger btn-sm'>삭제</button></td></tr>";
+					chapters += "<tr><td class='text-center' style='line-height:31px;'>#" + response.dkswLectureList[i].dkswLectureChapters[j].dkswLectureChapterCount + "</td><td style='line-height:31px;'>" + response.dkswLectureList[i].dkswLectureChapters[j].dkswLectureChapterName + "</td><td><button type='button' onclick='sendPush_lecture("+response.dkswLectureList[i].dkswLectureChapters[j].dkswLectureChapterNo +")' class='btn btn-success btn-sm margin_right_2 '>푸시알림</button><button type='button' class='btn btn-warning btn-sm margin_right_2 '>수정</button><button type='button' class='btn btn-danger btn-sm'>삭제</button></td></tr>";
 					lastChapterCount++;
 				}
 				
@@ -233,6 +233,40 @@ function cancelRegisterLecture(lecture) {
 			}
 		});
 		
+		return false;
+	}
+}
+
+// [교수모드] 푸시 보내기
+function sendPush_lecture(chapter) {
+	check = confirm("푸시를 발송하시겠습니까?\n등록된 회원 수에 따라 지연이 발생할 수 있습니다.");
+
+	if(!check) {
+		return false;
+		
+	} else {
+	
+		var action = "/dksw/lecture?action=sendPush";
+		var form_data = {
+			inputChapterNo : chapter
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : action,
+			data : form_data,
+			dataType : "text",
+			success: function(response) {
+				if(response = "ok") {
+					alert("푸시를 발송하였습니다.");
+				} else {
+					alert("푸시 발송에 실패하였습니다.");
+				}
+			}, error: function(xhr,status,error) {
+				alert(error);
+			}
+		});
+			
 		return false;
 	}
 }
