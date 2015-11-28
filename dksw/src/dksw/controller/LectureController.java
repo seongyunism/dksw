@@ -379,24 +379,43 @@ public class LectureController extends HttpServlet {
 		String lectureName = null;
 		LectureChapter chapter = null;
 		HttpSession sessionMember = req.getSession();
-
+		int pushCount = 0;
+		
 		try {
 			int inputLectureNo = (req.getParameter("inputLectureNo") != null) ? Integer.parseInt(req.getParameter("inputLectureNo")) : 0;
 			int inputChapterNo = (req.getParameter("inputChapterNo") != null) ? Integer.parseInt(req.getParameter("inputChapterNo")) : 0;
 			int memberCategory = (sessionMember.getAttribute("dkswMemberCategory") != null) ? Integer.parseInt((sessionMember.getAttribute("dkswMemberCategory").toString())) : 0;
 			
+			JSONObject jObject = new JSONObject();
+			JSONArray jArray = new JSONArray();
+
 			if(memberCategory == 6) { // 교수인지 확인		
 				students = LectureDAO.getStdentListByLecture(inputLectureNo);
 				lectureName = LectureDAO.getLecture(inputLectureNo).getDkswLectureName();
 				chapter = LectureDAO.getChapter(inputChapterNo);
 								
-				AppPushUtil.sendAndroidPushByArray(students, "lecture", "강의자료가 업로드되었습니다. (" + lectureName + ", #" + chapter.getDkswLectureChapterCount() + " " + chapter.getDkswLectureChapterName() + ")");
+				pushCount = AppPushUtil.sendAndroidPushByArray(students, "lecture", "강의자료가 업로드되었습니다. (" + lectureName + ", #" + chapter.getDkswLectureChapterCount() + " " + chapter.getDkswLectureChapterName() + ")");
+
+				jObject.put("dkswSendPush_PushCount", pushCount);
+				jObject.put("dkswSendPush_TotalCount", students.size());
+
+				if(students.size() == pushCount) {
+					jObject.put("dkswSendPush_Check", "complete");
+				} else {
+					jObject.put("dkswSendPush_Check", "some");					
+				}
 				
-				res.getWriter().write("OK");
 			} else {
-				res.getWriter().write("Fail");
+				jObject.put("dkswSendPush_PushCount", 0);
+				jObject.put("dkswSendPush_TotalCount", 0);
+				jObject.put("dkswSendPush_Check", "fail");
 			}
 	
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+			
+			res.getWriter().write(jObject.toString());
+
 		} catch (SQLException se) {
 			req.setAttribute("errorMsg", "ERROR : SQL ERROR");
 		} catch (IOException ie) {

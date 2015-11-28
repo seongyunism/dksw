@@ -256,10 +256,12 @@ function sendPush_lecture(lecture, chapter) {
 			type : "POST",
 			url : action,
 			data : form_data,
-			dataType : "text",
+			dataType : "json",
 			success: function(response) {
-				if(response = "ok") {
+				if(response.dkswSendPush_Check == "complete") {
 					alert("푸시를 발송하였습니다.");
+				} else if(response.dkswSendPush_Check == "some") {
+					alert("푸시를 일부 발송하였습니다. (" + response.dkswSendPush_PushCount + "/" + dkswSendPush_TotalCount + ")");					
 				} else {
 					alert("푸시 발송에 실패하였습니다.");
 				}

@@ -36,7 +36,7 @@ function initializeDepartmentGreeting() {
 		dataType : "json",
 		success: function(response) {
 			$("#dkswDepartmentGreetingTitle").text(response.dkswDepartmentGreetingTitle);
-			$("#dkswDepartmentGreetingPicture").attr("src", "/dksw/04_upload/files/" + response.dkswDepartmentGreetingPicture);	
+			$("#dkswDepartmentGreetingPicture").attr("src", "/upload/files/" + response.dkswDepartmentGreetingPicture);	
 			$("#dkswDepartmentGreetingContent").html(response.dkswDepartmentGreetingContent.replace(/\n/g, "<br />"));	
 			$("#dkswDepartmentGreetingEditDate").text(response.dkswDepartmentGreetingEditDate);
 			$("#dkswDepartmentProfessorNameKo").text(response.dkswDepartmentProfessorNameKo);
@@ -173,7 +173,7 @@ function initializeDepartmentClub(clubCode) {
 			$("#dkswDepartmentClubNameKo").text(response.dkswDepartmentClubNameKo);
 			$("#dkswDepartmentClubNameEn").text(response.dkswDepartmentClubNameEn);
 			$("#dkswDepartmentClubContent").html(response.dkswDepartmentClubContent);	
-			$("#dkswDepartmentClubPicture").attr("src", "/dksw/04_upload/files/sub_02/club_info/" + response.dkswDepartmentClubPicture);	
+			$("#dkswDepartmentClubPicture").attr("src", "/upload/files/sub_02/club_info/" + response.dkswDepartmentClubPicture);	
 			$("#dkswDepartmentClubEditDate").text(response.dkswDepartmentClubEditDate);
 			$("#dkswDepartmentClubEditRightIndex").text(response.dkswDepartmentClubEditRightIndex);
 		}, error: function(xhr,status,error) {

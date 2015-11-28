@@ -20,16 +20,28 @@
 	});
 
 	$(window).load(function() {
-
+		
 	});
 	
 	$(function() {
 
 	});
 	</script>
+	<style>
+	#dkswBoardFileImages img {height:300px; cursor:pointer;}
+	#dkswBoardFileImages img:hover {border:1px solid #eeeeee;}
+	
+	div.blackPlate {position:fixed; width:100%; height:100%; background:rgba(0, 0, 0, 0.65); z-index:10000; display:none; cursor:pointer;}
+	div.blackPlate div.v-center {width:100%; text-align:center;}
+	div.blackPlate div.v-center img {box-shadow:0px 0px 5px 2px rgba(0, 0, 0, 0.3);}
+	</style>
 </head>
 
 <body>
+	<div class="blackPlate" title="클릭하면 닫힙니다." onclick="closeViewFullImage()">
+		<div class="v-center"></div>
+	</div>
+
 	<!-- Navigation -->
 	<jsp:include page="../../commonNav.jsp" flush="false"/>
 
@@ -60,7 +72,6 @@
             </div>
             
 			<div class="view">
-	
 	            <div class="post-header">
 	                <h2 class="font-NanumGothic" id="dkswBoardTitle"></h2>
 	            </div>
@@ -69,9 +80,17 @@
 	            <div class="space"></div>
 	            
 	            <div class="text-block font-NanumGothic" id="dkswBoardContent" style="line-height:2em;"></div>
-	            <div class="space"></div>
+				<hr class="hr" />
+				
+				<div id="dkswBoardFileImages"></div>
 	            
 	            <c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '2' || sessionScope.dkswMemberCategory == '5'}">        
+					<hr class="hr" />
+					
+					<div id="dkswBoardFileList">
+						<div class=""></div>
+					</div>
+					
 		            <div class="btn btn-primary pull-left margin_left_5" onclick="sendPush_board('<%=postNo%>')">
 		            	<i class="fa fa-bell"></i>푸시 발송
 		            </div>

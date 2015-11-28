@@ -45,7 +45,7 @@
 		
 			<p class="page-law-title text-center text-bold">한국IBM 산학협력프로그램 모집요강</p>
 			<div class="space"></div>
-			<img src="../../../04_upload/files/sub_04/sanhak/IBM.jpg" width="800" height="450" />
+			<img class="img-responsive" src="/upload/files/sub_04/sanhak/ibm.png" width="800" height="450" />
 			<div class="space"></div>
 			
 

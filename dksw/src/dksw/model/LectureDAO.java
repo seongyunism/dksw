@@ -410,8 +410,7 @@ public class LectureDAO {
 		try {
 			con = DBUtil.getConnection();
 
-			pstmt = con.prepareStatement(
-					"SELECT dkswMemberNO FROM dksw_lecture_register WHERE dkswLectureNo=? ");
+			pstmt = con.prepareStatement("SELECT dkswMemberNo FROM dksw_lecture_register WHERE dkswLectureNo=?");
 			pstmt.setInt(1, inputLectureNo);
 			rset = pstmt.executeQuery();
 

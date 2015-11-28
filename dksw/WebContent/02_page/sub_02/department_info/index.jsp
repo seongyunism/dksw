@@ -43,7 +43,7 @@
 	<section class="section">
 		<div class="container-sm">
 
-			<img src="../../../04_upload/files/sub_02/department_info/20151029_001.jpg" class="container-sm-img" />
+			<img src="/upload/files/sub_02/department_info/20151029_001.jpg" class="container-sm-img" />
 		
 			
 			<div class="space-sm"></div>

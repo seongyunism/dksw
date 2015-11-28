@@ -13,10 +13,10 @@ public class ShellUtil {
 			proc.waitFor();
 			
 			if(proc.exitValue() != 0) {
-				System.out.println("exit value was non-zero");
+//				System.out.println("비정상종료");
 				return false;
 			} else {
-				System.out.println("실행완료");
+//				System.out.println("실행완료");
 				return true;
 			}
 

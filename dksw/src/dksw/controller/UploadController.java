@@ -110,10 +110,6 @@ public class UploadController extends HttpServlet {
 							if(checkPermission) { // 허가된 사용자인 경우
 								realUploadPath = File.separator + "home" + File.separator + "dksw" + File.separator + "upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;
 								contextUploadPath  = "/upload" + File.separator + "files" + File.separator + CommonUtil.uploadPathInitialize(paramValue) + File.separator + uploadFilePostNo;
-
-								System.out.println(realUploadPath);
-								System.out.println(contextUploadPath);
-								
 								
 								File file = new File(realUploadPath);
 								file.mkdir();

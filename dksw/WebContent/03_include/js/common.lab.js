@@ -55,9 +55,9 @@ function initializeLab(labCode) {
 				var workPlace = "";
 				
 				if(response.dkswLabMembers[i].dkswLabMembersPicture == "") {
-					memberPicture = "/dksw/04_upload/files/sub_03/members/no-image.jpg";
+					memberPicture = "/upload/files/sub_03/members/no-image.jpg";
 				} else {
-					memberPicture = "/dksw/04_upload/files/sub_03/members/" + labCode + "/" + response.dkswLabMembers[i].dkswLabMembersPicture;
+					memberPicture = "/upload/files/sub_03/members/" + labCode + "/" + response.dkswLabMembers[i].dkswLabMembersPicture;
 				}
 										
 				var member = "<div class='col-lg-3 col-md-3 col-sm-6' name=" + response.dkswLabMembers[i].dkswLabMembersNo + "><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='" + memberPicture
@@ -83,7 +83,7 @@ function initializeLab(labCode) {
 			}
 			
 			if(response.dkswLabModifyPermission == "OK"){
-				addMember = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='/dksw/04_upload/files/sub_03/members/no-image.jpg'"
+				addMember = "<div class='col-lg-3 col-md-3 col-sm-6'><div class='profile-circle' style='margin-bottom:100px;'><div class='hover-content'><img class='img-responsive' src='/upload/files/sub_03/members/no-image.jpg'"
 					+ "style='width:100%' /><div class='content-circle content-center text-center'><ul class='circle-icons icons-list'><li><a href='mailto://"
 					+ "' title='Follow us'><i class='fa fa-envelope'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-twitter'></i></a></li><li><a href='#' title='Follow us'><i class='fa fa-facebook'></i></a></li></ul></div></div><h3 class='text-center'>" 
 					+ "<input type='text' name='data1' maxlength='20' class='form-control text-center' style='width:200px;padding:0px 3px; display:inline' placeholder = '이름(Ko)' />	"

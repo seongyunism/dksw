@@ -1399,6 +1399,10 @@ ul.primary span {
 	    background-image: url("../../01_image/background-bar/04_01.jpg");
 	}
 	
+	.background-bar-04-02 {
+	    background-image: url("../../01_image/background-bar/04_02.jpg");
+	}
+	
 	.background-bar-04-03 {
 	    background-image: url("../../01_image/background-bar/04_03.jpg");
 	}
@@ -1463,6 +1467,10 @@ ul.primary span {
 
 	.background-bar-04-01 {
 	    background-image: url("../../01_image/background-bar/04_01.jpg");
+	}
+
+	.background-bar-04-02 {
+	    background-image: url("../../01_image/background-bar/04_02.jpg");
 	}
 	
 	.background-bar-04-03 {
@@ -4301,7 +4309,7 @@ ul.thumbs {
 	
 	div.page-main-subtitle {
 		font-size:2.2em;
-		line-height:1.5em;
+		line-height:1.6em;
 	}	
 }
 

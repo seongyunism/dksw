@@ -14,15 +14,24 @@ function initializeBoard(board) {
 		data : inputBoardCategory,
 		dataType : "json",
 		success: function(response) {
+			var firstImage = "";
+			
 			if(board == '4') {
 				var posts = "";
 				var post = "";
 				
 				for(i=0; i<response.dkswBoard.length; i++) {
+					for(j=0; j<response.dkswBoard[i].dkswBoardFiles.length; j++) {
+						if(response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFileType == "jpg" || response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFileType == "png") {
+							firstImage = response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFilePath;
+							break;
+						}
+					}
+					
 					post = "<div class='row blog-post' name='"
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><div class='col-sm-4'><div class='hover-content'><div class='image-crop-box'><img class='img-responsive image-crop' src='"
-						+ response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile
+						+ firstImage
 						+ "' /></div></div></div><div class='col-sm-8'><a href='./view.jsp?category=" + category + "&postNo="
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><h2>"
@@ -43,10 +52,17 @@ function initializeBoard(board) {
 				var post = "";
 				
 				for(i=0; i<response.dkswBoard.length; i++) {
+					for(j=0; j<response.dkswBoard[i].dkswBoardFiles.length; j++) {
+						if(response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFileType == "jpg" || response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFileType == "png") {
+							firstImage = response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFilePath;
+							break;
+						}
+					}
+					
 					post = "<div class='row blog-post wow fadeInUp' name='"
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><div class='col-sm-4'><div class='image-crop-box'><img class='img-responsive image-crop' src='"
-						+ response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile
+						+ firstImage
 						+ "' /></div></div><div class='col-sm-8'><a href='./view.jsp?category=" + category + "&postNo="
 						+ response.dkswBoard[i].dkswBoardNo
 						+ "'><h3>"
@@ -91,7 +107,14 @@ function initializeBoardView(no) {
 			$("#dkswBoardSubTitle").text(response.dkswBoardSubTitle);			
 			$("#dkswBoardContent").html(response.dkswBoardContent);
 			$("#dkswBoardWriteDate").html(response.dkswBoardWriteDate);
-			$("#dkswMemberName").text(response.dkswMemberName);		
+			$("#dkswMemberName").text(response.dkswMemberName);	
+			
+			for(i=0; i<response.dkswBoardFiles.length; i++) {
+				if(response.dkswBoardFiles[i].dkswBoardFileType == "jpg" || response.dkswBoardFiles[i].dkswBoardFileType == "png") {
+					$("#dkswBoardFileImages").append("<img src='" + response.dkswBoardFiles[i].dkswBoardFilePath + "' onclick=viewFullImage('" + response.dkswBoardFiles[i].dkswBoardFilePath + "') />");
+				}
+			}
+			
 		}, error: function(xhr,status,error) {
 			alert(error);
 		}
@@ -269,7 +292,8 @@ function getNews() {
 		url : action,
 		dataType : "json",
 		success: function(response) {
-
+			var firstImage = "";
+			
 			for(i=0; i<3; i++) {
 				var target = "sub_01/notice";
 				
@@ -277,9 +301,16 @@ function getNews() {
 					target = "sub_05/board";
 				}
 				
+				for(j=0; j<response.dkswBoard[i].dkswBoardFiles.length; j++) {
+					if(response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFileType == "jpg" || response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFileType == "png") {
+						firstImage = response.dkswBoard[i].dkswBoardFiles[j].dkswBoardFilePath;
+						break;
+					}
+				}
+					
 				var post = "<a href='02_page/" + target + "/view.jsp?postNo=" + response.dkswBoard[i].dkswBoardNo + "' class='txtMain'>"
 					+ "<div class='col-md-4 col-lg-4 col-sm-6' data-wow-delay='0.8s'>" 
-					+ "<div class='news'><div class='image-crop-box'><img class='img-responsive image-crop' src='" + response.dkswBoard[i].dkswBoardFiles[0].dkswBoardFile + "' alt=''></div>"
+					+ "<div class='news'><div class='image-crop-box'><img class='img-responsive image-crop' src='" + firstImage + "' /></div>"
 					+ "<h3 class='EllipsText'>" + response.dkswBoard[i].dkswBoardTitle + "</h3>"
 					+ "<p style='padding-top:5px;'>" + response.dkswBoard[i].dkswBoardContent + "</p>"
 					+ "<p style='text-align:right;'><em>" + response.dkswBoard[i].dkswBoardWriteDate + "</em><p>"
@@ -329,4 +360,13 @@ function sendPush_board(no) {
 			
 		return false;
 	}
+}
+
+function viewFullImage(src) {
+	$("div.blackPlate").slideDown(500);
+	$("div.blackPlate div.v-center").html("<img src='" + src + "' />");
+}
+
+function closeViewFullImage() {
+	$("div.blackPlate").slideUp(500);
 }

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dksw.model.domain.Upload;
 import dksw.util.DBUtil;
 
 public class UploadDAO {
@@ -79,24 +80,33 @@ public class UploadDAO {
 		}
 	}
 
-	public static String getFileSrc(int inputUploadNo) throws SQLException {
+	public static Upload getFile(int inputUploadNo) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String fileSrc = null;
+		Upload file = null;
 		
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("SELECT dkswUploadFileSrc FROM dksw_upload WHERE dkswUploadNo=?");
+			pstmt = con.prepareStatement("SELECT * FROM dksw_upload WHERE dkswUploadNo=?");
 			pstmt.setInt(1, inputUploadNo);
 			rset = pstmt.executeQuery();
 			
-			rset.next();
-			fileSrc = rset.getString(1);
-			
-			return fileSrc;
+			if(rset.next()) {
+				file = new Upload(
+					rset.getInt(1),
+					rset.getInt(2),
+					rset.getInt(3),
+					rset.getLong(4),
+					rset.getInt(5),
+					rset.getString(6),
+					rset.getString(7)
+				);
+			}
+				
+			return file;
 		
 		} catch (SQLException se) {
 			se.printStackTrace();

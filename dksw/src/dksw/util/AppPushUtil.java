@@ -50,16 +50,17 @@ public class AppPushUtil {
 	}
 	
 	// 회원 번호를 리스트로 받아 푸시 보내기
-	public static void sendAndroidPushByArray(ArrayList<Integer> members, String inputLink, String inputMessage) throws SQLException {
+	public static int sendAndroidPushByArray(ArrayList<Integer> members, String inputLink, String inputMessage) throws SQLException {
 
 		HashMap<Integer, String> pms = new HashMap<Integer, String>();
 		String memberToken = "";
 		boolean pushCheck = false;
+		int pushCount = 0;
 		
 		try {
 			for(int i=0; i<members.size(); i++) {
 				memberToken = MemberTokenDAO.getMemberToken(members.get(i)); // 회원에 해당하는 토큰 가져오기
-				System.out.println(memberToken);
+
 				if(!memberToken.equals("")) { // 디바이스가 등록된 회원인 경우 푸시 발송할 대상에 포함
 					pms.put(members.get(i), memberToken);
 				}
@@ -71,19 +72,24 @@ public class AppPushUtil {
 			while(iter.hasNext()) {
 				int inputMemberNo = iter.next();
 				String inputMemberTokenKey = pms.get(inputMemberNo);
-				System.out.println(inputMemberTokenKey);
+
+				System.out.println("푸시 발송 요청 : " + inputMemberNo + ", " + inputMemberTokenKey);
 				String cmd[] = {"/usr/bin/node", "/home/dksw/sh/gcm-provider.js", inputMemberTokenKey, inputMessage};
 				pushCheck = ShellUtil.execCommand(cmd);
 				
 				if(pushCheck) {
+					System.out.println("푸시 발송 성공 : " + inputMemberNo + ", " + inputMemberTokenKey);
 					AdminDAO.addPushLog((System.currentTimeMillis())/1000, inputMessage, inputMemberNo);
+					pushCount++;
 				} else {
-					System.out.println("푸시 발송을 실패하였습니다.");
+					System.out.println("푸시 발송 실패 : " + inputMemberNo + ", " + inputMemberTokenKey);
 				}
 			}
 			
-		} catch (SQLException se) {
-			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		return pushCount;
 	}	
 }

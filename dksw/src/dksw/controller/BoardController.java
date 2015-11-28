@@ -20,6 +20,7 @@ import dksw.model.MemberDAO;
 import dksw.model.UploadDAO;
 import dksw.model.domain.AdminPermission;
 import dksw.model.domain.Board;
+import dksw.model.domain.Upload;
 import dksw.util.AppPushUtil;
 import dksw.util.CommonUtil;
 import dksw.util.PermissionCheck;
@@ -200,17 +201,22 @@ public class BoardController extends HttpServlet {
 			JSONArray jFileArray = new JSONArray();
 			List<String> files = new ArrayList<String>();
 			files = CommonUtil.commonSpilt(post.getDkswBoardFiles());
-
-			for(int i=0; i<files.size(); i++) {
-				JSONObject tempChapter = new JSONObject();
-				int pos = files.get(i).lastIndexOf(".");
-				String ext = files.get(i).substring( pos + 1 );
-				
-				tempChapter.put("dkswBoardType", ext);
-				tempChapter.put("dkswBoardFile", files.get(i));
-				jFileArray.add(tempChapter);
-			}
 			
+			if(post.getDkswBoardFiles().equals("")) { // 저장된 첨부파일이 없을 경우
+
+			} else {		
+				for(int i=0; i<files.size(); i++) {
+					JSONObject tempFile = new JSONObject();
+					Upload file = UploadDAO.getFile(Integer.parseInt(files.get(i)));
+					int pos = file.getDkswUploadFileSrc().lastIndexOf(".");
+					String ext = file.getDkswUploadFileSrc().substring( pos + 1 );
+					
+					tempFile.put("dkswBoardFileType", ext);
+					tempFile.put("dkswBoardFilePath", file.getDkswUploadFileSrc());
+					tempFile.put("dkswBoardFileName", file.getDkswUploadFileName());
+					jFileArray.add(tempFile);
+				}
+			}
 			jObject.put("dkswBoardFiles", jFileArray);
 					
 			res.setContentType("application/json");
@@ -258,25 +264,29 @@ public class BoardController extends HttpServlet {
 				List<String> files = new ArrayList<String>();
 
 				files = CommonUtil.commonSpilt(posts.get(i).getDkswBoardFiles());
-				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
+				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 첨부파일이 없을 경우
 					JSONObject tempFile = new JSONObject();
 					
-					tempFile.put("dkswBoardType", "jpg");
-					tempFile.put("dkswBoardFile", "/upload/files/sub_01/board/no-image.jpg");
+					tempFile.put("dkswBoardFileType", "jpg");
+					tempFile.put("dkswBoardFilePath", "/upload/files/sub_01/board/no-image.jpg");
 					jFileArray.add(tempFile);
 					
 				} else {
-					JSONObject tempFile = new JSONObject();
-					int pos = files.get(0).lastIndexOf(".");
-					String ext = files.get(0).substring( pos + 1 );
-
-					tempFile.put("dkswBoardType", ext);
-					tempFile.put("dkswBoardFile", UploadDAO.getFileSrc(Integer.parseInt(files.get(0))));
-					jFileArray.add(tempFile);	
+					for(int j=0; j<files.size(); j++) {
+						JSONObject tempFile = new JSONObject();
+						Upload file = UploadDAO.getFile(Integer.parseInt(files.get(j)));
+						int pos = file.getDkswUploadFileSrc().lastIndexOf(".");
+						String ext = file.getDkswUploadFileSrc().substring( pos + 1 );
+						
+						tempFile.put("dkswBoardFileType", ext);
+						tempFile.put("dkswBoardFilePath", file.getDkswUploadFileSrc());
+						tempFile.put("dkswBoardFileName", file.getDkswUploadFileName());
+						jFileArray.add(tempFile);
+					}
+					
 				}
-				
 				temp.put("dkswBoardFiles", jFileArray);
-
+								
 				jArray.add(temp);
 			}
 			
@@ -329,18 +339,24 @@ public class BoardController extends HttpServlet {
 				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
 					JSONObject tempFile = new JSONObject();
 					
-					tempFile.put("dkswBoardType", "jpg");
-					tempFile.put("dkswBoardFile", "/upload/files/sub_01/board/no-image.jpg");
+					tempFile.put("dkswBoardFileType", "jpg");
+					tempFile.put("dkswBoardFilePath", "/upload/files/sub_01/board/no-image.jpg");
 					jFileArray.add(tempFile);
 					
 				} else {
-					JSONObject tempFile = new JSONObject();
-					int pos = files.get(0).lastIndexOf(".");
-					String ext = files.get(0).substring( pos + 1 );
-
-					tempFile.put("dkswBoardType", ext);
-					tempFile.put("dkswBoardFile", UploadDAO.getFileSrc(Integer.parseInt(files.get(0))));
-					jFileArray.add(tempFile);	
+					for(int j=0; j<files.size(); j++) {
+						JSONObject tempFile = new JSONObject();
+						Upload file = UploadDAO.getFile(Integer.parseInt(files.get(j)));
+						int pos = file.getDkswUploadFileSrc().lastIndexOf(".");
+						String ext = file.getDkswUploadFileSrc().substring( pos + 1 );
+						
+						tempFile.put("dkswBoardFileType", ext);
+						tempFile.put("dkswBoardFilePath", file.getDkswUploadFileSrc());
+						tempFile.put("dkswBoardFileName", file.getDkswUploadFileName());
+						jFileArray.add(tempFile);
+					}
+					
+					temp.put("dkswBoardFiles", jFileArray);
 				}
 				
 				temp.put("dkswBoardFiles", jFileArray);
