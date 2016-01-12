@@ -82,6 +82,8 @@
 	            <div class="text-block font-NanumGothic" id="dkswBoardContent" style="line-height:2em;"></div>
 				<hr class="hr" />
 				
+				<div id="dkswBoardFileList"></div>
+				
 				<div id="dkswBoardFileImages"></div>
 	            
 	            <c:if test="${sessionScope.dkswMemberCategory == '1' || sessionScope.dkswMemberCategory == '2' || sessionScope.dkswMemberCategory == '5'}">        

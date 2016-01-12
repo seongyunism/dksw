@@ -110,6 +110,8 @@ function initializeBoardView(no) {
 			$("#dkswMemberName").text(response.dkswMemberName);	
 			
 			for(i=0; i<response.dkswBoardFiles.length; i++) {
+				$("#dkswBoardFileList").append("<div class='file'><a href='" + response.dkswBoardFiles[i].dkswBoardFilePath + "' targat='_blank'>" + response.dkswBoardFiles[i].dkswBoardFileName + "</a></div>");
+				
 				if(response.dkswBoardFiles[i].dkswBoardFileType == "jpg" || response.dkswBoardFiles[i].dkswBoardFileType == "png") {
 					$("#dkswBoardFileImages").append("<img src='" + response.dkswBoardFiles[i].dkswBoardFilePath + "' onclick=viewFullImage('" + response.dkswBoardFiles[i].dkswBoardFilePath + "') />");
 				}

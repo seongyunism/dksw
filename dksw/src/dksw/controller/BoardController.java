@@ -278,8 +278,14 @@ public class BoardController extends HttpServlet {
 						int pos = file.getDkswUploadFileSrc().lastIndexOf(".");
 						String ext = file.getDkswUploadFileSrc().substring( pos + 1 );
 						
-						tempFile.put("dkswBoardFileType", ext);
-						tempFile.put("dkswBoardFilePath", file.getDkswUploadFileSrc());
+						if(ext.equals("jpg") || ext.equals("png")) {
+							tempFile.put("dkswBoardFileType", ext);
+							tempFile.put("dkswBoardFilePath", file.getDkswUploadFileSrc());
+						} else {
+							tempFile.put("dkswBoardFileType", "jpg");
+							tempFile.put("dkswBoardFilePath", "/upload/files/sub_01/board/no-image.jpg");
+						}
+	
 						tempFile.put("dkswBoardFileName", file.getDkswUploadFileName());
 						jFileArray.add(tempFile);
 					}
@@ -333,9 +339,7 @@ public class BoardController extends HttpServlet {
 				// 파일 가져오기
 				JSONArray jFileArray = new JSONArray();
 				List<String> files = new ArrayList<String>();
-
 				files = CommonUtil.commonSpilt(posts.get(i).getDkswBoardFiles());
-				
 				if(posts.get(i).getDkswBoardFiles().equals("")) { // 저장된 이미지가 없을 경우
 					JSONObject tempFile = new JSONObject();
 					
@@ -350,8 +354,14 @@ public class BoardController extends HttpServlet {
 						int pos = file.getDkswUploadFileSrc().lastIndexOf(".");
 						String ext = file.getDkswUploadFileSrc().substring( pos + 1 );
 						
-						tempFile.put("dkswBoardFileType", ext);
-						tempFile.put("dkswBoardFilePath", file.getDkswUploadFileSrc());
+						if(ext.equals("jpg") || ext.equals("png")) {
+							tempFile.put("dkswBoardFileType", ext);
+							tempFile.put("dkswBoardFilePath", file.getDkswUploadFileSrc());
+						} else {
+							tempFile.put("dkswBoardFileType", "jpg");
+							tempFile.put("dkswBoardFilePath", "/upload/files/sub_01/board/no-image.jpg");
+						}
+						
 						tempFile.put("dkswBoardFileName", file.getDkswUploadFileName());
 						jFileArray.add(tempFile);
 					}
